@@ -1,0 +1,19 @@
+# C++ base MakeFile
+# add links to libaries if needed
+
+CC = icc
+HEADERS = animal.h
+CLASSES = animal.cpp
+MAIN = main.cpp
+EXNAME = test
+
+all: $(EXNAME)
+
+$(EXNAME): $(MAIN) $(HEADERS) $(CLASSES)
+	$(CC) -o $@ $<
+clean:
+	rm -f $(EXNAME)
+
+
+
+

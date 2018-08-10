@@ -1,0 +1,290 @@
+% author lists, or if there are many overlapping affiliations.
+% For Phys. Rev. appearance, change preprint to twocolumn.
+% Choose pra, prb, prc, prd, pre, prl, prstab, prstper, or rmp for journal
+%  Add 'draft' option to mark overfull boxes with black boxes
+%  Add 'showpacs' option to make PACS codes appear
+%  Add 'showkeys' option to make keywords appear
+
+\documentclass[aps,prl,twocolumn]{revtex4-1}
+
+\usepackage{amsmath,amssymb}
+\usepackage{physics}
+\usepackage{slashed}
+\usepackage{mypackage}
+\usepackage{blindtext}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+
+\definecolor{mygreen}{RGB}{28,172,0} 
+\definecolor{mylilas}{RGB}{170,55,241}
+
+\begin{document}
+
+\lstset{language=Matlab,
+    %basicstyle=\color{red},
+    breaklines=true,
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},
+    showstringspaces=false,
+    %numbers=left,
+    %numberstyle={\tiny \color{black}},
+    %numbersep=9pt, 
+    emph=[1]{for,end,break},emphstyle=[1]\color{red},
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+
+% Use the \preprint command to place your local institutional report
+% number in the upper righthand corner of the title page in preprint mode.
+% Multiple \preprint commands are allowed.
+% Use the 'preprintnumbers' class option to override journal defaults
+% to display numbers if necessary
+% \preprint{}
+
+\title{Applications of Relativity quiz 9}
+
+% repeat the \author .. \affiliation  etc. as needed
+% \email, \thanks, \homepage, \altaffiliation all apply to the current
+% author. Explanatory text should go in the []'s, actual e-mail
+% address or url should go in the {}'s for \email and \homepage.
+% Please use the appropriate macro foreach each type of information
+
+% \affiliation command applies to all authors since the last
+% \affiliation command. The \affiliation command should follow the
+% other information
+% \affiliation can be followed by \email, \homepage, \thanks as well.
+
+\author{Anthony Kalaitzis}
+
+%\email[]{Your e-mail address}
+%\homepage[]{Your web page}
+%\thanks{}
+%\altaffiliation{}
+
+
+%Collaboration name if desired (requires use of superscriptaddress
+%option in \documentclass). \noaffiliation is required (may also be
+%used with the \author command).
+%\collaboration can be followed by \email, \homepage, \thanks as well.
+%\collaboration{}
+%\noaffiliation
+
+\date{\today}
+\maketitle
+
+\section{Question 1}
+The Christofell symbols are defined in the general way that
+\begin{align*}
+  \Gamma^\alpha_{\beta\gamma}=\dv{\vb{e}_\beta}{x^\gamma}\cdot\vb{e}_\alpha
+\end{align*}
+where we also know that the basis vectors $\vb{e_\alpha}$ are defined by
+\begin{align*}
+  \vb{e_\alpha}=\dv{x^\alpha}\vb{x}\equiv\pd_\alpha
+\end{align*}
+Plugging in our values for this case gives us that
+\begin{align*}
+  \Gamma^r_{tt}&=\dv{\vb{e}_t}{x^t}\cdot\vb{e}_r\\
+               &=\dv{t}\qty(\dv{t}\vb{x})\cdot\hat{\vb{r}}\\
+               &=\dv[2]{\vb{x}}{t}\cdot\hat{\vb{r}}\\
+               &=\vb{a}\cdot\unitv{r}\\
+               &=-\frac{GM}{r^4}
+\end{align*}
+
+\section{Question 2}
+Using the definition of the covariant derivative we have that
+\begin{align*}
+  \frac{D}{D\tau}u^\mu&= u^\nu D_\nu u^\mu\\
+                      &=u^\nu\qty(\pd_\nu u^\mu+\Gamma^\mu_{\nu\beta}u^\beta)\\
+                      &=u^\nu\pd_\nu u^\mu+\Gamma^\mu_{\nu\beta}u^\nu u^\beta
+\end{align*}
+Plugging this into our parallel transport equation gives us that
+\begin{align*}
+  \frac{Du^\mu}{D\tau}&=\epsilon u^\mu\\
+\implies \ u^\nu\pd_\nu u^\mu+\Gamma^\mu_{\nu\beta}u^\nu u^\beta-\epsilon u^\mu &= 0                       
+\end{align*}
+This is our new geodesic equation with these conditions.
+
+\section{Question 3a}
+
+From quiz 8 we have that
+\begin{align*}
+  \dv{p_\mu}{\tau}=\frac{1}{2m}(\pd_\mu g_{\beta\alpha})p^\beta p^\alpha
+\end{align*}
+hence if the metric tensor is independent of  $\mu$ derivatives then it is by extension a constant motion. The Schwarzschild metric is only dependent on $(r,\theta)$. Hence it is independent of $0\equiv t$ and $3\equiv\phi$ derivatives.
+
+\begin{align*}
+   \dv{E}{\tau}=\dv{p_t}{\tau}=\frac{1}{2m}(\pd_t g_{\beta\alpha})p^\beta p^\alpha=0
+\end{align*}
+\begin{align*}
+   \dv{L}{\tau}=\dv{p_\phi}{\tau}=\frac{1}{2m}(\pd_\phi g_{\beta\alpha})p^\beta p^\alpha=0
+\end{align*}
+$\implies E$ and $L$ are constants of the motion.
+\section{Question 3b}
+
+the metric tensor for $\theta=0$ becomes (remembering that $\dd s^2=-\dd\tau^2$)
+\begin{align*}
+  -\dd\tau^2&=-\qty(1-\frac{2M}{r})\dd t^2+\qty(1-\frac{2M}{r})^{-1}\dd r^2+r^2\dd\phi^2\\
+  1&=\qty(1-\frac{2M}{r})\qty(\dv{t}{\tau})^2-\qty(1-\frac{2M}{r})^{-1}\qty(\dv{r}{\tau})^2\\
+            & \phantom{=}-r^2\qty(\dv{\phi}{\tau})^2 \\
+  \implies \qty(\dv{r}{\tau})^2&=\qty(1-\frac{2M}{r})\qty[\qty(1-\frac{2M}{r})\qty(\dv{t}{\tau})^2-r^2\qty(\dv{\phi}{\tau})^2-1]
+\end{align*}
+Now consider that
+\begin{align*}
+  p_0&=mg_{00}\dv{t}{\tau}\\
+     &=-m\qty(1-\frac{2M}{r})\dv{t}{\tau}=E\\
+  \implies \dv{t}{\tau}&=-\frac{E}{m}\qty(1-\frac{2M}{r})^{-1}
+\end{align*}
+and
+\begin{align*}
+  p_\phi&=mg_{\phi\phi}\dv{\phi}{\tau}\\
+        &=mr^2\dv{\phi}{\tau}=L\\
+        \implies\dv{\phi}{\tau}&=\frac{L}{mr^2}
+\end{align*}
+Where we used that
+\begin{align*}
+  p_\mu=mg_{\mu\mu}\dv{x^\mu}{\tau}
+\end{align*}
+for the generalized momentum on a manifold. Plugging in gives us that
+\begin{align*}
+  \qty(1-\frac{2M}{r})^{-1}\qty(\dv{r}{\tau})^2&=\qty(1-\frac{2M}{r})^{-1}\frac{E^2}{m^2}-\frac{L^2}{m^2r^2}-1\\
+  \qty(\dv{r}{\tau})^2&=\frac{E^2}{m^2}-\qty(1-\frac{2M}{r})\qty(1+\frac{L^2}{m^2r^2})
+\end{align*}
+hence proving the same question from last week... again
+
+\section{Question 4}
+Consider the velocity $u_\phi$ like so
+\begin{align*}
+  u_\phi=g_{\phi\mu}u^\mu
+\end{align*}
+Where $\mu\in\{0,1,2,3\}$ hence we have that
+\begin{align*}
+  u_\phi&=g_{\phi t}u^t+g_{\phi r}u^r+g_{\phi \theta}u^\theta+g_{\phi \phi}u^\phi\\
+        &=g_{\phi t}u^t+3\cdot 0
+\end{align*}
+using the fact that $u^r=u^\theta=u^\phi=0$. Consider boosting to a frame where $\theta=\phi=r=0$ for the metric tensor. Then we have that
+\begin{align*}
+  -\dd\tau^2&=g_{tt}\dd t^2\\
+  \implies \ \qty(\dv{t}{\tau})^2&=-\frac{1}{g_{tt}}\\
+  \qty(\dv{(ct)}{\tau})^2&=-\frac{c^2}{g_{tt}}\\
+  u^t&=\frac{c}{\sqrt{-g_{tt}}}
+\end{align*}
+Where we used the fact that $x^\mu\equiv(ct,\vb{x})$ hence
+\begin{align*}
+  u^t=\dv{x^0}{\tau}=\dv{(ct)}{\tau}
+\end{align*}
+hence
+\begin{align*}
+  u_\phi=\frac{g_{\phi t}c}{\sqrt{-g_{tt}}}
+\end{align*}
+
+\section{Question 5a}
+Lets begin by calculating the scalar curvature $R=g^{\mu\nu}R_{\mu\nu}$ where $R_{\mu\nu}$ is the Riemannian curvature tensor. Note that $R_{0i}=R_{i0}=0$ so hence
+\begin{align*}
+  R&=g^{\mu\nu}R_{\mu\nu}\\
+   &=g^{00}R_{00}+g^{ij}R_{ij}\\
+   &=(-1)(-3)\frac{\ddot{a}}{a}+g^{ij}g_{ij}\qty(\frac{\ddot{a}}{a}+2\frac{\dot{a}^2}{a^2}+2\frac{k}{a^2})\\
+   &=\frac{\ddot{a}}{a}+3\qty(\frac{\ddot{a}}{a}+2\frac{\dot{a}^2}{a^2}+2\frac{k}{a^2})\\
+   &=\frac{6}{a^2}(a\ddot{a}+\dot{a}^2+k)
+\end{align*}
+Where we used the fact that $g^{ij}g_{ij}=3$ for this metric. We have the Einstein field equations i.e. that
+\begin{align*}
+  R_{\mu\nu}-\frac{1}{2}Rg_{\mu\nu}=8\pi T_{\mu\nu}
+\end{align*}
+Consider these equations for the case that $\mu=\nu=0$. The
+\begin{align*}
+  R_{00}-\frac{1}{2}Rg_{00}&=8\pi T_{00}\\
+  -3\frac{a\ddot{a}}{a^2}+\frac{3}{a^2}(a\ddot{a}+\dot{a}^2+k)&=8\pi\rho\\
+  \implies \ \frac{3}{a^2}(\dot{a}^2+k)&=8\pi\rho
+\end{align*}
+Consider the next case where $\mu=i, \nu=j$. Hence we get that
+\begin{align*}
+  R_{ij}-\frac{1}{2}Rg_{ij}&=8\pi T_{ij}\\
+  \qty(\frac{\ddot{a}}{a}+2\frac{\dot{a}^2}{a^2}+2\frac{k}{a^2})g_{ij}-\frac{3}{a^2}(a\ddot{a}+\dot{a}^2+k)g_{ij}&=8\pi Pg_{ij}\\
+  \implies \ \qty(\frac{\ddot{a}}{a}+2\frac{\dot{a}^2}{a^2}+2\frac{k}{a^2})-\frac{3}{a^2}(a\ddot{a}+\dot{a}^2+k)&=8\pi P\\
+  -2\frac{\ddot{a}}{a}-\frac{1}{a^2}\qty(\dot{a}^2+k)&=8\pi P\\
+  -2\frac{\ddot{a}}{a}-\frac{1}{3}\frac{3}{a^2}\qty(\dot{a}^2+k)&=8\pi P    
+\end{align*}
+Using our previous equation gives us that
+\begin{align*}
+  -2\frac{\ddot{a}}{a}-\frac{1}{3}8\pi\rho&=8\pi P\\
+  -2\frac{\ddot{a}}{a}&=8\pi\qty(P+\frac{1}{3}\rho)\\
+  \frac{\ddot{a}}{a}&=-4\pi\qty(P+\frac{1}{3}\rho)\\
+                                          &=-\frac{4\pi}{3}(\rho+3P)
+\end{align*}
+
+\section{Question 5b}
+
+Using the metric tensor for the case of $\theta=\phi=0$ and that $t=t_0$ gives us
+\begin{align*}
+  \dd l^2(t)&=a^2(t)\frac{\dd r^2}{1-kr^2}
+\end{align*}
+Using Taylor series, expand about the point $t=t_0$
+\begin{align*}
+  \implies a(t)\approx a(t_0)+\dot{a}(t_0)\dd t
+\end{align*}
+hence
+\begin{align*}
+  \dd l(t)&\approx (a(t_0)+\dot{a}(t_0)\dd t)\frac{1}{\sqrt{1-kr^2}}\dd r
+\end{align*}
+Abusing Taylor again gives us that (noting that $k$ is small)
+\begin{align*}
+  \frac{1}{\sqrt{1-kr^2}}=1+O(\dd r^2)\approx 1
+\end{align*}
+and that
+\begin{align*}
+  \dd r=\frac{\dd l(t_0)}{a(t_0)}
+\end{align*}
+where $a$ is the scaling factor in the FRW metric.
+\begin{align*}
+  \implies \dd l(t)&\approx (a(t_0)+\dot{a}(t_0)\dd t)\frac{\dd l(t_0)}{a(t_0)}\\
+                   &\approx \dd l(t_0)+\frac{\dot{a}(t_0)}{a(t_0)}\dd t\dd l(t_0)\\
+\implies \frac{\dd l(t)}{\dd t}&\approx \frac{\dot{a}(t_0)}{a(t_0)}\dd l(t_0)
+\end{align*}
+Where use used that $\dd l(t_0)/\dd t=0$ as it is a constant length. If $l$ is the separation between galaxies then $v=\dd l/\dd t$ is the rate of separation. Taking this to the finite extension gives us that.
+\begin{align*}
+  v=\frac{\dot{a}(t_0)}{a(t_0)}l(t_0)
+\end{align*}
+
+
+
+
+
+
+% only one appendix.
+%\appendix
+%\section{}
+
+%\begin{acknowledgments}
+% put your acknowledgments here.
+%\end{acknowledgments}
+
+% Create the reference section using BibTeX:
+\bibliography{basename of .bib file}
+
+\end{document}
+
+% \bibliography{basename of .bib file}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+
+
+
+
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

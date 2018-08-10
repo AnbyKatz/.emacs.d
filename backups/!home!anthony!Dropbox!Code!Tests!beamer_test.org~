@@ -1,0 +1,54 @@
+#+TITLE: Example Presentation
+#+AUTHOR: Anthony Kalaitzis
+#+OPTIONS: H:2 toc:t num:t
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [presentation]
+#+LATEX_header: \usefonttheme[onlymath]{serif}
+#+BEAMER_header: \usetheme{Berlin}
+#+BEAMER_header: \usecolortheme[named=purple]{structure}
+#+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col) %8BEAMER_OPT(Opt)
+
+* Introduction
+
+** frame 1
+
+Some more stuff above this
+
+#+BEGIN_EXPORT latex
+\begin{definition}
+  $f(z) = z^2$
+\end{definition}
+#+END_EXPORT
+
+Some stuff here
+
+** frame 2
+
+#+BEGIN_EXPORT latex
+\begin{theorem}
+  $f$ analytic $\iff f$ holomorphic
+\end{theorem}
+#+END_EXPORT
+
+* Motivation
+
+** frame 1
+
+| $k_F$ | $\rho_B$ |
+|-------+----------|
+|     0 |        0 |
+|   0.2 |      1.5 |
+|   0.4 |      3.2 |
+|   0.6 |        4 |
+|-------+----------|
+
+** frame 2
+
+#+caption
+
+* Background
+
+** frame 1
+
+** frame 2
+

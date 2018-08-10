@@ -1,0 +1,42 @@
+ls
+ls
+./test.sh
+bash test.sh
+which bash
+chmod +x test.sh 
+ls
+./test.sh 
+which bash
+make clean
+ls
+chmod +x attempt_1.py
+ls
+chmod +x attempt_2.py 
+ls
+./attempt_1.py ''
+ls
+ls
+ls
+cd ..
+ls
+mkdir Bash_Scripts
+ls
+cd Bash_Scripts/
+ls
+ls
+sp-pause
+cdc
+ls
+cdc
+cdc
+ls
+ls
+ls
+ls
+mkdir PP_assignment
+cd PP_assignment/
+ls
+ls
+rm test.org
+ls
+ls

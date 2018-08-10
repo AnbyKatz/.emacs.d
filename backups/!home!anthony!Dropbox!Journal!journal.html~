@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-08-07 Tue 11:54 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MPHIL Research Journal</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Anthony Kalaitzis" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">MPHIL Research Journal</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org27452d2">1. 2018</a>
+<ul>
+<li><a href="#org8e14008">1.1. 2018-07 July</a>
+<ul>
+<li><a href="#org145c317">1.1.1. 2018-07-26 Thursday</a></li>
+</ul>
+</li>
+<li><a href="#org668bd28">1.2. 2018-08 August</a>
+<ul>
+<li><a href="#org00811df">1.2.1. 2018-08-02 Thursday</a></li>
+<li><a href="#org381b955">1.2.2. 2018-08-03 Friday</a></li>
+<li><a href="#org31cd712">1.2.3. 2018-08-06 Monday</a></li>
+<li><a href="#orgfdac73d">1.2.4. 2018-08-07 Tuesday</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org27452d2" class="outline-2">
+<h2 id="org27452d2"><span class="section-number-2">1</span> 2018</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org8e14008" class="outline-3">
+<h3 id="org8e14008"><span class="section-number-3">1.1</span> 2018-07 July</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-org145c317" class="outline-4">
+<h4 id="org145c317"><span class="section-number-4">1.1.1</span> 2018-07-26 Thursday</h4>
+<div class="outline-text-4" id="text-1-1-1">
+</div>
+<ol class="org-ol">
+<li><a id="orgce61da7"></a>QMC starting point&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Meeting">Meeting</span></span><br />
+<div class="outline-text-5" id="text-1-1-1-1">
+<p>
+<span class="underline">Notes</span>: Below we have the TOV equation which we will need to solve for the mass-radius relation for neutron stars 
+</p>
+
+\begin{align*}
+  \frac{dP}{dr}=-\frac{Gm}{r^2}\rho\left(1+\frac{P}{\rho c^2}\right)\left(1+\frac{4\pi r^3P}{mc^2}\right)\left(1-\frac{2Gm}{rc^2}\right)^{-1}
+\end{align*}
+
+<p>
+This will be done in the \(\beta\) equilibrium case where \(\mu_P=\mu_N+\mu_{e^-}\)
+</p>
+
+<p>
+<span class="underline">Agenda</span>: Use these relationships to calculate the Moment of Inertia. Calculate the equation of state for the QMC model for neutron stars in \(\beta\) equilibrium. Solve the TOV equations for mass radius relationship for neutron stars.
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org668bd28" class="outline-3">
+<h3 id="org668bd28"><span class="section-number-3">1.2</span> 2018-08 August</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org00811df" class="outline-4">
+<h4 id="org00811df"><span class="section-number-4">1.2.1</span> 2018-08-02 Thursday</h4>
+<div class="outline-text-4" id="text-1-2-1">
+</div>
+<ol class="org-ol">
+<li><a id="org9731991"></a>CCSP information session<br />
+<div class="outline-text-5" id="text-1-2-1-1">
+<p>
+<span class="underline">Notes</span>:  Allow $1500 for travel expenses for conferences and hotels. Maybe mention the computers the university is supplying and your own personal computer. 
+</p>
+
+<p>
+<span class="underline">Agenda</span>: Fix the budget section of the CCSP. Final check and spell check and then hand in
+</p>
+
+<p>
+<span class="underline">Resources</span>: N/A
+</p>
+</div>
+</li>
+
+<li><a id="org8ffec9a"></a>Equation of State&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Meeting">Meeting</span>&#xa0;<span class="DM">DM</span></span><br />
+<div class="outline-text-5" id="text-1-2-1-2">
+<p>
+<span class="underline">Notes</span>: The equation of state represents \(P\) vs \(\epsilon\) i.e. pressure vs energy density. The recent Dark matter in a RMF theory setting paper <a href="https://arxiv.org/abs/1807.10013v1">Dark matter and neutron stars</a> only considered a small percentage of neutrons decaying into dark matter particles and was not considering their existence in neutron stars to explain for the dark matter problem of the universe. This likely occurred near the beginning of the universe (i.e. the creation of the dark matter).
+</p>
+
+<p>
+In order to solve the TOV equations we pick an initial density and find where the graph of Pressure vs radius intersects the \(x\) axis. This should be a simple DE to solve. Once you know this value you should be able to extract all needed physical quantities. This includes things like the mass as a function of radius and other various quantities in General Relativity (nuclear incomprehensibility.
+</p>
+
+<p>
+The constraints the GW170817 puts on the EoS are complicated and require a large amount of GR to explain. The bottom line is that is gives us a range of physically viable EoS to try as potential solutions. From this we can extract other useful quantities. An example of equations of state and mass radius relationships are given below:
+</p>
+
+
+<div class="figure">
+<p><img src="Images/MR_neutronstars.jpeg" alt="MR_neutronstars.jpeg" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Mass vs Radius for neutron stars</p>
+</div>
+
+<p>
+<span class="underline">Agenda</span>: Acquire a range of values for the EoS with spacing of no bigger then \(0.1fm^{-3}\) for the case of \(p,n,\mu\) and \(e^{-}\) present in neutron stars. Have a read on the paper <a href="https://arxiv.org/pdf/nucl-th/0611030.pdf">Cold uniform matter and neutron stars in the QMC model</a>. Maybe explore some more background on the &beta; equilibrium conditions of neutron stars and make sure to understand these conditions and where they come from.
+</p>
+
+<p>
+<span class="underline">Resources</span>:  <a href="https://arxiv.org/pdf/nucl-th/0611030.pdf">Cold uniform matter and neutron stars in the QMC model</a>, <a href="https://arxiv.org/abs/1807.10013v1">Dark matter and neutron stars</a>, GW170817 is the code for the relevant gravitational wave experiment that will come up a lot.
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org381b955" class="outline-4">
+<h4 id="org381b955"><span class="section-number-4">1.2.2</span> 2018-08-03 Friday</h4>
+<div class="outline-text-4" id="text-1-2-2">
+</div>
+<ol class="org-ol">
+<li><a id="org7c16a39"></a>Countable and Uncountable infinities&#xa0;&#xa0;&#xa0;<span class="tag"><span class="RT">RT</span></span><br />
+<div class="outline-text-5" id="text-1-2-2-1">
+<p>
+<span class="underline">Notes</span>: Below is a sketch of a proof of the natural numbers is an infinite set. Let \(f:\mathbb{N}\to \{1,...,n\}\). If we suppose that this mapping exists and is bijective, then if we take the final element \(n\) of the set. By the axiom of natural numbers, the element \(n+1\) must be in the set, hence not a bijection, contradiction.
+</p>
+
+<p>
+<span class="underline">Resources</span>: <a href="https://myuni.adelaide.edu.au/courses/25463">Integration and Analysis Course Notes</a>, <a href="https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems">Godel&rsquo;s incompletness theorem</a>
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org31cd712" class="outline-4">
+<h4 id="org31cd712"><span class="section-number-4">1.2.3</span> 2018-08-06 Monday</h4>
+<div class="outline-text-4" id="text-1-2-3">
+</div>
+<ol class="org-ol">
+<li><a id="orgc20df11"></a>QMC 2006 - Baryon Octet&#xa0;&#xa0;&#xa0;<span class="tag"><span class="2006">2006</span></span><br />
+<div class="outline-text-5" id="text-1-2-3-1">
+<p>
+<span class="underline">Notes</span>: The observed maximum mass of cold neutron stars cannot be explained without considering the pressure, arising from the strong nuclear force, which opposes gravitational collapse. The theoretical framework for describing the properties of strongly interacting matter is the Equation of State (EoS), which relates the pressure and energy density of the system, calculated using a model for the baryon-baryon interaction between particles present in the matter.
+</p>
+
+<p>
+At sufficiently high density, nuclear matter will most likely be composed not just of nucleons and leptons but also strange baryons and boson condensates. It is also likely that the interaction between overlapping quark bags will result in partial or full deconfinement. We will consider the matter in \(\beta\) equilibrium and initially the \(p,n,e^{-}\) and \(\mu^{-}\) will be considered. Later we will fully incorporate the Hyperons and the scalar isovector. 
+</p>
+
+<p>
+The main feature of the QMC model is that the interactions are generated by the exchange of mesons coupled locally to the quarks. We will consider the \(\sigma,\omega\) and \(\rho\) mesons. Given the position and velocity of the bag, we obtain its energy by solving the field equations for the confined quarks.
+</p>
+
+<p>
+The <a href="https://ac.els-cdn.com/0375947496000334/1-s2.0-0375947496000334-main.pdf?_tid=17897949-d516-4ee8-a88c-221189b469fd&amp;acdnat=1533531811_240b565d83935d63a742195c742ed692">QMC 1996</a> paper mainly focused on nuclear matter and finite nuclei primarily composed of nucleons, it can however be generalized to Hyperons. The paper <a href="https://ac.els-cdn.com/S037594740700574X/1-s2.0-S037594740700574X-main.pdf?_tid=1435387d-6c93-4291-8638-8993350e4801&amp;acdnat=1533532016_40e2a902600517075fec538e0670a79d">QMC 2006</a> includes spin 1/2 SU(3) octet \((N,\Lambda,\Sigma,\Xi)\) where the baryons are specified by 
+</p>
+
+<p>
+Below is a table of the quantum numbers of the Baryon octet for future reference:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">p</th>
+<th scope="col" class="org-left">n</th>
+<th scope="col" class="org-right">&Lambda;</th>
+<th scope="col" class="org-right">&Sigma;<sup>-</sup></th>
+<th scope="col" class="org-right">&Sigma;<sup>0</sup></th>
+<th scope="col" class="org-right">&Sigma;<sup>+</sup></th>
+<th scope="col" class="org-left">&Xi;<sup>-</sup></th>
+<th scope="col" class="org-left">&Xi;<sup>0</sup></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">t</td>
+<td class="org-left">1/2</td>
+<td class="org-left">1/2</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-left">1/2</td>
+<td class="org-left">1/2</td>
+</tr>
+
+<tr>
+<td class="org-left">m</td>
+<td class="org-left">1/2</td>
+<td class="org-left">-1/2</td>
+<td class="org-right">0</td>
+<td class="org-right">-1</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+<td class="org-left">-1/2</td>
+<td class="org-left">1/2</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">0</td>
+<td class="org-left">0</td>
+<td class="org-right">-1</td>
+<td class="org-right">-1</td>
+<td class="org-right">-1</td>
+<td class="org-right">-1</td>
+<td class="org-left">-2</td>
+<td class="org-left">-2</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+where \(t,m\) is the isospin and its projection respectively and \(s\) the strangeness. The working hypothesis is that the strange quark is not coupled to the meson fields, which can be seen as a consequence of the fact that the mesons represent correlated pion exchanges.
+</p>
+
+<p>
+<span class="underline">Resources</span>: The main resource being referenced here is <a href="https://ac.els-cdn.com/S037594740700574X/1-s2.0-S037594740700574X-main.pdf?_tid=1435387d-6c93-4291-8638-8993350e4801&amp;acdnat=1533532016_40e2a902600517075fec538e0670a79d">Cold uniform matter and neutron stars</a> as well as <a href="https://arxiv.org/pdf/nucl-th/0402064.pdf">Quark structure and nuclear effective forces</a>, <a href="https://ac.els-cdn.com/S0375947406001539/1-s2.0-S0375947406001539-main.pdf?_tid=84dfeb2c-41fd-49f8-bfff-678d64150800&amp;acdnat=1533518634_cccf7a73578a60dd2b5dfdd5639c1659">Physical origin of density dependent forces of Skyrme type within the QMC model</a>
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgfdac73d" class="outline-4">
+<h4 id="orgfdac73d"><span class="section-number-4">1.2.4</span> 2018-08-07 Tuesday</h4>
+<div class="outline-text-4" id="text-1-2-4">
+</div>
+<ol class="org-ol">
+<li><a id="orgb879071"></a>QMC 2006 - Hamiltonian&#xa0;&#xa0;&#xa0;<span class="tag"><span class="2006">2006</span></span><br />
+<div class="outline-text-5" id="text-1-2-4-1">
+<p>
+<span class="underline">Notes</span>: Set the \(u\) and \(d\) quark masses to zero and assume that their coupling to the meson fields respects isospin symmetry. The energy of a baryon of flavour \(f\) with position \(\vec{R}\) and momentum \(\vec{P}\) has the form
+</p>
+
+<p>
+\[ E_f = \sqrt{P^2+M_f^2(\sigma)}+g_\omega^f \omega +g_\rho \vec{b}\cdot\vec{I}^t \]
+</p>
+
+<p>
+where M<sub>f</sub>(&sigma;) is the effective mass, that is the energy of the corresponding quark bag in its rest frame, in the &sigma; field, and \vec{I}<sup>t</sup> is the isospin operator for isospin \(t\), defined as
+</p>
+
+<p>
+\vec{\tau}<sub>q</sub> the Pauli matrix acting on the \(u\) and \(d\) quarks. The flavour dependence of the &omega; coupling is fixed by the number of non-strange quarks in the baryon, that is:
+</p>
+
+<p>
+Generally we will use the following fit to the mass
+</p>
+
+<p>
+where \(d\) is the scalar polarisability, describing the response of the nucleon to the applied scalar field.
+</p>
+
+<p>
+The total energy of the nuclear system is the sum of the baryon energies \(E(i)\) and of the energy stored in the meson felds
+</p>
+<p>
+<span class="underline">Resources</span>: See previous days references
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Anthony Kalaitzis</p>
+<p class="date">Created: 2018-08-07 Tue 11:54</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

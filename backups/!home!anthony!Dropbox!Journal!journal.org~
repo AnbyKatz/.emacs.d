@@ -1,0 +1,185 @@
+# -*- mode: org; -*-
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+
+#+TITLE: MPHIL Research Journal
+#+AUTHOR: Anthony Kalaitzis
+#+EMAIL: anthony.kalaitzis@adelaide.edu.au
+#+OPTIONS: toc:nil
+#+LaTeX_CLASS_OPTIONS: [13pt]
+#+LATEX_HEADER: \pagenumbering{gobble}
+
+* 2018
+** 2018-07 July
+*** 2018-07-26 Thursday
+**** QMC starting point                                          :Meeting:
+
+_Notes_: Below we have the TOV equation which we will need to solve for the mass-radius relation for neutron stars 
+
+\begin{align*}
+  \frac{dP}{dr}=-\frac{Gm}{r^2}\rho\left(1+\frac{P}{\rho c^2}\right)\left(1+\frac{4\pi r^3P}{mc^2}\right)\left(1-\frac{2Gm}{rc^2}\right)^{-1}
+\end{align*}
+
+This will be done in the $\beta$ equilibrium case where $\mu_P=\mu_N+\mu_{e^-}$
+
+_Agenda_: Use these relationships to calculate the Moment of Inertia. Calculate the equation of state for the QMC model for neutron stars in $\beta$ equilibrium. Solve the TOV equations for mass radius relationship for neutron stars.
+** 2018-08 August
+*** 2018-08-02 Thursday
+**** CCSP information session                                    
+
+_Notes_:  Allow $1500 for travel expenses for conferences and hotels. Maybe mention the computers the university is supplying and your own personal computer. 
+ 
+_Agenda_: Fix the budget section of the CCSP. Final check and spell check and then hand in
+ 
+_Resources_: N/A
+
+**** Equation of State                                        :Meeting:DM:
+
+_Notes_: The equation of state represents $P$ vs $\epsilon$ i.e. pressure vs energy density. The recent Dark matter in a RMF theory setting paper [[https://arxiv.org/abs/1807.10013v1][Dark matter and neutron stars]] only considered a small percentage of neutrons decaying into dark matter particles and was not considering their existence in neutron stars to explain for the dark matter problem of the universe. This likely occurred near the beginning of the universe (i.e. the creation of the dark matter).
+
+In order to solve the TOV equations we pick an initial density and find where the graph of Pressure vs radius intersects the $x$ axis. This should be a simple DE to solve. Once you know this value you should be able to extract all needed physical quantities. This includes things like the mass as a function of radius and other various quantities in General Relativity (nuclear incomprehensibility.
+
+The constraints the GW170817 puts on the EoS are complicated and require a large amount of GR to explain. The bottom line is that is gives us a range of physically viable EoS to try as potential solutions. From this we can extract other useful quantities. An example of equations of state and mass radius relationships are given below:
+
+#+CAPTION: Mass vs Radius for neutron stars
+#+ATTR_LATEX: :width 0.6\textwidth
+[[file:Images/MR_neutronstars.jpeg]]
+ 
+_Agenda_: Acquire a range of values for the EoS with spacing of no bigger then $0.1fm^{-3}$ for the case of $p,n,\mu$ and $e^{-}$ present in neutron stars. Have a read on the paper [[https://arxiv.org/pdf/nucl-th/0611030.pdf][Cold uniform matter and neutron stars in the QMC model]]. Maybe explore some more background on the \beta equilibrium conditions of neutron stars and make sure to understand these conditions and where they come from.
+ 
+_Resources_:  [[https://arxiv.org/pdf/nucl-th/0611030.pdf][Cold uniform matter and neutron stars in the QMC model]], [[https://arxiv.org/abs/1807.10013v1][Dark matter and neutron stars]], GW170817 is the code for the relevant gravitational wave experiment that will come up a lot.
+*** 2018-08-03 Friday
+**** Countable and Uncountable infinities                             :RT: 
+
+_Notes_: Below is a sketch of a proof of the natural numbers is an infinite set. Let $f:\mathbb{N}\to \{1,...,n\}$. If we suppose that this mapping exists and is bijective, then if we take the final element $n$ of the set. By the axiom of natural numbers, the element $n+1$ must be in the set, hence not a bijection, contradiction.
+
+_Resources_: [[https://myuni.adelaide.edu.au/courses/25463][Integration and Analysis Course Notes]], [[https://en.wikipedia.org/wiki/G%25C3%25B6del%2527s_incompleteness_theorems][Godel's incompletness theorem]]
+*** 2018-08-06 Monday
+**** QMC 2006 - Baryon Octet                                        :2006:
+
+_Notes_: The observed maximum mass of cold neutron stars cannot be explained without considering the pressure, arising from the strong nuclear force, which opposes gravitational collapse. The theoretical framework for describing the properties of strongly interacting matter is the Equation of State (EoS), which relates the pressure and energy density of the system, calculated using a model for the baryon-baryon interaction between particles present in the matter.
+
+At sufficiently high density, nuclear matter will most likely be composed not just of nucleons and leptons but also strange baryons and boson condensates. It is also likely that the interaction between overlapping quark bags will result in partial or full deconfinement. We will consider the matter in $\beta$ equilibrium and initially the $p,n,e^{-}$ and $\mu^{-}$ will be considered. Later we will fully incorporate the Hyperons and the scalar isovector. 
+
+The main feature of the QMC model is that the interactions are generated by the exchange of mesons coupled locally to the quarks. We will consider the $\sigma,\omega$ and $\rho$ mesons. Given the position and velocity of the bag, we obtain its energy by solving the field equations for the confined quarks.
+
+The [[https://ac.els-cdn.com/0375947496000334/1-s2.0-0375947496000334-main.pdf?_tid=17897949-d516-4ee8-a88c-221189b469fd&acdnat=1533531811_240b565d83935d63a742195c742ed692][QMC 1996]] paper mainly focused on nuclear matter and finite nuclei primarily composed of nucleons, it can however be generalized to Hyperons. The paper [[https://ac.els-cdn.com/S037594740700574X/1-s2.0-S037594740700574X-main.pdf?_tid=1435387d-6c93-4291-8638-8993350e4801&acdnat=1533532016_40e2a902600517075fec538e0670a79d][QMC 2006]] includes spin 1/2 SU(3) octet $(N,\Lambda,\Sigma,\Xi)$ where the baryons are specified by 
+
+#+BEGIN_EXPORT latex
+\begin{align*}
+  \ket{f} = \ket{tms}
+\end{align*}
+#+END_EXPORT
+
+Below is a table of the quantum numbers of the Baryon octet for future reference:
+
+|---+-----+------+---------+------------+----------+------------+---------+-------|
+|   | p   | n    | \Lambda | \Sigma^{-} | \Sigma^0 | \Sigma^{+} | \Xi^{-} | \Xi^0 |
+|---+-----+------+---------+------------+----------+------------+---------+-------|
+| t | 1/2 | 1/2  |       0 |          1 |        1 |          1 | 1/2     | 1/2   |
+| m | 1/2 | -1/2 |       0 |         -1 |        0 |          1 | -1/2    | 1/2   |
+| s | 0   | 0    |      -1 |         -1 |       -1 |         -1 | -2      | -2    |
+|---+-----+------+---------+------------+----------+------------+---------+-------|
+
+where $t,m$ is the isospin and its projection respectively and $s$ the strangeness. The working hypothesis is that the strange quark is not coupled to the meson fields, which can be seen as a consequence of the fact that the mesons represent correlated pion exchanges.
+ 
+_Resources_: The main resource being referenced here is [[https://ac.els-cdn.com/S037594740700574X/1-s2.0-S037594740700574X-main.pdf?_tid=1435387d-6c93-4291-8638-8993350e4801&acdnat=1533532016_40e2a902600517075fec538e0670a79d][Cold uniform matter and neutron stars]] as well as [[https://arxiv.org/pdf/nucl-th/0402064.pdf][Quark structure and nuclear effective forces]], [[https://ac.els-cdn.com/S0375947406001539/1-s2.0-S0375947406001539-main.pdf?_tid=84dfeb2c-41fd-49f8-bfff-678d64150800&acdnat=1533518634_cccf7a73578a60dd2b5dfdd5639c1659][Physical origin of density dependent forces of Skyrme type within the QMC model]]
+*** 2018-08-07 Tuesday
+**** QMC 2006 - Hamiltonian                                         :2006:
+
+_Notes_: Set the $u$ and $d$ quark masses to zero and assume that their coupling to the meson fields respects isospin symmetry. The energy of a baryon of flavour $f$ with position $\vec{R}$ and momentum $\vec{P}$ has the form
+
+#+BEGIN_EXPORT latex
+\begin{align*}
+  E_f = \sqrt{P^2+M_f^2(\sigma)}+g_\omega^f \omega +g_\rho \vec{b}\cdot\vec{I}^t
+\end{align*}
+#+END_EXPORT
+
+where M_f(\sigma) is the effective mass, that is the energy of the corresponding quark bag in its rest frame, in the \sigma field, and $\vec{I}^t$ is the isospin operator for isospin $t$, defined as
+
+#+BEGIN_EXPORT latex
+\begin{align*}
+  \mel{tms}{\sum_q \frac{\vb{\tau}_q}{2}}{t'm's'} = \delta(tt')\delta(ss')\vb{I}_{mm'}^t
+\end{align*}
+#+END_EXPORT
+
+$\vec{\tau}_q$ the Pauli matrix acting on the $u$ and $d$ quarks. The flavour dependence of the \omega coupling is fixed by the number of non-strange quarks in the baryon, that is:
+
+#+BEGIN_EXPORT latex
+\begin{align*}
+  g_\omega^f = \omega_f^\omega g_\omega = \qty(1+\frac{s}{3})g_\omega
+\end{align*}
+#+END_EXPORT
+
+Generally we will use the following fit to the mass
+
+#+BEGIN_EXPORT latex
+\begin{align*}
+  M_f(\sigma) = M_f - \omega_f^\sigma g_\sigma\sigma+\frac{d}{2}\tilde{\omega}_f^\sigma (g_\sigma\sigma)^2
+\end{align*}
+#+END_EXPORT
+
+where $d$ is the scalar polarisability, describing the response of the nucleon to the applied scalar field.
+
+The total energy of the nuclear system is the sum of the baryon energies $E(i)$ and of the energy stored in the meson felds
+#+BEGIN_EXPORT latex
+\begin{align*}
+  E_T &= \sum{i,A}E(i)+E_{\text{mesons}} \\
+  E_{\text{mesons}} &= \frac{1}{2}\int \dd^3\vb{r} \qty[ (\grad\sigma)^2+m_\sigma^2\sigma^2] - \frac{1}{2}\int \dd^3\vb{r}\qty[ (\grad\omega)^2+m_\omega^2\omega^2]\\
+  &\phantom{=} -\frac{1}{2}\int \dd^3\vb{r}\qty[ (\grad\cdot\vb{b})^2+m_\rho^2b^2]
+\end{align*}
+#+END_EXPORT
+
+ 
+_Resources_: See previous days references
+
+**** Unit Conversion  
+
+|-----------+-------------------------------|
+| Unit      | Conversion Factor             |
+|-----------+-------------------------------|
+| fm        | 197.33 MeV^{-1}               |
+| 1/fm^4    | 2.6115\times 10^{-4}/km^2     |
+|           | 197.33 MeV/fm^3               |
+|           | 3.5178\times 10^{14}g/cm^3    |
+|           | 3.1616\times 10^{35}dyne/cm^2 |
+| MeV/fm^3  | 1.7827\times 10^{12}g/cm^3    |
+|           | 1.3234\times 10^{-6}/km^2     |
+| M_{\odot} | 1.4766 km                     |
+|-----------+-------------------------------|
+*** 2018-08-10 Friday
+**** QMC 2006 - Mass vs Radius 
+
+_Notes_: Need to bunch up the points around the start of the EoS and the jump between inner crust and outer crust. This occurs in the data at 0.0-0.4 MeV/fm^3.
+ 
+_Resources_:
+**** Using GIT                                                        :RT: 
+
+_Notes_: Git allows for the storage and archival of old code and files via commands like git add and git commit.
+
+|-----------+---------------------------------------------------|
+| commands  | action                                            |
+|-----------+---------------------------------------------------|
+| add       | Add a file to the current branch                  |
+| init      | Initializes a repository in the current directory |
+| status    | Tells us the current status of files              |
+| commit -m | Store the files with a message                    |
+| log       | Brings up a list of commit messages               |
+| checkout  | Change branch                                     |
+| diff      | Show changes since last commit for all files      |
+| branch    | list,create or delete branchs                     |
+|-----------+---------------------------------------------------|
+
+we can create a file called .gitignore to tell git to ignore files we do not want to commit. The syntax follows file types like *~ for auto save files where the * represents a terminal wildcard.
+
+When creating a branch, the default branch for git is the master branch. git checkout may be used to switch between Branch's.
+
+It is important to note that all these repositories are stored locally on your machine. We wish to store such files on the cloud. We can pushup a entire branch into the cloud.
+ 
+_Resources_:

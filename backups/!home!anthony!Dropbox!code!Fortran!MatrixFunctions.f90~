@@ -1,0 +1,35 @@
+module MatrixFunctions
+  use Kinds
+  implicit none
+
+contains
+  function trace(M)
+    complex(dp), dimension(:,:), intent(in) :: M
+    complex(dp) :: trace
+
+    integer :: n = size(M,dim=1)
+    integer :: j
+
+    trace=0
+    do j=1:n
+       trace=trace+M(j,j)
+    end do
+  end function trace
+
+  function determinant(M) result(det)
+    complex(dp), dimension(:,:), intent(in) :: M
+    complex(dp) :: det, cf
+
+    integer :: n = size(M,dim=1)
+    integer :: i,j
+
+    det=0
+    do j=1:n
+       cf = cofactor(M,j,1)
+       det = det+((-1)**(j+1))*M(j,1)*determinant(cf)
+    end do
+
+  end function determinant
+
+
+end module MatrixFunctions

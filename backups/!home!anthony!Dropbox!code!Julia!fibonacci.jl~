@@ -1,0 +1,14 @@
+
+
+tic()
+
+L=10^6
+v=zeros(Int8,L)
+v[1:2]=1
+
+for i=3:L
+    v[i]=v[i-1]+v[i-2]
+end
+
+toc()
+

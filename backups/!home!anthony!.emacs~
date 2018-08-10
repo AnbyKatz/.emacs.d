@@ -1,0 +1,438 @@
+(setq package-archives
+    '(("melpa" . "http://melpa.org/packages/")
+      ("gnu" . "http://elpa.gnu.org/packages/")))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(LaTeX-version "2e")
+ '(Linum-format "%7i ")
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   ["#272822" "#F92672" "#A6E22E" "#E6DB74" "#66D9EF" "#FD5FF0" "#A1EFE4" "#F8F8F2"])
+ '(beacon-color "#cc6666")
+ '(compilation-message-face 'default)
+ '(custom-enabled-themes '(monokai))
+ '(custom-safe-themes
+   '("5bccf8917c4508bfb6f73e4d23d610a6f106547bc020109d978bc68f00e8f30d" "cd125c0cb337e0dc4aff253ed97284da8e94b69fa5032174f4bb9728cd913566" "53054cfc717f84ed1ec24df2d2afc3b9f50ad6bbeb308d78eb3778516d33a2e1" "ede95e02b47ec0e0b1d3011dbcf1390755cf20bf7bd4df01f5158447f70ad276" "02529fb38e63a3a6a95c2244c1ea1c86a69339433df20f0ec34445fd78a7b1fd" "0a5bf3b78de61affa7d53fce482b158348e6b1f86e5e73ba1b400f41a0cd20bf" "68001bc35ff40d747ab8ad076e4f5990a27c4521a06b5e40910145d704885320" "1784927ceae5f347b4f9fe0ed69cc52d10f63fa14d27436dc959e7877162c87a" "308c88c84758f042fae387150f8727898ae35c9de759c6e54a5ddc3321641c33" "b06024a357b66fbbd73070c4f636dac552c0d2441e04d0abd335a320d43809ee" "f77d5cab0a9aed47f05fdf746d590b6a5d1329af2f8ad5458b360e570c9c84f0" "9b6530653460ac479b7f89501c70be77fe2ded81f38257a73b06e251f219bfb7" "2508cb47ef6daeefb67c00390716c419ca11b89673d3c6aa488797beff4375ff" "7e1f081ea8da0a3f37582b3821ba7ab6371e7d3587b40deedb9230c6c41c312b" "46881dbae3eb18c9262ffec6789d4a9bdb130e6ef2c8d81122156b2c6c057a16" "bc40f613df8e0d8f31c5eb3380b61f587e1b5bc439212e03d4ea44b26b4f408a" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "c3d4af771cbe0501d5a865656802788a9a0ff9cf10a7df704ec8b8ef69017c68" default))
+ '(fci-rule-character-color "#202020")
+ '(fci-rule-color "#3C3D37")
+ '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
+ '(frame-background-mode 'dark)
+ '(fringe-mode 4 nil (fringe))
+ '(highlight-changes-colors '("#FD5FF0" "#AE81FF"))
+ '(highlight-tail-colors
+   '(("#3C3D37" . 0)
+     ("#679A01" . 20)
+     ("#4BBEAE" . 30)
+     ("#1DB4D0" . 50)
+     ("#9A8F21" . 60)
+     ("#A75B00" . 70)
+     ("#F309DF" . 85)
+     ("#3C3D37" . 100)))
+ '(magit-diff-use-overlays nil)
+ '(main-line-color1 "#1E1E1E")
+ '(main-line-color2 "#111111")
+ '(main-line-separator-style 'chamfer)
+ '(org-agenda-files '("~/Dropbox/Journal/agenda.org"))
+ '(package-selected-packages
+   '(org-bullets chess org unicode-input charmap ace-window matlab-mode csharp-mode elpy rainbow-mode minimap helm-spotify helm-spotify-plus flycheck-julia julia-repl auctex auctex-latexmk auctex-lua))
+ '(pos-tip-background-color "#FFFACE")
+ '(pos-tip-foreground-color "#272822")
+ '(powerline-color1 "#1E1E1E")
+ '(powerline-color2 "#111111")
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   '((20 . "#F92672")
+     (40 . "#CF4F1F")
+     (60 . "#C26C0F")
+     (80 . "#E6DB74")
+     (100 . "#AB8C00")
+     (120 . "#A18F00")
+     (140 . "#989200")
+     (160 . "#8E9500")
+     (180 . "#A6E22E")
+     (200 . "#729A1E")
+     (220 . "#609C3C")
+     (240 . "#4E9D5B")
+     (260 . "#3C9F79")
+     (280 . "#A1EFE4")
+     (300 . "#299BA6")
+     (320 . "#2896B5")
+     (340 . "#2790C3")
+     (360 . "#66D9EF")))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   '(unspecified "#272822" "#3C3D37" "#F70057" "#F92672" "#86C30D" "#A6E22E" "#BEB244" "#E6DB74" "#40CAE4" "#66D9EF" "#FB35EA" "#FD5FF0" "#74DBCD" "#A1EFE4" "#F8F8F2" "#F8F8F0")))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(font-lock-constant-face ((t (:foreground "firebrick2")))))
+
+;; ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+;; ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+;; QUALITY OF LIFE CHANGES
+
+;; Change text size in emacs
+(set-face-attribute 'default nil :height 150)
+
+;; Auto fullscreen when in GUI
+(when (display-graphic-p)
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  )
+
+;; Don't show menu or scroll bar
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+(when window-system
+  (scroll-bar-mode -1))
+
+;; Emacs has a silly warning bell by default. This gets rid of it.
+(setq ring-bell-function 'ignore)
+
+;; Fix Emacs' mouse scrolling behaviour
+(setq scroll-conservatively 100) ;; When cursor moves outside window, don't jump erratically
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+
+;; Display time in mode line
+(setq display-time-string-forms
+      '((propertize (format-time-string " %b %d, %l:%M%P" now) 'face 'bold)))
+(setq display-time-and-date t)
+(display-time-mode 1)
+
+;; Abbreviate all 'Yes/No' prompts to 'y/n'
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; camelCase recognition
+(global-subword-mode)
+
+;; Display line number
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+;; Remove start up message
+(setq inhibit-startup-message t)
+(setq inhibit-startup-echo-area-message t)
+
+;; Adds better user feedback
+(require 'better-defaults)
+
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'foo-mode-hook #'rainbow-delimiters-mode)
+
+;; ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+;; ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+;; Keyboard Short Cuts
+
+;; Enable quick access to emacs config file with "H-e"
+(defun my/visit-emacs-config ()
+  (interactive)
+  (find-file "~/.emacs"))
+(global-set-key (kbd "H-e") 'my/visit-emacs-config)
+
+;; helm mode
+(helm-mode 1)
+(require 'helm)
+(require 'helm-config)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+
+;; Evaluate region quicker
+(define-key emacs-lisp-mode-map (kbd "C-c C-r") 'eval-region)
+
+;; Move lines function
+;; press M-<up> and M-<down> to move the current line up or down
+(defun move-line-up ()
+  (interactive)
+  (transpose-lines 1)
+  (previous-line 2))
+  ;; (forward-line -2))
+
+(defun move-line-down ()
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (previous-line 1))
+  ;; (forward-line -1))
+
+(global-set-key (kbd "M-<up>") 'move-line-up)
+(global-set-key (kbd "M-<down>") 'move-line-down)
+
+;; ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+;; ------------------------------------------------------------------------------------------------------------------------------------------------------
+;; Add colour theme load paths
+(add-to-list 'custom-theme-load-path "~/.emacs.d/anthony-swanking-theme")
+(load-theme 'anthony-swanking t)
+
+;; Spell checker for auctex
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+
+;; pdf tools
+
+(add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+
+;; make midnight mode colours nice
+
+(setq pdf-view-midnight-colors (cons (face-foreground 'default) (face-background 'default)))
+(defun my-pdf-view-mode-hook ()
+  (pdf-view-midnight-minor-mode 1)
+  (linum-mode 0)
+  )
+(add-hook 'pdf-view-mode-hook 'my-pdf-view-mode-hook)
+(pdf-tools-install)
+
+;; to use pdfview with auctex
+
+(setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+      TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
+      TeX-source-correlate-start-server t) ;; not sure if last line is neccessary
+
+;; to have the buffer refresh after compilation
+
+(add-hook 'TeX-after-compilation-finished-functions
+	  #'TeX-revert-document-buffer)
+
+;; force side by side display
+
+;; (setq split-height-threshold nil)
+;; (setq split-width-threshold 0)
+
+;; Spotify Stuff
+(require 'helm-spotify-plus)
+
+;; -------------------------------------------------------------------------------------------------------------
+
+;; f90 stuff
+;; press M-; on a region to comment it out
+(autoload 'f90-mode "f90" "Fortran 90 mode" t)
+(add-hook 'f90-mode-hook 'my-f90-mode-hook)
+(require 'fortran)
+(defun my-f90-mode-hook () 
+  (local-set-key (kbd "H-M-c") (lambda () (interactive) (shell-command "./bash_fortran")))
+  (local-set-key (kbd "H-t") 'my/f90-comment-header-block)
+  (setq f90-font-lock-keywords f90-font-lock-keywords-3)
+  '(f90-comment-region "!!!$")
+  '(f90-indented-comment-re "!")
+  (abbrev-mode 1)                      ; turn on abbreviation mode
+  (turn-on-font-lock)                  ; syntax highlighting
+  (auto-fill-mode 0)                   ; turn off auto-filling
+)
+
+;; Python Stuff
+(require 'python)
+(add-hook 'python-mode-hook 'my-python-mode-hook)
+(defun my-python-mode-hook()
+  (local-set-key (kbd "H-M-p") 'my/python-compile) 
+  (setq python-shell-interpreter "ipython"
+        python-shell-interpreter-args "--simple-prompt -i")
+  (add-to-list 'load-path "/folder/containing/file")
+  )
+
+;; Tex things
+(require 'tex)
+(add-hook 'LaTeX-mode-hook 'my-LaTeX-mode-hook)
+(defun my-LaTeX-mode-hook ()
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+  (setq TeX-PDF-mode t)
+  (visual-line-mode 1)
+  (flyspell-mode 1)
+  (LaTeX-math-mode 1)
+  (TeX-source-correlate-mode 1)
+  (outline-minor-mode 1)
+  (local-set-key (kbd "C-M-=") '(lambda () (interactive) (insert "&= ")))
+  (local-set-key (kbd "C-H-f") '(lambda () (interactive) (insert "frac{")))
+  (local-set-key (kbd "C-c b") 'tex-latex-block)
+  (local-set-key (kbd "<C-tab>") 'outline-toggle-children)
+  )
+
+;; C++ things
+(require 'cl)
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+(defun my-c++-mode-hook ()
+  (local-set-key (kbd "H-M-p")(lambda () (interactive) (shell-command "./bash_c++")))
+  )
+
+;; Julia Stuff
+(add-to-list 'load-path "~/.emacs.d/elpa/julia-mode-20171116.642")
+(require 'julia-mode)
+(add-hook 'julia-mode-hook 'my-Julia-mode-hook)
+(defun my-Julia-mode-hook()
+  (local-set-key (kbd "C-c C-p") 'inferior-julia-shell)
+  (local-set-key (kbd "C-c C-r") 'julia-shell-run-region)
+  (local-set-key (kbd "H-M-p") 'my/julia-compile) 
+  )
+(defun my/julia-compile()
+  (interactive)
+  (defvar thisfile buffer-file-name)
+  (shell-command (concat "julia " thisfile)))
+
+(setq  inferior-julia-program-name "~/bin/julia/bin/julia")
+
+;; Org-mode stuff
+(defun my-org-mode-hook ()
+  (setq org-log-done t)
+  (define-key global-map "\C-cl" 'org-store-link)
+  (define-key global-map "\C-ca" 'org-agenda)
+  (visual-line-mode 1)
+  (org-indent-mode 1)
+  (org-bullets-mode 1)
+  (abbrev-mode 1)
+  ;; (linum-mode 1)
+)
+(autoload 'org-mode "org" "Org Mode" t)
+(add-hook 'org-mode-hook 'my-org-mode-hook)
+(require 'ob-clojure)
+(require 'ox-latex)
+(require 'org)
+(unless (boundp 'org-latex-classes)
+  (setq org-latex-classes nil))
+(add-to-list 'org-latex-classes
+             '("article"
+               "\\documentclass{article}"
+               ("\\section{%s}" . "\\section*{%s}")))
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (python . t)
+   (fortran . t)
+   (latex . t)
+   (shell . t)
+   (julia . t)
+   (emacs-lisp . t)
+   ))
+(setq org-capture-templates
+      '(
+        ("j" "Journal Entry"
+         entry (file+datetree "~/Dropbox/Journal/agenda.org")
+         "* %?"
+         :empty-lines 1)     
+        ))
+
+;; Julia Stuff
+(defun julia-repl ()
+  "Runs Julia in a screen session in a `term' buffer."
+  (interactive)
+  (require 'term)
+  (let ((termbuf (apply 'make-term "Julia REPL" "screen" nil (split-string-and-unquote "julia"))))
+    (set-buffer termbuf)
+    (term-mode)
+    (term-char-mode)
+    (switch-to-buffer termbuf)))
+(global-set-key (kbd "C-x j") 'julia-repl)
+
+;; Repeat actions command
+(defun my/repeat-last-shell-command()
+  "repeats last run shell command"
+  (interactive)
+  (shell-command (cadr (assoc 'shell-command command-history))))
+
+;; Make emacs shell recognise custom paths
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (replace-regexp-in-string
+                          "[ \t\n]*$"
+                          ""
+                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq eshell-path-env path-from-shell) ; for eshell users
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(defun my/f90-comment-header-block (title)
+  "Inserts a commented title block for f90"
+  (interactive "sEnter a title: ")
+  (defvar blank-len 1)
+  (setq blank-len (/ (- 69 (length title)) 2))
+  (newline)
+  (dotimes (jj 5)
+    (case jj
+      ((0 4)
+       (indent-for-tab-command)
+       (insert "!")
+       (dotimes (ii 69) (insert "-"))
+       (insert "!")
+       (newline))
+      ((1 3)
+       (indent-for-tab-command)
+       (insert "!")
+       (dotimes (ii 69) (insert " "))
+       (insert "!")
+       (newline))
+      (2
+       (indent-for-tab-command)
+       (insert "!")
+       (dotimes (ii blank-len)
+	 (insert " "))
+       (if (= (mod (length title) 2) 0)
+	   (insert " ")
+	 )
+       (insert title)
+       (dotimes (ii blank-len)
+	 (insert " "))
+       (insert "!")
+       (newline))
+  )))
+
+;; Recognise exported paths
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (replace-regexp-in-string
+                          "[ \t\n]*$"
+                          ""
+                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq eshell-path-env path-from-shell) ; for eshell users
+    (setq exec-path (split-string path-from-shell path-separator))))
+(when window-system (set-exec-path-from-shell-PATH))
+
+;; Add in Japanese Language environment
+(set-language-environment "Japanese")
+
+;; Add in Custom quick definitions for abbrev mode
+(setq abbrev-file-name "~/.abbrev_defs")
+(if (file-exists-p abbrev-file-name)
+    (quietly-read-abbrev-file))
+
+;; Open firefox when exporting org code
+'(org-file-apps
+    (quote
+      ((auto-mode . emacs)
+      ("\\.mm\\'" . default)
+      ("\\.x?html?\\'" . "/usr/bin/firefox %s")
+      ("\\.pdf\\'" . default))))
+
+;; Custom key bindings
+(global-set-key (kbd "H-r")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/Thesis/MPhil_Research.tex")))
+(global-set-key (kbd "H-j")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/agenda.org")))
+(global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/QMC_2007_Code/QMC_2007_CodeV1.f90")))
+(global-set-key (kbd "H-t")  (lambda () (interactive) (find-file  "~/texmf/tex/latex/package_repository/mypackage.sty")))
+(global-set-key (kbd "H-O")  (lambda () (interactive) (find-file  "~/Dropbox/Code/Org_Files/todo_list.org")))
+(global-set-key (kbd "H-s") 'helm-spotify-plus)
+(global-set-key (kbd "M-[") 'other-frame)
+(global-set-key (kbd "M-]") 'other-window)
+(global-set-key (kbd "M-n") 'forward-paragraph)
+(global-set-key (kbd "M-p") 'backward-paragraph)
+(global-set-key (kbd "M-Z") 'my/repeat-last-shell-command)
+(global-set-key (kbd "H-Z") 'my/f90-comment-header-block)

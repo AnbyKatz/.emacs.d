@@ -1,0 +1,212 @@
+program QMC_2018V1
+  use kinds
+  use UsefulFunctions
+  use pyplots
+  implicit none
+
+  integer  ,parameter             :: N = 2000, M = 100, L = 78
+  integer                         :: i,j,k,intersect,L3
+  character(len=20) ,dimension(2) :: titles
+  real(DP) ,dimension(N,4)        :: data
+  real(DP) ,dimension(2)          :: y0  
+  real(DP) ,dimension(N)          :: Pvals,rho,radius,splc,Pr
+  real(DP) ,dimension(M)          :: test_x,test_y,den_guess
+  real(DP) ,dimension(6,2)        :: parameters
+  real(DP)                        :: N1,p1,N2,p2,r,a,empty,&
+       & conv1,conv2,conv3,conv4,tN,test,RhoIn,y1,y2,h,&
+       & y,t,t0,conv5
+
+  real(DP),dimension(L)  :: crust_t,crust_y,crust_c,rho2,intvals
+
+  !---------------------------------------------------------------------!
+  !                                                                     !
+  !                           Model Parameters                          !
+  !                                                                     !
+  !---------------------------------------------------------------------!
+
+  parameters(1,1) = 0         
+  parameters(1,2) = 2.62e-7   
+  parameters(2,1) = 0         
+  parameters(2,2) = 3.197_DP  
+  parameters(3,1) = 8.623e-3  
+  parameters(3,2) = 0.0251_DP 
+  parameters(4,1) = 1.548_DP  
+  parameters(4,2) = 1.286_DP  
+  parameters(5,1) = 342.4_DP  
+  parameters(5,2) = 522.1_DP  
+  parameters(6,1) = 184.4_DP  
+  parameters(6,2) = 113.0_DP  
+
+  conv1 = 3.5178e14           ! 1/fm^4 -> g/cm^3
+  conv2 = 197.33              ! 1/fm^4 -> MeV/fm^3
+  conv3 = 3.1616e35           ! 1/fm^4 -> dyne/cm^2
+  conv4 = 1.3234e-6           ! MeV/fm^3 -> 1/km^2
+  conv5 = 1.4766_DP           ! Solar Mass -> km
+
+  titles(1) = "data"
+  titles(2) = "fit"
+
+  !---------------------------------------------------------------------!
+  !                                                                     !
+  !                                 Code                                !
+  !                                                                     !
+  !---------------------------------------------------------------------!
+
+  i = 1
+  N1 = parameters(1,i)  
+  p1 = parameters(2,i)  
+  N2 = parameters(3,i)  
+  p2 = parameters(4,i)  
+  r = parameters(5,i)   
+  a = parameters(6,i)   
+
+  call calccrust()
+
+  rho2(1:L) = crust_t
+  do j = 1,L
+     Pvals(j) = P(rho2(j))
+  end do
+
+  intersect = guesszero(crust_y-Pvals(1:L))
+  rho(1:intersect) = rho2(1:intersect)
+  rho(intersect+1:N) = linspace(rho2(intersect),1200.0_DP,N-intersect+1)
+  Pvals(1:intersect) = crust_y(1:intersect)
+
+  do j = intersect,N
+     Pvals(j) = P(rho(j))
+  end do
+
+  Pvals = Pvals*conv4
+  Rho = Rho*conv4
+  call splineFit(Pvals,Rho,splc)
+
+  t0 = 0.1_DP         ! km
+  tN = 20.0_DP        ! km
+  y0(2) = 0.001_DP    ! 1/km^2
+  h = 10e-2           ! km  
+
+  den_guess = linspace(10.0_DP,500.0_DP,M)
+
+  do k = 1,M
+
+     t = t0
+     y0(1) = den_guess(k)! MeV/fm^3
+     y0(1) = y0(1)*conv4 ! 1/km^2
+     y0(2) = 0.001_DP    ! 1/km^2
+
+     do j = 1,N  
+        call rk4(h,t,y0,dPdr,dmdr,y1,y2)
+        if ( y1 <= 1e-7 ) exit
+        t = t + h
+        y0(1) = y1
+        y0(2) = y2
+        Pr(j) = y1
+     end do
+
+     test_x(k) = t
+     test_y(k) = y2/conv5
+
+  end do
+
+  call plot(test_x,test_y)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+contains
+
+
+  !---------------------------------------------------------------------!
+  !                                                                     !
+  !                            TOV Equations                            !
+  !                                                                     !
+  !---------------------------------------------------------------------!
+
+  function dPdr(r,P,m)
+    use kinds
+    implicit none 
+
+    real(DP),intent(in)  :: r,P,m
+    real(DP)             :: dPdr
+
+    RhoIn = splinevals(splc,Pvals,P)
+    dPdr = -(m*RhoIn/(r**2))*&
+         &(( (1.0_DP+P/RhoIn)*(1.0_DP+4*pi*(r**3)*P/m))/&
+         & (1.0_DP-2*m/r))
+
+  end function dPdr
+
+  function dmdr(r,P,m)
+    use kinds
+    implicit none 
+
+    real(DP),intent(in)  :: r,P,m
+    real(DP)             :: dmdr
+
+    RhoIn = splinevals(splc,Pvals,P)
+    dmdr = 4*pi*(r**2)*RhoIn
+
+  end function dmdr
+
+  !---------------------------------------------------------------------!
+  !                                                                     !
+  !                          Equation of state                          !
+  !                                                                     !
+  !---------------------------------------------------------------------!
+
+  function P(eps)
+    use kinds
+    implicit none
+
+    real(DP),intent(in) :: eps
+    real(DP)            :: P
+
+    P   = (N1*(eps**(p1))/(1+exp((eps-r)/a)))&
+         &+(N2*(eps**(p2))/(1+exp(-(eps-r)/a)))
+
+  end function P
+
+  !---------------------------------------------------------------------!
+  !                                                                     !
+  !                        Calculate Crust Values                       !
+  !                                                                     !
+  !---------------------------------------------------------------------!
+
+  subroutine calcCrust()
+
+    open(100,file="theo_data",action="read",status="old",form="formatted")
+    do i=1,L
+       read(100,*) crust_t(i),crust_y(i),empty
+    end do
+    crust_t = (crust_t/conv1)*conv2  ! MeV/fm^3
+    crust_y = (crust_y/conv3)*conv2  ! MeV/fm^3
+
+  end subroutine calccrust
+
+  subroutine sanityCheck()
+
+    data(:,1) = Pvals
+    do j = 1,N
+       data(j,2) = splineVals(splc,Pvals,Pvals(j))
+    end do
+    call plot(data(:,1:2))
+
+  end subroutine sanityCheck
+
+end program QMC_2018V1

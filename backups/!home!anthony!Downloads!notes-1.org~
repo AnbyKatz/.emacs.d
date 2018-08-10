@@ -1,0 +1,137 @@
+#+TITLE: Stuff on About Org Mode
+#+AUTHOR: Phil Grace
+#+OPTIONS: toc:nil num:nil
+#+STARTUP: content
+
+
+
+Harry Schwartz is God. Go watch his [[https://www.youtube.com/watch?v=SzA2YODtgK4][sermon]].
+
+* Capture
+[[https://orgmode.org/manual/Capture.html#Capture][Org Mode docs]] include a pretty good explanation of org-capture. Would recommend
+binding org-capture to =C-c c= globally:
+
+#+BEGIN_SRC emacs-lisp
+  (define-key (kbd "C-c l") 'org-store-link)
+  (define-key (kbd "C-c a") 'org-agenda)
+  (define-key (kbd "C-c c") 'org-capture)
+#+END_SRC
+
+Templates are set by the variable org-capture-templates, and there are plenty of
+examples online, as well as syntax guides.
+
+* Quickly insert source blocks
+
+Activate any of these templates by typing /e.g./ =<el=, and then =TAB=.
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-structure-template-alist
+               '("el" "#+BEGIN_SRC emacs-lisp\n  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("c" "#+BEGIN_SRC C++\n  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("py" "#+BEGIN_SRC python\n  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("ipy" "#+BEGIN_SRC ipython :session :exports both :results raw drawer\n  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("f" "#+BEGIN_SRC fortran\n  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("y" "#+BEGIN_SRC yaml\n  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("sh" "#+BEGIN_SRC shell\n  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("t" "#+BEGIN_SRC text\n  ?\n#+END_SRC"))
+#+END_SRC
+
+* Exporting
+
+Translate regular ol' straight quotes to typographically-correct curly quotes
+when exporting.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-export-with-smart-quotes t)
+#+END_SRC
+
+Use =physics= package for all LaTeX exports.
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-latex-packages-alist '("" "physics"))
+#+END_SRC
+
+
+** Syntax highlighting with minted (warning, can be a time sink)
+
+I want to produce PDFs with syntax highlighting in the code. The best way to do
+that seems to be with the =minted= package, but that package shells out to
+=pygments= to do the actual work. =pdflatex= usually disallows shell commands;
+this enables that.
+
+#+BEGIN_SRC emacs-lisp
+   (setq org-latex-pdf-process
+         '("latex -shell-escape --synctex=1 -interaction=nonstopmode -output-directory %o %f"
+           "latex -shell-escape --synctex=1 -interaction=nonstopmode -output-directory %o %f"
+           "latex -shell-escape --synctex=1 -interaction=nonstopmode -output-directory %o %f"))
+#+END_SRC
+
+Include the =minted= package in all of my LaTeX exports.
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted)
+#+END_SRC
+
+* General
+
+Don't ask before evaluating code blocks.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-confirm-babel-evaluate nil)
+#+END_SRC
+
+
+* Prettification
+
+org-bullets because they're pretty. They're just unicode characters, so you can customise
+them to whatever you want.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (org-bullets-mode t)))
+#+END_SRC
+
+Nice ellipsis:
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-ellipsis "⤵")
+#+END_SRC
+
+Use syntax highlighting in source blocks while editing (you may already have
+this).
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-fontify-natively t)
+#+END_SRC
+
+When editing a code snippet, use the current window rather than popping open a
+new one.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-window-setup 'current-window)
+#+END_SRC
+
+Automatic indentation upon startup (or set to nil if you don't want it)
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-startup-indented t)
+#+END_SRC
+
+* Managing org mode config file
+
+Everything outside of an emacs-lisp source block is a comment. To keep blocks in
+your config without them being tangled and used in startup, just add the header
+argument =:tangle no=, like so:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  ( / 2 0 )  ; do not execute!!
+#+END_SRC

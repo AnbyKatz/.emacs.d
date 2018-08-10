@@ -1,0 +1,2 @@
+ifort -c kinds.f90
+ifort -c

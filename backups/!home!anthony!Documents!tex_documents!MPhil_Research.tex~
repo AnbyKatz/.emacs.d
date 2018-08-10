@@ -1,0 +1,170 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{mypackage}
+\usepackage{graphicx}
+\usepackage{slashed}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{document}
+
+% ----------------------------------------------------------------
+
+\vspace*{-2cm}
+%\enlargethispage{2cm}
+
+\begin{center}
+\makeatletter
+% Upper part of the page
+%\vspace*{-1cm}
+\includegraphics[width=0.45\textwidth]{vertLogo.eps}\\[1.8cm]   
+\textsc{\LARGE Faculty of Sciences}\\[0.4cm]
+\textsc{\Large School of Physical Sciences}\\[0.7cm]
+% Title
+\HRule 
+\vspace{0.6cm}
+\huge{Topic Notes}
+\HRule 
+\vspace{1.4cm}
+\Large Anthony Kalaitzis \\[1.4cm]
+\Large
+\emph{Supervisors:} \\
+Prof.~Anthony \textsc{Thomas} \\
+Ass Prof.~Ross \textsc{Young}
+
+\vfill
+
+% Bottom of the page
+{\large October 2018}
+\end{center}
+
+% ------------------------------------------------------------------
+
+\section{Relativistic Nuclear Field Theory}
+\subsection{Uncharged and Charged Scalar Fields}
+Consider the simplest example of a field ie the uncharged scalar field which we will denote $\sigma(x)$. This will have the corresponding KG Lagrangian density.
+\[\mathcal{L}_\sigma=\frac{1}{2}(\partial_\mu \sigma\partial^\mu \sigma - m_\sigma^2\sigma^2)\]
+where $m_\sigma$ denotes the meson mass. Clearly after applying the EL equations we get the corresponding KG equation for a free spin-zero meson ie
+\[\partial_\mu\bigg(\pdvf{\mathcal{L}}{(\partial_\mu\sigma)}\bigg)-\pdvf{\mathcal{L}}{\sigma}=0 \]
+\[\eqsplit{ \pdvf{\Lag}{(\partial_\mu\sigma)}&=\pdv{(\partial_\mu\sigma)}\frac{1}{2}(\partial_\mu\sigma g^{\mu\nu}\partial_\nu\sigma)\\
+    &=\frac{1}{2}\bigg(g^{\mu\nu}\partial_\nu\sigma+\partial_\mu\sigma g^{\mu\nu}\frac{\partial_\nu\sigma}{\partial_\mu\sigma}\bigg)\\
+    &=\frac{1}{2}\bigg(\partial^\mu\sigma+\partial_\nu\sigma g^{\mu\nu} \bigg)=\partial^\mu\sigma } \]
+\[\implies \partial_\mu(\partial^\mu \sigma)+m_\sigma^2\sigma=0 \]
+\[\therefore (\square+m_\sigma^2)\sigma(x)=0\]
+where $\square\equiv\partial_\mu\partial^\mu$. We make the standard substitutions  for energy and momentum operators
+\[E\to i\pdv{t} \qquad \mathbf{P}\to-i\grad\]
+Note the KG equation represents the operator equation below when acted on a state
+\[E^2=P^2+m_\sigma^2\]
+and we recognise that the above Lagrangian has the same space symmetries of any Lorentz scalar Lagrangian and hence its energy momentum tensor takes the usual form
+\[\mathcal{T}^{\mu\nu}\equiv\frac{\partial\mathcal{L}}{\partial{(\partial_\mu\phi)}}\partial^\nu\phi-\eta^{\mu\nu}\mathcal{L}\]
+A scalar Lagrangian that does have an internal symmetry is one representing two scalar mesons of the same mass,
+\[\mathcal{L}(\sigma_1,\sigma_2)=\frac{1}{2}(\partial_\mu \sigma_1\partial^\mu \sigma_1 - m_\sigma^2\sigma_1^2)+\frac{1}{2}(\partial_\mu \sigma_2\partial^\mu \sigma_2 - m_\sigma^2\sigma_2^2)\]
+This symmetry becomes more apparent if we define the complex field $\sigma=(\sigma_1+i\sigma_2)/\sqrt(2)$. Which then implies that we can write the lagrangian in the following way
+\[\mathcal{L}(\sigma_1,\sigma_2)=\partial_\mu\sigma^*\partial^\mu\sigma-m^2_\sigma\sigma^*\sigma\]
+which is clearly invariant under the transformation $\sigma(x)\to e^{iq\lambda}\sigma(x)$ and $\sigma^*(x)\to e^{-iq\lambda}\sigma^*(x)$ where $\lambda$ is a cts variable and we interpret $q$ as the charge of the field. If we now want to construct the conserved current we consider the variational derivative of this above transformation $\delta\sigma=iq\lambda\sigma$ or in terms of the original field $\sigma_1\to\sigma_1-q\lambda\sigma_2$ and $\sigma_2\to\sigma_2+a\lambda\sigma_1$. Hence our small deformations of the field are $-q\sigma_2$ and $q\sigma_1$ which leads to a conserved current which is just the sum of two terms
+\[J^\mu=q \bigg(\pdvf{\mathcal{L}}{(\partial_\mu\sigma_1)}\sigma_2+\pdvf{\mathcal{L}}{(\partial_\mu\sigma_2)}\sigma_1\bigg)=q(\sigma_1\partial^\mu\sigma_2+\sigma_2\partial^\mu\sigma_1)=q(\vb{\sigma}\times\partial^\mu\vb{\sigma}) \]
+or in terms of the complex field we have 
+\[J^\mu=-iq(\sigma^*\partial^*\sigma-\sigma\partial_\mu\sigma^*)\]
+\subsection{Uncharged and charged vector fields}
+Now we'll consider the uncharged Lorentz vector field for a meson of mass $m_\omega$ and its corresponding tensor $ \omega_{\mu\nu}=\partial_\mu\omega_\nu-\partial_\nu\omega_\mu$ as analogous to EM theory. Which then gives the Lagrangian density
+\[\mathcal{L}_\omega=-\frac{1}{4}\omega_{\mu\nu}\omega^{\mu\nu}+\frac{1}{2}m_\omega^2\omega_\mu\omega^\mu \] 
+Which then gives if we apply the EL equations
+\[ \eqsplit{ \frac{\partial\Lag}{\partial(\partial_\alpha\omega_{\beta})}&=-\frac{1}{4}g^{\mu\mu'}g^{\nu\nu'}\pdv{(\pd_\alpha\omega_\beta)}\omega_{\mu\nu}\omega_{\mu'\nu'}  \\
+    &= -\frac{1}{4}g^{\mu\mu'}g^{\nu\nu'}\Big(\omega_{\mu'\nu'}(\delta^\alpha_\mu\delta^\beta_\nu-\delta^\alpha_\nu\delta^\beta_\mu)+\omega_{\mu\nu}(\delta^\alpha_{\mu'}\delta^\beta_{\nu'}-\delta^\alpha_{\nu'}\delta^\beta_{\mu'})\Big) \\
+    &= -\frac{1}{4}(\omega^{\alpha\beta}-\omega^{\beta\alpha}+\omega^{\alpha\beta}-\omega^{\beta\alpha})\\
+&=\omega^{\beta\alpha} } \]
+where we are free to change the final labels.
+\[\eqsplit{\pdvf{\Lag}{\omega_\mu}&=\frac{1}{2}m_\omega^2g^{\mu\mu'}\pdv{\omega_\mu}\omega_\mu\omega_{\mu'} \\
+    &=\frac{1}{2}m_\omega^2(\omega^\mu+g^{\mu\mu'}\omega_\mu\delta^{\mu}_{\mu'})\\
+    &=m^2_\omega\omega^\mu}\]
+Hence finally we have that
+\[\pd_\alpha\Big(\pdvf{\Lag}{(\pd_\alpha\omega_\beta)}\Big)-\pdvf{\Lag}{\omega_\beta}=0\]
+\[\pd_\alpha(\pd^\beta\omega^\alpha-\pd^\alpha\omega^\beta)-m^2_\omega\omega^\beta=0\]
+\[\implies \ \pd_\alpha\pd^\beta\omega^\alpha-(\square+m^2_\omega)\omega^\beta=0\]
+Which may be equivalently written after relabeling and lowering of indices as
+\[(\square+m_\omega^2)\omega_\mu-\partial_\mu\partial^\nu\omega_\nu=0\]
+Which is known as the Proca equation. Taking the above equations divergence gives us
+\[(\square+m_\omega^2)\partial^\mu\omega_\mu-\square\partial^\nu\omega_\nu=0\implies m_\omega^2\partial^\mu\omega_\mu=0\]
+ie this implies that the field must be divergence-less if the particle (meson) it describes is massive. Hence for free mesons, each of the four lorentz components satisfy a KG equation of the form $(\square+m_\omega^2)\omega_\mu=0$. Finally we describe the charged meson triplet which we will denote $\vb{\rho}^\mu=(\rho_1^\mu,\rho_2^\mu,\rho_3^\mu)$. As expected the Lagrangian desity for the triplet is
+\[\vb{\Lag}_\rho=-\frac{1}{4}\vb{\rho}_{\mu\nu}\cdot\vb{\rho}^{\mu\nu}+\frac{1}{2}m_\rho^2\vb{\rho}_\mu\cdot\vb{\rho}^\mu\]
+Which has the same phase invariance as our previous complex field if we introduce the the variable
+\[\rho_\pm^\mu=\frac{1}{\sqrt{2}}(\rho_1^\mu\pm\rho_2^\mu)\]
+Which then reproduce's the same invariance relations as our previous complex field. A more general invariant rotation in isospin space may be written in the form $\vb{\rho}_\mu\to\vb{\rho}_\mu+\vb{\Lambda}\times\vb{\rho}_\mu$ where $\Lambda$ is an infinitesimal vector in isospin space. This may also be written using index notation as $\vb{\rho}_\mu\to\vb{\rho}_\mu+\epsilon_{ijk}\Lambda_j\rho_{k\mu}$. Going through similar working as previously done, this leads to a conserved current $\vb{I}^\nu=\vb{\rho}_\mu\times\vb{\rho}^{\nu\mu}$. This is a Lorentz four current, the isospin current of the rho field. We can then easily obtain the charge current by just multiplying by the charge $q$
+\[\mathcal{J}^\nu=q(\vb{\rho}_\mu\times\vb{\rho}^{\mu\nu})\]
+Just as for the omega field, after applying the EL equations we arrive at another KG equation but for the $\rho$ field ie
+\[(\square+m_\rho^2)\vb{\rho}^\mu=0\]
+\subsection{Neutron and Proton}
+Consider the neutron and proton which are both spin-$\frac{1}{2}$ particles so they both satisfy a Dirac equation. Take the Dirac Lagrangian describing both particles ie
+\[\Lag=\psibar_p(i\slashed{\partial}-m)\psi_p+\psibar_n(i\slashed{\partial}-m)\psi_n\]
+For convenience we introduce the notation
+\[\psi\equiv\m{\psi_p\\\psi_n}\implies\Lag=\psibar(i\slashed{\partial}-m)\psi\]
+let $\vb{\tau}=(\tau_1,\tau_2,\tau_3)$ denote the pauli matrices and $\Lambda$ an arbitrary vector constant in isospin space. This Lagrangian is then invariant under the cts phase transformation
+\[\psi\to e^{-i\vb{\tau}\cdot\vb{\Lambda}/2}\psi\]
+Clearly we can build up a finite rotation from infinitesimal ones. As before consider the variational derivative of $\psi$
+\[\delta\psi=-\frac{i}{2}\vb{\Lambda}\cdot\vb{\tau}\psi=\vb{\Lambda}\cdot\vb{F}\]
+Where $\vb{F}=-\frac{i}{2}\vb{\tau}\psi$
+\[\pdvf{\Lag}{(\partial_\mu\psi)}=\pdv{(\partial_\mu\psi)}\bigg(\psibar i\gamma^\mu\partial_\mu\psi-m\psibar\psi\bigg)=\psibar i\gamma^\mu\]
+We can calculate the Noether current via the formula
+\[\vb{J}^\mu\equiv \pdvf{\Lag}{(\pd_\mu\phi_i)}\vb{F}_i\]
+where $\vb{F}_i$ is a continuous deformation of the field coming from transformations of the form
+\[\phi'_i(x)=\phi_i+\lambda_jF_i^j[\phi_1(x),...,\phi_n(x)]  \]
+hence our conserved current for this field deformation is
+\[\vb{I}^\mu=(\psibar i\gamma^\mu)\Big(-\frac{i}{2}\vb{\tau}\psi\Big)=\frac{1}{2}\psibar\gamma^\mu\vb{\tau}\psi\]
+where $\vb{I}$ is a conserved isospin current related to the Noether current $\vb{J}$ by a factor of $q$ i.e the charge. If we consider the third component of $\vb{\tau}$ or the Pauli matrix we get the following
+\[\vb{I}_3^\mu=\frac{1}{2}\psibar\gamma^\mu\tau_3\psi \qquad \tau_3=\m{1&0\\0&-1}  \]
+\[\implies \ I_3^\mu=\frac{1}{2}\psi^\dagger \gamma^0 \tau_3 \psi=\frac{1}{2}(\psi_p^\dagger\psi_p-\psi^\dagger_n\psi_n) \]
+\subsection{Electromagnetic Field}
+We will now introduce an electromagnetic field via our standard free EM Lagrangian
+\[\Lag_{EM}=-\frac{1}{4}A_{\mu\nu}A^{\mu\mu}\qquad A_{\mu\nu}\equiv \pd_\mu A_\nu-\pd_\nu A_\mu  \]
+with our Lorentz 4-vector $A^\mu=(V,\vb{A})$ where $V$ is the electric scalar potential and $\vb{A}$ the magnetic vector potential. We add electromagnetic interactions via the gauge transformation $\pd^\mu\to\pd^\mu+iqA_\mu\equiv \mathcal{D}^\mu$. hence for our spinor field of the proton we introduce this transformation into the Lagrangian to get the following (note clearly the electromagnetic dynamics of the system don't effect the uncharged neutron)
+\[\eqsplit{ \Lag&=\psibar_p(i\gamma_\mu\mathcal{D}_\mu-m)\psi_p-\frac{1}{4}A_{\mu\nu}A^{\mu\nu} \\
+    &=\psibar_p(i\slashed{\pd}-m)\psi_p-\frac{1}{4}A_{\mu\nu}A^{\mu\nu}-A_\mu J^\mu }\]
+where $J^\mu\equiv-q\psibar_p\gamma_\mu A^\mu\psi_p$. Similarly for our complex scalar field we have after the gauge transformation that
+\[\eqsplit{\Lag&=(\mathcal{D}^\mu\sigma)^\dagger(\mathcal{D}_\mu\sigma)-m\sigma^\dagger\sigma-\frac{1}{4}A_{\mu\nu}A^{\mu\nu}\\
+    &=\Lag(\sigma_1,\sigma_2)-\frac{1}{4}A_{\mu\nu}A^{\mu\nu}+iqA_\mu(\sigma\pd^\mu\sigma^*-\sigma^*\pd^\mu\sigma)+q^2A^2\sigma^*\sigma}  \]
+We could also write this in terms of two fields and calculate our conserved current via a similar process as before. One finds that
+\[J^\mu=-iq\Big(\sigma^*(\mathcal{D}^\mu\sigma)-\sigma(\mathcal{D}^\mu\sigma^*)\Big)\]
+which is exactly what we expect i.e it looks like the Noether current under the transformation $\pd^\mu\to\mathcal{D}^\mu$. Note the quadratic coupling from the charge in the Lagrangian.
+\subsection{The $\sigma$-$\omega$ Model}
+Our nuclear field theory will be based on the fields of four particles: the nucleons, a scalar meson and the omega vector meson. We want the Lagrangian to be a Lorentz scalar. The most intuitive choice is having the scalar meson couple to the baryon scalar density $\psibar\psi$ and the vector meson couple to the baryon four current $\psibar\gamma^\mu\psi$. The interaction Lagrangian will hence be the sum of these couplings times some coupling strength i.e.
+\[\Lag=g_\sigma\sigma(x)\psibar(x)\psi(x)-g_\omega\omega_\mu(x)\psibar(x)\gamma^\mu\psi(x)\]
+where the choice of sign is arbitrary. Now adding all our Lagrangian's together to include the dynamics of the nucleons and the mesons gives us
+\[\eqsplit{\Lag= \ &\psibar\Big(i\gamma_\mu(\pd^\mu+ig_\omega\omega^\mu)-(m-g_\sigma\sigma)\Big)\psi\\
+    &+\frac{1}{2}(\pd_\mu \sigma\pd^\mu \sigma-m_\sigma^2\sigma^2) -\frac{1}{4}\omega_{\mu\nu}\omega^{\mu\nu}+\frac{1}{2}m_\omega^2\omega_\mu\omega^\mu}\]
+Applying our previous knowledge of the Euler Lagrange equations with the added coupling terms gives us that
+\[(\square+m_\omega^2)\omega_\mu(x)=g_\sigma\psibar(x)\psi(x)\]
+\[(\square+m_\omega^2)\omega_\mu(x)-\pd_\mu\pd^\nu\omega_\nu(x)=g_\omega\psibar(x)\gamma_\mu\psi(x)\]
+Nucleon conservation $\implies \pd^\nu\omega_\nu=0$ for the massive vector field. The Euler Lagrange equations for nucleons are
+\[\Big(\gamma_\mu(\pd^\mu-g_\omega\omega^\mu(x))-(m-g_\sigma\sigma(x))\Big)\psi(x)=0\]
+hence we have three coupled, non-linear differential equations i.e. the stuff of nightmares. This is where we introduce the ``relativistic mean-field approximation''. The system we are interested in is static uniform matter in the ground state so replacing the fields with their mean values in this state is justified, $\sigma\to\ev{\sigma}$ and $\omega_\mu\to\ev{\omega_\mu}$. In static uniform matter the source currents $\psibar\psi$ and $\psibar\gamma^\mu\psi$ are independent of $x$ and hence so are their mean fields. So our three Euler Lagrange equations reduce to
+\[\eqsplit{  m_\sigma^2\sigma&=g\sigma\ev{\psibar\psi} \\
+    m^2_\omega\omega_0&=g_\omega\ev{\psi^\dagger\psi} \\
+    m^2_\omega\omega_k&=g_\omega\ev{\psibar\gamma_k\psi}}\]
+we may now write the meson fields without their $x$ dependence hence our Euler Lagrange equation for nucleons becomes
+\[\Big(\gamma_\mu(\pd^\mu-g_\omega\omega^\mu)-(m-g_\sigma\sigma)\Big)\psi(x)=0\]
+remembering that these are now the mean values of the fields not the fields themselves.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

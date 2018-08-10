@@ -1,0 +1,95 @@
+module UsefulFunctions
+  use kinds
+  implicit none
+
+contains
+
+  function linspace(start,finish,N)
+    integer, intent(in)    :: start, finish
+    integer                :: N
+    real(dp), dimension(N) :: linspace
+    
+    real(dp)               :: int
+    integer                :: i
+    
+    linspace(1) = real(start)
+    linspace(N) = real(finish)
+    int  = (real(finish)-start)/N
+
+    do i=2,N-1
+       linspace(i)=linspace(i-1)+int
+    end do
+
+  end function linspace
+
+    ! In place Cooley-Tukey FFT
+  recursive subroutine fft(x)
+    complex(dp), dimension(:), intent(inout)  :: x
+    complex(dp)                               :: t
+    integer                                        :: N
+    integer                                        :: i
+    complex(dp), dimension(:), allocatable    :: even, odd
+ 
+    N=size(x)
+ 
+    if(N .le. 1) return
+ 
+    allocate(odd((N+1)/2))
+    allocate(even(N/2))
+ 
+    ! divide
+    odd =x(1:N:2)
+    even=x(2:N:2)
+ 
+    ! conquer
+    call fft(odd)
+    call fft(even)
+ 
+    ! combine
+    do i=1,N/2
+       t=exp(cmplx(0.0_dp,-2.0_dp*pi*real(i-1,dp)/real(N,dp),kind=dp))*even(i)
+       x(i)     = odd(i) + t
+       x(i+N/2) = odd(i) - t
+    end do
+ 
+    deallocate(odd)
+    deallocate(even)
+ 
+  end subroutine fft
+
+  ! In place Cooley-Tukey FFT
+  recursive subroutine ifft(x)
+    complex(dp), dimension(:), intent(inout)  :: x
+    complex(dp)                               :: t
+    integer                                        :: N
+    integer                                        :: i
+    complex(dp), dimension(:), allocatable    :: even, odd
+ 
+    N=size(x)
+ 
+    if(N .le. 1) return
+ 
+    allocate(odd((N+1)/2))
+    allocate(even(N/2))
+ 
+    ! divide
+    odd =x(1:N:2)
+    even=x(2:N:2)
+ 
+    ! conquer
+    call ifft(odd)
+    call ifft(even)
+ 
+    ! combine
+    do i=1,N/2
+       t=exp(cmplx(0.0_dp,2.0_dp*pi*real(i-1,dp)/real(N,dp),kind=dp))*even(i)
+       x(i)     = odd(i) + t
+       x(i+N/2) = odd(i) - t
+    end do
+ 
+    deallocate(odd)
+    deallocate(even)
+ 
+  end subroutine ifft
+  
+end module UsefulFunctions

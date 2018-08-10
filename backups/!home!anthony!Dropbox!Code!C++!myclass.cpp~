@@ -1,0 +1,16 @@
+// myclass.cpp
+
+int myclass::get_age(void)
+{
+  return age;
+}
+
+myclass::myclass(void)
+{
+  cout<<"Object constructed"<<endl;
+}
+
+myclass::~myclass(void)
+{
+  cout<<"Object was destroyed"<<endl;
+}

@@ -1,0 +1,28 @@
+# -*- mode: org; -*-
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+
+#+AUTHOR: Anthony Kalaitzis
+#+TITLE: Complex Analysis Talk Notes
+
+* Brief introduction
+Mention the definition of a complex number $z=x+iy$ where $i=\sqrt{-1}$. Possibly mention the fact that we can write any complex as $z=e^{i\theta}$ for some $\theta$. Could compare this to two dimensional vectors to give some motivation.
+* Motivation
+Physics = hard. Some very complicated integrals and complex analysis makes these a lot easier to calculate. Complex analysis tells us when we can and can't integrate these function easily (Poles, singularities, residue theorem and all the other theorems). Some nice power series results plus must mention the fact that holomorphic \implies analytic.
+* Balls
+* Complex Derivative
+* Entire Functions
+* Branch's
+* Parametrization 
+* Cauchy's Integral Theorem
+* Residue Theorem
+* Laurent Series
+* Orientation
+* Other Noteworthy Theorems
+Stress the point that this is more a list of theorems for reference. The point of the theorems is just more tricks to try and evaluate the integrals.
+* List of standard formula for integrals

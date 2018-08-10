@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\graphicspath{ {project_pictures/}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{document}
+
+% ----------------------------------------------------------------
+
+\vspace*{-2cm}
+%\enlargethispage{2cm}
+
+\begin{center}
+\makeatletter
+% Upper part of the page
+%\vspace*{-1cm}
+\includegraphics[width=0.45\textwidth]{vertLogo.eps}\\[1.8cm]   
+\textsc{\LARGE Faculty of Sciences}\\[0.4cm]
+\textsc{\Large School of Physical Sciences}\\[0.7cm]
+% Title
+\HRule 
+\vspace{0.6cm}
+\huge{The effects of High Energy Particles against our Machine Overlords}\\[0.3cm]
+\HRule 
+\vspace{1.4cm}
+\Large Anthony Kalaitzis \\[1.4cm]
+\Large
+\emph{Supervisors:} \\
+Prof.~Anthony \textsc{Thomas} \\
+Ass Prof.~Ross \textsc{Young}
+
+\vfill
+
+% Bottom of the page
+{\large October 2018}
+\end{center}
+
+% ------------------------------------------------------------------
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduction}
+In recent years we have seen exponential increase in the field of robotics and autonomous machinery. Robots are more capable of performing fine motor movement with each passing year such as opening doors, navigating stairs and even back flips. Taking this to the logical end point, when the machines eventually try to lobotomize the human race, one might ask the question ``What is the effect of High energy particles on complex machinery designed to mimic the human anatomy''? In this report we hope to explore this exact question and others such as
+
+\begin{itemize}
+\item how high must the energy be to conceivably short circuit/kill an android?
+\item Which particles would be the most efficient when factoring means of creation? Number of particles produced, and the ease of precise targeting of the particle beam 
+\end{itemize}
+
+In short, we are testing what kind of particles we need in certain energy ranges to deposit sufficient energy to destroy modern day electronics/robotics. We will be approximating the chemical composition of future machinery to current machinery and testing against known values of currents/energies deposited that causes machinery to fail. The skeletal shape of the robots also plays an important factor as the primary surface area for destruction will be the robots chest and head (Where most the vital components are stored) as opposed to the same test on just a computer which we could approximate to a cube where the entire cube is the surface area of destruction.
+
+This report will be made up of the following sections: ``\textbf{The Problem}'' where we will be discussing the physics, approximations and relevance (if any) of what we are studying. ``\textbf{Method}'' How Geant4 can be used to simulate our conundrum and acquire our data plus the background knowledge on robotics and high energy physics we procured to make sense of our results. ``\textbf{Description}'' The step by step process of how the simulation was undertaken inside Geant4 and what occurred. ``\textbf{Results and Conclusion}'' self explanatory.
+
+Introductions over, time to annihilate robots of all possible genders.
+
+\section{The Problem}
+Energized particles do damage to electronics via ionization [1]. The amount of damage is heavily dependent on the distance from target to source, energy of the particle, number of particles and the composition of material being penetrated. For instance if the robots where wearing a protective layer of lead of about a few cm's thick then we would need much higher energy particles to penetrate this barrier due to leads high attenuation attributed to it's high density. For this project however we will make the assumption that this is not the case based on the fact that due to leads high density, a protective coating of lead would weigh a considerable amount and restrict the robots movement as to allow us to batter them with sticks or some other pointy objects.
+
+We may also assume nothing lies in the path of us and the target i.e the density of the medium between source and target will be negligible. So to summarize: we will consider a beam of energized particles towards a target at a distance of a few metres away in a vacuum. The attenuation considered will come solely from the composition of the robot and no other external sources.
+
+Consider the case of gamma ray's interacting with the electrical components. Gamma-ray photons deposit their energy via ionization [21] where the bulk of this damage comes from the enhancement of conductivity via the creation of extra charge carriers and trapped charge [21]. These photons interact in the following ways [25]
+\begin{itemize}
+\item Photoelectric effect
+\item Compton effect
+\item Electron-positron pair production
+\end{itemize}
+Without going into the nitty gritty detail, these effects all contribute to the failure of electrical components. Where all these are caused from high energy photons depositing their energy which is the main statistic we will be sampling i.e the energy deposited and where.
+
+Whilst the original goal of this report was for the own creators amusement we may extrapolate its results to apply for modern day robotics. For instance with the advance of technology it is highly likely that more complex machinery will be used to survey outer planets such as mars which has a thinner atmosphere. Understanding how high energy particles interact with electronics will be vital in damage prevention and maintenance of the machinery. Particularly prevention in the case of planetary expeditions where maintenance will not be an option. One must also consider that during the journey to for instance Mars, the absence of an atmosphere will pose problems for on board electronics.
+
+\section{Method}
+For our project we will be editing the pre-existing Geant4 example human phantom to meet our specified parameters for a generic robot and using Geant4's inbuilt beam function to fire high energy particles at our target. Firstly we must add the new elements our robots are composed of to the file ``G4HumanPhantomMaterial.cc'' which contains an element list plus the compositions of human skin, skeletal system, organs etc. Below is an example of defining the element Aluminum:
+\begin{center}
+  \includegraphics[width=12cm,height=1.5cm]{{Image_1}}
+\end{center}
+where $Z$ is the atomic number and $A$ the molar mass. Following this process we including elements such as Titanium, Cobalt, Nickel and other various metals where their values for atomic number and molar mass came from [3]
+
+\end{document}

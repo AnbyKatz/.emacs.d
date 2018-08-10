@@ -1,0 +1,35 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+animal::animal()
+{
+  name= "?";
+  age = 0;
+}
+
+void animal::setname(string animal_name)
+{
+  name = animal_name;
+}
+
+void animal::setage(int animal_age)
+{
+  age = animal_age;
+}
+
+string animal::getname()
+{
+  return name;
+}
+
+int animal::getage()
+{
+  return age;
+}
+
+animal::~animal()
+{
+  cout<<"animal destroyed"<<endl;
+}

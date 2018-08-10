@@ -1,0 +1,20 @@
+program plot_test
+  use kinds
+  implicit none
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+end program plot_test

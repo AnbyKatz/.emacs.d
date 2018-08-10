@@ -1,0 +1,98 @@
+Module pyplots
+  use kinds
+  implicit none
+
+contains
+
+  ! 2-D line plot
+  ! ------------------------------------------------------
+  ! ------------------------------------------------------ 
+  subroutine plot(x,y,title)
+    real(dp),dimension(:),intent(in) :: x,y
+    character,intent(in)     :: title
+    integer :: i,ID
+    
+    if (size(x) .ne. size(y)) then
+       print *, "ERROR! sizes of arrays not equal"
+       return
+    end if
+
+    ID = 1
+    
+    open(100,file="ID.dat",action="write", &
+         & status="replace",form="formatted")
+    open(101,file="output.dat",action="write", &
+         & status="replace",form="formatted")
+
+    write(100,'(a20)') title
+    write(100,'(i10)') ID
+    write(101,'(es12.5)') x(:)
+    write(101,'(es12.5)') y(:)
+
+    close(100)
+    close(101)
+
+  end subroutine plot
+
+  ! 2-D log plot
+  ! ------------------------------------------------------
+  ! ------------------------------------------------------ 
+  subroutine loglog(x,y)
+    real(dp),dimension(:),intent(in) :: x,y
+    character,intent(in)     :: title
+    integer :: i,ID
+
+    if (size(x) .ne. size(y)) then
+       print *, "ERROR! sizes of arrays not equal"
+       return
+    end if
+
+    ID = 2
+
+    open(100,file="ID.dat",action="write", &
+         & status="replace",form="formatted")    
+    open(101,file="output.dat",action="write", &
+         & status="replace",form="formatted")
+
+    write(100,'(a20)') title
+    write(100,'(i10,i10)') ID
+    write(101,'(es12.5)') x(:)
+    write(101,'(es12.5)') y(:)
+
+    close(100)
+    close(101)
+
+  end subroutine loglog
+
+  ! 3-D line plot
+  ! ------------------------------------------------------
+  ! ------------------------------------------------------
+  subroutine plot3(x,y,z)
+    real(dp),dimension(:),intent(in) :: x,y,z    
+    character,intent(in)     :: title
+    integer :: i,ID
+
+    if (size(x) .ne. size(y)) then
+       print *, "ERROR! sizes of arrays not equal"
+       return
+    end if
+
+    ID=3
+
+    open(100,file="ID.dat",action="write", &
+         & status="replace",form="formatted")
+    open(101,file="output.dat",action="write", &
+         & status="replace",form="formatted")
+
+    write(100,'(a20)') title
+    write(100,'(i10)') ID
+    write(101,'(es12.5)') x(:)
+    write(101,'(es12.5)') y(:)
+    write(101,'(es12.5)') z(:)
+
+    close(100)
+    close(101)
+    
+  end subroutine plot3
+
+end Module pyplots

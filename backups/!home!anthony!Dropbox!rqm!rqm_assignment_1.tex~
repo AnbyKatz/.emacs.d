@@ -1,0 +1,226 @@
+\documentclass[13pt]{article}
+\usepackage[a4paper,left=1.5cm,right=1.5cm,top=10mm,bottom=20mm]{geometry}
+
+\usepackage{amsmath,amssymb}
+\usepackage{mypackage}
+\usepackage{physics}
+
+\renewcommand{\pv}{\vb{p}}
+
+\title{RQM Assignment 1}
+\author{Anthony Kalaitzis}
+\pagenumbering{gobble}
+
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+We can write $H$ in the following form by noting that $\pv=-i\hbar\grad$
+\[H=c\boldsymbol{\alpha}\cdot\pv+mc^2\beta\]
+\[\comm{H}{L}=(c\boldsymbol{\alpha}\cdot\pv+mc^2\beta)(\vb{r}\cp\pv)-(\vb{r}\cp\pv)(c\boldsymbol{\alpha}\cdot\pv+mc^2\beta)\]
+Clearly $\comm{mc^2\beta}{\vb{r}\cp\pv}=0$ as $\beta$ is just a matrix of numbers. Now just consider the other part of the commutator ie
+\[\frac{1}{c}\comm{H}{L}=\alpha_n p_n\epsilon_{ijk}r_j p_k-\epsilon_{ijk}r_j p_k \alpha_n p_n \]
+\[=\m{0&\sigma_n\\\sigma_n&0}p_n\epsilon_{ijk}r_j p_k-\epsilon_{ijk}r_j p_k \m{0&\sigma_n\\\sigma_n&0} p_n \]
+The Pauli matrices are complex two dimensional scalar matrices so they commute with one dimensional operators ie $\comm{r}{\sigma}=\comm{p}{\sigma}=0$. Hence we can again reduce this problem to solving
+\[\frac{1}{c}\comm{H}{L}=\sigma_n p_n\epsilon_{ijk}r_j p_k-\epsilon_{ijk}r_j p_k \sigma_n p_n \]
+Making use of $\comm{p_i}{r_j}=-i\hbar\delta_{ij}$ gives us
+\[=\epsilon_{ijk}\big(\sigma_n(r_jp_n-i\hbar\delta_{nj})p_k-\sigma_nr_jp_kp_n\big)=\epsilon_{ijk}\big(\sigma_nr_jp_kp_n-i\hbar\delta_{nj}\sigma_np_k-\sigma_nr_jp_kp_n\big)  \]
+Where we used that $\comm{p_i}{p_j}=0$
+\[\therefore \ \comm{H}{L}=-i\hbar c\epsilon_{ink}\sigma_n p_k=-i\hbar c \sigmav\cp\pv\neq 0  \]
+generally. So the $L$ operator doesn't commute with $H$. Suppose we pick an operator $S$... of course at COMPLETE RANDOM i.e $S=\frac{\hbar}{2}\sigma$. Does this now commute?
+\[\comm{H}{L+S}=\comm{H}{L}+\comm{H}{S}\]
+\[\comm{H}{S}=(c\boldsymbol{\alpha}\cdot\pv+mc^2\beta)\frac{\hbar}{2}\sigmav-\frac{\hbar}{2}\sigmav(c\boldsymbol{\alpha}\cdot\pv+mc^2\beta)  \]
+Once again clearly $\comm{mc^2\beta}{S}=0$ so let's just focus on the other term. (Note we will replace $\alpha$ by $\sigma$ using the same logic as before)
+\[\comm{H}{S}=\frac{\hbar c}{2}\bigg(\sigma_n p_n \sigma_m-\sigma_m\sigma_n p_n\bigg)\]
+Using that $\sigma_n\sigma_m=\delta_{nm}+i\epsilon_{nmk}\sigma_k$ gives us
+\[\frac{2}{\hbar c}\comm{H}{S}=(\delta_{nm}+i\epsilon_{nmk}\sigma_k)p_n-(\delta_{mn}+i\epsilon_{mnk}\sigma_k)p_n\]
+\[=p_m+i\epsilon_{mkn}\sigma_k p_n-p_m-i(-\epsilon_{mkn})\sigma_k p_n=2i(\sigmav\cp\pv)  \]
+\[\comm{H}{L+S}=-i\hbar c\sigmav\cp\pv+i\hbar c\sigmav\cp\pv=0\]
+Hence we have found a spin operator that when added to $L$ commutes with the dirac Hamiltonian. \par
+\newpage
+\section*{Question 2}
+\subsection*{2.a}
+\[\gamma^5\gamma^0=i\gamma^0\gamma^1\gamma^2\gamma^3\gamma^0\]
+We can apply the fact that $\{\gamma^\mu,\gamma^\nu\}=2g^{\mu\nu}$ which gives us the following
+\[\implies\gamma^3\gamma^0=2g^{30}-\gamma^0\gamma^3=-\gamma^0\gamma^3  \]
+and similarly $\gamma^2\gamma^0=-\gamma^0\gamma^2$, $\gamma^1\gamma^0=-\gamma^0\gamma^1$.
+\[\therefore \ \gamma^5\gamma^0=i\gamma^0\gamma^1\gamma^2(-\gamma^0\gamma^3)=-i\gamma^0\gamma^1(-\gamma^0\gamma^2)\gamma^3=i\gamma^0(-\gamma^0\gamma^1)\gamma^2\gamma^3  \]
+\[\therefore \ \gamma^5\gamma^0=-i(\gamma^0)^2\gamma^1\gamma^2\gamma^3=-i\gamma^1\gamma^2\gamma^3 \]
+\par
+\subsection*{2.b}
+\[0=\gamma^5\gamma^0\gamma_\mu p^\mu\psi=-i\gamma^1\gamma^2\gamma^3\gamma_\mu p^\mu \psi \]
+\[=-i\gamma^1\gamma^2\gamma^3(\gamma_0p^0-\gamma_1p^1-\gamma_2p^2-\gamma_3p^3) \psi \]
+\[=\bigg(i\gamma^0\gamma^1\gamma^2\gamma^3p_0+i\gamma^1\gamma^1\gamma^2\gamma^3p_1-i\gamma^1\gamma^2\gamma^2\gamma^3p_2+i\gamma^1\gamma^2\gamma^3\gamma^3p_3\bigg)\psi\]
+and we can see from the anti commutation relation that
+\[\gamma^1\gamma^1=-I \qquad \gamma^2\gamma^2=-I \qquad \gamma^3\gamma^3=-I\]
+\[\gamma^5\gamma^0\gamma_\mu p^\mu\psi=(\gamma^5p_0-i\gamma^2\gamma^3p_1+i\gamma^1\gamma^3p_2-i\gamma^1\gamma^2p_3)\psi=0  \]
+\[\therefore \ \gamma^5p_0\psi=i(\gamma^2\gamma^3p_1-\gamma^1\gamma^3p_2+\gamma^1\gamma^2p_3)\psi\]
+let
+\[\vb{\Sigma}=(i\gamma^2\gamma^3,-i\gamma^1\gamma^3,i\gamma^1\gamma^2)\]
+\[\gamma^5p_0\psi=(\Sigma^1p_1+\Sigma^2p_2+\Sigma^3p_3)\psi=\vb{\Sigma}\cdot\pv\psi\]
+Note $p_0=p^0$ for our metric tensor so this is the same as $\gamma^5p^0\psi=\vb{\Sigma}\cdot\pv\psi$ \par
+\subsection*{2.c}
+\[\Sigma^1=i\gamma^2\gamma^3=i\gammatwo\gammathree=i\m{0&-i&0&0\\-i&0&0&0\\0&0&0&-i\\0&0&-i&0}=\m{\sigma_x&0\\0&\sigma_x}\]
+\[\Sigma_2=-i\gamma^1\gamma^3=-i\gammaone\gammathree=-i\m{0&1&0&0\\-1&0&0&0\\0&0&0&1\\0&0&-1&0}=\m{\sigma_y&0\\0&\sigma_y}\]
+\[\Sigma_3=i\gamma^1\gamma^2=i\gammaone\gammatwo=i\m{-i&0&0&0\\0&i&0&0\\0&0&-i&0\\0&0&0&i}=\m{\sigma_z&0\\0&\sigma_z}\]
+\[\implies\Sigma=\m{\sigmav&0\\0&\sigmav}\]
+\newpage
+\section*{Question 3}
+\subsection*{3.a}
+We have that $H=c\boldsymbol{\alpha}\cdot\vb{p}-imc\omega\boldsymbol{\alpha}\cdot\vb{r}\beta+mc^2\beta$ and want to show that $H=H^\dagger$
+\[H^\dagger=\bigg(c\boldsymbol{\alpha}\cdot\vb{p}-imc\omega\boldsymbol{\alpha}\cdot\vb{r}\beta+mc^2\beta\bigg)^\dagger\]
+\[=c\boldsymbol{\alpha}^\dagger\cdot(-i\hbar\grad)^\dagger+imc\omega(\boldsymbol{\alpha}\cdot\vb{r}\beta)^\dagger+mc^2\beta^\dagger\]
+Using that $(AB)^\dagger=B^\dagger A^\dagger$ for the matrix operators gives us
+\[H^\dagger=i\hbar c\boldsymbol{\alpha}^\dagger\cdot\grad^\dagger+imc\omega\beta^\dagger\vb{r}^\dagger\cdot\boldsymbol{\alpha}^\dagger\]
+Remembering that $A^\dagger=\overline{A}^T$. Clearly $\alpha_1,\alpha_3\inR\implies \overline{\alpha_1}^T=\alpha_1\quad\overline{\alpha_3}^T=\alpha_3$ as they are made up of the pauli matrices and are either diagonal or off diagonal matrices.
+\[\overline{\alpha_2}^T=\m{0&0&0&i\\0&0&-i&0\\0&i&0&0\\-i&0&0&0}^T=\m{0&0&0&-i\\0&0&i&0\\0&-i&0&0\\i&0&0&0}=\alpha_2  \]
+Clearly $\vb{r}^\dagger=\vb{r}, \beta^\dagger=\beta$ as well and noting that the dot product is symmetric gives us
+\[\beta^\dagger\alpha^\dagger=\m{1&0\\0&-1}\m{0&\sigmav\\\sigmav&0}=\m{0&\sigmav\\-\sigmav&0}\]
+\[=-\m{0&\sigmav\\\sigmav&0}\m{1&0\\0&-1}=-\boldsymbol{\alpha}\beta\]
+and also $\grad^\dagger=-\grad$. Subbing in these expressions gives us
+\[H^\dagger=-i\hbar c\boldsymbol{\alpha}\cdot\grad-imc\omega\boldsymbol{\alpha}\cdot\vb{r}\beta+mc^2\beta\]
+\[=c\boldsymbol{\alpha}\cdot\pv-imc\omega\boldsymbol{\alpha}\cdot\vb{r}\beta+mc^2\beta=H\]
+Hence we have that $H^\dagger=H$ i.e the Hamiltonian is hermitian. \par
+\subsection*{3.b}
+Consider the following decomposition on our dirac equation
+\[\psi=\m{\phi\\\chi} \qquad \psi\sim\psi e^{-iEt/\hbar}\]
+Where we can take out our time dependence in this normal way. Our dirac equation then becomes
+\[\bigg(c\pv\m{0&\sigmav\\\sigmav&0}-imc\omega\vb{r}\m{0&\sigmav\\\sigmav&0}\m{1&0\\0&-1}+mc^2\m{1&0\\0&-1}\bigg)\m{\phi\\\chi}e^{-iEt/\hbar}=i\hbar\pdv{t}\m{\phi\\\chi}e^{-iEt/\hbar}  \]
+\[\implies c\pv\m{\sigmav\chi\\\sigmav\phi}-imc\omega\vb{r}\m{\sigmav\chi\\-\sigmav\phi}+mc^2\m{\phi\\-\chi}=E\m{\phi\\\chi}\]
+which gives us the two equations
+\[\eqsplit{\qquad (c\vb{p}\cdot\boldsymbol{\sigma}-imc\omega\vb{r}\cdot\boldsymbol{\sigma})\chi+mc^2\phi&=E\phi\\
+  \qquad   (c\vb{p}\cdot\boldsymbol{\sigma}+imc\omega\vb{r}\cdot\boldsymbol{\sigma})\phi-mc^2\chi&=E\chi }\]
+Rearranging gives us
+\[\eqsplit{(1)\qquad (c\vb{p}\cdot\boldsymbol{\sigma}-imc\omega\vb{r}\cdot\boldsymbol{\sigma})\chi&=(E-mc^2)\phi\\
+  (2)\qquad   (c\vb{p}\cdot\boldsymbol{\sigma}+imc\omega\vb{r}\cdot\boldsymbol{\sigma})\phi&=(E+mc^2)\chi }\]
+Consider the following taylor expansion
+\[E=\gamma mc^2=mc^2\bigg(1+\frac{1}{2}\frac{v^2}{c^2}+O\bigg(\frac{v^4}{c^4}\bigg)\bigg)\]
+In the non-relativistic limit $E\approx mc^2$. Hence
+\[(1)\implies(c\vb{p}\cdot\boldsymbol{\sigma}-imc\omega\vb{r}\cdot\boldsymbol{\sigma})\chi\approx 0\implies \chi\approx 0\]
+i.e $\chi$ is small so we may disregard it (i.e $\psi\approx\phi$). Rearranging $(1)$ to get $(2)$ just in terms of $\phi$ gives us
+\[\chi=\frac{(E-mc^2)}{(c\vb{p}\cdot\boldsymbol{\sigma}-imc\omega\vb{r}\cdot\boldsymbol{\sigma})}\phi\]
+\[\implies \frac{(E+mc^2)(E-mc^2)}{(c\vb{p}\cdot\boldsymbol{\sigma}-imc\omega\vb{r}\cdot\boldsymbol{\sigma})}\phi=(c\vb{p}\cdot\boldsymbol{\sigma}+imc\omega\vb{r}\cdot\boldsymbol{\sigma})\phi\]
+Let $E'=E-mc^2\implies E+mc^2=E'+2mc^2$ where $E'$ is the non-relativistic energy. This gives us
+\[(E'+2mc^2)E'\phi=\bigg(c^2(\vb{p}\cdot\boldsymbol{\sigma})^2+m^2c^2\omega^2(\vb{r}\cdot\boldsymbol{\sigma})^2+imc^2\omega((\vb{p}\cdot\boldsymbol{\sigma})(\vb{r}\cdot\boldsymbol{\sigma})-(\vb{r}\cdot\boldsymbol{\sigma})(\vb{p}\cdot\boldsymbol{\sigma}))\bigg)\phi\]
+Using the identities $(\vb{a}\cdot\sigmav)^2=\abs{\vb{a}}^2$ and $(\vb{a}\cdot\sigmav)(\vb{b}\cdot\sigmav)=(\vb{a}\cdot\vb{b})+i(\vb{a}\cp\vb{b})\cdot\sigmav$ gives us the following
+\[(\pv\cdot\sigmav)(\vb{r}\cdot\sigmav)-(\vb{r}\cdot\sigmav)(\vb{p}\cdot\sigmav)=\vb{p}\cdot\vb{r}+i(\pv\cp\vb{r})\cdot\sigmav-\vb{r}\cdot\vb{p}-i(\vb{r}\cp\vb{p})\cdot\sigmav  \]
+using the fact that $\comm{p_i}{r_j}=-i\hbar\delta_{ij}$ and the fact that the cross product is anti-symmetric gives us that
+\[\vb{p}\cdot\vb{r}-\vb{r}\cdot\vb{p}=-3i\hbar\]
+hence
+\[(\vb{p}\cdot\sigmav)(\vb{r}\cdot\sigmav)-(\vb{r}\cdot\sigmav)(\vb{p}\cdot\sigmav)=-2i(\vb{r}\cp\vb{p})\cdot\sigmav-3i\hbar  \]
+Hence applying both these identites gives us
+\[\eqsplit{ (E'+2mc^2)E'\phi&=\bigg(c^2\abs{p}^2+m^2c^2\omega^2\abs{r}^2+imc^2\omega(-2i(\vb{r}\cdot\vb{p})\cdot\sigmav-3i\hbar)\bigg)\phi \\
+&=\bigg(c^2\abs{p}^2+m^2c^2\omega^2\abs{r}^2+2mc^2\omega(\vb{r}\cdot\vb{p})\cdot\sigmav-3mc^2\hbar\omega\bigg)\phi \\
+&=2mc^2\bigg(\frac{p^2}{2m}+\frac{1}{2}m\omega^2r^2+\frac{2\omega}{\hbar}\vb{L}\cdot\vb{S}-\frac{3}{2}\hbar\omega\bigg)\phi} \]
+Where we made the substitution that
+\[\vb{L}\cdot\vb{S}=\frac{\hbar}{2}(\vb{r}\cdot\vb{p})\cdot\sigmav\]
+Hence we have an equation of the form
+\[E'\phi=\bigg(\frac{2mc^2}{E'+2mc^2}\bigg)\bigg(\frac{p^2}{2m}+\frac{1}{2}m\omega^2r^2+\frac{2\omega}{\hbar}\vb{L}\cdot\vb{S}-\frac{3}{2}\hbar\omega\bigg)\phi \]
+We want to get the energy eigen-value $E'$ to one side of the equation and our operators on the other side. Consider the following taylor series trickery
+\[\frac{1}{1-x}=1+x+x^2+O(x^3)\]
+Where this series is convergent if $|x|<1$. Clearly
+\[\Big|\frac{E'}{2mc^2}\Big|<1\]
+hence we apply the above taylor series to get
+\[\frac{2mc^2}{E'+2mc^2}=\frac{1}{1+\frac{E'}{2mc^2}}=1-\frac{E'}{2mc^2}+O\bigg(\frac{E'}{2mc^2}\bigg)^2\]
+Hence in our non-relativistic limit we have
+\[\frac{2mc^2}{E'+2mc^2}\approx 1-\frac{E'}{2mc^2} \]
+Our equation is now
+\[ \bigg(\frac{E'}{1-\frac{E'}{2mc^2}}\bigg) \phi=\bigg(\frac{p^2}{2m}+\frac{1}{2}m\omega^2r^2+\frac{2\omega}{\hbar}\vb{L}\cdot\vb{S}-\frac{3}{2}\hbar\omega\bigg)\phi \]
+again abusing our good friend taylor gives us that
+\[\frac{x}{1-x}=x+x^2+O(x^3)\]
+convergent if $|x|<1$ hence
+\[2mc^2\bigg(\frac{E'/2mc^2}{1-E'/2mc^2}\bigg)=2mc^2\bigg(\frac{E'}{2mc^2}+O\bigg(\frac{E'}{2mc^2}\bigg)^2\bigg)\approx E'\]
+in the non-relativistic limit. Hence finally if we define the Hamiltonian for the harmonic osicllator as
+\[H_{SHO}=\frac{p^2}{2m}+\frac{1}{2}m\omega^2r^2\]
+Then our non-relativistic dirac equation is of the form
+\[\Big(H_{SHO}+\frac{2\omega}{\hbar}\vb{L}\cdot\vb{S}-\frac{3}{2}\hbar\omega\Big)\phi=E'\phi\]
+Hence we have a system that is just a three-dimensional harmonic oscillator plus a constant $\vb{L}\cdot\vb{S}$ coupling. Suppose we wanted to find the lowest energy i.e the energy of the ground state call it $\phi_0$. We may write the Hamiltonian in the form
+\[H_{SHO}=\hbar\omega\Big(a_i^\dagger a_i +\frac{3}{2}\Big)\]
+where $i=1,2,3$ and is summed for all three dimensions. $a_i\phi_0=0 \ \forall \ i$ as it is the ground state (it's energy may not be lowered). We may also make the substitution that
+\[(\vb{L}+\vb{S})^2=L^2+S^2+2\vb{L}\cdot\vb{S}\implies \vb{L}\cdot\vb{S}=\frac{1}{2}\big(J^2-L^2-S^2)\]
+assume that $\phi_0$ is in an eigenstate of the Hamiltonian
+\[ H=H_{SHO}+\frac{2\omega}{\hbar}\vb{L}\cdot\vb{S}-\frac{3}{2}\hbar\omega \]
+with energy eigenvalue $E_0$. Since we're looking at the dirac equation, we have a spin-$\frac{1}{2}$ particle hence $S^2\phi_0\sim s(s+1)\phi_0=\frac{3}{4}\phi_0$. This also implies that $j=l+s=l+\frac{1}{2}$ for the eigenvalue of total angular momentum hence
+\[\eqsplit{  H\phi&=\hbar\omega\Big(a_i^\dagger a_i+\frac{3}{2}\Big)\phi_0+\frac{2\omega}{\hbar}\frac{\hbar^2}{2}(J^2-L^2-S^2)\phi_0-\frac{3}{2}\hbar\omega\phi_0 \\
+&=\frac{3}{2}\hbar\omega\phi_0+\hbar\omega(j(j+1)-l(l+1)-s(s+1))\phi_0 -\frac{3}{2}\hbar\omega\phi_0\\
+&=\frac{3}{2}\hbar\omega\phi_0+\hbar\omega((l+1/2)(1+3/2)-l^2-l)\phi_0-\frac{3}{4}\hbar\omega\phi_0 -\frac{3}{2}\hbar\omega\phi_0\\
+&=\frac{3}{4}\hbar\omega\phi_0+\hbar\omega(l+3/4)\phi_0 -\frac{3}{2}\hbar\omega\phi_0\\
+&=E_0\phi_0} \]
+and  as $l\geq 0 \implies$ Lowest energy for $E_0$ occurs clearly when $l=0$ hence our lowest energy eigenvalue is
+\[E_0=\hbar\omega\Big(\frac{3}{4}+\frac{3}{4}-\frac{3}{2}\Big)=0\]
+\newpage
+\section*{Question 4}
+\subsection*{4.a}
+\[ \comm{P^2}{M_{\rho\sigma}}=g^{\mu\nu}(P_{\mu}P_\nu M_{\rho\sigma}-M_{\rho\sigma}P_\mu P_\nu) \]
+we have that $\comm{P_\mu}{P_\nu}=0$ and $\comm{P_\mu}{M_{\rho\sigma}}=-(g_{\mu\rho}P_\sigma-g_{\mu\sigma}P_\rho)$. Applying these gives us that
+\[P_\mu P_\nu M_{\rho\sigma}=P_\mu(-g_{\nu\rho}P_\sigma+g_{\nu\sigma}P_\rho+M_{\rho\sigma}P_\nu) \]
+\[=-g_{\nu\rho}P_\mu P_\sigma+g_{\nu\sigma}P_\mu P_\rho +(-g_{\mu\rho}P_\sigma+g_{\mu\sigma}P_\rho+M_{\rho\sigma}P_\mu)P_\nu \]
+\[=-g_{\nu\rho}P_\mu P_\sigma+g_{\nu\sigma}P_\mu P_\rho-g_{\mu\rho}P_\sigma P_\nu+g_{\mu\sigma}P_\rho P_\nu+M_{\rho\sigma}P_{\mu}P_\nu  \]
+\[ \therefore \comm{P^2}{M_{\rho\sigma}}=g^{\mu\nu}\big(-g_{\nu\rho}P_\mu P_\sigma+g_{\nu\sigma}P_\mu P_\rho-g_{\mu\rho}P_\sigma P_\nu+g_{\mu\sigma}P_\rho P_\nu\big)  \]
+\[=-g_{\nu\rho}P^\nu P_\sigma+g_{\nu\sigma}P^\nu P_\rho-g_{\mu\rho}P_\sigma P^\mu+g_{\mu\sigma}P_\rho P^\mu\]
+\[=-P_\rho P_\sigma+P_\sigma P_\rho-P_\sigma P_\rho+P_\rho P_\sigma\]
+ \[\therefore \ \comm{P^2}{M_{\rho\sigma}} =0\]
+ as $\comm{P_\mu}{P_\nu}=0$, hence these objects commute. \par
+ \underline{4.b} Define $W^\mu=\epsilon^{\mu\nu\rho\sigma}P_\nu M_{\rho\sigma}/\sqrt{P^2}$ and $S^2=W^\mu W_\mu$. Consider the following object
+ \[P^2S^2=P^2W^\mu W_\mu=\epsilon^{\mu\nu\rho\sigma}P_\nu M_{\rho\sigma}\epsilon_{\mu\nu\rho\sigma}P^\nu M^{\rho\sigma}\]
+\subsection*{4.b}
+We wish to calculate
+\[P^2S^2=\epsilon^{\mu\nu\rho\sigma}\epsilon_{\mu\nu'\rho'\sigma'}P_\nu M_{\rho\sigma} P^{\nu'} M^{\rho'\sigma'} \]
+Consider the following object
+\[\epsilon^{\mu\nu\rho\sigma}\epsilon_{\mu\nu'\rho'\sigma'}\]
+\[=\delta_\mu^\mu \epsilon^{\nu\rho\sigma}\epsilon_{\nu'\rho'\sigma'}-\delta_{\nu'}^\mu\epsilon^{\nu\rho\sigma}\epsilon_{\rho'\sigma'\mu}+\delta_{\rho'}^\mu\epsilon^{\nu\rho\sigma}\epsilon_{\sigma'\mu\nu'}-\delta_{\sigma'}^{\mu}\epsilon^{\nu\rho\sigma}\epsilon_{\mu\nu'\rho'}\]
+\[=4\bigg(\epsilondelta{\nu}{\rho}{\sigma}{\nu'}{\rho'}{\sigma'}\bigg)-\delta_{\nu'}^{\mu}\bigg(\epsilondelta{\nu}{\rho}{\sigma}{\rho'}{\sigma'}{\mu}\bigg)\]
+\[+\delta_{\rho'}^\mu\bigg(\epsilondelta{\nu}{\rho}{\sigma}{\sigma'}{\mu}{\nu'}\bigg)-\delta_{\sigma'}^{\mu}\bigg(\epsilondelta{\nu}{\rho}{\sigma}{\mu}{\nu'}{\rho'}\bigg)\]
+\[=4(\delta_{\nu'\rho'\sigma'}^{\nu\rho\sigma}-\delta_{\nu'\rho'\sigma'}^{\nu\sigma\rho}-\delta_{\nu'\rho'\sigma'}^{\rho\nu\sigma}+\delta_{\nu'\rho'\sigma'}^{\rho\sigma\nu}+\delta_{\nu'\rho'\sigma'}^{\sigma\nu\rho}-\delta_{\nu'\rho'\sigma'}^{\sigma\rho\nu})-(\delta_{\rho'\sigma'\nu'}^{\nu\rho\sigma}-\delta_{\rho'\sigma'\nu'}^{\nu\sigma\rho}-\delta_{\rho'\sigma'\nu'}^{\rho\nu\sigma}+\delta_{\rho'\sigma'\nu'}^{\rho\sigma\nu}+\delta_{\rho'\sigma'\nu'}^{\sigma\nu\rho}-\delta_{\rho'\sigma'\nu'}^{\sigma\rho\nu})  \]
+\[+(\delta_{\sigma'\rho'\nu'}^{\nu\rho\sigma}-\delta_{\sigma'\rho'\nu'}^{\nu\sigma\rho}-\delta_{\sigma'\rho'\nu'}^{\rho\nu\sigma}+\delta_{\sigma'\rho'\nu'}^{\rho\sigma\nu}+\delta_{\sigma'\rho'\nu'}^{\sigma\nu\rho}-\delta_{\sigma'\rho'\nu'}^{\sigma\rho\nu})-(\delta_{\sigma'\nu'\rho'}^{\nu\rho\sigma}-\delta_{\sigma'\nu'\rho'}^{\nu\sigma\rho}-\delta_{\sigma'\nu'\rho'}^{\rho\nu\sigma}+\delta_{\sigma'\nu'\rho'}^{\rho\sigma\nu}+\delta_{\sigma'\nu'\rho'}^{\sigma\nu\rho}-\delta_{\sigma'\nu'\rho'}^{\sigma\rho\nu})  \]
+\[\epsilon^{\mu\nu\rho\sigma}\epsilon_{\mu\nu'\rho'\sigma'}=\delta_{\nu'\rho'\sigma'}^{\nu\rho\sigma}-\delta_{\nu'\rho'\sigma'}^{\nu\sigma\rho}-\delta_{\nu'\rho'\sigma'}^{\rho\nu\sigma}+\delta_{\nu'\rho'\sigma'}^{\rho\sigma\nu}+\delta_{\nu'\rho'\sigma'}^{\sigma\nu\rho}-\delta_{\nu'\rho'\sigma'}^{\sigma\rho\nu}\]
+one could also easily acquire this object after anti-symetrisation of three indices... I just hate myself. Plugging this into our expression gives us that.
+\[P^2 S^2=(P_\nu M_{\rho\sigma} P^{\nu}M^{\rho\sigma}-P_\nu M_{\rho\sigma}P^{\nu}M^{\sigma\rho}-P_\nu M_{\rho\sigma}P^\rho M^{\nu\sigma}+P_\nu M_{\rho\sigma}P^\rho M^{\sigma\nu}+P_\nu M_{\rho\sigma}P^\sigma M^{\nu\rho}-P_\nu M_{\rho\sigma}P^\sigma M^{\rho\nu})\]
+Noting that $M_{ij}=-M_{ji}$, $M_{0i}=-M_{i0}$ and $M_{00}=0\implies M_{\mu\nu}=-M_{\mu\nu}$. This allows us to combine some terms
+\[P^2S^2=2P_\nu M_{\rho\sigma}P^\nu M^{\rho\sigma}-2P_\nu M_{\rho\sigma}P^{\rho}M^{\nu\sigma}-2P_\nu M_{\rho\sigma}P^\sigma  M^{\rho\nu}  \]
+and we can also do the following manipulation
+\[P_\nu M_{\rho\sigma}P^\sigma  M^{\rho\nu}=P_\nu M_{\sigma\rho}P^\sigma M^{\nu\rho}\]
+which now has the summations over the indices in the same places as $P_\nu M_{\rho\sigma}P^{\rho}M^{\nu\sigma}$ so we may relabel our indices to the same labels as this object and add them together hence
+\[P^2S^2=2P_\nu M_{\rho\sigma}P^\nu M^{\rho\sigma}-4P_\nu M_{\rho\sigma}P^{\rho}M^{\nu\sigma} \]
+Now using our commutation relations gives us that
+\[\eqsplit{ g^{\nu\nu'}(P_{\nu'}M_{\rho\sigma}-M_{\rho\sigma}P_{\nu'})&=g^{\nu\nu'}(-g_{\nu\rho}P_\sigma+g_{\nu\sigma}P_\rho)\\
+\implies M_{\rho\sigma}P^\nu&=P^\nu M_{\rho\sigma}-g^{\nu\nu'}(-g_{\nu\rho}P_\sigma+g_{\nu\sigma}P_\rho)\\
+&=P^\nu M_{\rho\sigma}+\delta^{\nu'}_{\rho}P_\sigma-\delta^{\nu'}_\sigma P_\rho\\
+&=P^\nu M_{\rho\sigma}} \]
+Hence for the first term we have
+\[P_\nu M_{\rho\sigma}P^\nu M^{\rho\sigma}=P_\nu P^\nu M_{\rho\sigma} M^{\rho\sigma}\]
+for the next term we have
+\[\eqsplit{ P_\nu M_{\rho\sigma}P^\rho  M^{\nu\sigma}&=(M_{\rho\sigma}P_\nu-g_{\nu\rho}P_\sigma+g_{\nu\sigma}P_\rho)P^\rho M^{\nu\sigma}\\ 
+    &=M_{\rho\sigma}P^\rho P_\nu M^{\nu\sigma}+(-g_{\nu\rho}P_\sigma+g_{\nu\sigma}P_\rho)P^\rho M^{\nu\sigma}}\]
+Using that
+\[g^{\nu\nu'}g^{\sigma\sigma'}(P_\nu M_{\nu'\sigma'}-M_{\nu'\sigma'}P_\nu)=g^{\nu\nu'}g^{\sigma\sigma'}(-g_{\nu\nu'}P_{\sigma'}+g_{\nu\sigma'}P_{\nu'})  \]
+Gives us
+\[\eqsplit{ \therefore \ P_\nu M_{\rho\sigma}P^\rho M^{\nu\sigma} &= (-g_{\nu\rho}P_\sigma+g_{\nu\sigma}P_\rho)P^\rho M^{\nu\sigma}+M_{\rho\sigma}P^\rho(g^{\nu\nu'}g^{\sigma\sigma'}(-g_{\nu\nu'}P_{\sigma'}+g_{\nu\sigma'}P_{\nu'})+M^{\nu\sigma}P_\nu)  \\
+    &= M_{\rho\sigma}P^\rho M^{\nu\sigma}P_\nu+(-g_{\nu\rho}P_\sigma+g_{\nu\sigma}P_\rho)P^\rho M^{\nu\sigma}+M_{\rho\sigma}P^\rho g^{\nu\nu'}g^{\sigma\sigma'}(-g_{\nu\nu'}P_{\sigma'}+g_{\nu\sigma'}P_{\nu'}) }\]
+If we can just show the remainder term is $0$ then we're done.
+\[\eqsplit{ (-g_{\nu\rho}P_\sigma+g_{\nu\sigma}P_\rho)P^\rho M^{\nu\sigma}+M_{\rho\sigma}P^\rho g^{\nu\nu'}g^{\sigma\sigma'}(-g_{\nu\nu'}P_{\sigma'}+g_{\nu\sigma'}P_{\nu'})&=-P_\sigma P_\nu M^{\nu\sigma}+P^2 M_{\nu\nu}+M_{\rho\sigma}P^\rho(-P^\sigma+\delta^\sigma_\nu P^\nu)\\
+    &=-P_\sigma P_\nu M^{\nu\sigma}+P^2 M_{\nu\nu} } \]
+Using that $M_{ij}=-M_{ij}\implies M_{\nu\nu}=0$ as $M_{00}=0$.
+
+Finally using that $\comm{P_\mu}{P_\nu}=0$ and $M_{\nu\mu}=-M_{\mu\nu}$ hence
+\[\eqsplit{P_\sigma P_\nu M^{\nu\sigma}&=\frac{1}{2}(P_\sigma P_\nu M^{\nu\sigma}+P_\sigma P_\nu M^{\nu\sigma})\\
+    &=\frac{1}{2}(P_\sigma P_\nu M^{\nu\sigma}-P_\sigma P_\nu M^{\sigma\nu})\\
+    &=\frac{1}{2}(P_\sigma P_\nu M^{\nu\sigma}-P_\nu P_\sigma M^{\sigma\nu})\\
+    &=0}\]
+Where the final step is true after relabeling indices as the summations are over the same indices for both objects. Hence finally we have that $P_\nu M_{\rho\sigma}P^\rho M^{\nu\sigma}=M_{\rho\sigma}P^\rho M^{\nu\sigma}P_\nu$. Putting these both together gives us
+\[P^2 S^2 = 2(P^2M_{\rho\sigma}M^{\rho\sigma}-2M_{\rho\sigma}P^\rho M^{\nu\sigma}P_\nu)\]
+\[\implies S^2 =2(P^2M_{\rho\sigma}M^{\rho\sigma}-2M_{\rho\sigma}P^\rho M^{\nu\sigma}P_\nu)/P^2\]
+Now consider the spin zero Klein Gordon particle with $k=(m,0)$ where $M_{ij}=0$ and $M_{00}=0$ so only permutations of the form $(0,i)$ and $(i,0)$ survive. hence
+\[M_{\rho\sigma}M^{\rho\sigma}=M_{0i}M^{0i}+M_{i0}M^{i0}\]
+and we have that $M_{0i}=-M_{i0}$ hence
+\[P^2M_{\rho\sigma}M^{\rho\sigma}=P^2(M_{0i}M^{0i}-M_{0i}(-M^{0i}))=2P^2M_{0i}M^{0i}\]
+Consider the other object $M_{\rho\sigma}P^\rho M^{\nu\sigma}P_\nu$, we must have 0 and $i$ for the indices of $M_{\rho\sigma}$ a non-trivial element as discussed above. If $\sigma\neq 0$ then $\rho=\nu=0$ otherwise clearly we have a 0 element hence
+\[\eqsplit{M_{\rho\sigma}P^\rho M^{\nu\sigma}P_\nu&=M_{i 0}P^i M^{j 0}P_j+M_{0i}P^0M^{0i}P_0\\
+    &=M_{i0}P^iM^{j0}P_j+M_{i0}P^0M^{i0}P_0}\]
+Hence we have using that $P=(m,0)$
+\[\eqsplit{\frac{1}{4}P^2S^2&=M_{0i}M^{0i}P^2-M_{i0}P^iM^{j0}P_j-M_{i0}P^0M^{i0}P_0\\
+    &=M_{0i}M^{0i}m^2-0-(-M_{0i})(-M^{0i})m^2 \\
+    &= 0}\]
+hence $S^2=0$
+\end{document}...

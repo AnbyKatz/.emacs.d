@@ -1,0 +1,198 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+
+#include "Character.h" //including all objects and there implementations
+#include "Character.cpp"
+
+#include "Main_Character.h"
+#include "Main_Character.cpp"
+
+#include "Protagonist.h"
+#include "Protagonist.cpp"
+
+#include "Route_Character.h"
+#include "Route_Character.cpp"
+
+#include "Other_Character.h"
+#include "Other_Character.cpp"
+
+#include "User_input_int.cpp"
+#include "User_input_string.cpp"
+
+//including programs which correspond to scenes and conversations below
+#include "The_Beginning.cpp" //scenes for the game included
+#include "The_Library.cpp"
+#include "Library_Finale.cpp"
+#include "West_Gate.cpp"
+
+
+using namespace std; //for standard output
+
+int main()
+{
+	
+	//Creating Protagonist
+	Protagonist *person[1]; //Initalizing object
+	person[0] = new Protagonist();
+	
+	//Defining Love Interests details	
+	string names[2]={"Yuu","Lucy"};
+	int ages[2]={17,18};
+	int IDs[3]={0,1,2};
+	Route_Character *Love_Interests[2];
+	for(int i=0;i<2;i++)
+	{
+		Love_Interests[i] = new Route_Character(); //Setting Details for Love_Interests
+		Love_Interests[i] -> setName(names[i]);
+		Love_Interests[i] -> setAge(ages[i]);
+		Love_Interests[i] -> setID(IDs[i+1]);	
+	}
+	person[0]->setID(IDs[0]);
+	
+	//Defining other characters details
+
+	string names_2[2]={"Doug","Dave"};
+	int ages_2[2]={16,19};
+	int availble[2]={-10,3};
+	
+	Other_Character *Side_People[2];
+	for (int i=0;i<2;i++) //loops through all created objects
+	{
+		Side_People[i] = new Other_Character(); //Setting Details for Other Characters
+		Side_People[i] -> setName(names_2[i]);
+		Side_People[i] -> setAge(ages_2[i]);
+		Side_People[i] -> setAvailibility(availble[i]);
+	}
+	
+	//Introduction
+	
+	cout<<"Welcome to 'Above The Sky'. You are about to be transported to BickMoore Highschool, make the choices corresponding to what you would do in every situation."<<endl;
+	cout<<"Whenever the symbol '>>>' appears, click enter to continue"<<endl;
+	cout<<">>>"<<endl; //This is used to signal when the user has to enter an input to continue
+	User_input_string(); //requests string just to stop text from printing at the same time. Makes user have to click enter or enter anything to continue
+	
+	cout<<"What is your first name?"<<endl;
+	string name = User_input_string(); // sets name to User's Specified name
+	string input = string("Kieffer") + ", "+name+": "; //This is to be inputed in functions so writing time takes less
+	
+	if(name!="")
+		person[0] -> setName(input); //If no name was entered then the default name is set
+	else
+		person[0] -> setName("Kieffer: "); //Otherwise The name is set regularly
+	cout<<"You will now be taking the place of "<<name<<" Kieffer"<<endl;
+	cout<<"Good luck"<<endl;
+	cout<<endl;
+	cout<<">>>"<<endl;
+	User_input_string();
+	
+	//Let the game begin
+	//Scene 1
+	Love_Interests[0]->sethappiness(The_Beginning(person[0]->getName())); //Runs the integer funtion The_begining with input variable users name. Uses Route_Character Behaviour to set varible to output of function
+	person[0]->setScore(Love_Interests[0]->gethappiness()); //takes out put of function above and applies it to Protagionst Object behaviour
+	cout<<">>>"<<endl;
+	User_input_string();
+	
+	cout<<"Some time passes whilst you do nothing"<<endl; //words
+	cout<<">>>"<<endl;
+	User_input_string();
+	cout<<"You decide to go to the Library to kill some time."<<endl;
+	cout<<">>>"<<endl;
+	User_input_string();
+	
+	//Scene 2
+	Love_Interests[1]->sethappiness(The_Library(person[0]->getName())); //Same as above expect for object 2
+	person[0]->setScore(Love_Interests[1]->gethappiness());
+	cout<<">>>"<<endl;
+	User_input_string();
+	
+	cout<<"Some time passes whilst you do nothing...you lazy bugger"<<endl; //words
+	cout<<">>>"<<endl;
+	User_input_string();
+	
+	//Final Scene
+	cout<<"You may go to 1: The Library or 2: The West gate"<<endl;
+	int input2 = User_input_int();	//requests user input
+	
+	while(input2 > 2 or input2 < 1)
+	{	
+		input2 = User_input_int();		//until user inputs correct number, keeps looping
+	}
+	
+	
+	switch(input2)	//functions are run or not, depending on input number
+	{
+		case 1:
+			if(Love_Interests[1]->gethappiness() == Side_People[0]->getAvailibility()) // if certain values are equal to other values, then
+			{
+				Library_Finale(person[0]->getName(),1); //run these functions with these numbers
+				break; // break to stop the loop
+			}
+			if(Love_Interests[1]->gethappiness() == 5) //same for all code below
+			{
+				Library_Finale(person[0]->getName(),2); //all varibles defined at the start. Happiness is changed in functions like The_Beginning depending on user input
+				break;
+			}
+			else
+			{
+				Library_Finale(person[0]->getName(),3);
+				break;
+			}
+			break;
+		case 2:
+			if(Love_Interests[0]->gethappiness() == Side_People[1]->getAvailibility()) //Same Idea for the rest of the Switch Statement
+			{
+				West_Gate(person[0]->getName(),1);
+				break;
+			}
+			if(Love_Interests[0]->gethappiness() >= 5)
+			{
+				West_Gate(person[0]->getName(),2);
+				break;
+				
+			}
+			else
+			{
+				West_Gate(person[0]->getName(),3);
+				break;
+			}
+			break;
+	}
+	
+	//Finale
+	cout<<endl;
+	cout<<">>>"<<endl;
+	User_input_string();
+	cout<<"THANKS FOR PLAYING!"<<endl;
+	cout<<">>>"<<endl;
+	User_input_string();
+	cout<<"GOOD JOB! THE END"<<endl;
+	cout<<">>>"<<endl;
+	User_input_string();
+	cout<<"HERE IS YOUR FINAL REPORT CARD"<<endl;
+	
+	cout<<"ID: "<<person[0]->getID()<<endl; //printing final details
+	cout<<"Name: "<<" Kieffer, "<<name<<endl; //Aquiring needed information with getters
+	cout<<"Age: "<<person[0]->getAge()<<endl;
+	cout<<endl;
+	
+	for(int i=0;i<2;i++) //loops through created objects
+	{
+		cout<<"ID: "<<Love_Interests[i]->getID()<<endl; //Displaying Final Information of Objects Using Getters
+		cout<<"Name: "<<Love_Interests[i]->getName()<<endl;
+		cout<<"Age: "<<Love_Interests[i]->getAge()<<endl;
+		cout<<"Final Happiness: "<<Love_Interests[i]->gethappiness()<<endl;
+		cout<<endl;
+	}
+	
+	cout<<"Final Score: "<<person[0]->getScore()<<endl; //Final Score From Protagonist Object
+	cout<<">>>"<<endl;
+	User_input_string();
+	
+	//deleting objects
+	for(int i=0;i<2;i++)
+		delete Love_Interests[i];
+	for(int i=0;i<2;i++)
+		delete Side_People[i];	
+	delete person[0];
+}

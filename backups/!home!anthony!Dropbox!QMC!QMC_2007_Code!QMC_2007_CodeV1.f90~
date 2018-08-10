@@ -1,0 +1,246 @@
+program QMC_2007_CodeV1
+  use usefulFunctions
+  use Kinds
+  use Pyplots
+  implicit none
+
+  !---------------------------------------------------------------------!
+  ! Below contains code which reproduces plots from the 1996 QMC        !
+  ! finite nuclei paper. One run calculates the plots using the fits    !
+  ! for the effective nucleon mass and the parameter C. For further     !
+  ! details on the applied formulas, see the proofs given in attached   !
+  ! tex document.                                                       !
+  !---------------------------------------------------------------------!
+
+  integer                             :: ii,jj,ID,guess,counter,N
+  character(len=11),dimension(2)      :: legend
+  real(DP),dimension(:),  allocatable :: rhoB_ax,sm_ax,RhoN_ax,RhoZ_ax
+  real(DP),dimension(:,:),allocatable :: data1,data2,data3,data
+  real(DP),dimension(3)               :: couple,BagRadii  
+
+  real(DP)                            :: x,Mq,Mn,fmMeV,Bag,z0,SIGfield, &
+       Msigma,Rho0,RhoB_Z,RB,         &
+       sigma,a,b1,absErr,relErr,      &
+       Omega0,g_sigma,Meff,V,C,Mqef,  &
+       dOmega0,yval,ed,dx,d,          &
+       finDen,ZNpercent,b2,RhoB_N,Mz
+
+  !---------------------------------------------------------------------!
+  !                                                                     !
+  !                           Parameters Below                          !
+  !                                                                     !
+  !---------------------------------------------------------------------!
+
+  N = 1e3
+  allocate(rhoB_ax(N),sm_ax(N),data(N,6),&
+       rhoN_ax(N),rhoZ_ax(N))
+
+  ! Conversion Factor
+  fmMeV       = 1/(197.327_DP)  !for fm -> MeV^{-1}
+
+  ! Set model parameters
+  couple(1)   = sqrt(5.86*4*pi) !constant
+  couple(2)   = sqrt(5.40*4*pi) !constant
+  couple(3)   = sqrt(5.07*4*pi) !constant
+  BagRadii(1) = 0.60_DP         !fm
+  BagRadii(2) = 0.80_DP         !fm
+  BagRadii(3) = 1.00_DP         !fm
+  Mq          = 5.0_DP          !MeV
+  Mn          = 939.565_DP      !MeV
+  Mz          = 938.272_DP      !MeV
+  Rho0        = 0.16_DP         !fm^{-3}
+  Msigma      = 550.0_DP        !MeV
+  finDen      = 2.5_DP          !fm^{-3}
+  ZNpercent   = 1.0_DP
+
+  ! range of values for ρ_B
+  rhoB_ax = linspace(0.001_dp,Rho0*finDen,N) !fm^{-3}
+  rhoZ_ax = rhoB_ax*ZNpercent               !fm^{-3}
+  rhoN_ax = rhoB_ax*(1.0_DP-ZNpercent)      !fm^{-3}
+
+  ! Integration Parameters
+  absErr      = 1e-6_DP
+  relErr      = 1e-6_DP
+  a           = 0.0_DP
+
+  ! Results file to write to
+  open(100,file="1996_Results.dat",action="write", &
+       & status="replace",form="formatted")
+
+  write(legend(1),'(a7)') "Neutron"
+  write(legend(2),'(a6)') "Proton"
+
+  ! Choose whether to run the code using the fit
+  ! parameters or solving the bag equations for
+  ! the parameters themselves
+
+
+
+
+
+  call QMC()
+  ! call plot(data(:,1:2))
+
+
+
+
+
+
+
+
+
+  deallocate(rhoB_ax,sm_ax,data,rhoN_ax,rhoZ_ax)
+
+  close(100)
+
+contains
+
+  !---------------------------------------------------------------------!
+  !                                                                     !
+  !                    Subroutines & Functions Below                    !
+  !                                                                     !
+  !---------------------------------------------------------------------!
+  
+  subroutine QMC()
+    use Kinds
+    implicit none
+
+    ! Maximum value for (g_σ)σ (MeV) 
+    ed      = 500.0_DP
+    counter = 1
+
+    g_sigma = couple(counter)
+    RB      = BagRadii(counter)*fmMeV
+    d       = 0.22*RB
+
+    ! range of values for (g_σ)σ 
+    sm_ax   = linspace(0.001_dp,ed/g_sigma,N)
+
+    ! Calculates the scalar meson field values
+    ! σ and stores them in data
+    call cal_SMF(data(:,ii))
+    data(:,ii) = data(:,ii)*g_sigma
+
+    ! Scale x_axis to multiples of nuclear matter
+    rhoB_ax = rhoB_ax/Rho0
+    data(:,1) = rhoB_ax
+
+
+
+  end subroutine QMC
+
+  !---------------------------------------------------------------------!
+  !                                                                     !
+  !                   Calculates Effective Mass and C                   !
+  !                                                                     !
+  !---------------------------------------------------------------------!
+
+  subroutine cal_MeffC(xvals,Meff,C)
+    use Kinds
+    implicit none
+
+    real(DP),dimension(:),intent(in)  :: xvals
+    real(DP),dimension(:),intent(out) :: Meff,C
+
+    Meff = MN - (1-(d/2)*g_sigma*xvals)*g_sigma*xvals
+    C    = 1 - d*g_sigma*xvals
+
+  end subroutine cal_MeffC
+
+  !---------------------------------------------------------------------!
+  !                                                                     !
+  !                 Calculate Scalar Meson Field values                 !
+  !                                                                     !
+  !---------------------------------------------------------------------!
+
+  subroutine cal_SMF(yvals)
+    use Kinds
+    implicit none
+
+    real(DP),dimension(N),intent(out) :: yvals
+
+    real(DP),dimension(N)             :: yy
+    integer                           :: kk
+
+    do jj = 1,N
+
+       RhoB_Z = RhoZ_ax(jj)*(fmMeV**(-3))
+       RhoB_N = RhoN_ax(jj)*(fmMeV**(-3)) 
+       b1   =(3*(pi**2)*RhoB_Z)**(1/3.0) 
+       b2   =(3*(pi**2)*RhoB_N)**(1/3.0)
+
+       do kk = 1,N
+          sigma  = sm_ax(kk)
+          yy(kk) = ((g_sigma/Msigma**2)*(1-d*g_sigma*sigma)*(1/pi**2))&
+               *(integral(SMF_IntZ,a,b1,absErr,relErr)+&
+               integral(SMF_IntN,a,b2,absErr,relErr))-sigma
+       end do
+
+       guess     = GuessZero(yy)
+       yvals(jj) = newton1D(SMF_newton,sm_ax(guess))
+
+    end do
+
+  end subroutine cal_SMF
+
+  !---------------------------------------------------------------------!
+  !                                                                     !
+  !                           Proton Integral                           !
+  !                                                                     !
+  !---------------------------------------------------------------------!
+
+  function SMF_IntZ(x)
+    use Kinds
+    implicit none
+
+    real(DP), intent(in) :: x
+    real(DP)             :: SMF_IntZ
+
+    real(DP)             :: Meff
+
+    Meff         = Mz - (1-(d/2)*g_sigma*sigma)*g_sigma*sigma
+    SMF_IntZ     = (Meff*(x**2))/(sqrt( Meff**2 + x**2 ))
+
+  end function SMF_IntZ
+
+  !---------------------------------------------------------------------!
+  !                                                                     !
+  !                           Neutron Integral                          !
+  !                                                                     !
+  !---------------------------------------------------------------------!
+
+  function SMF_IntN(x)
+    use Kinds
+    implicit none
+
+    real(DP), intent(in) :: x
+    real(DP)             :: SMF_IntN
+
+    real(DP)             :: Meff
+
+    Meff         = Mn - (1-(d/2)*g_sigma*sigma)*g_sigma*sigma
+    SMF_IntN = (Meff*(x**2))/(sqrt( Meff**2 + x**2 ))
+
+  end function SMF_IntN
+
+  !---------------------------------------------------------------------!
+  !                                                                     !
+  !                       Newton Function to solve                      !
+  !                                                                     !
+  !---------------------------------------------------------------------!
+
+  function SMF_newton(x)
+    use Kinds
+    implicit none
+
+    real(DP), intent(in) :: x
+    real(DP)             :: SMF_newton
+
+    sigma      = x
+    SMF_newton = ((g_sigma/Msigma**2)*(1-d*g_sigma*x)*(1/pi**2))&
+               *(integral(SMF_IntZ,a,b1,absErr,relErr)+&
+               integral(SMF_IntN,a,b2,absErr,relErr))-x
+
+  end function SMF_newton
+
+end program QMC_2007_CodeV1

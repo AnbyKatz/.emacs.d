@@ -1,0 +1,41 @@
+program fourier_fortran
+  use UsefulFunctions
+  use kinds
+  use pyplots
+  implicit none
+
+  integer, parameter         :: N = 2**16
+  real(dp),dimension(N,2)    :: data
+  complex(dp),dimension(N)   :: fourier_driver, fourier_height
+  real(dp),dimension(N)      :: ball_power, drive_power, x
+  real(dp)                   :: scale
+  integer,dimension(1)       :: j
+  integer                    :: i
+  
+  open(101,file="BBChaos145Hz-1.txt",action="read", &
+       & status="old",form="formatted")
+
+  do i=1,N
+     read(101,*) data(i,1),data(i,2)
+  end do
+
+  do i=1,N
+     fourier_driver(i) = cmplx(data(i,1),0)
+     fourier_height(i) = cmplx(data(i,2),0)
+  end do
+  
+  call fft(fourier_driver)
+  call fft(fourier_height)
+
+  do i=1,N
+     drive_power(i) = (abs(fourier_driver(i))**2)
+     ball_power(i)  = (abs(fourier_height(i))**2)
+  end do
+  
+  j = maxloc(drive_power(:))
+  scale = real(145)/j(1)
+  x = scale*linspace(-N/2,N/2-1,N-1)
+  
+  call loglog(x,ball_power,.true.)
+  
+end program fourier_fortran

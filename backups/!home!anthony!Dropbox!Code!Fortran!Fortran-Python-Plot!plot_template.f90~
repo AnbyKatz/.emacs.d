@@ -1,0 +1,57 @@
+program plot_template
+  use UsefulFunctions
+  use kinds
+  use pyplots
+  implicit none
+
+  ! ---------------------------------------------------!
+  ! UsefulFunctions contains the handy function        !
+  ! linspace(start,end,step) for creating axes.        !
+  ! fft(X) will also perform the fast fourier          !
+  ! but note that the input variable must be a         !
+  ! complex(dp) array                                  !
+  ! ---------------------------------------------------!
+
+  
+
+
+
+
+
+
+                   ! INSERT CODE HERE !
+
+
+
+
+
+
+
+
+  ! ---------------------------------------------------!
+  ! The following run a python script linked the       !
+  ! Fortran file pyplots.f90, output plots displayed   !
+  ! via python. Uncomment the necessary plot routines  !
+  ! ---------------------------------------------------!
+  
+  ! Standard x vs y plot with input parameters as
+  ! arrays.
+  ! call plot(x,y)
+
+  ! log scaled plot for both x and y. If shift is set
+  ! to true then python performs a fftshift on the
+  ! input y values.
+  ! call loglog(x,y,shift=.false./.true.)
+
+  ! Standard 3d plot where inputs are arrays
+  ! call plot3(x,y,z)
+
+  ! If input arguments are not equal in length then
+  ! an error will be displayed.
+
+  ! ---------------------------------------------------!
+  ! all input variables MUST BE real(dp) arrays other  !
+  ! wise the code will fail                            !
+  ! ---------------------------------------------------!
+  
+end program plot_template

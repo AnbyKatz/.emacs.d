@@ -1,0 +1,712 @@
+# -*- mode: org; -*-
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+
+#+AUTHOR: Anthony Kalaitzis
+#+TITLE: Emacs Config file
+
+* Emacs Utility
+** Shell
+Recognize exported paths in .bashrc
+#+BEGIN_SRC emacs-lisp
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (replace-regexp-in-string
+                          "[ \t\n]*$"
+                          ""
+                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq eshell-path-env path-from-shell) ; for eshell users
+    (setq exec-path (split-string path-from-shell path-separator))))
+(when window-system (set-exec-path-from-shell-PATH))
+
+(global-set-key (kbd "H-S") 'window-split-toggle)
+#+END_SRC
+
+Add shell variables to emacs
+#+BEGIN_SRC emacs-lisp
+  (when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+#+END_SRC
+
+** Language 
+
+Enable quick changed between English and 日本語
+#+BEGIN_SRC emacs-lisp
+(set-language-environment "Japanese")
+#+END_SRC
+
+** Extra
+
+Add custom abbrev definitions
+#+BEGIN_SRC emacs-lisp
+(setq abbrev-file-name "~/.abbrev_defs")
+(if (file-exists-p abbrev-file-name)
+    (quietly-read-abbrev-file))
+#+END_SRC
+
+Add some custom load paths
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/elpa/")
+#+END_SRC
+
+Toggle between splits
+#+BEGIN_SRC emacs-lisp
+  (defun window-split-toggle ()
+  "Toggle between horizontal and vertical split with two windows."
+  (interactive)
+  (if (> (length (window-list)) 2)
+      (error "Can't toggle with more than 2 windows!")
+    (let ((func (if (window-full-height-p)
+                    #'split-window-vertically
+                  #'split-window-horizontally)))
+      (delete-other-windows)
+      (funcall func)
+      (save-selected-window
+        (other-window 1)
+        (switch-to-buffer (other-buffer))))))
+#+END_SRC
+
+** Jedi
+
+Enable jedi auto complete
+#+BEGIN_SRC emacs-lisp
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)        
+#+END_SRC
+
+Enable auto complete mode
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'ac-modes 'org-mode)
+  (ac-set-trigger-key "TAB")
+#+END_SRC
+
+* Quality of life changes
+** Accessibility
+Change text size in Emacs
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'default nil :height 150)
+#+END_SRC
+
+camelCase recognition
+#+BEGIN_SRC emacs-lisp
+(global-subword-mode)
+#+END_SRC
+
+Turn on rainbow deliminators 
+#+BEGIN_SRC emacs-lisp
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'foo-mode-hook #'rainbow-delimiters-mode)
+#+END_SRC
+
+** Start up
+
+Auto full screen Emacs GUI
+#+BEGIN_SRC emacs-lisp
+(when (display-graphic-p)
+  (add-to-list 'default-frame-alist '(fullscreen . maximized)))
+#+END_SRC
+
+Don't show scroll bar
+#+BEGIN_SRC emacs-lisp
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+(when window-system
+  (scroll-bar-mode -1))
+#+END_SRC
+
+turn off Emacs's annoying bell
+#+BEGIN_SRC emacs-lisp
+(setq ring-bell-function 'ignore)
+#+END_SRC
+
+Fix Scrolling behaviour
+#+BEGIN_SRC emacs-lisp
+(setq scroll-conservatively 100)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) 
+(setq mouse-wheel-progressive-speed nil)
+(setq mouse-wheel-follow-mouse 't) 
+#+END_SRC
+
+Remove start up message
+#+BEGIN_SRC emacs-lisp
+(setq inhibit-startup-message t)
+(setq inhibit-startup-echo-area-message t)
+#+END_SRC
+
+Use better defaults for Emacs
+#+BEGIN_SRC emacs-lisp
+(require 'better-defaults)
+#+END_SRC
+
+** Display and Utility
+
+Display time in mode line
+#+BEGIN_SRC emacs-lisp
+(setq display-time-string-forms '((propertize (format-time-string " %b %d, %l:%M%P" now) 'face'bold)))
+(setq display-time-and-date t)
+(display-time-mode 1)
+#+END_SRC
+
+Abbreviate all 'Yes/No' prompts to 'y/n'
+#+BEGIN_SRC emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+Display line numbers in programming modes
+#+BEGIN_SRC emacs-lisp
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+#+END_SRC
+
+* Key Re-bindings
+** File Navigation
+
+Enable quick access to config file
+#+BEGIN_SRC emacs-lisp
+(defun my/visit-emacs-config ()
+  (interactive)
+  (find-file "~/.emacs.d/config.org"))
+(global-set-key (kbd "H-e") 'my/visit-emacs-config)
+#+END_SRC
+
+File navigation for major files
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "H-r")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/Thesis/MPhil_Research.tex")))
+(global-set-key (kbd "H-j")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/journal.org")))
+(global-set-key (kbd "H-a")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/agenda.org")))
+(global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/QMC_2007_Code/QMC_2007_CodeV1.f90")))
+(global-set-key (kbd "H-t")  (lambda () (interactive) (find-file  "~/texmf/tex/latex/package_repository/mypackage.sty")))
+#+END_SRC
+** Movement Macros
+
+Move between buffers in same frame
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "M-]") 'other-window)
+#+END_SRC
+
+Move between buffers in different frames
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "M-[") 'other-frame)
+#+END_SRC
+
+Move in paragraphs
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "M-n") 'forward-paragraph)
+(global-set-key (kbd "M-p") 'backward-paragraph)
+#+END_SRC
+
+ace window movement key bindings
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "H-A") 'ace-window)
+#+END_SRC
+
+** Personal Macros
+
+Binding for Helm Spotify inside Emacs
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "H-s") 'helm-spotify-plus)
+#+END_SRC
+** Global coding macros
+
+Repeat previous shell command
+#+BEGIN_SRC emacs-lisp
+(defun my/repeat-last-shell-command()
+  "repeats last run shell command"
+  (interactive)
+  (shell-command (cadr (assoc 'shell-command command-history))))
+(global-set-key (kbd "M-Z") 'my/repeat-last-shell-command)
+#+END_SRC
+
+Exchange below and above lines globally
+#+BEGIN_SRC emacs-lisp
+(defun move-line-up ()
+  (interactive)
+  (transpose-lines 1)
+  (previous-line 2))
+
+(defun move-line-down ()
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (previous-line 1))
+
+(global-set-key (kbd "M-<up>") 'move-line-up)
+(global-set-key (kbd "M-<down>") 'move-line-down)
+#+END_SRC
+
+* Helm
+
+Major configurations for the Helm Plugin
+#+BEGIN_SRC emacs-lisp
+(helm-mode 1)
+(require 'helm)
+(require 'helm-config)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+#+END_SRC
+
+Turn on Helm Spotify
+#+BEGIN_SRC emacs-lisp
+(require 'helm-spotify-plus)
+#+END_SRC
+
+* Colour Theme
+
+Load in custom colour theme
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'custom-theme-load-path "~/.emacs.d/anthony-swanking-theme")
+(load-theme 'anthony-swanking t)
+#+END_SRC
+
+* AucTex
+** FlySpell
+
+Enable spell checking for LaTex
+#+BEGIN_SRC emacs-lisp
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+#+END_SRC
+
+** PDF Tools
+
+Better PDF viewing inside AucTex
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+(setq pdf-view-midnight-colors (cons (face-foreground 'default) (face-background 'default)))
+
+(defun my-pdf-view-mode-hook ()
+  (pdf-view-midnight-minor-mode 1)
+  (linum-mode 0)
+  )
+(add-hook 'pdf-view-mode-hook 'my-pdf-view-mode-hook)
+(pdf-tools-install)
+
+(setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+      TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
+      TeX-source-correlate-start-server t)
+#+END_SRC
+
+** Utility
+
+Refresh the buffer after compilation
+#+BEGIN_SRC emacs-lisp
+(add-hook 'TeX-after-compilation-finished-functions
+	  #'TeX-revert-document-buffer)
+#+END_SRC
+
+** LaTeX editing major mode
+
+#+BEGIN_SRC emacs-lisp
+(require 'tex)
+(add-hook 'LaTeX-mode-hook 'my-LaTeX-mode-hook)
+(defun my-LaTeX-mode-hook ()
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+  (setq TeX-PDF-mode t)
+  (visual-line-mode 1)
+  (flyspell-mode 1)
+  (LaTeX-math-mode 1)
+  (TeX-source-correlate-mode 1)
+  (outline-minor-mode 1)
+  (local-set-key (kbd "C-M-=") '(lambda () (interactive) (insert "&= ")))
+  (local-set-key (kbd "C-H-f") '(lambda () (interactive) (insert "frac{")))
+  (local-set-key (kbd "C-c b") 'tex-latex-block)
+  (local-set-key (kbd "<C-tab>") 'outline-toggle-children)
+  )
+#+END_SRC
+
+* Coding
+** FORTRAN
+
+Auto load in FORTRAN mode for f90 files
+#+BEGIN_SRC emacs-lisp
+(autoload 'f90-mode "f90" "Fortran 90 mode" t)
+#+END_SRC
+
+Configurations for FORTRAN major mode
+#+BEGIN_SRC emacs-lisp
+(add-hook 'f90-mode-hook 'my-f90-mode-hook)
+(require 'fortran)
+(defun my-f90-mode-hook () 
+  (local-set-key (kbd "H-M-c") (lambda () (interactive) (shell-command "./bash_fortran")))
+  (local-set-key (kbd "H-t") 'my/f90-comment-header-block)
+  (setq f90-font-lock-keywords f90-font-lock-keywords-3)
+  '(f90-comment-region "!!!$")
+  '(f90-indented-comment-re "!")
+  (abbrev-mode 1)                     
+  (turn-on-font-lock)                 
+  (auto-fill-mode 0)                  
+)
+#+END_SRC
+
+Creates a heading in FORTRAN major mode
+#+BEGIN_SRC emacs-lisp
+(defun my/f90-comment-header-block (title)
+  "Inserts a commented title block for f90"
+  (interactive "sEnter a title: ")
+  (defvar blank-len 1)
+  (setq blank-len (/ (- 69 (length title)) 2))
+  (newline)
+  (dotimes (jj 5)
+    (case jj
+      ((0 4)
+       (indent-for-tab-command)
+       (insert "!")
+       (dotimes (ii 69) (insert "-"))
+       (insert "!")
+       (newline))
+      ((1 3)
+       (indent-for-tab-command)
+       (insert "!")
+       (dotimes (ii 69) (insert " "))
+       (insert "!")
+       (newline))
+      (2
+       (indent-for-tab-command)
+       (insert "!")
+       (dotimes (ii blank-len)
+	 (insert " "))
+       (if (= (mod (length title) 2) 0)
+	   (insert " ")
+	 )
+       (insert title)
+       (dotimes (ii blank-len)
+	 (insert " "))
+       (insert "!")
+       (newline))
+  )))
+(global-set-key (kbd "H-Z") 'my/f90-comment-header-block)
+#+END_SRC
+
+** Python
+
+Some configurations Python major mode
+#+BEGIN_SRC emacs-lisp
+(require 'python)
+(add-hook 'python-mode-hook 'my-python-mode-hook)
+(defun my-python-mode-hook()
+  (local-set-key (kbd "H-M-p") 'my/python-compile) 
+  (setq python-shell-interpreter "ipython"
+        python-shell-interpreter-args "--simple-prompt -i")
+  (add-to-list 'load-path "/folder/containing/file")
+  )
+#+END_SRC
+
+** C++
+
+Load in C++ major mode for .h files
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+#+END_SRC
+
+Some configurations C++ major mode
+#+BEGIN_SRC emacs-lisp
+(require 'cl)
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+(defun my-c++-mode-hook ()
+  (local-set-key (kbd "H-M-p")(lambda () (interactive) (shell-command "./bash_c++")))
+  )
+#+END_SRC
+
+** Julia
+*** Environment Macros
+
+Some configurations Julia major mode
+#+BEGIN_SRC emacs-lisp
+(require 'julia-mode)
+(add-hook 'julia-mode-hook 'my-Julia-mode-hook)
+(defun my-Julia-mode-hook()
+  (local-set-key (kbd "C-c C-p") 'inferior-julia-shell)
+  (local-set-key (kbd "C-c C-r") 'julia-shell-run-region)
+  (local-set-key (kbd "H-M-p") 'my/julia-compile) 
+  )
+#+END_SRC
+
+Compile command for Julia
+#+BEGIN_SRC emacs-lisp
+(defun my/julia-compile()
+  (interactive)
+  (defvar thisfile buffer-file-name)
+  (shell-command (concat "julia " thisfile)))
+#+END_SRC
+
+*** Shell Configurations
+
+load in Julia compiler
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/elpa/julia-mode-20171116.642")
+#+END_SRC
+
+Julia shell
+#+BEGIN_SRC emacs-lisp
+(setq  inferior-julia-program-name "~/bin/julia/bin/julia")
+#+END_SRC
+
+Julia repel stuff
+#+BEGIN_SRC emacs-lisp
+(defun julia-repl ()
+  "Runs Julia in a screen session in a `term' buffer."
+  (interactive)
+  (require 'term)
+  (let ((termbuf (apply 'make-term "Julia REPL" "screen" nil (split-string-and-unquote "julia"))))
+    (set-buffer termbuf)
+    (term-mode)
+    (term-char-mode)
+    (switch-to-buffer termbuf)))
+(global-set-key (kbd "C-x j") 'julia-repl)
+#+END_SRC
+
+* Org
+** Editing Code
+
+Some configurations Org major mode
+#+BEGIN_SRC emacs-lisp
+(defun my-org-mode-hook ()
+  (setq org-log-done t)
+  (define-key global-map "\C-cl" 'org-store-link)
+  (define-key global-map "\C-ca" 'org-agenda)
+  (visual-line-mode 1)
+  (org-indent-mode 1)
+  (org-bullets-mode 1)
+  (abbrev-mode 1)
+  ;; (linum-mode 1)
+)
+#+END_SRC
+
+load mode
+#+BEGIN_SRC emacs-lisp
+(autoload 'org-mode "org" "Org Mode" t)
+(add-hook 'org-mode-hook 'my-org-mode-hook)
+#+END_SRC
+
+load in certain languages coding modes
+#+BEGIN_SRC emacs-lisp
+(require 'ob-clojure)
+(require 'ox-latex)
+(require 'org)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (python . t)
+   (fortran . t)
+   (latex . t)
+   (shell . t)
+   (julia . t)
+   (emacs-lisp . t)
+   ))
+#+END_SRC
+
+** Capture Mode
+
+add custom section titles templates
+#+BEGIN_SRC emacs-lisp
+  (setq org-capture-templates
+        (quote (("w" "Work todo" entry (file+olp "~/Dropbox/Journal/agenda.org" "Agenda" "Work")
+                 "* ☛ TODO %?")
+                 ("p" "Personal todo" entry (file+olp "~/Dropbox/Journal/agenda.org" "Agenda" "Personal")
+                 "* ☛ TODO %?")
+                ("m" "Meeting Notes" entry (file+olp+datetree "~/Dropbox/Journal/journal.org")
+                 "* %? :Meeting: \n\n _Notes_:  \n \n _Agenda_: \n \n _Resources_: ")
+                ("j" "Journal" entry (file+olp+datetree "~/Dropbox/Journal/journal.org")
+                 "* %? \n\n _Notes_:  \n \n _Resources_:")
+                ("r" "Research Talk" entry (file+olp+datetree "~/Dropbox/Journal/journal.org")
+                 "* %? :RT: \n\n _Notes_:  \n \n _Resources_:")
+                )))
+#+END_SRC
+
+Tell org where the agenda files are
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-files 
+  (list "~/Dropbox/Journal/agenda.org" "~/Dropbox/Journal/journal.org"))  
+#+END_SRC
+
+** Macros
+
+Keyboard macros for org mode
+#+BEGIN_SRC emacs-lisp
+   (global-set-key (kbd "C-c l") 'org-store-link)
+   (global-set-key (kbd "C-c a") 'org-agenda)
+   (global-set-key (kbd "C-c c") 'org-capture)
+#+END_SRC
+
+Code block macros
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-structure-template-alist
+               '("el" "#+BEGIN_SRC emacs-lisp\n  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("c" "#+BEGIN_SRC C++\n  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("py" "#+BEGIN_SRC python
+  #!/usr/bin/python3.5
+  import matplotlib.pyplot as pypl
+  import numpy as np
+  import math as m
+  from matplotlib import rc
+  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("ipy" "#+BEGIN_SRC ipython :session :exports both :results raw drawer\n  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("f" "#+BEGIN_SRC fortran\n  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("y" "#+BEGIN_SRC yaml\n  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("sh" "#+BEGIN_SRC shell\n  ?\n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist
+               '("t" "#+BEGIN_SRC text\n  ?\n#+END_SRC"))
+#+END_SRC
+
+** Utility
+
+Translate regular ol' straight quotes to typographically-correct curly quotes
+when exporting.
+#+BEGIN_SRC emacs-lisp
+   (setq org-export-with-smart-quotes t)
+#+END_SRC
+
+Don't ask before evaluating code blocks.
+#+BEGIN_SRC emacs-lisp
+   (setq org-confirm-babel-evaluate nil)
+#+END_SRC
+
+For exporting to HTML
+#+BEGIN_SRC emacs-lisp
+(require  'htmlize)
+#+END_SRC
+
+** Visual Settings
+
+Nice ellipsis:
+#+BEGIN_SRC emacs-lisp
+   (setq org-ellipsis "⤵")
+#+END_SRC
+
+Use syntax highlighting in source blocks while editing (you may already have
+this).
+#+BEGIN_SRC emacs-lisp
+   (setq org-src-fontify-natively t)
+#+END_SRC
+
+When editing a code snippet, use the current window rather than popping open a
+new one.
+#+BEGIN_SRC emacs-lisp
+   (setq org-src-window-setup 'current-window)
+#+END_SRC
+
+Automatic indentation upon startup (or set to nil if you don't want it)
+#+BEGIN_SRC emacs-lisp
+  (setq org-startup-indented t)
+#+END_SRC
+
+Change Org bullets appearance
+#+BEGIN_SRC emacs-lisp
+(setq org-bullets-face-name (quote org-bullet-face))
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(setq org-bullets-bullet-list '("➢" "➣" "➤" "➟" "➙" "»")) 
+;("○" "☉" "◎" "◉" "○" "◌" "◎" "●" "◦" "◯" "⚪" "⚫" "⚬" "❍" "￮" "⊙" "⊚" "⊛" "∙" "∘"))
+#+END_SRC
+
+#+RESULTS:
+| ➢ | ➣ | ➤ | ➟ | ➙ | » |
+
+** Agenda alternations
+
+Add states for to do lists
+#+BEGIN_SRC emacs-lisp 
+     (setq org-todo-keywords '((sequence "☛ TODO(t)" "|" "✔ DONE(d)") ;
+     (sequence "⚑ WAITING(w)" "|")
+     (sequence "|" "💀 DEAD(d)")
+  ))
+#+END_SRC
+
+** LaTeX
+
+Use =mypackage= package for all LaTeX exports.
+#+BEGIN_SRC emacs-lisp
+(setq org-latex-packages-alist '())
+(add-to-list 'org-latex-packages-alist '("" "mypackage" t))
+#+END_SRC
+
+Tell org where to find LaTeX
+#+BEGIN_SRC emacs-lisp
+  (setq exec-path (append exec-path '("/usr/bin")))
+  (load "auctex.el" nil t t)
+#+END_SRC
+
+** Beamer
+
+Some code to allow the use of Beamer in org mode
+#+BEGIN_SRC emacs-lisp
+; allow for export=>beamer by placing
+
+;; #+LaTeX_CLASS: beamer in org files
+(unless (boundp 'org-export-latex-classes)
+  (setq org-export-latex-classes nil))
+(add-to-list 'org-export-latex-classes
+  ;; beamer class, for presentations
+  '("beamer"
+     "\\documentclass[11pt]{beamer}\n
+      \\mode<{{{beamermode}}}>\n
+      \\usetheme{{{{beamertheme}}}}\n
+      \\usecolortheme{{{{beamercolortheme}}}}\n
+      \\beamertemplateballitem\n
+      \\setbeameroption{show notes}
+      \\usepackage[utf8]{inputenc}\n
+      \\usepackage[T1]{fontenc}\n
+      \\usepackage{hyperref}\n
+      \\usepackage{color}
+      \\usepackage{listings}
+      \\lstset{numbers=none,language=[ISO]C++,tabsize=4,
+  frame=single,
+  basicstyle=\\small,
+  showspaces=false,showstringspaces=false,
+  showtabs=false,
+  keywordstyle=\\color{blue}\\bfseries,
+  commentstyle=\\color{red},
+  }\n
+      \\usepackage{verbatim}\n
+      \\institute{{{{beamerinstitute}}}}\n          
+       \\subject{{{{beamersubject}}}}\n"
+
+     ("\\section{%s}" . "\\section*{%s}")
+     
+     ("\\begin{frame}[fragile]\\frametitle{%s}"
+       "\\end{frame}"
+       "\\begin{frame}[fragile]\\frametitle{%s}"
+       "\\end{frame}")))
+
+  ;; letter class, for formal letters
+
+  (add-to-list 'org-export-latex-classes
+
+  '("letter"
+     "\\documentclass[11pt]{letter}\n
+      \\usepackage[utf8]{inputenc}\n
+      \\usepackage[T1]{fontenc}\n
+      \\usepackage{color}"
+     
+     ("\\section{%s}" . "\\section*{%s}")
+     ("\\subsection{%s}" . "\\subsection*{%s}")
+     ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+     ("\\paragraph{%s}" . "\\paragraph*{%s}")
+     ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+#+END_SRC
+
+Beamer template 
+#+BEGIN_SRC emacs-lisp
+    (add-to-list 'org-structure-template-alist
+    '("beamer" "#+TITLE: \n#+AUTHOR: Anthony Kalaitzis \n#+OPTIONS: H:2 toc:t num:t \n#+LATEX_CLASS: beamer \n#+LATEX_CLASS_OPTIONS: [presentation] \n#+LATEX_header: \n#+BEAMER_header: \\usetheme{Berlin} \n#+BEAMER_header: \\usecolortheme[named=purple]{structure} \n#+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col) %8BEAMER_OPT(Opt) \n?"))
+#+END_SRC
+
+* Wolfram Alpha
+
+set wolfram alpha ID
+#+BEGIN_SRC emacs-lisp
+(require 'wolfram)
+(setq wolfram-alpha-app-id 'U2773W-V74GXV4HWX)
+#+END_SRC 

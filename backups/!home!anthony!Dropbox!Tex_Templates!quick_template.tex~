@@ -1,0 +1,21 @@
+\documentclass[13pt]{article}
+
+\usepackage[a4paper]{geometry}
+\usepackage{mypackage}
+      
+\title{}
+\author{Anthony Kalaitzis}
+\pagenumbering{gobble}
+
+\begin{document}
+\maketitle
+
+
+
+
+
+
+% \bibliographystyle{plain}
+% \bibliography{bibfilename}
+
+\end{document}

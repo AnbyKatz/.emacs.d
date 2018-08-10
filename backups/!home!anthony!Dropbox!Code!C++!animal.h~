@@ -1,0 +1,20 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+class animal
+{
+ public:
+  animal();
+
+  int age;
+  string name;
+
+  void setname(string animal_name);
+  void setage(int animal_age);
+  string getname();
+  int getage();
+
+  ~animal();
+
+};

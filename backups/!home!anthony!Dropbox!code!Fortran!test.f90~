@@ -1,0 +1,18 @@
+program test
+  use kinds
+  use fft_mod
+  implicit none
+
+  complex(dp), dimension(8) :: v,ouput
+  integer :: i
+
+  v(1:4) = 1
+  v(5:8) = 0
+
+  call fft(v)
+
+  do i=1,8
+     write(*,'("(", F20.15, ",", F20.15, "i )")') v(i)
+  end do
+  
+end program test

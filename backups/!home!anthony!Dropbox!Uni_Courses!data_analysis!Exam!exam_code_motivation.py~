@@ -1,0 +1,70 @@
+#!/usr/bin/python3.5
+
+import matplotlib.pyplot as pypl
+import numpy as np
+import math as m
+from scipy.integrate import quad
+from matplotlib import rc
+from pylab import*
+from sympy import*
+
+# Fourier Analysis of data
+# Data
+N_2001_2 = 8760
+N_2000 = 8784
+raw_data = np.array(genfromtxt("exam_data.csv",delimiter=','))
+data = np.array(raw_data)
+Moon_Period = 27.3
+Moon_freq = 1/Moon_Period
+
+titles = ["sea level","water temp",
+          "air temp","bar pressure",
+          "residuals", "adj residuals",
+          "wind direction","wind gust",
+          "wind speed"]
+
+## ---------------------------------------------------
+
+##                  Motivational Plots
+
+## ---------------------------------------------------
+
+fs = 24
+N = int(len(data))
+f = (fs*np.linspace(0,N-1,N))/N
+
+for ii in range(0,len(raw_data[0,:])):
+    pypl.plot(raw_data[:,ii],label=titles[ii])
+pypl.legend()
+pypl.show()
+
+for ii in range(0,8):
+    for jj in range(0,len(raw_data)):
+        if abs(raw_data[jj,ii]) == 9999:
+            raw_data[jj,ii] = nan
+
+    pypl.plot(raw_data[:,ii],label=titles[ii])
+pypl.legend()
+pypl.show()
+            
+    
+for ii in range(0,8):
+    input_data = data[:,ii]
+    fft_input=np.fft.fft(input_data)        
+    input_power=(np.square(np.absolute(fft_input)))/N**2
+    pypl.loglog(f,input_power,label=titles[ii])        
+
+##---------------------------------------------------------------
+
+pypl.xlabel("time")
+pypl.ylabel("Power Spectra")
+pypl.grid()
+pypl.axvline(x=fs/N,label="min freq",c='black')
+pypl.axvline(x=Moon_freq,label="Moon Freq",c='black')
+pypl.axvline(x=fs/2,label="Niquist Freq",c='black')
+pypl.legend()
+pypl.show()
+
+## -----------------------------------------------------------
+## -----------------------------------------------------------
+## -----------------------------------------------------------

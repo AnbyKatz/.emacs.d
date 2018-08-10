@@ -1,0 +1,1 @@
+data = readdlm("~/Dropbox/code/Julia/BBChaos145Hz-1.txt")

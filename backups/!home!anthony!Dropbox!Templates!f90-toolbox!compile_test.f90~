@@ -1,0 +1,20 @@
+program compile_test
+  use kinds
+  implicit none
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+end program compile_test

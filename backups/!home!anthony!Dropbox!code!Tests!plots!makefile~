@@ -1,0 +1,26 @@
+# Fortran base MakeFile
+# add links to libaries if needed
+
+F90C = ifort
+F90FLAGS = -O2
+
+%.o: %.f90
+	$(F90C) $(F90FLAGS) -c $<
+
+# Modules below
+OBJS = kinds.o\
+	UsefulFunctions.o\
+	pyplots.o
+
+
+fourier_fortran: fourier_fortran.f90 $(OBJS)
+	$(F90C) $(F90FLAGS) -o $@ $< $(OBJS) 
+
+# list dependencies
+fourier_fortran.o: kinds.o
+UsefulFunctions.o : kinds.o
+pyplots.o: kinds.o
+
+clean:
+	rm *.o *.mod
+

@@ -1,0 +1,82 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LaTeX Template: Beamer arrows
+%
+% Source: http://www.texample.net/
+% Feel free to distribute this template, but please keep the
+% referal to TeXample.net.
+% Date: Nov 2006
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{beamer} %
+
+\usepackage{mypackage}
+
+\usetheme{CambridgeUS}
+\usefonttheme{professionalfonts}
+\usetikzlibrary{arrows,shapes}
+
+\author{Anthony Kalaitzis}
+\title{Complex analysis}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Branch's}
+  \begin{center}
+    \underline{Def:} The principle value of the argument $\text{arg}(w)=$ the unique $\theta\in[-\pi,\pi]$ st $\omega=\abs{\omega}\text{cis}\theta$    
+  \end{center}
+
+  These branch's cause issues at what we call the branch cuts. For this branch, if we consider values where $z\in\{ \ x \ | \ x<0 \ ,\ x\inR \}$, we can see that we have 2 equally valued angles along the negative reals.
+  
+\end{frame}
+
+\begin{frame}
+\frametitle{Complex logarithm}
+
+\begin{center}
+    \text{\underline{Def:} The principle value of the logarithm $\log(w)$ is}    
+  \end{center}
+  \begin{equation*}
+    \log(\omega)\equiv \ln\abs{\omega}+i\text{arg}(\omega)
+  \end{equation*}
+  \begin{center}
+    where $0\leq\text{arg}(\omega)<2\pi$
+  \end{center}
+\end{frame}
+\begin{frame}
+    \frametitle{Harmonic equations}
+\end{frame}
+
+
+
+
+
+
+\end{document}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

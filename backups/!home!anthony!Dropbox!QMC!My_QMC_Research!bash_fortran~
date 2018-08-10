@@ -1,0 +1,4 @@
+#!/bin/bash
+
+make all
+./QMC_2018V1

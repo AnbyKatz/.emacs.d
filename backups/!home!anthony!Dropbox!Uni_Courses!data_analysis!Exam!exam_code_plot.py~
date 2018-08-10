@@ -1,0 +1,232 @@
+#!/usr/bin/python3.5
+
+import matplotlib.pyplot as pypl
+import numpy as np
+import math as m
+from scipy.integrate import quad
+from matplotlib import rc
+from pylab import*
+from sympy import*
+
+# Fourier Analysis of data
+# Data
+N_2000 = 8784
+raw_data = np.array(genfromtxt("exam_data.csv",delimiter=','))
+data = np.array(raw_data[N_2000+1:len(raw_data)-1,:])
+Moon_Period = 29.5
+Moon_freq = 1/Moon_Period
+
+titles = ["Sea Level","water temp",
+          "air temp","bar pressure",
+          "residuals", "adj residuals",
+          "wind direction","wind gust",
+          "wind speed"]
+            
+## ---------------------------------------------------
+
+##                  Variable Parameters
+
+## ---------------------------------------------------
+
+N_tot = 2**14
+Overlay_Original = False
+
+Multi_Peak_Display = False
+ID_window = False
+ID_avg_1 = True
+ID_avg_2 = False
+
+# Popular Input for a moving average
+# Average Power Spectra
+ID_avg_3 = True
+
+N_avg = 32
+step_size = 1
+width = 10
+
+# change below variable to 0,1,2 or 3 to change
+# region of truncation and displayed graphs
+
+setup = 0
+        
+# Enter which plots to display using below legend key
+# 0 - Sea Level
+# 1 - Water Temp
+# 2 - Air temp
+# 3 - Bar Pressure
+# 4 - Residuals
+# 5 - Adj Residuals
+# 6 - Wind Direction
+# 7 - Wind Gust
+# 8 - Wind Speed
+
+Plots = [0,4,5,8]
+
+## ---------------------------------------------------
+
+##                     Code Below
+
+## ---------------------------------------------------
+
+# Plot just the sea level
+if setup == 1:
+    N_tot = 2**14
+    Plots = [0]
+    step_size = 1
+    width = 1
+    Overlay_Original = False
+    ID_window = False
+    ID_avg_1 = False
+    ID_avg_2 = False
+    ID_avg_3 = False
+
+# Plot 2 averaging techniques for sea level
+if setup == 2:
+    N_tot = 2**14
+    Plots = [0]
+    N_avg = 32
+    step_size = 1
+    width = 1
+    Overlay_Original = False
+    ID_window = False
+    ID_avg_1 = True
+    ID_avg_2 = True
+    ID_avg_3 = False
+
+# Plot running mean technique for best bump apperance
+if setup == 3:
+    N_tot = 2**13
+    Plots = [0,4,5,8]
+    N_avg = 1
+    width = 6
+    Overlay_Original = False
+    ID_window = True
+    ID_avg_1 = False
+    ID_avg_2 = False
+    ID_avg_3 = True
+
+if Overlay_Original == True:
+    step_size = N_avg
+
+##----------------------------------------------------------    
+    
+if ID_avg_1 == True or ID_avg_2 == True:
+    N = int(N_tot/N_avg)
+    fs = 24/N_avg
+else:
+    N = int(N_tot/step_size)
+    fs = 24/step_size
+    
+f = (fs*np.linspace(0,N-1,N))/N
+
+if ID_window == True:
+    # create window functions
+    hann_1 =  np.array([(1/2)*(1-cos((2*m.pi*kk)/(N-1))) \
+             for kk in range(N)])
+if ID_avg_3 == True:
+    hann_2 = np.array([(1/2)*(1-cos((2*m.pi*kk)/(width-1))) \
+             for kk in range(width)])
+
+    
+##-------------------------------------------------------------
+            
+if Overlay_Original == True:
+    orig_input_data = data[0:N_tot:step_size,0]
+    orig_fft_input=np.fft.fft(orig_input_data)        
+    orig_input_power=(np.square(np.absolute(orig_fft_input)))
+    pypl.loglog(f,orig_input_power,label=titles[0])        
+
+#----------------------------------------------------------------        
+
+for ii in range(0,len(Plots)):
+
+    ii = Plots[ii]
+    
+    if ID_avg_1 == True:
+        fft_input = [0 for i in range(N)]
+        for jj in range(0,N_avg):
+            input_data = data[jj:N_tot:N_avg,ii]
+            if ID_window == True:
+                input_data = input_data*hann_1
+            fft_input=fft_input+np.fft.fft(input_data)
+            
+        fft_input = fft_input/N_avg
+        input_power=(np.square(np.absolute(fft_input)))
+        
+        if ID_avg_3 == True:
+            moving_avg = [0 for i in range(N-(width-1))]
+            for kk in range(0,len(moving_avg)-1):
+                moving_avg[kk] = np.sum(hann_2*input_power[kk:kk+width]\
+                    )/width
+            pypl.loglog(f[0:len(moving_avg)]\
+                        ,moving_avg,label=titles[ii])
+        else:
+            pypl.loglog(f,input_power,label=titles[ii])
+
+#----------------------------------------------------------------
+
+    if ID_avg_2 == True:
+        fft_input = [0 for i in range(N)]
+        for jj in range(0,N_avg):
+            input_data = data[jj*N:(jj+1)*N,ii]
+            if ID_window == True:
+                input_data = input_data*hann_1
+
+            fft_input=fft_input+np.fft.fft(input_data)
+
+        fft_input = fft_input/N_avg        
+        input_power=(np.square(np.absolute(fft_input)))
+
+        if ID_avg_3 == True:
+            moving_avg = [0 for i in range(N-(width-1))]
+            for kk in range(0,len(moving_avg)-1):
+                moving_avg[kk] = np.sum(hann_2*input_power[kk:kk+width]\
+                )/width
+            pypl.loglog(f[0:len(moving_avg)]\
+                        ,moving_avg,label=titles[ii])
+        else:
+            pypl.loglog(f,input_power,label=titles[ii])
+
+#----------------------------------------------------------------                    
+    if ID_avg_1 == False and ID_avg_2 == False:
+        input_data = data[0:N_tot:step_size,ii]                         
+        if ID_avg_3 == True:
+            if ID_window == True:
+                input_data = input_data*hann_1
+            fft_input=np.fft.fft(input_data)
+            input_power=(np.square(np.absolute(fft_input)))
+            moving_avg = [0 for i in range(N-(width-1))]
+            
+            for kk in range(0,len(moving_avg)-1):        
+                moving_avg[kk] = np.sum(hann_2*input_power[kk:kk+width]\
+                    )/width            
+            pypl.loglog(f[0:len(moving_avg)]\
+                        ,moving_avg,label=titles[ii])
+        else:
+            if ID_window == True:
+                input_data = input_data*hann_1
+            fft_input=np.fft.fft(input_data)
+            input_power=(np.square(np.absolute(fft_input)))
+            pypl.loglog(f,input_power,label=titles[ii])         
+
+##---------------------------------------------------------------
+
+pypl.xlabel("frequency")
+pypl.ylabel("Power Spectra")
+pypl.grid()
+pypl.legend()
+pypl.axvline(x=fs/N,c='black')
+pypl.axvline(x=Moon_freq,c='black')
+
+if Multi_Peak_Display == True:
+    pypl.axvline(x=Moon_freq*2,label="Moon Freq",c='black')
+    pypl.axvline(x=Moon_freq*3,label="Moon Freq",c='black')
+    pypl.axvline(x=Moon_freq*4,label="Moon Freq",c='black')
+    pypl.axvline(x=Moon_freq*5,label="Moon Freq",c='black')
+
+pypl.axvline(x=fs/2,c='black')
+pypl.show()
+
+## -----------------------------------------------------------
+## -----------------------------------------------------------
+## -----------------------------------------------------------

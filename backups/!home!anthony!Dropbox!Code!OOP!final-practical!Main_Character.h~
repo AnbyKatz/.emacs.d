@@ -1,0 +1,17 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Main_Character : public Character //Sub Class of Character Class
+{
+	public:  //Data accessible
+		Main_Character(); //constructor
+		
+		int id; //varibles
+
+		void setID(int ID); //Behaviour
+		int getID();
+
+		~Main_Character(); //Destructor
+};

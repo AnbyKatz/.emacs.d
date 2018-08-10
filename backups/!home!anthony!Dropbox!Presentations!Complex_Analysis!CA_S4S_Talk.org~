@@ -1,0 +1,89 @@
+# -*- mode: org; -*-
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+
+#+TITLE: Complex Analysis
+#+AUTHOR: 
+#+SUBTITLE: Anthony Kalaitzis
+#+OPTIONS: H:2 toc:t num:t
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [presentation]
+#+BEAMER_header: \usetheme{Berlin}
+#+BEAMER_header: \usecolortheme[named=purple]{structure}
+#+LATEX_header: \usefonttheme[onlymath]{serif}
+#+LATEX_header: \Berlincount
+#+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col) %8BEAMER_OPT(Opt)
+
+* Introduction
+
+** Motivation
+
+* Complex Differentiation
+
+** Balls
+
+#+BEGIN_EXPORT latex
+\begin{definition}
+  If $a\inC$ and $R\inR$ then the Ball of radius $R$ is defined as the set
+  \begin{align*}
+    B(a,R) &\equiv \{ \ z \ | \ 0\leq\abs{z-a}<R \}\\
+    \pd B(a,R) &\equiv \{ \ z \ | \ \abs{z-a}=R \} \\
+    \pd B(a,R) &\equiv B(a,R)\cup \pd B(a,r)
+  \end{align*}
+\end{definition}
+#+END_EXPORT
+
+** The Derivative
+
+#+BEGIN_EXPORT latex
+\begin{definition}
+  Take a complex valued function $f$ defined on a nhd of the point $z_0$ i.e. $B(z_0,R)$. The complex derivative defined as
+  \begin{align*}
+    f'(z_0) = \lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}
+  \end{align*}
+  $f$ is said to be holomorphic (complex differentiable) in a nhd of $z_0$ if the above limit exists.  
+\end{definition}
+#+END_EXPORT
+
+** Branch's
+** Complex Logarithm
+
+* Complex Integration
+
+** Orientation
+** Parametrization 
+** Cauchy's Integral Formula
+
+#+BEGIN_EXPORT latex
+\begin{theorem}[Cauchy's Integral Formula]
+  Suppose $f:U\subseteq \mathbb{C}\to\mathbb{C}$ is a holomorphic and $U$ an open subset. Then for the open ball $B(a,R)\subseteq U$ we have that
+  \begin{align*}
+    f(a) = \frac{1}{2\pi i}\int_{\pd B(a,R)}  \frac{f(z)}{z-a}\dd z
+  \end{align*}
+\end{theorem}
+#+END_EXPORT
+
+** Examples
+** Laurent Series
+** Residue Theorem
+
+#+BEGIN_EXPORT latex
+\begin{theorem}
+  Suppose $f:U\subseteq \mathbb{C}\to \mathbb{C}$ is holomorphic on $U\setminus\{a_1,...,a_n\}$. $U$ an open set then we have that
+  \begin{align*}
+    \int_U f(z)\dd z = 2\pi i \sum_{k=1}^n \text{Res}\qty(f,a_k)
+  \end{align*}
+\end{theorem}
+#+END_EXPORT
+
+** Example
+
+* Cheat Sheet
+
+** Other Useful Theorems
+** List of Complex Integrals

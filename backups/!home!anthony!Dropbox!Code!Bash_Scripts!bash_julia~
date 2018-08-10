@@ -1,0 +1,4 @@
+#!/bin/bash
+
+./julia_filename.jl
+

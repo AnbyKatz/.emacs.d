@@ -1,0 +1,116 @@
+Module pyplots
+  use kinds
+  implicit none
+
+contains
+
+  ! 2-D line plot
+  ! ------------------------------------------------------
+  ! ------------------------------------------------------ 
+  subroutine plotxy(x,y,z,w,x_title,y_title)
+    real(dp),dimension(:),intent(in) :: x,y
+    real(dp),dimension(:),intent(in),optional :: z,w
+    character(len=*),intent(in),optional :: &
+         & x_title,y_title
+    
+    integer :: i,N,ID
+    
+    ID=1
+    N=size(x)
+
+    open(100,file="ID.dat",action="write", &
+         & status="replace",form="formatted")
+    open(102,file="output.dat",action="write", &
+         & status="replace",form="formatted")
+
+    if(present(x_title)) then
+       open(101,file="details.dat",action="write", &
+            & status="replace",form="formatted")
+       write(101,'(a10,a10)') x_title,y_title
+       close(101)
+    end if
+    
+    if(present(z)) then   
+       ID = -1
+       do i=1,N
+          write(102,'(f10.5,f10.5,f10.5,f10.5)') x(i) ,y(i) ,z(i), w(i)      
+       end do
+    else
+       do i=1,N
+          write(102,'(f10.5,f10.5)') x(i) ,y(i)
+       end do
+    end if
+
+    write(100,'(i10)') ID
+    
+    close(100)
+    close(102)
+    
+    call system('ipython pyplots.py')
+    
+  end subroutine plotxy
+
+  ! 2-D log plot
+  ! ------------------------------------------------------
+  ! ------------------------------------------------------ 
+  subroutine logxy(x,y)
+    real(dp),dimension(:),intent(in) :: x,y
+    integer :: i,N,ID
+    
+    ID=2
+    N=size(x)
+
+    open(100,file="ID.dat",action="write", &
+         & status="replace",form="formatted")
+    open(101,file="details.dat",action="write", &
+         & status="replace",form="formatted")
+    open(102,file="output.dat",action="write", &
+         & status="replace",form="formatted")
+    write(100,'(i10)') ID
+    
+    do i=1,N
+       write(102,'(f10.5,f10.5)') x(i) ,y(i)
+    end do
+
+    close(100)
+    close(101)
+    close(102)
+    
+    call system('ipython pyplots.py')
+    
+  end subroutine logxy
+
+  ! 3-D line plot
+  ! ------------------------------------------------------
+  ! ------------------------------------------------------
+  subroutine plotxyz(x,y,z,title)
+    real(dp),dimension(:),intent(in) :: x,y,z
+    character(len=*), optional      :: title
+    
+    integer :: i,N,ID
+    
+    ID=3
+    N=size(x)
+
+    open(100,file="ID.dat",action="write", &
+         & status="replace",form="formatted")
+    open(101,file="details.dat",action="write", &
+         & status="replace",form="formatted")
+    open(102,file="output.dat",action="write", &
+         & status="replace",form="formatted")
+    write(100,'(i10)') ID
+    write(101,'(a)') title
+
+    do i=1,N
+       write(102,'(f10.5,f10.5,f10.5)') x(i) ,y(i) ,z(i)
+    end do
+
+    close(100)
+    close(101)
+    close(102)
+    
+    call system('ipython pyplots.py')
+    
+  end subroutine plotxyz
+
+end Module pyplots

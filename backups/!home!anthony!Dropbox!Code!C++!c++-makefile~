@@ -1,0 +1,21 @@
+# C++ base MakeFile
+# add links to libaries if needed
+
+CC = icc
+MAIN = main.cpp
+EXNAME = test
+
+HEADERS = 
+
+CLASSES = 
+
+all: $(EXNAME)
+
+$(EXNAME): $(MAIN) $(HEADERS) $(CLASSES)
+	$(CC) -o $@ $<
+clean:
+	rm -f $(EXNAME)
+
+
+
+

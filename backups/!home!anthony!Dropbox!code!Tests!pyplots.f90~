@@ -1,0 +1,84 @@
+Module pyplots
+  use kinds
+  implicit none
+
+contains
+
+  ! 2-D line plot
+  ! ------------------------------------------------------
+  ! ------------------------------------------------------ 
+  subroutine plotxy(x,y)
+    real(dp),dimension(:),intent(in) :: x,y
+    integer :: i,ID
+    
+    ID=1
+    
+    open(100,file="ID.dat",action="write", &
+         & status="replace",form="formatted")
+    open(101,file="output.dat",action="write", &
+         & status="replace",form="formatted")
+    
+    write(100,'(i10,i10)') ID
+    write(101,'(f10.5)') x(:)
+    write(101,'(f10.5)') y(:)
+    
+    close(100)
+    close(101)
+    
+    call system('ipython pyplots.py')
+    
+  end subroutine plotxy
+
+  ! 2-D log plot
+  ! ------------------------------------------------------
+  ! ------------------------------------------------------ 
+  subroutine logxy(x,y)
+    real(dp),dimension(:),intent(in) :: x,y
+    integer :: i,ID
+    
+    ID=2
+
+    open(100,file="ID.dat",action="write", &
+         & status="replace",form="formatted")    
+    open(101,file="output.dat",action="write", &
+         & status="replace",form="formatted")
+    write(100,'(i10)') ID
+    
+    write(101,'(f10.5,f10.5)') x(:)
+    write(101,'(f10.5,f10.5)') y(:)
+
+    close(100)
+    close(101)
+    
+    call system('ipython pyplots.py')
+    
+  end subroutine logxy
+
+  ! 3-D line plot
+  ! ------------------------------------------------------
+  ! ------------------------------------------------------
+  subroutine plotxyz(x,y,z)
+    real(dp),dimension(:),intent(in) :: x,y,z
+    
+    integer :: i,ID
+    
+    ID=3
+
+    open(100,file="ID.dat",action="write", &
+         & status="replace",form="formatted")
+    open(101,file="output.dat",action="write", &
+         & status="replace",form="formatted")
+
+    write(100,'(i10)') ID
+    write(101,'(f10.5)') x(:)
+    write(101,'(f10.5)') y(:)
+    write(101,'(f10.5)') z(:)
+
+    close(100)
+    close(101)
+    
+    call system('ipython pyplots.py')
+    
+  end subroutine plotxyz
+
+end Module pyplots

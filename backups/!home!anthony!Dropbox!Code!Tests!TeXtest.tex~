@@ -1,0 +1,72 @@
+% Created 2018-08-06 Mon 09:17
+% Intended LaTeX compiler: pdflatex
+\documentclass[13pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{mypackage}
+\usepackage[a4paper]{geometry}
+\pagenumbering{gobble}
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand\blankpage{%\null\thispagestyle{empty}%\newpage}
+\newcommand{\bsym}[1]{\boldsymbol{#1}}
+\author{Anthony Kalaitzis}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={Anthony Kalaitzis},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.0.50 (Org mode 9.1.13)}, 
+ pdflang={English}}
+\begin{document}
+
+\vspace*{-2cm}
+%\enlargethispage{2cm}
+
+\begin{center}
+\makeatletter
+% Upper part of the page
+%\vspace*{-1cm}
+\includegraphics[width=0.45\textwidth]{vertLogo.eps}\\[1.8cm]   
+\textsc{\LARGE Faculty of Sciences}\\[0.4cm]
+\textsc{\Large School of Physical Sciences}\\[0.7cm]
+% Title
+\HRule 
+\vspace{0.6cm}
+\huge{Topic Notes}
+\HRule 
+\vspace{1.4cm}
+\Large Anthony Kalaitzis \\[1.4cm]
+\Large
+\emph{Supervisors:} \\
+Prof.~Anthony \textsc{Thomas} \\
+Ass Prof.~Ross \textsc{Young}
+
+\vfill
+
+% Bottom of the page
+{\large October 2018}
+\end{center}
+
+\section{First Section}
+\label{sec:orgfeb32ce}
+
+\subsection{sub section 1}
+\label{sec:org288d576}
+
+\subsection{sub section 2}
+\label{sec:org1462e68}
+\end{document}

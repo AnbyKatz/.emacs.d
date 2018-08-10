@@ -169,7 +169,7 @@ File navigation for major files
 (global-set-key (kbd "H-r")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/Thesis/MPhil_Research.tex")))
 (global-set-key (kbd "H-j")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/journal.org")))
 (global-set-key (kbd "H-a")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/agenda.org")))
-(global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/My_QMC_Research/QMC_2018V2.f90")))
+(global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/My_QMC_Research/QMC_2018V1.f90")))
 (global-set-key (kbd "H-t")  (lambda () (interactive) (find-file  "~/texmf/tex/latex/package_repository/mypackage.sty")))
 #+END_SRC
 
@@ -375,6 +375,14 @@ Creates a heading in FORTRAN major mode
        (newline))
   )))
 (global-set-key (kbd "H-Z") 'my/f90-comment-header-block)
+#+END_SRC
+
+Recompile FORTRAN numerical libraries 
+#+BEGIN_SRC emacs-lisp
+  (defun numFort-recompile ()
+    "Recompile personal FORTRAN numerical libraries"
+    (interactive)
+    (shell-command (concat "(cd /home/anthony/Dropbox/Code/Fortran/f90-toolbox/; ./recompile.sh") ))
 #+END_SRC
 
 ** Python

@@ -1,0 +1,345 @@
+% author lists, or if there are many overlapping affiliations.
+% For Phys. Rev. appearance, change preprint to twocolumn.
+% Choose pra, prb, prc, prd, pre, prl, prstab, prstper, or rmp for journal
+%  Add 'draft' option to mark overfull boxes with black boxes
+%  Add 'showpacs' option to make PACS codes appear
+%  Add 'showkeys' option to make keywords appear
+
+\documentclass[aps,prl,twocolumn]{revtex4-1}
+\usepackage{mypackage}
+
+
+\begin{document}
+
+% Use the \preprint command to place your local institutional report
+% number in the upper righthand corner of the title page in preprint mode.
+% Multiple \preprint commands are allowed.
+% Use the 'preprintnumbers' class option to override journal defaults
+% to display numbers if necessary
+% \preprint{}
+
+\title{Particle Physics Assignment}
+
+% repeat the \author .. \affiliation  etc. as needed
+% \email, \thanks, \homepage, \altaffiliation all apply to the current
+% author. Explanatory text should go in the []'s, actual e-mail
+% address or url should go in the {}'s for \email and \homepage.
+% Please use the appropriate macro foreach each type of information
+
+% \affiliation command applies to all authors since the last
+% \affiliation command. The \affiliation command should follow the
+% other information
+% \affiliation can be followed by \email, \homepage, \thanks as well.
+
+\author{Anthony Kalaitzis}
+
+%\email[]{Your e-mail address}
+%\homepage[]{Your web page}
+%\thanks{}
+%\altaffiliation{}
+\affiliation{}
+
+%Collaboration name if desired (requires use of superscriptaddress
+%option in \documentclass). \noaffiliation is required (may also be
+%used with the \author command).
+%\collaboration can be followed by \email, \homepage, \thanks as well.
+%\collaboration{}
+%\noaffiliation
+
+\date{\today}
+\maketitle
+
+\section{Question 1}
+see crudely stapled paper to the back of this assignment.
+
+\section{Question 2.a}
+The quark masses for $u,d,s$ are approximately the same in the limit compared to the baryons and mesons they compose ($m_u\approx m_d$ however $m_s$ has a greater difference between the two).
+
+So we can consider them as a set of three particles only distinguishable by their label $u,d,s$. The strong force gluons don't see electric charge so even though the quarks have different charges, it remains a triplet of similar particles (The EM corrections are $\sim 1\%$ so we can neglect them).
+
+This means there exists a symmetry between states composed with these three quarks which we can represent via the unitary transformation
+\begin{align*}
+  \m{u\\d\\s}\to U\m{u\\d\\s}
+\end{align*}
+
+i.e. We can mix states composed of $u,d$ and $s$ quarks and the resulting possible combinations are different kinds of the same particle up to the amount of $s$ quarks as the mass of $s$ is quite different. An example would be the meson octet which mixes the states $\ket{u\bar{u}},\ket{d\bar{d}}$ and $\ket{s\bar{s}}$.
+
+\section{Question 2.b.i}
+When we look at the $\Delta^{++}$ baryon for instance which has angular momentum $J=+\frac{3}{2}$ and in the ground state (quantum number $l=0$). $l=0\implies$ symmetric spatial wave function. The quark content to make this baryon must be $(uuu)$ to make the total charge so it's fully flavour symmetric (composed of all the same quarks).
+
+However $u$ quarks are spin-$\frac{1}{2}$ fermions. By the Pauli exclusion principle we cannot have 2 fermions together with the same spin. We only have spin $\pm\frac{1}{2}$ for possible spins but we have 3 particles so 2 particles must have the same spin. So it should be impossible for a $(uuu)$ particle to exist but it does.
+
+So we invent a new set of quantum numbers and call them colour. This gives us what is called $SU(3)$ colour symmetry in which we assign to every quark a colour or anti-colour (red, green, blue). If the total colour sums to white then the bound quark state is allowed.
+
+This allows for the existence of the $\Delta^{++}$ baryon as it is colour neutral and all the quantum numbers of the particles aren't the same anymore.
+
+\section{Question 2.b.ii}
+
+The asymptotic freedom of the strong force ($SU(3)$ colour interactions) refers to the fact that the strong force gets asymptotically weaker at shorter distances/higher momentum transfers ($Q=-q$ where $q$ is the momentum transfer). When $Q$ is large, the coupling strength of the strong force is low which allows for us to only take lower order terms in a perturbative expansion.
+
+The colour interactions become negligible and the electromagnetic force dominates. If the strong force is approximated as an exchange of pions, at high energies/short distances we can consider these exchanges of pions to be negligible.
+
+\section{Question 2.b.iii}
+
+A current quark refers to just the bare quark propagator through a true vacuum. However we know this is unrealistic so we refer to the constituent quark which is the current quark propagator dressed with gluon couplings and quark-antiquark loops interacting with the propagator. These gluons are self interacting and cause constant field fluctuations.
+
+These constant gluon interactions or gluon dressing contribute to the effective mass. So in a sense this dressing dynamically creates mass which increases the mass of the bare quark propagator.
+
+The current quark has only a small amount of mass compared to the constituent quark for the $u,d,s$ quarks so most the mass for these quarks comes from dynamically mass generation from gluon interactions.
+
+The key reason why this occurs is that gluons carry colour themselves and we know that they interact with any coloured object. Our $SU(3)$ colour symmetry has assigned a colour to all quarks and in doing so has allowed them to interact with gluons. This allows for the gluon dressing of a quark propagator to occur and the end result is constant gluon self interacting and couplings to the coloured object i.e. the quark.
+
+It is these couplings that dynamically create mass. Your mass does not come from the Higgs as two men named Derek once said.
+
+\section{Question 3.a}
+see crudely stapled paper to the back of this assignment... again
+
+\section{Question 3.b}
+
+We have mesons
+\begin{align*}
+  K^0=(\bar{s}d) \qquad \bar{K}^0=\qty(s\bar{d})
+\end{align*}
+Charge conjugation sends quarks to their anti-quarks so hence
+\begin{align*}
+  C\ket{K^0}=C\ket{\bar{s}d}=\ket{s\bar{d}}=\ket{\bar{K}^0}
+\end{align*}
+and similarly
+\begin{align*}
+  C\ket{\bar{K}^0}=\ket{K^0}
+\end{align*}
+The parity operator assigns a value of $+1$ for every particle and $-1$ for every anti-particle (this is done multiplicativly. Hence we have that
+\begin{align*}
+  P\ket{K^0}=P\ket{\bar{s}d}=(-1)(+1)\ket{\bar{s}d}=-\ket{K^0}
+\end{align*}
+similarly we have that
+\begin{align*}
+  P\ket{\bar{K}^0}=-\ket{\bar{K}^0}
+\end{align*}
+
+\section{Question 3.c}
+
+Using the knowledge of the eigen-values from the previous question we can construct eigen states of $\ket{K^0}$ and $\ket{\bar{K}^0}$ which are just linear combinations of each other with an overall normalisation.
+
+\begin{align*}
+  \ket{K_1}&=\frac{1}{\sqrt{2}}\qty(\ket{K^0}-\ket{\bar{K}^0})\\
+  \ket{K_2}&=\frac{1}{\sqrt{2}}\qty(\ket{K^0}+\ket{\bar{K}^0})
+\end{align*}
+
+Let's check if their eigen states of the $CP$ operator with some eigenvalues.
+
+\begin{align*}
+  CP\ket{K_1}&=\frac{1}{\sqrt{2}}\qty(CP\ket{K^0}-CP\ket{\bar{K}^0})\\
+             &=\frac{1}{\sqrt{2}}\qty(-\ket{\bar{K}^0}+\ket{K^0})\\
+             &=(+1)\ket{K_1}
+\end{align*}
+
+and
+
+\begin{align*}
+  CP\ket{K_2}&=\frac{1}{\sqrt{2}}\qty(CP\ket{K^0}+CP\ket{\bar{K}^0})\\
+             &=\frac{1}{\sqrt{2}}\qty(-\ket{\bar{K}^0}-\ket{K^0})\\
+             &=(-1)\ket{K_2}  
+\end{align*}
+
+Hence these are both eigen states of the $CP$ operator with eigen-value $\pm 1$.
+
+\section{Question 3.d}
+
+\begin{align*}
+  \pi^0=\frac{1}{\sqrt{2}}\qty(u\bar{u}-d\bar{d})
+\end{align*}
+we have that
+\begin{align*}
+  CP\ket{\pi^0}&=\frac{1}{\sqrt{2}}\qty(CP\ket{u\bar{u}}-CP\ket{d\bar{d}})\\
+               &=\frac{1}{\sqrt{2}}\qty(-C\ket{u\bar{u}}+C\ket{d\bar{d}})\\
+               &=\frac{1}{\sqrt{2}}\qty(-\ket{u\bar{u}}+\ket{d\bar{d}})\\
+               &=-\ket{\pi^0}
+\end{align*}
+Using that $\ket{\pi^0}\otimes\ket{\pi^0}=\ket{\pi^0 \pi^0}$ as they are $\in L^2(\mathbb{C},m)$ with the Lebesgue measure $m$ (elements of an inner product space so the tensor product is well defined).
+
+The parity operator will take $\vb{r}\to-\vb{r}$ for the spatial components. This will also give us the total angular momentum factor  $P\ket{l}\sim (-1)^l\ket{l}$ where $l$ is the angular momentum between the particles (assuming the particles are distinguishable). This comes from the spatial wave function.
+
+If the particles aren't distinguishable then flipping the spatial vector $\vb{r}$ between them doesn't give us this factor as the particles essentially look like they're still in the same positions.
+
+the $C$ operator will also have a factor of $(-1)^l$ for particles that are not their own anti-particle and not for ones that are via the same argument as above. When we swap particles for their anti-particle it reverses the direction but only if we can tell the difference between the particle and anti-particle. 
+
+\begin{align*}
+  \implies \ CP\ket{\pi^0\pi^0 l}&=(-1)(-1)\ket{\pi^0\pi^0 l}\\
+                                 &=\ket{\pi^0\pi^0 l}
+\end{align*}
+so $\ket{\pi^0\pi^0 l}$ is an eigen-state of the $CP$ operator with eigenvalue $+1$.
+
+Using the same process for the other state we get that
+\begin{align*}
+  CP\ket{\pi^+}&=CP\ket{u\bar{d}}\\
+               &=-C\ket{u\bar{d}}\\
+               &=-\ket{\bar{u}d}\\
+               &=-\ket{\pi^{-}}\\
+  CP\ket{\pi^-}&=CP\ket{\bar{u}d}\\
+               &=-C\ket{\bar{u}d}\\
+               &=-\ket{u\bar{d}}\\
+               &=-\ket{\pi^+}
+\end{align*}
+here since the particles are not their own anti-particle and are distinguishable we get factors $(-1)^l$ for both $C$ and $P$ operators hence
+\begin{align*}
+  CP\ket{\pi^+\pi^-l}&=(-1)(-1)(-1)^l(-1)^l\ket{\pi^-\pi^+l}\\
+                     &=(-1)^{2l}\ket{\pi^+\pi^-l}\\
+                     &= \ket{\pi^+\pi^-l}
+\end{align*}
+as this is the same state of the two pion's together with angular momentum between them of $l$ and $l\in\mathbb{Z}$. So the state $\ket{\pi^+\pi^-l}$ is an eigen-state of the $CP$ operator with eigenvalue $+1$ as well.
+
+\section{Question 3.e}
+
+Using our previous knowledge of the $CP$ eigen-values we get that (Where to make it easier, we can consider these states constructed in the following way)
+\begin{align*}
+  \ket{\pi\pi\pi l_1l_2}=\ket{\pi\pi l_1}\otimes\ket{\pi\pi l_2}
+\end{align*}
+hence
+\begin{align*}
+  CP\ket{\pi^0\pi^0\pi^0l_1l_2}&=(-1)(-1)(-1)\\
+                               &\phantom{=}\times(-1)^{l_2}\ket{\pi^0\pi^0\pi^0l_1l_2}\\
+                               &=(-1)^{l_2+1}\ket{\pi^0\pi^0\pi^0l_1l_2}
+\end{align*}
+so $\ket{\pi^0\pi^0\pi^0l_1l_2}$ is an eigen-state of $CP$ with eigen-value $(-1)^{l_2+1}$.
+
+\begin{align*}
+  CP\ket{\pi^+\pi^-\pi^0l_1l_2}&=(-1)(-1)(-1)\\
+  &\phantom{=}\times(-1)^{l_1}(-1)^{l_2}(-1)^{l_1}\ket{\pi^-\pi^+\pi^0l_1l_2}\\
+                               &=(-1)^{2l_1+l_2+1}\ket{\pi^+\pi^-\pi^0l_1l_2}\\
+                               &=(-1)^{l_2+1}\ket{\pi^+\pi^-\pi^0l_1l_2}
+\end{align*}
+Where a second factor of $(-1)^{l_2}$ does not come in as this is the angular momentum between $(\pi^+\pi^-)$ and $(\pi^0)$. So the $C$ operator on this combination does not pick up this factor. $\ket{\pi^+\pi^-\pi^0l_1l_2}$ is an eigen-state of the $CP$ operator with eigen-value $(-1)^{l_2+1}$.
+
+If the original particle had spin-0 then by conservation of angular momentum, the total angular momentum of the final 3 particles must be 0 as well. Hence we have that
+\begin{align*}
+  l_1+l_2=J=0
+\end{align*}
+using the quantum number relation that if $J=0\implies j=0$ and that
+\begin{align*}
+  \abs{l_1-l_2}\leq j\leq l_1+l_2
+\end{align*}
+
+\section{Question 3.f}
+
+if we let $l_1=l_2=0$ then both $CP$ eigen-states have eigen-value
+
+\begin{align*}
+  \text{e-value for both} = (-1)^{l_1+l_2+1}=(-1)
+\end{align*}
+
+So both states have $CP$ eigen-value $-1$.
+
+\section{Question 3.g}
+
+The first eigen-state is composed of only $\pi^0$'s which decay via the electromagnetic force through $\pi^0\to\gamma+\gamma$. It may not decay into a lepton and lepton neutrino pair as this would violate charge conservation.
+
+The second state also has $\pi^\pm$ which may decay via the weak force through $\pi^+\to\mu^++\nu_\mu$ and $\pi^-\to\mu^-+\bar{\nu}_\mu$. The coupling strength of the weak interaction is much smaller then the coupling strength of the electromagnetic force.
+
+Hence the first eigen-state which decays via the electromagnetic force has a much shorter life-time then the second eigenstate.
+
+\section{Question 3.h}
+
+Suppose we had two states
+\begin{align*}
+  \ket{K_1}=\ket{\pi\pi} \qquad \ket{K_2}=\ket{\pi\pi\pi}
+\end{align*}
+where in the first state we have $\pi^0\pi^0$ or $\pi^+\pi^-$ as our particles. Both compositions will produce a state with $CP$ eigen-value +1 which we have seen from part one.
+
+The second state may have $\pi^0\pi^0\pi^0$ or $\pi^0\pi^-\pi^+$ as our particles. Both compositions will produce a state with $CP$ eigen-value -1 which we have seen from part one.
+
+With these $CP$ eigen-states, we may now construct $K_L$ as a linear combination of these $CP$ eigen-states so it too will be a $CP$ eigen-state.
+
+\begin{align*}
+  \ket{K_L}=\frac{1}{\sqrt{1+\abs{\epsilon}^2}}\qty(\ket{K_2}+\epsilon\ket{K_1})
+\end{align*}
+
+Due to the difference in the mean life times of the eigen-states, a long lived $K_L$ still contains a small amount of the $K_1$ eigen-state. If $CP$ was conserved, we would expect that this eigen-state would in the beginning have a $CP$ eigen-value of (suppose $\epsilon=1$ initially)
+
+\begin{align*}
+  CP\ket{K_L}\sim (+1-1)=0
+\end{align*}
+
+After a long experiment time you would expect the eigen-state $\ket{K_L}$ to only be composed of the $K_2$ so it should have a $CP$ eigen-value of -1. However we measure that the beam still has a small amount of the $K_1$ eigen-state, hence $CP$ is violated.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% only one appendix.
+%\appendix
+%\section{}
+
+%\begin{acknowledgments}
+% put your acknowledgments here.
+%\end{acknowledgments}
+
+% Create the reference section using BibTeX:
+\bibliography{basename of .bib file}
+
+\end{document}
+
+% \bibliography{basename of .bib file}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

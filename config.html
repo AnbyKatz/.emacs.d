@@ -1,0 +1,1343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-08-06 Mon 14:14 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Emacs Config file</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Anthony Kalaitzis" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Emacs Config file</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org3a480b8">1. Emacs Utility</a>
+<ul>
+<li><a href="#org2536aed">1.1. Shell</a></li>
+<li><a href="#orgffe2ce6">1.2. Language</a></li>
+<li><a href="#org8c66791">1.3. Extra</a></li>
+</ul>
+</li>
+<li><a href="#orge51be0c">2. Quality of life changes</a>
+<ul>
+<li><a href="#orgc3aa5bd">2.1. Accessibility</a></li>
+<li><a href="#org506215a">2.2. Start up</a></li>
+<li><a href="#orgd9eb280">2.3. Display and Utility</a></li>
+</ul>
+</li>
+<li><a href="#org50d3b40">3. Key Re-bindings</a>
+<ul>
+<li><a href="#org1213dc6">3.1. File Navigation</a></li>
+<li><a href="#org0ca8c92">3.2. Movement Macros</a></li>
+<li><a href="#org8cd927b">3.3. Personal Macros</a></li>
+<li><a href="#org7df62cc">3.4. Global coding macros</a></li>
+</ul>
+</li>
+<li><a href="#orgce8b067">4. Helm</a></li>
+<li><a href="#orgc6816dd">5. Colour Theme</a></li>
+<li><a href="#orgf51857d">6. AucTex</a>
+<ul>
+<li><a href="#orgfd437dd">6.1. FlySpell</a></li>
+<li><a href="#org868fd95">6.2. PDF Tools</a></li>
+<li><a href="#org04e2814">6.3. Utility</a></li>
+<li><a href="#org33727b6">6.4. LaTeX editing major mode</a></li>
+</ul>
+</li>
+<li><a href="#org20216c1">7. Coding</a>
+<ul>
+<li><a href="#orga58d3b2">7.1. FORTRAN</a></li>
+<li><a href="#orgbc61bae">7.2. Python</a></li>
+<li><a href="#orgf3a03fc">7.3. C++</a></li>
+<li><a href="#orgacaf4e8">7.4. Julia</a>
+<ul>
+<li><a href="#org8e4b799">7.4.1. Environment Macros</a></li>
+<li><a href="#org1f20df1">7.4.2. Shell Configurations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org094fffa">8. Org</a>
+<ul>
+<li><a href="#org1ecd6d6">8.1. Editing Code</a></li>
+<li><a href="#org777e797">8.2. Capture Mode</a></li>
+<li><a href="#org11a47e1">8.3. Macros</a></li>
+<li><a href="#org80c7b0b">8.4. Utility</a></li>
+<li><a href="#org2fe7a6c">8.5. Visual Settings</a></li>
+<li><a href="#orge0c0ab5">8.6. Agenda alternations</a></li>
+<li><a href="#org2f1e7bc">8.7. Beamer</a></li>
+<li><a href="#org735aa9e">8.8. LaTeX</a></li>
+</ul>
+</li>
+<li><a href="#org41e05c4">9. Wolfram Alpha</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3a480b8" class="outline-2">
+<h2 id="org3a480b8"><span class="section-number-2">1</span> Emacs Utility</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org2536aed" class="outline-3">
+<h3 id="org2536aed"><span class="section-number-3">1.1</span> Shell</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Recognize exported paths in .bashrc
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">set-exec-path-from-shell-PATH</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">let</span> <span style="color: #A6E22E;">(</span><span style="color: #E6DB74;">(</span>path-from-shell <span style="color: #FD971F;">(</span>replace-regexp-in-string
+                          <span style="color: #ff00ff;">"[ \t\n]*$"</span>
+                          <span style="color: #ff00ff;">""</span>
+                          <span style="color: #F92672;">(</span>shell-command-to-string <span style="color: #ff00ff;">"$SHELL --login -i -c 'echo $PATH'"</span><span style="color: #F92672;">)</span><span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span>
+    <span style="color: #A6E22E;">(</span>setenv <span style="color: #ff00ff;">"PATH"</span> path-from-shell<span style="color: #A6E22E;">)</span>
+    <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> eshell-path-env path-from-shell<span style="color: #A6E22E;">)</span> <span style="color: #75715E;">; </span><span style="color: #999999; font-style: italic;">for eshell users</span>
+    <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> exec-path <span style="color: #E6DB74;">(</span>split-string path-from-shell path-separator<span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">when</span> window-system <span style="color: #66D9EF;">(</span>set-exec-path-from-shell-PATH<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-S"</span><span style="color: #66D9EF;">)</span> 'window-split-toggle<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Add shell variables to emacs
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">when</span> <span style="color: #66D9EF;">(</span>memq window-system '<span style="color: #A6E22E;">(</span>mac ns x<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span>
+<span style="color: #66D9EF;">(</span>exec-path-from-shell-initialize<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgffe2ce6" class="outline-3">
+<h3 id="orgffe2ce6"><span class="section-number-3">1.2</span> Language</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Enable quick changed between English and 日本語
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>set-language-environment <span style="color: #ff00ff;">"Japanese"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8c66791" class="outline-3">
+<h3 id="org8c66791"><span class="section-number-3">1.3</span> Extra</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Add custom abbrev definitions
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> abbrev-file-name <span style="color: #ff00ff;">"~/.abbrev_defs"</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">if</span> <span style="color: #66D9EF;">(</span>file-exists-p abbrev-file-name<span style="color: #66D9EF;">)</span>
+    <span style="color: #66D9EF;">(</span>quietly-read-abbrev-file<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Add some custom load paths
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-to-list 'load-path <span style="color: #ff00ff;">"~/.emacs.d/elpa/"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Toggle between splits
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">window-split-toggle</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+<span style="color: #E6DB74;">"Toggle between horizontal and vertical split with two windows."</span>
+<span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
+<span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">if</span> <span style="color: #A6E22E;">(</span>&gt; <span style="color: #E6DB74;">(</span>length <span style="color: #FD971F;">(</span>window-list<span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span> 2<span style="color: #A6E22E;">)</span>
+    <span style="color: #A6E22E;">(</span><span style="color: #ffc0cb; font-weight: bold; font-style: italic; text-decoration: underline;">error</span> <span style="color: #ff00ff;">"Can't toggle with more than 2 windows!"</span><span style="color: #A6E22E;">)</span>
+  <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">let</span> <span style="color: #E6DB74;">(</span><span style="color: #FD971F;">(</span>func <span style="color: #F92672;">(</span><span style="color: #00ffff; font-weight: bold;">if</span> <span style="color: #AE81FF;">(</span>window-full-height-p<span style="color: #AE81FF;">)</span>
+                  #'split-window-vertically
+                #'split-window-horizontally<span style="color: #F92672;">)</span><span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span>
+    <span style="color: #E6DB74;">(</span>delete-other-windows<span style="color: #E6DB74;">)</span>
+    <span style="color: #E6DB74;">(</span>funcall func<span style="color: #E6DB74;">)</span>
+    <span style="color: #E6DB74;">(</span><span style="color: #00ffff; font-weight: bold;">save-selected-window</span>
+      <span style="color: #FD971F;">(</span>other-window 1<span style="color: #FD971F;">)</span>
+      <span style="color: #FD971F;">(</span>switch-to-buffer <span style="color: #F92672;">(</span>other-buffer<span style="color: #F92672;">)</span><span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Auto refresh buffers without asking
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>global-auto-revert-mode t<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge51be0c" class="outline-2">
+<h2 id="orge51be0c"><span class="section-number-2">2</span> Quality of life changes</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgc3aa5bd" class="outline-3">
+<h3 id="orgc3aa5bd"><span class="section-number-3">2.1</span> Accessibility</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Change text size in Emacs
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>set-face-attribute 'default nil <span style="color: #87ceeb;">:height</span> 150<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+camelCase recognition
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>global-subword-mode<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Turn on rainbow deliminators 
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-hook 'prog-mode-hook #'rainbow-delimiters-mode<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-hook 'foo-mode-hook #'rainbow-delimiters-mode<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org506215a" class="outline-3">
+<h3 id="org506215a"><span class="section-number-3">2.2</span> Start up</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Auto full screen Emacs GUI
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">when</span> <span style="color: #66D9EF;">(</span>display-graphic-p<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>add-to-list 'default-frame-alist '<span style="color: #A6E22E;">(</span>fullscreen . maximized<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Don&rsquo;t show scroll bar
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>tool-bar-mode 0<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>menu-bar-mode 0<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">when</span> window-system
+  <span style="color: #66D9EF;">(</span>scroll-bar-mode -1<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+turn off Emacs&rsquo;s annoying bell
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> ring-bell-function 'ignore<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Fix Scrolling behaviour
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> scroll-conservatively 100<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> mouse-wheel-scroll-amount '<span style="color: #66D9EF;">(</span>1 <span style="color: #A6E22E;">(</span><span style="color: #E6DB74;">(</span>shift<span style="color: #E6DB74;">)</span> . 1<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span> 
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> mouse-wheel-progressive-speed nil<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> mouse-wheel-follow-mouse 't<span style="color: #AE81FF;">)</span> 
+</pre>
+</div>
+
+<p>
+Remove start up message
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> inhibit-startup-message t<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> inhibit-startup-echo-area-message t<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Use better defaults for Emacs
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">better-defaults</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd9eb280" class="outline-3">
+<h3 id="orgd9eb280"><span class="section-number-3">2.3</span> Display and Utility</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Display time in mode line
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> display-time-string-forms '<span style="color: #66D9EF;">(</span><span style="color: #A6E22E;">(</span>propertize <span style="color: #E6DB74;">(</span>format-time-string <span style="color: #ff00ff;">" %b %d, %l:%M%P"</span> now<span style="color: #E6DB74;">)</span> 'face'bold<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> display-time-and-date t<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>display-time-mode 1<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Abbreviate all &rsquo;Yes/No&rsquo; prompts to &rsquo;y/n&rsquo;
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>fset 'yes-or-no-p 'y-or-n-p<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Display line numbers in programming modes
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-hook 'prog-mode-hook 'display-line-numbers-mode<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org50d3b40" class="outline-2">
+<h2 id="org50d3b40"><span class="section-number-2">3</span> Key Re-bindings</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org1213dc6" class="outline-3">
+<h3 id="org1213dc6"><span class="section-number-3">3.1</span> File Navigation</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Enable quick access to config file
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my/visit-emacs-config</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>find-file <span style="color: #ff00ff;">"~/.emacs.d/config.org"</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-e"</span><span style="color: #66D9EF;">)</span> 'my/visit-emacs-config<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+File navigation for major files
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-r"</span><span style="color: #66D9EF;">)</span>  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #A6E22E;">(</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span>find-file  <span style="color: #ff00ff;">"~/Dropbox/QMC/Thesis/MPhil_Research.tex"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-j"</span><span style="color: #66D9EF;">)</span>  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #A6E22E;">(</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span>find-file  <span style="color: #ff00ff;">"~/Dropbox/Journal/journal.org"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-a"</span><span style="color: #66D9EF;">)</span>  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #A6E22E;">(</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span>find-file  <span style="color: #ff00ff;">"~/Dropbox/Journal/agenda.org"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-w"</span><span style="color: #66D9EF;">)</span>  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #A6E22E;">(</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span>find-file  <span style="color: #ff00ff;">"~/Dropbox/QMC/My_QMC_Research/QMC_2018.f90"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-t"</span><span style="color: #66D9EF;">)</span>  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #A6E22E;">(</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span>find-file  <span style="color: #ff00ff;">"~/texmf/tex/latex/package_repository/mypackage.sty"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0ca8c92" class="outline-3">
+<h3 id="org0ca8c92"><span class="section-number-3">3.2</span> Movement Macros</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Move between buffers in same frame
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"M-]"</span><span style="color: #66D9EF;">)</span> 'other-window<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Move between buffers in different frames
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"M-["</span><span style="color: #66D9EF;">)</span> 'other-frame<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Move in paragraphs
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"M-n"</span><span style="color: #66D9EF;">)</span> 'forward-paragraph<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"M-p"</span><span style="color: #66D9EF;">)</span> 'backward-paragraph<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+ace window movement key bindings
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-A"</span><span style="color: #66D9EF;">)</span> 'ace-window<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8cd927b" class="outline-3">
+<h3 id="org8cd927b"><span class="section-number-3">3.3</span> Personal Macros</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Binding for Helm Spotify inside Emacs
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-s"</span><span style="color: #66D9EF;">)</span> 'helm-spotify-plus<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7df62cc" class="outline-3">
+<h3 id="org7df62cc"><span class="section-number-3">3.4</span> Global coding macros</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+Repeat previous shell command
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my/repeat-last-shell-command</span><span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #E6DB74;">"repeats last run shell command"</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>shell-command <span style="color: #A6E22E;">(</span>cadr <span style="color: #E6DB74;">(</span>assoc 'shell-command command-history<span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"M-Z"</span><span style="color: #66D9EF;">)</span> 'my/repeat-last-shell-command<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Exchange below and above lines globally
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">move-line-up</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>transpose-lines 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>previous-line 2<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">move-line-down</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>forward-line 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>transpose-lines 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>previous-line 1<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"M-&lt;up&gt;"</span><span style="color: #66D9EF;">)</span> 'move-line-up<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"M-&lt;down&gt;"</span><span style="color: #66D9EF;">)</span> 'move-line-down<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgce8b067" class="outline-2">
+<h2 id="orgce8b067"><span class="section-number-2">4</span> Helm</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Major configurations for the Helm Plugin
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>helm-mode 1<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">helm</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">helm-config</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"M-x"</span><span style="color: #66D9EF;">)</span> 'helm-M-x<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"C-x C-f"</span><span style="color: #66D9EF;">)</span> 'helm-find-files<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"C-x C-b"</span><span style="color: #66D9EF;">)</span> 'helm-buffers-list<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Turn on Helm Spotify
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">helm-spotify-plus</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc6816dd" class="outline-2">
+<h2 id="orgc6816dd"><span class="section-number-2">5</span> Colour Theme</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Load in custom colour theme
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-to-list 'custom-theme-load-path <span style="color: #ff00ff;">"~/.emacs.d/anthony-swanking-theme"</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>load-theme 'anthony-swanking t<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf51857d" class="outline-2">
+<h2 id="orgf51857d"><span class="section-number-2">6</span> AucTex</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-orgfd437dd" class="outline-3">
+<h3 id="orgfd437dd"><span class="section-number-3">6.1</span> FlySpell</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Enable spell checking for LaTex
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">dolist</span> <span style="color: #66D9EF;">(</span>hook '<span style="color: #A6E22E;">(</span>text-mode-hook<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>add-hook hook <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #E6DB74;">(</span><span style="color: #E6DB74;">)</span> <span style="color: #E6DB74;">(</span>flyspell-mode 1<span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org868fd95" class="outline-3">
+<h3 id="org868fd95"><span class="section-number-3">6.2</span> PDF Tools</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Better PDF viewing inside AucTex
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-to-list 'auto-mode-alist '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"\\.pdf\\'"</span> . pdf-view-mode<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> pdf-view-midnight-colors <span style="color: #66D9EF;">(</span>cons <span style="color: #A6E22E;">(</span>face-foreground 'default<span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span>face-background 'default<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my-pdf-view-mode-hook</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>pdf-view-midnight-minor-mode 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>linum-mode 0<span style="color: #66D9EF;">)</span>
+  <span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-hook 'pdf-view-mode-hook 'my-pdf-view-mode-hook<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>pdf-tools-install<span style="color: #AE81FF;">)</span>
+
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> TeX-view-program-selection '<span style="color: #66D9EF;">(</span><span style="color: #A6E22E;">(</span>output-pdf <span style="color: #ff00ff;">"PDF Tools"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span>
+      TeX-view-program-list '<span style="color: #66D9EF;">(</span><span style="color: #A6E22E;">(</span><span style="color: #ff00ff;">"PDF Tools"</span> TeX-pdf-tools-sync-view<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span>
+      TeX-source-correlate-start-server t<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org04e2814" class="outline-3">
+<h3 id="org04e2814"><span class="section-number-3">6.3</span> Utility</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Refresh the buffer after compilation
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-hook 'TeX-after-compilation-finished-functions
+          #'TeX-revert-document-buffer<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org33727b6" class="outline-3">
+<h3 id="org33727b6"><span class="section-number-3">6.4</span> LaTeX editing major mode</h3>
+<div class="outline-text-3" id="text-6-4">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">tex</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-hook 'LaTeX-mode-hook 'my-LaTeX-mode-hook<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my-LaTeX-mode-hook</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> TeX-auto-save t<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> TeX-parse-self t<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">setq-default</span> TeX-master nil<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> TeX-PDF-mode t<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>visual-line-mode 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>flyspell-mode 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>LaTeX-math-mode 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>TeX-source-correlate-mode 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>outline-minor-mode 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"C-M-="</span><span style="color: #A6E22E;">)</span> '<span style="color: #A6E22E;">(</span>lambda <span style="color: #E6DB74;">(</span><span style="color: #E6DB74;">)</span> <span style="color: #E6DB74;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #E6DB74;">)</span> <span style="color: #E6DB74;">(</span>insert <span style="color: #ff00ff;">"&amp;= "</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"C-H-f"</span><span style="color: #A6E22E;">)</span> '<span style="color: #A6E22E;">(</span>lambda <span style="color: #E6DB74;">(</span><span style="color: #E6DB74;">)</span> <span style="color: #E6DB74;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #E6DB74;">)</span> <span style="color: #E6DB74;">(</span>insert <span style="color: #ff00ff;">"frac{"</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"C-c b"</span><span style="color: #A6E22E;">)</span> 'tex-latex-block<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"&lt;C-tab&gt;"</span><span style="color: #A6E22E;">)</span> 'outline-toggle-children<span style="color: #66D9EF;">)</span>
+  <span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org20216c1" class="outline-2">
+<h2 id="org20216c1"><span class="section-number-2">7</span> Coding</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-orga58d3b2" class="outline-3">
+<h3 id="orga58d3b2"><span class="section-number-3">7.1</span> FORTRAN</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+Auto load in FORTRAN mode for f90 files
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>autoload 'f90-mode <span style="color: #ff00ff;">"f90"</span> <span style="color: #E6DB74;">"Fortran 90 mode"</span> t<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Configurations for FORTRAN major mode
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-hook 'f90-mode-hook 'my-f90-mode-hook<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">fortran</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my-f90-mode-hook</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span> 
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"H-M-c"</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #E6DB74;">(</span><span style="color: #E6DB74;">)</span> <span style="color: #E6DB74;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #E6DB74;">)</span> <span style="color: #E6DB74;">(</span>shell-command <span style="color: #ff00ff;">"./bash_fortran"</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"H-t"</span><span style="color: #A6E22E;">)</span> 'my/f90-comment-header-block<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> f90-font-lock-keywords f90-font-lock-keywords-3<span style="color: #66D9EF;">)</span>
+  '<span style="color: #66D9EF;">(</span>f90-comment-region <span style="color: #ff00ff;">"!!!$"</span><span style="color: #66D9EF;">)</span>
+  '<span style="color: #66D9EF;">(</span>f90-indented-comment-re <span style="color: #ff00ff;">"!"</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>abbrev-mode 1<span style="color: #66D9EF;">)</span>                     
+  <span style="color: #66D9EF;">(</span>turn-on-font-lock<span style="color: #66D9EF;">)</span>                 
+  <span style="color: #66D9EF;">(</span>auto-fill-mode 0<span style="color: #66D9EF;">)</span>                  
+<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Creates a heading in FORTRAN major mode
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my/f90-comment-header-block</span> <span style="color: #66D9EF;">(</span>title<span style="color: #66D9EF;">)</span>
+  <span style="color: #E6DB74;">"Inserts a commented title block for f90"</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span> <span style="color: #ff00ff;">"sEnter a title: "</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">defvar</span> <span style="color: #ffc125;">blank-len</span> 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> blank-len <span style="color: #A6E22E;">(</span>/ <span style="color: #E6DB74;">(</span>- 69 <span style="color: #FD971F;">(</span>length title<span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span> 2<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>newline<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">dotimes</span> <span style="color: #A6E22E;">(</span>jj 5<span style="color: #A6E22E;">)</span>
+    <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">case</span> jj
+      <span style="color: #E6DB74;">(</span><span style="color: #FD971F;">(</span>0 4<span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span>indent-for-tab-command<span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span>insert <span style="color: #ff00ff;">"!"</span><span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span><span style="color: #00ffff; font-weight: bold;">dotimes</span> <span style="color: #F92672;">(</span>ii 69<span style="color: #F92672;">)</span> <span style="color: #F92672;">(</span>insert <span style="color: #ff00ff;">"-"</span><span style="color: #F92672;">)</span><span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span>insert <span style="color: #ff00ff;">"!"</span><span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span>newline<span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span>
+      <span style="color: #E6DB74;">(</span><span style="color: #FD971F;">(</span>1 3<span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span>indent-for-tab-command<span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span>insert <span style="color: #ff00ff;">"!"</span><span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span><span style="color: #00ffff; font-weight: bold;">dotimes</span> <span style="color: #F92672;">(</span>ii 69<span style="color: #F92672;">)</span> <span style="color: #F92672;">(</span>insert <span style="color: #ff00ff;">" "</span><span style="color: #F92672;">)</span><span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span>insert <span style="color: #ff00ff;">"!"</span><span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span>newline<span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span>
+      <span style="color: #E6DB74;">(</span>2
+       <span style="color: #FD971F;">(</span>indent-for-tab-command<span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span>insert <span style="color: #ff00ff;">"!"</span><span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span><span style="color: #00ffff; font-weight: bold;">dotimes</span> <span style="color: #F92672;">(</span>ii blank-len<span style="color: #F92672;">)</span>
+         <span style="color: #F92672;">(</span>insert <span style="color: #ff00ff;">" "</span><span style="color: #F92672;">)</span><span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span><span style="color: #00ffff; font-weight: bold;">if</span> <span style="color: #F92672;">(</span>= <span style="color: #AE81FF;">(</span>mod <span style="color: #66D9EF;">(</span>length title<span style="color: #66D9EF;">)</span> 2<span style="color: #AE81FF;">)</span> 0<span style="color: #F92672;">)</span>
+           <span style="color: #F92672;">(</span>insert <span style="color: #ff00ff;">" "</span><span style="color: #F92672;">)</span>
+         <span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span>insert title<span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span><span style="color: #00ffff; font-weight: bold;">dotimes</span> <span style="color: #F92672;">(</span>ii blank-len<span style="color: #F92672;">)</span>
+         <span style="color: #F92672;">(</span>insert <span style="color: #ff00ff;">" "</span><span style="color: #F92672;">)</span><span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span>insert <span style="color: #ff00ff;">"!"</span><span style="color: #FD971F;">)</span>
+       <span style="color: #FD971F;">(</span>newline<span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span>
+  <span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-Z"</span><span style="color: #66D9EF;">)</span> 'my/f90-comment-header-block<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbc61bae" class="outline-3">
+<h3 id="orgbc61bae"><span class="section-number-3">7.2</span> Python</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+Insert a template for a python document
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-hook 'find-file-hooks 'my/template-insert-python<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my/template-insert-python</span><span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">when</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">and</span>
+  <span style="color: #E6DB74;">(</span>string-match <span style="color: #ff00ff;">"\\.py$"</span> <span style="color: #FD971F;">(</span>buffer-file-name<span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span>
+  <span style="color: #E6DB74;">(</span>eq 1 <span style="color: #FD971F;">(</span>point-max<span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span>
+  <span style="color: #A6E22E;">(</span>insert-file <span style="color: #ff00ff;">"~/Dropbox/Templates/python_template.py"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>    
+</pre>
+</div>
+
+<p>
+Some configurations Python major mode
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">python</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-hook 'python-mode-hook 'my-python-mode-hook<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my-python-mode-hook</span><span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>     
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> python-shell-interpreter <span style="color: #ff00ff;">"ipython"</span>
+        python-shell-interpreter-args <span style="color: #ff00ff;">"--simple-prompt -i"</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>add-to-list 'load-path <span style="color: #ff00ff;">"/folder/containing/file"</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf3a03fc" class="outline-3">
+<h3 id="orgf3a03fc"><span class="section-number-3">7.3</span> C++</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+Load in C++ major mode for .h files
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-to-list 'auto-mode-alist '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"\\.h\\'"</span> . c++-mode<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Insert a template for a C++ document
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-hook 'find-file-hooks 'my/template-insert-C++<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my/template-insert-C++</span><span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">when</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">and</span>
+  <span style="color: #E6DB74;">(</span>string-match <span style="color: #ff00ff;">"\\.cpp$"</span> <span style="color: #FD971F;">(</span>buffer-file-name<span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span>
+  <span style="color: #E6DB74;">(</span>eq 1 <span style="color: #FD971F;">(</span>point-max<span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span>
+  <span style="color: #A6E22E;">(</span>insert-file <span style="color: #ff00ff;">"~/Dropbox/Templates/c++template.cpp"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>    
+</pre>
+</div>
+
+<p>
+Some configurations C++ major mode
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">cl</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-hook 'c++-mode-hook 'my-c++-mode-hook<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my-c++-mode-hook</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"H-M-p"</span><span style="color: #A6E22E;">)</span><span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #E6DB74;">(</span><span style="color: #E6DB74;">)</span> <span style="color: #E6DB74;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #E6DB74;">)</span> <span style="color: #E6DB74;">(</span>shell-command <span style="color: #ff00ff;">"./bash_c++"</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgacaf4e8" class="outline-3">
+<h3 id="orgacaf4e8"><span class="section-number-3">7.4</span> Julia</h3>
+<div class="outline-text-3" id="text-7-4">
+</div>
+<div id="outline-container-org8e4b799" class="outline-4">
+<h4 id="org8e4b799"><span class="section-number-4">7.4.1</span> Environment Macros</h4>
+<div class="outline-text-4" id="text-7-4-1">
+<p>
+Some configurations Julia major mode
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">julia-mode</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-hook 'julia-mode-hook 'my-Julia-mode-hook<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my-Julia-mode-hook</span><span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"C-c C-p"</span><span style="color: #A6E22E;">)</span> 'inferior-julia-shell<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"C-c C-r"</span><span style="color: #A6E22E;">)</span> 'julia-shell-run-region<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"H-M-p"</span><span style="color: #A6E22E;">)</span> 'my/julia-compile<span style="color: #66D9EF;">)</span> 
+  <span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Compile command for Julia
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my/julia-compile</span><span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">defvar</span> <span style="color: #ffc125;">thisfile</span> buffer-file-name<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>shell-command <span style="color: #A6E22E;">(</span>concat <span style="color: #ff00ff;">"julia "</span> thisfile<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1f20df1" class="outline-4">
+<h4 id="org1f20df1"><span class="section-number-4">7.4.2</span> Shell Configurations</h4>
+<div class="outline-text-4" id="text-7-4-2">
+<p>
+load in Julia compiler
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-to-list 'load-path <span style="color: #ff00ff;">"~/.emacs.d/elpa/julia-mode-20171116.642"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Julia shell
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span>  inferior-julia-program-name <span style="color: #ff00ff;">"~/bin/julia/bin/julia"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Julia repel stuff
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">julia-repl</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #E6DB74;">"Runs Julia in a screen session in a `</span><span style="color: #ee2c2c;">term</span><span style="color: #E6DB74;">' buffer."</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">term</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">let</span> <span style="color: #A6E22E;">(</span><span style="color: #E6DB74;">(</span>termbuf <span style="color: #FD971F;">(</span>apply 'make-term <span style="color: #ff00ff;">"Julia REPL"</span> <span style="color: #ff00ff;">"screen"</span> nil <span style="color: #F92672;">(</span>split-string-and-unquote <span style="color: #ff00ff;">"julia"</span><span style="color: #F92672;">)</span><span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span>
+    <span style="color: #A6E22E;">(</span>set-buffer termbuf<span style="color: #A6E22E;">)</span>
+    <span style="color: #A6E22E;">(</span>term-mode<span style="color: #A6E22E;">)</span>
+    <span style="color: #A6E22E;">(</span>term-char-mode<span style="color: #A6E22E;">)</span>
+    <span style="color: #A6E22E;">(</span>switch-to-buffer termbuf<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"C-x j"</span><span style="color: #66D9EF;">)</span> 'julia-repl<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org094fffa" class="outline-2">
+<h2 id="org094fffa"><span class="section-number-2">8</span> Org</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-org1ecd6d6" class="outline-3">
+<h3 id="org1ecd6d6"><span class="section-number-3">8.1</span> Editing Code</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Some configurations Org major mode
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my-org-mode-hook</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-log-done t<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>define-key global-map <span style="color: #ff00ff;">"\C-cl"</span> 'org-store-link<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>define-key global-map <span style="color: #ff00ff;">"\C-ca"</span> 'org-agenda<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>visual-line-mode 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>org-indent-mode 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>org-bullets-mode 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>abbrev-mode 1<span style="color: #66D9EF;">)</span>
+  <span style="color: #75715E;">;; </span><span style="color: #999999; font-style: italic;">(linum-mode 1)</span>
+<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+load mode
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>autoload 'org-mode <span style="color: #ff00ff;">"org"</span> <span style="color: #E6DB74;">"Org Mode"</span> t<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-hook 'org-mode-hook 'my-org-mode-hook<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+load in certain languages coding modes
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">ob-clojure</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">ox-latex</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">org</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>org-babel-do-load-languages
+ 'org-babel-load-languages
+ '<span style="color: #66D9EF;">(</span>
+   <span style="color: #A6E22E;">(</span>python . t<span style="color: #A6E22E;">)</span>
+   <span style="color: #A6E22E;">(</span>fortran . t<span style="color: #A6E22E;">)</span>
+   <span style="color: #A6E22E;">(</span>latex . t<span style="color: #A6E22E;">)</span>
+   <span style="color: #A6E22E;">(</span>shell . t<span style="color: #A6E22E;">)</span>
+   <span style="color: #A6E22E;">(</span>julia . t<span style="color: #A6E22E;">)</span>
+   <span style="color: #A6E22E;">(</span>emacs-lisp . t<span style="color: #A6E22E;">)</span>
+   <span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org777e797" class="outline-3">
+<h3 id="org777e797"><span class="section-number-3">8.2</span> Capture Mode</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+add custom section titles templates
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-capture-templates
+      <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">quote</span> <span style="color: #A6E22E;">(</span><span style="color: #E6DB74;">(</span><span style="color: #ff00ff;">"m"</span> <span style="color: #ff00ff;">"Meeting Notes"</span> entry <span style="color: #FD971F;">(</span>file+olp+datetree <span style="color: #ff00ff;">"~/Dropbox/Journal/journal.org"</span><span style="color: #FD971F;">)</span>
+               <span style="color: #ff00ff;">"* %? :Meeting: \n\n _Notes_:  \n \n _Agenda_: \n \n _Resources_: "</span><span style="color: #E6DB74;">)</span>
+              <span style="color: #E6DB74;">(</span><span style="color: #ff00ff;">"j"</span> <span style="color: #ff00ff;">"Journal"</span> entry <span style="color: #FD971F;">(</span>file+olp+datetree <span style="color: #ff00ff;">"~/Dropbox/Journal/journal.org"</span><span style="color: #FD971F;">)</span>
+               <span style="color: #ff00ff;">"* %? \n\n _Notes_:  \n \n _Resources_:"</span><span style="color: #E6DB74;">)</span>
+              <span style="color: #E6DB74;">(</span><span style="color: #ff00ff;">"r"</span> <span style="color: #ff00ff;">"Research Talk"</span> entry <span style="color: #FD971F;">(</span>file+olp+datetree <span style="color: #ff00ff;">"~/Dropbox/Journal/journal.org"</span><span style="color: #FD971F;">)</span>
+               <span style="color: #ff00ff;">"* %? :RT: \n\n _Notes_:  \n \n _Resources_:"</span><span style="color: #E6DB74;">)</span>
+              <span style="color: #E6DB74;">(</span><span style="color: #ff00ff;">"Q"</span> <span style="color: #ff00ff;">"Meeting Question"</span> entry <span style="color: #FD971F;">(</span>file+olp+datetree <span style="color: #ff00ff;">"~/Dropbox/Journal/questions.org"</span><span style="color: #FD971F;">)</span>
+               <span style="color: #ff00ff;">"* %?"</span><span style="color: #E6DB74;">)</span>
+              <span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Tell org where the agenda files are
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-agenda-files 
+  <span style="color: #66D9EF;">(</span>list <span style="color: #ff00ff;">"~/Dropbox/Journal/agenda.org"</span> <span style="color: #ff00ff;">"~/Dropbox/Journal/journal.org"</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>  
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org11a47e1" class="outline-3">
+<h3 id="org11a47e1"><span class="section-number-3">8.3</span> Macros</h3>
+<div class="outline-text-3" id="text-8-3">
+<p>
+Keyboard macros for org mode
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"C-c l"</span><span style="color: #66D9EF;">)</span> 'org-store-link<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"C-c a"</span><span style="color: #66D9EF;">)</span> 'org-agenda<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"C-c c"</span><span style="color: #66D9EF;">)</span> 'org-capture<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Code block macros
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-to-list 'org-structure-template-alist
+             '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"el"</span> <span style="color: #ff00ff;">"#+BEGIN_SRC emacs-lisp\n  ?\n#+END_SRC"</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-to-list 'org-structure-template-alist
+             '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"c"</span> <span style="color: #ff00ff;">"#+BEGIN_SRC C++\n  ?\n#+END_SRC"</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-to-list 'org-structure-template-alist
+             '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"py"</span> <span style="color: #ff00ff;">"#+BEGIN_SRC python</span>
+<span style="color: #ff00ff;">#!/usr/bin/python3.5</span>
+<span style="color: #ff00ff;">import matplotlib.pyplot as pypl</span>
+<span style="color: #ff00ff;">import numpy as np</span>
+<span style="color: #ff00ff;">import math as m</span>
+<span style="color: #ff00ff;">from matplotlib import rc</span>
+<span style="color: #ff00ff;">?\n#+END_SRC"</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-to-list 'org-structure-template-alist
+             '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"ipy"</span> <span style="color: #ff00ff;">"#+BEGIN_SRC ipython :session :exports both :results raw drawer\n  ?\n#+END_SRC"</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-to-list 'org-structure-template-alist
+             '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"f"</span> <span style="color: #ff00ff;">"#+BEGIN_SRC fortran\n  ?\n#+END_SRC"</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-to-list 'org-structure-template-alist
+             '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"y"</span> <span style="color: #ff00ff;">"#+BEGIN_SRC yaml\n  ?\n#+END_SRC"</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-to-list 'org-structure-template-alist
+             '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"sh"</span> <span style="color: #ff00ff;">"#+BEGIN_SRC shell\n  ?\n#+END_SRC"</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-to-list 'org-structure-template-alist
+             '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"t"</span> <span style="color: #ff00ff;">"#+BEGIN_SRC text\n  ?\n#+END_SRC"</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org80c7b0b" class="outline-3">
+<h3 id="org80c7b0b"><span class="section-number-3">8.4</span> Utility</h3>
+<div class="outline-text-3" id="text-8-4">
+<p>
+Translate regular ol&rsquo; straight quotes to typographically-correct curly quotes
+when exporting.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-export-with-smart-quotes t<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Don&rsquo;t ask before evaluating code blocks.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-confirm-babel-evaluate nil<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+For exporting to HTML
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span>  '<span style="color: #ee2c2c;">htmlize</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2fe7a6c" class="outline-3">
+<h3 id="org2fe7a6c"><span class="section-number-3">8.5</span> Visual Settings</h3>
+<div class="outline-text-3" id="text-8-5">
+<p>
+Nice ellipsis:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-ellipsis <span style="color: #ff00ff;">"&#10549;"</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Use syntax highlighting in source blocks while editing (you may already have this).
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-src-fontify-natively t<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+When editing a code snippet, use the current window rather than popping open a new one.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-src-window-setup 'current-window<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Automatic indentation upon startup (or set to nil if you don&rsquo;t want it)
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-startup-indented t<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Change Org bullets appearance
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-bullets-face-name <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">quote</span> org-bullet-face<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-hook 'org-mode-hook <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #A6E22E;">(</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span>org-bullets-mode 1<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-bullets-bullet-list '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"&#10146;"</span> <span style="color: #ff00ff;">"&#10147;"</span> <span style="color: #ff00ff;">"&#10148;"</span> <span style="color: #ff00ff;">"&#10143;"</span> <span style="color: #ff00ff;">"&#10137;"</span> <span style="color: #ff00ff;">"&#187;"</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span> 
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge0c0ab5" class="outline-3">
+<h3 id="orge0c0ab5"><span class="section-number-3">8.6</span> Agenda alternations</h3>
+<div class="outline-text-3" id="text-8-6">
+<p>
+Add states for to do lists
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-todo-keywords '<span style="color: #66D9EF;">(</span><span style="color: #A6E22E;">(</span>sequence <span style="color: #ff00ff;">"&#9755; TODO(t)"</span> <span style="color: #ff00ff;">"|"</span> <span style="color: #ff00ff;">"&#10004; DONE(d)"</span><span style="color: #A6E22E;">)</span> <span style="color: #75715E;">;</span>
+                          <span style="color: #A6E22E;">(</span>sequence <span style="color: #ff00ff;">"&#9873; WAITING(w)"</span> <span style="color: #ff00ff;">"|"</span><span style="color: #A6E22E;">)</span>
+                          <span style="color: #A6E22E;">(</span>sequence <span style="color: #ff00ff;">"|"</span> <span style="color: #ff00ff;">"&#128128; DEAD(d)"</span><span style="color: #A6E22E;">)</span>
+                          <span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2f1e7bc" class="outline-3">
+<h3 id="org2f1e7bc"><span class="section-number-3">8.7</span> Beamer</h3>
+<div class="outline-text-3" id="text-8-7">
+<p>
+Some code to allow the use of Beamer in org mode
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #75715E;">; </span><span style="color: #999999; font-style: italic;">allow for export=&gt;beamer by placing</span>
+
+<span style="color: #75715E;">;; </span><span style="color: #999999; font-style: italic;">#+LaTeX_CLASS: beamer in org files</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">unless</span> <span style="color: #66D9EF;">(</span>boundp 'org-export-latex-classes<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-export-latex-classes nil<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-to-list 'org-export-latex-classes
+  <span style="color: #75715E;">;; </span><span style="color: #999999; font-style: italic;">beamer class, for presentations</span>
+  '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"beamer"</span>
+     <span style="color: #ff00ff;">"\\documentclass[11pt]{beamer}\n</span>
+<span style="color: #ff00ff;">      \\mode&lt;{{{beamermode}}}&gt;\n</span>
+<span style="color: #ff00ff;">      \\usetheme{{{{beamertheme}}}}\n</span>
+<span style="color: #ff00ff;">      \\usecolortheme{{{{beamercolortheme}}}}\n</span>
+<span style="color: #ff00ff;">      \\beamertemplateballitem\n</span>
+<span style="color: #ff00ff;">      \\setbeameroption{show notes}</span>
+<span style="color: #ff00ff;">      \\usepackage[utf8]{inputenc}\n</span>
+<span style="color: #ff00ff;">      \\usepackage[T1]{fontenc}\n</span>
+<span style="color: #ff00ff;">      \\usepackage{hyperref}\n</span>
+<span style="color: #ff00ff;">      \\usepackage{color}</span>
+<span style="color: #ff00ff;">      \\usepackage{listings}</span>
+<span style="color: #ff00ff;">      \\lstset{numbers=none,language=[ISO]C++,tabsize=4,</span>
+<span style="color: #ff00ff;">  frame=single,</span>
+<span style="color: #ff00ff;">  basicstyle=\\small,</span>
+<span style="color: #ff00ff;">  showspaces=false,showstringspaces=false,</span>
+<span style="color: #ff00ff;">  showtabs=false,</span>
+<span style="color: #ff00ff;">  keywordstyle=\\color{blue}\\bfseries,</span>
+<span style="color: #ff00ff;">  commentstyle=\\color{red},</span>
+<span style="color: #ff00ff;">  }\n</span>
+<span style="color: #ff00ff;">      \\usepackage{verbatim}\n</span>
+<span style="color: #ff00ff;">      \\institute{{{{beamerinstitute}}}}\n          </span>
+<span style="color: #ff00ff;">       \\subject{{{{beamersubject}}}}\n"</span>
+
+     <span style="color: #A6E22E;">(</span><span style="color: #ff00ff;">"\\section{%s}"</span> . <span style="color: #ff00ff;">"\\section*{%s}"</span><span style="color: #A6E22E;">)</span>
+
+     <span style="color: #A6E22E;">(</span><span style="color: #ff00ff;">"\\begin{frame}[fragile]\\frametitle{%s}"</span>
+       <span style="color: #ff00ff;">"\\end{frame}"</span>
+       <span style="color: #ff00ff;">"\\begin{frame}[fragile]\\frametitle{%s}"</span>
+       <span style="color: #ff00ff;">"\\end{frame}"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+
+  <span style="color: #75715E;">;; </span><span style="color: #999999; font-style: italic;">letter class, for formal letters</span>
+
+  <span style="color: #AE81FF;">(</span>add-to-list 'org-export-latex-classes
+
+  '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"letter"</span>
+     <span style="color: #ff00ff;">"\\documentclass[11pt]{letter}\n</span>
+<span style="color: #ff00ff;">      \\usepackage[utf8]{inputenc}\n</span>
+<span style="color: #ff00ff;">      \\usepackage[T1]{fontenc}\n</span>
+<span style="color: #ff00ff;">      \\usepackage{color}"</span>
+
+     <span style="color: #A6E22E;">(</span><span style="color: #ff00ff;">"\\section{%s}"</span> . <span style="color: #ff00ff;">"\\section*{%s}"</span><span style="color: #A6E22E;">)</span>
+     <span style="color: #A6E22E;">(</span><span style="color: #ff00ff;">"\\subsection{%s}"</span> . <span style="color: #ff00ff;">"\\subsection*{%s}"</span><span style="color: #A6E22E;">)</span>
+     <span style="color: #A6E22E;">(</span><span style="color: #ff00ff;">"\\subsubsection{%s}"</span> . <span style="color: #ff00ff;">"\\subsubsection*{%s}"</span><span style="color: #A6E22E;">)</span>
+     <span style="color: #A6E22E;">(</span><span style="color: #ff00ff;">"\\paragraph{%s}"</span> . <span style="color: #ff00ff;">"\\paragraph*{%s}"</span><span style="color: #A6E22E;">)</span>
+     <span style="color: #A6E22E;">(</span><span style="color: #ff00ff;">"\\subparagraph{%s}"</span> . <span style="color: #ff00ff;">"\\subparagraph*{%s}"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Beamer template 
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-to-list 'org-structure-template-alist
+'<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">"beamer"</span> <span style="color: #ff00ff;">"#+TITLE: \n#+AUTHOR: Anthony Kalaitzis \n#+OPTIONS: H:2 toc:t num:t \n#+LATEX_CLASS: beamer \n#+LATEX_CLASS_OPTIONS: [presentation] \n#+LATEX_header: \n#+BEAMER_header: \\usetheme{Berlin} \n#+BEAMER_header: \\usecolortheme[named=purple]{structure} \n#+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col) %8BEAMER_OPT(Opt) \n?"</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org735aa9e" class="outline-3">
+<h3 id="org735aa9e"><span class="section-number-3">8.8</span> LaTeX</h3>
+<div class="outline-text-3" id="text-8-8">
+<p>
+Use <code>mypackage</code> package for all LaTeX exports.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-latex-packages-alist '<span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-to-list 'org-latex-packages-alist '<span style="color: #66D9EF;">(</span><span style="color: #ff00ff;">""</span> <span style="color: #ff00ff;">"mypackage"</span> t<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Tell org where to find LaTeX
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> exec-path <span style="color: #66D9EF;">(</span>append exec-path '<span style="color: #A6E22E;">(</span><span style="color: #ff00ff;">"/usr/bin"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>load <span style="color: #ff00ff;">"auctex.el"</span> nil t t<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org41e05c4" class="outline-2">
+<h2 id="org41e05c4"><span class="section-number-2">9</span> Wolfram Alpha</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+set wolfram alpha ID
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">wolfram</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> wolfram-alpha-app-id 'U2773W-V74GXV4HWX<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Anthony Kalaitzis</p>
+<p class="date">Created: 2018-08-06 Mon 14:14</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

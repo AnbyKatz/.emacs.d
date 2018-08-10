@@ -1,0 +1,34 @@
+\documentclass[aps,prl,twocolumn]{revtex4-1}
+\usepackage{mypackage}
+
+\begin{document}
+\author{Author}
+\title{}
+\affiliation{}
+
+\date{\today}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# \bibliographystyle{plain}
+# \bibliography{basename of .bib file}
+
+
+
+
+

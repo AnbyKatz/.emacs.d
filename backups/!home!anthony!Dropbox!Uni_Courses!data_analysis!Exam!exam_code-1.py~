@@ -1,0 +1,67 @@
+#!/usr/bin/python3.5
+
+import matplotlib.pyplot as pypl
+import numpy as np
+import math as m
+from scipy.integrate import quad
+from matplotlib import rc
+from pylab import*
+from sympy import*
+
+# Fourier Analysis of data
+# Data
+data = genfromtxt("exam_data.csv",delimiter=',')
+N_2001_2 = 8760
+N_2000 = 8784
+fs = 24
+Moon_Period = 27.3
+Moon_freq = 1/Moon_Period
+
+# variable parameters
+N_tot = 2**14
+step_size = 4
+ID_window = False
+
+N_avg = 4
+ID_avg = False
+
+N = int(N_tot/step_size)
+#N = int(N_tot/N_avg)
+f = (fs*np.linspace(0,N-1,N))/N
+
+titles = ["sea level","water temp",
+          "air temp","bar pressure",
+          "residuals", "adj residuals",
+          "wind direction","wind gust",
+          "wind speed"]
+
+if ID_window == True:
+    # create window functions
+    hann =  [(1/2)*(1-cos((2*m.pi*kk)/(N_window-1))) \
+             for kk in range(N_window)]
+
+for ii in range(0,9):
+
+    if ID_avg == True:
+        fft_input = [0 for i in range(int(N_tot/N_avg))]
+        for jj in range(0,N_avg):
+            input_data = data[jj:N_tot:N_avg,ii]
+            fft_input=fft_input+np.fft.fft(input_data)
+        fft_input = fft_input/N_avg
+    else:
+        input_data = data[0:N_tot:step_size,ii]
+        if ID_window == True:
+            input_data = input_data*hann
+        fft_input=np.fft.fft(input_data)
+
+    input_power=(np.square(np.absolute(fft_input)))/(len(fft_input)**2)
+    pypl.loglog(f,input_power,label=titles[ii])
+
+pypl.xlabel("time")
+pypl.ylabel("Power Spectra")
+pypl.grid()
+pypl.plot((Moon_freq,Moon_freq),(10**-3,10**5))
+pypl.plot((fs/2,fs/2),(10**-5,10**5))
+pypl.legend()
+pypl.show()
+    

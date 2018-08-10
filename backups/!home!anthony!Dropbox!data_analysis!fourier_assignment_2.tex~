@@ -1,0 +1,231 @@
+\documentclass[13pt]{article}
+
+\usepackage[a4paper,left=1.5cm,right=1.5cm,top=10mm,bottom=20mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{physics}
+\usepackage{slashed}
+\usepackage{mypackage}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{mwe}
+\usepackage{afterpage}
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+        \newpage}
+      
+\title{}
+\author{Anthony Kalaitzis}
+\pagenumbering{gobble}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+
+Using the transfer function formula we have that
+
+\begin{align*}
+  Y(\omega)=\frac{V_{out}}{V_{in}}
+\end{align*}
+Clearly in our case we  have a simple voltage divider relationship hence
+\begin{align*}
+  V_{out}=\frac{Z_L}{Z_R+Z_L}V_{in}
+\end{align*}
+and these impendences are known to be $Z_L=i\omega L$ and $Z_R=R$ hence
+\begin{align*}
+  Y(\omega)=\frac{i\omega L}{R+i\omega L}=\frac{1}{R/i\omega L+1}
+\end{align*}
+
+hence this tells us that when $L\to\infty\implies Y\to 1$ and hence $V_{in}=V_{out}$. Also when $R=0$ we have that $V_{in}=V_{out}$ as one might expect.
+
+\begin{align*}
+  \abs{Y(\omega)}&=Y(\omega)Y^*(\omega)\\
+  &=\sqrt{\bigg(\frac{1}{1-iR/\omega L}\bigg)\bigg(\frac{1}{1+iR/\omega L}\bigg)}\\
+                 &=\frac{1}{\sqrt{1+R^2/\omega^2L^2}}
+\end{align*}
+
+\section*{Question 2}
+
+We may calculate the impulse response function as follows
+\begin{align*}
+  y(t)&=\frac{1}{2\pi}\infint{\omega}Y(\omega)e^{i\omega t}\\
+      &=\frac{iL}{2\pi}\infint{\omega}\frac{\omega e^{i\omega t}}{R+i\omega L}  
+\end{align*}
+let $x=L\omega\implies\dd x=L\dd\omega$ hence
+\begin{align*}
+  y(t)&=\frac{iL}{2\pi}\frac{1}{L^2}\infint{x}\frac{xe^{ixt/L}}{R+ix}\\
+      &=-\frac{1}{2\pii}\frac{1}{L}\infint{x}\frac{ixe^{ixt/L}}{iR-x}
+\end{align*}
+Now we want to make use of a semi-circular contour integration to evaluate this integral here. Consider first $t\geq 0$, the integration above clearly has a pole at $x=iR$. \\ 
+
+Close the contour in the positive imaginary plane via a semi circle of radius $r$. Denote the arc by $C_R$ and hence we can break up our integration in the following way.
+
+\begin{align*}
+  \oint_{\text{semi-circle}}=\int_{-r}^{r}+\int_{C_R}
+\end{align*}
+
+Consider the following complex extension of the above integral
+\begin{align*}
+  \abs{\int_{C_R}\dd z\frac{ize^{izt/L}}{iR-z}}&\leq\int_{C_R}\frac{\abs{ze^{izt/L}}}{\abs{iR-z}}\dd s\\
+                                               &\leq \frac{\abs{z}e^{\text{Re}(izt/L)}}{\abs{R}-\abs{z}}s                    
+\end{align*}
+Where we used that
+\begin{align*}
+  \frac{1}{\abs{x-y}}\leq\frac{1}{\abs{x}-\abs{y}}
+\end{align*}
+and the fact that this becomes an integral over the arc length $\dd s$. Clearly for a semi-circle $\int_{C_R}\dd s=s=\pi r$. Let $z=x+iy$. We have that $z\in C_R\implies \abs{z}\leq r$ and also that $\abs{y}\leq r$ hence
+\begin{align*}
+  \abs{\int_{C_R}\dd z\frac{ize^{izt/L}}{iR-z}}&\leq\frac{\pi r^2}{R-r}e^{-yt/L}
+\end{align*}
+as $r\to\infty\implies y\to\infty$ where $y\neq 0$ as $y\in C_R$ so this is ok. the term $e^{-yt/L}\to 0$ faster then $r\to\infty$ in the limit as $r\to\infty$ in the above fraction hence
+\begin{align*}
+  \lim_{r\to\infty}\frac{\pi r^2}{R-r}e^{-yt/L}=0
+\end{align*}
+hence we have that
+\begin{align*}
+  \lim_{r\to\infty}\oint&=\lim_{r\to\infty}\bigg(\int_r^{-r}+\int_{C_R}\bigg)\\
+                        &=\int_{-\infty}^\infty+0
+\end{align*}
+hence
+\begin{align*}
+  \lim_{r\to\infty}\oint\frac{ize^{izt/L}}{iR-z}\dd z&=\infint{z}\frac{ize^{izt/L}}{iR-z}\\
+  &=\infint{x}\frac{ix e^{ix t/L}}{iR-x}
+\end{align*}
+where the final relabeling works as we are only integrating over the real axis and may relabel $z\to x$ where $x\inR$. The LHS integral may be evaluated with Cauchy's integral formula
+\begin{align*}
+  f(a)=\frac{1}{2\pii}\oint\frac{f(z)}{z-a}
+\end{align*}
+Where $a$ is the location of a pole. Noting that in our case we have $f(z)=ize^{izt/L}$ gives us that in the limit $r\to\infty$
+\begin{align*}
+  y(t)     &=-\frac{1}{2\pii L}\oint\bigg(\frac{ize^{izt/L}}{iR-z}\bigg) \\
+           &=\frac{1}{2\pii L}\oint\bigg(\frac{ize^{izt/L}}{z-iR}\bigg) \\
+           &=\frac{1}{L}i(iR)e^{-Rt/L}\\
+           &=-\frac{R}{L}e^{-Rt/L}
+\end{align*}
+If we consider the case where $t<0$, we have something like $e^{-iz}$ in the numerator. Hence we close the contour in the negative imaginary plane as shown in lectures. Going through the same process as before but in this case, no poles are enclosed so by the Cauchy's theorem, the integral is 0. hence
+
+\begin{align*}
+  y(t)=\begin{cases}
+    -\frac{R}{L}e^{-Rt/L} &\qquad t\geq 0 \\
+    \qquad 0 &\qquad t<0
+    \end{cases}    
+\end{align*}
+
+Suppose we now want to check the inverse transform to ensure we get the same thing back. Using linearity of the integral we have that
+\begin{align*}
+  \ft\Big(\ft^{-1}(y(t))\Big)&=\int_{-\infty}^\infty \dd t y(t)e^{i\omega t}\\
+                             &=-\frac{R}{ L}\int_0^\infty \dd t e^{-Rt/L}e^{-i\omega t}\\
+                             &=-\frac{R}{ L}\int_0^\infty \dd t e^{-(R/L+i\omega)t}\\
+                             &=-\frac{R}{ L}\bigg[ -\frac{1}{R/L+i\omega}e^{-(R/L+i\omega)t}\bigg]_{0}^\infty\\
+                             &=0-\frac{R}{(R+i\omega L)}e^0\\
+                             &=-\frac{R}{(R+i\omega L)}
+\end{align*}
+Which isn't exactly what we want. Consider adding the Fourier transform of a delta function to the final result i.e. the constant $1$. Then we have
+\begin{align*}
+  \qty(1-\frac{R}{R+i\omega L})&=\frac{R+i\omega L-R}{R+i \omega L}\\
+                               &=\frac{i\omega L}{R+i\omega L}\\
+                               &=Y(\omega)
+\end{align*}
+Hence this tells us that our actual final result is
+
+\begin{align*}
+  y(t)=\begin{cases}
+    \delta(t)-\frac{R}{L}e^{-Rt/L} &\qquad t\geq 0 \\
+    \qquad 0 &\qquad t<0
+    \end{cases}    
+\end{align*}
+
+and by above we have that $\ft\big(y(t)\big)=Y(\omega)$
+
+\section*{Question 3}
+Our previous result was
+\begin{align*}
+  y(t)=\begin{cases}
+    \delta(t)-\frac{R}{L}e^{-Rt/L} &\qquad t\geq 0 \\
+    \qquad 0 &\qquad t<0
+    \end{cases}    
+\end{align*}
+Consider the following Fourier transform for a rectangular pulse. We wish to show that this gives us our function back in a certain limit. Consider the following where we used that $\omega=2\pi\nu$
+
+\begin{align*}
+  g(t)&=\frac{1}{2\pi}\infint{\omega}\widetilde{F}(\omega)\widetilde{Y}(\omega)e^{i\omega t}
+\end{align*}
+
+For our case we will consider
+\begin{align*}
+  f(t)=  \begin{cases}
+    0 &\qquad t>\abs{\tau}/2\\
+    \frac{a}{2} &\qquad t=\tau/2\\
+    a &\qquad t<\abs{\tau}/2
+  \end{cases}
+\end{align*}
+the rectangular pulse, who's Fourier transform was shown in class to be
+\begin{align*}
+  \widetilde{F}(\omega)=2a\tau\frac{\sin(\omega\tau/2)}{\tau\omega}
+\end{align*}
+and we use our previous transfer function $\widetilde{Y}(\omega)$, hence we have
+\begin{align*}
+  g(t)&=2a iL\frac{1}{2\pi}\int_{-\infty}^\infty\frac{\omega}{R+i\omega L}\frac{\sin(\omega\tau/2)}{\omega}e^{i\omega t}\dd\omega\\
+      &=\frac{aL}{2\pi}\int_{-\infty}^\infty\frac{\qty(e^{i\omega\tau/2}-e^{-i\omega\tau/2})}{R+i\omega L}e^{i\omega t}\dd\omega\\
+      &=\frac{a L}{2\pi}\int_{-\infty}^\infty\frac{1}{R+i\omega L}\qty(e^{i(\tau/2+t)\omega}-e^{i(-\tau/2+t)\omega} )\dd\omega
+\end{align*}
+Using Cauchy's integral formula again in a similar way to question 2 and making the substitution that $z=\omega L$
+\begin{align*}
+  g(t)&=\frac{aLi}{2\pii}\frac{1}{L}\oint\bigg(  \frac{ie^{i(\tau/2+t)z/L}}{iR-z}-\frac{ie^{i(-\tau/2+t)z/L}}{iR-z} \bigg)\dd z\\
+      &=\frac{a}{2\pii}\oint\bigg(-  \frac{e^{i(\tau/2+t)z/L}}{iR-z}+\frac{e^{i(-\tau/2+t)z/L}}{iR-z} \bigg)\dd z
+\end{align*}
+However we want to consider the following 3 cases for $t$. Namely $t>\tau/2$, $-\tau/2<t<\tau/2$ and $t<-\tau/2$. First for $t>\tau/2$, both exponentials have positive exponents hence similar to our argument in part 3, we close the contour in the positive imaginary plane and both have poles in this contour hence
+\begin{align*}
+  g(t)&=a\qty(-e^{i(\tau/2+t)iR/L}+e^{i(-\tau/2+t)iR/L})\\
+      &=a\qty(e^{(\tau/2-t)R/L}-e^{-(\tau/2+t)R/L})\\
+      &=ae^{-Rt/L}\qty(e^{\tau R/2L}-e^{-\tau R/2L})\\
+      &=-2ae^{-Rt/L}\sinh(\tau R/2L)
+\end{align*}
+for $t>\tau/2$. for $-\tau/2<t<\tau/2$ we have only the left exponential with positive exponent hence only the left term will contribute after applying Cauchy's integral formula and closing in the positive imaginary plane for the left term, and closing in the negative imaginary plane for the right term (no contributions in the negative imaginary plane since the pole is at $z=iR$ hence in the negative imaginary plane, no poles are enclosed and hence Cauchy tells us that this integral is hence 0). hence
+\begin{align*}
+  g(t)&=-ae^{-(\tau/2+t)R/L}
+\end{align*}
+and for the final case when $t<-\tau/2$, both exponents are negative hence both don't contribute. hence
+\begin{align*}
+  g(t)=0
+\end{align*}
+so finally we have that
+\begin{align*}
+  g(t)=
+  \begin{cases}
+    -2ae^{-Rt/L}\sinh(\tau R/2L) \qquad  &\phantom{-\tau/2<}t>\tau/2\\
+    -ae^{-(\tau/2+t)R/L} \qquad &-\tau/2<t<\tau/2 \\
+    0 \qquad &\phantom{-\tau/2<}t<-\tau/2
+  \end{cases}
+\end{align*}
+We want to compare this to our function found in question 2 so take the limit of $\tau\to 0$ and compare back to our function from question 3. Remembering that we have the fact from lectures that $a\sim 1/\tau$ gives us that first in the case of $t>\tau/2$
+\begin{align*}
+  \lim_{\tau\to 0}g(t)= \lim_{\tau\to 0}\frac{2}{\tau}e^{-Rt/L}\sinh(\tau R/2L)
+\end{align*}
+and using L'Hopitals rule to evaluate this limit gives us that
+\begin{align*}
+  \lim_{\tau\to 0}g(t)&=-2e^{-Rt/L}\lim_{\tau\to 0}\frac{\dv{\tau}\sinh(\tau R/2L)}{\dv{\tau}\tau}\\
+                      &=-\frac{R}{L}e^{-Rt/L}\lim_{\tau\to 0}\frac{\cosh(\tau R/2L)}{1}\\
+                      &=-\frac{R}{L}e^{-Rt/L}\cosh(0)\\
+                      &=-\frac{R}{L}e^{-Rt/L}
+\end{align*}
+for the case of $-\tau/2<t<\tau/2$ we have
+\begin{align*}
+  \lim_{\tau\to 0}g(t)=-a^{-Rt/L}\lim_{\tau\to 0}\frac{1}{\tau}\sim\delta(t)
+\end{align*}
+and in this case we are in the range $0<t<0$ so this is out $t=0$ value. The other value is 0 so adding these conditions together gives us that.
+\begin{align*}
+  \lim_{\tau\to 0}g(t)=\delta(t)-\frac{R}{L}e^{-Rt/L}
+\end{align*}
+Which is our exactly out function from question 2. A infinite pulse at $t=0$ when we turn on the signal and then the Fourier transform of the transfer function for later times.
+
+
+
+\end{document}

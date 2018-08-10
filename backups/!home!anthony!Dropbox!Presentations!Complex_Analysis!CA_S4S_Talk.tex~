@@ -1,0 +1,115 @@
+% Created 2018-08-07 Tue 13:59
+% Intended LaTeX compiler: pdflatex
+\documentclass[presentation]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{mypackage}
+\usefonttheme[onlymath]{serif}
+\Berlincount
+\usetheme{default}
+\date{\today}
+\title{Complex Analysis}
+\subtitle{Anthony Kalaitzis}
+\usetheme{Berlin}
+\usecolortheme[named=purple]{structure}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={Complex Analysis},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.0.50 (Org mode 9.1.13)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+
+\section{Introduction}
+\label{sec:org9cd8aee}
+
+\begin{frame}[label={sec:orgf814d87}]{Motivation}
+\end{frame}
+
+\section{Complex Differentiation}
+\label{sec:org29aeef1}
+
+\begin{frame}[label={sec:orgedf2689}]{Balls}
+\begin{definition}
+  If $a\inC$ and $R\inR$ then the Ball of radius $R$ is defined as the set
+  \begin{align*}
+    B(a,R) &\equiv \{ \ z \ | \ 0\leq\abs{z-a}<R \}\\
+    \pd B(a,R) &\equiv \{ \ z \ | \ \abs{z-a}=R \} \\
+    \pd B(a,R) &\equiv B(a,R)\cup \pd B(a,r)
+  \end{align*}
+\end{definition}
+\end{frame}
+
+\begin{frame}[label={sec:org34037f0}]{The Derivative}
+\begin{definition}
+  Take a complex valued function $f$ defined on a nhd of the point $z_0$ i.e. $B(z_0,R)$. The complex derivative defined as
+  \begin{align*}
+    f'(z_0) = \lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}
+  \end{align*}
+  $f$ is said to be holomorphic (complex differentiable) in a nhd of $z_0$ if the above limit exists.  
+\end{definition}
+\end{frame}
+
+\begin{frame}[label={sec:org69f93b1}]{Branch's}
+\end{frame}
+\begin{frame}[label={sec:org1ffd950}]{Complex Logarithm}
+\end{frame}
+
+\section{Complex Integration}
+\label{sec:orgbda5633}
+
+\begin{frame}[label={sec:org890e989}]{Orientation}
+\end{frame}
+\begin{frame}[label={sec:orga69c389}]{Parametrization}
+\end{frame}
+\begin{frame}[label={sec:org41e9054}]{Cauchy's Integral Formula}
+\begin{theorem}[Cauchy's Integral Formula]
+  Suppose $f:U\subseteq \mathbb{C}\to\mathbb{C}$ is a holomorphic and $U$ an open subset. Then for the open ball $B(a,R)\subseteq U$ we have that
+  \begin{align*}
+    f(a) = \frac{1}{2\pi i}\int_{\pd B(a,R)}  \frac{f(z)}{z-a}\dd z
+  \end{align*}
+\end{theorem}
+\end{frame}
+
+\begin{frame}[label={sec:org97b10f4}]{Examples}
+\end{frame}
+\begin{frame}[label={sec:org3c3748d}]{Laurent Series}
+\end{frame}
+\begin{frame}[label={sec:org825fffb}]{Residue Theorem}
+\begin{theorem}
+  Suppose $f:U\subseteq \mathbb{C}\to \mathbb{C}$ is holomorphic on $U\setminus\{a_1,...,a_n\}$. $U$ an open set then we have that
+  \begin{align*}
+    \int_U f(z)\dd z = 2\pi i \sum_{k=1}^n \text{Res}\qty(f,a_k)
+  \end{align*}
+\end{theorem}
+\end{frame}
+
+\begin{frame}[label={sec:org04a7398}]{Example}
+\end{frame}
+
+\section{Cheat Sheet}
+\label{sec:orga345d22}
+
+\begin{frame}[label={sec:org7d73b47}]{Other Useful Theorems}
+\end{frame}
+\begin{frame}[label={sec:orgba5c7ef}]{List of Complex Integrals}
+\end{frame}
+\end{document}

@@ -1,0 +1,23 @@
+# Fortran base MakeFile
+# add links to libaries if needed
+
+F90C = ifort
+F90FLAGS = -O2
+
+%.o: %.f90
+	$(F90C) $(F90FLAGS) -c $<
+
+# Modules below
+OBJS = 	kinds.o \
+	fft_mod.o
+
+aa: aa.f90 $(OBJS)
+	$(F90C) $(F90FLAGS) -o $@ $< $(OBJS) 
+
+# list dependencies
+aa.o: kinds.o
+#fft_mod.o: kinds.o
+
+clean:
+	rm *.o *.mod
+

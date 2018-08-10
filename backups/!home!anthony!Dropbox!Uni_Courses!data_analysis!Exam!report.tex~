@@ -1,0 +1,464 @@
+% author lists, or if there are many overlapping affiliations.
+% For Phys. Rev. appearance, change preprint to twocolumn.
+% Choose pra, prb, prc, prd, pre, prl, prstab, prstper, or rmp for journal
+%  Add 'draft' option to mark overfull boxes with black boxes
+%  Add 'showpacs' option to make PACS codes appear
+%  Add 'showkeys' option to make keywords appear
+
+\documentclass[aps,prl,twocolumn]{revtex4-1}
+\usepackage{mypackage}
+\usepackage{setspace}
+
+\definecolor{Code}{rgb}{0,0,0}
+\definecolor{Decorators}{rgb}{0.5,0.5,0.5}
+\definecolor{Numbers}{rgb}{0.5,0,0}
+\definecolor{MatchingBrackets}{rgb}{0.25,0.5,0.5}
+\definecolor{Keywords}{rgb}{0,0,1}
+\definecolor{self}{rgb}{0,0,0}
+\definecolor{Strings}{rgb}{0,0.63,0}
+\definecolor{Comments}{rgb}{0,0.63,1}
+\definecolor{Backquotes}{rgb}{0,0,0}
+\definecolor{Classname}{rgb}{0,0,0}
+\definecolor{FunctionName}{rgb}{0,0,0}
+\definecolor{Operators}{rgb}{0,0,0}
+\definecolor{Background}{rgb}{0.98,0.98,0.98}
+
+\lstdefinelanguage{Python}{
+numbers=left,
+numberstyle=\footnotesize,
+numbersep=1em,
+xleftmargin=1em,
+framextopmargin=2em,
+framexbottommargin=2em,
+showspaces=false,
+showtabs=false,
+showstringspaces=false,
+frame=l,
+tabsize=4,
+% Basic
+basicstyle=\ttfamily\small\setstretch{1},
+backgroundcolor=\color{Background},
+% Comments
+commentstyle=\color{Comments}\slshape,
+% Strings
+stringstyle=\color{Strings},
+morecomment=[s][\color{Strings}]{"""}{"""},
+morecomment=[s][\color{Strings}]{'''}{'''},
+% keywords
+morekeywords={import,from,class,def,for,while,if,is,in,elif,else,not,and,or,print,break,continue,return,True,False,None,access,as,,del,except,exec,finally,global,import,lambda,pass,print,raise,try,assert},
+keywordstyle={\color{Keywords}\bfseries},
+% additional keywords
+morekeywords={[2]@invariant,pylab,numpy,np,scipy},
+keywordstyle={[2]\color{Decorators}\slshape},
+emph={self},
+emphstyle={\color{self}\slshape},
+%
+}
+
+\begin{document}
+
+\lstset{language=Python,tabsize=2}
+
+% Use the \preprint command to place your local institutional report
+% number in the upper righthand corner of the title page in preprint mode.
+% Multiple \preprint commands are allowed.
+% Use the 'preprintnumbers' class option to override journal defaults
+% to display numbers if necessary
+% \preprint{}
+
+\title{Data Analysis Take Home Exam}
+
+% repeat the \author .. \affiliation  etc. as needed
+% \email, \thanks, \homepage, \altaffiliation all apply to the current
+% author. Explanatory text should go in the []'s, actual e-mail
+% address or url should go in the {}'s for \email and \homepage.
+% Please use the appropriate macro foreach each type of information
+
+% \affiliation command applies to all authors since the last
+% \affiliation command. The \affiliation command should follow the
+% other information
+% \affiliation can be followed by \email, \homepage, \thanks as well.
+
+\author{Anthony Kalaitzis - a1686631}
+
+%\email[]{Your e-mail address}
+%\homepage[]{Your web page}
+%\thanks{}
+%\altaffiliation{}
+\affiliation{}
+
+%Collaboration name if desired (requires use of superscriptaddress
+%option in \documentclass). \noaffiliation is required (may also be
+%used with the \author command).
+%\collaboration can be followed by \email, \homepage, \thanks as well.
+%\collaboration{}
+%\noaffiliation
+
+\date{\today}
+\maketitle
+
+\section{Introduction}
+
+The purpose of this report is to analyze the data given over a three year period which may exhibit lunar periodicity as this data contains sea level height among other quantities. We will go into an in depth Fourier analysis of the data. Including three averaging techniques in order to reduce noise, a statistical significance analysis and some possible windows.
+
+All these tools will be used to extract the dominant frequencies out of the data which should be the equal to the lunar periodicity.
+
+\section{The Raw Data}
+
+We begin by loading our data into Python. The data contains nine measured quantities, each sampled every hour over three years. The nine data sets are contained in each column of the data set variable. It is worth noting that we have compiled the three data sets into one long file with the sets in temporal order (i.e. 2000-2001-2002). Code for loading the data in below:
+
+\begin{lstlisting}
+  raw_data = np.array(genfromtxt(\
+  "exam_data.csv",delimiter=','))
+  data = np.array(raw_data)
+  for ii in range(0,len(raw_data[0,:])):
+     pypl.plot(raw_data[:,ii],\
+     label=titles[ii])
+  pypl.legend()
+  pypl.show()
+\end{lstlisting}
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{fig1}
+    \caption{Plot for the nine given data sets}
+    \label{fig1}
+\end{figure}
+
+When plotting this raw data against a simple indexed axis, (i.e. 1,2,3 for the first second and third element etc.) we notice the following issue. We can see in FIG \ref{fig1} that this data contains many dropouts. These dropouts contaminate the data so we wish to avoid them.
+
+It is worth noting that the total number of data points per column is $N=26304$. The Fast Fourier Transformation (FFT) algorithm we wish to run requires the number of data points to be a power of $2$ (otherwise it will pad out the data with zeros).
+
+The greatest power of 2 below the total Number of data points $N$ is $N_0=2^{14}=16384$. Our main data set with which we wish to analyze is the sea level data. This is due to the fact that we expect the sea level to exhibit lunar periodicity the most when compared to the other data sets.
+
+The sea level data sets dropouts only occur in the 2000 data (as seen in FIG \ref{fig1}, the three data sets are roughly of equivalent length) and the remaining 2 sets contain more then $2^{14}$ points. We may hence truncate our way around the dropout problem by merely ignoring the 2000 data set and taking the first $2^{14}$ points from the 2001+2002 data sets.
+
+This will work for the sea level data but not the other sets. We will hence only consider four data sets namely: sea level, residuals, adjusted residuals and wind speed. The other data sets such as air temperature contain too many dropouts to be considered for serious analysis.
+
+The largest interval for these data sets without dropout is between the first dropout of the sea level data set and the dropout for wind speed at around 2000 data points (as seen in FIG \ref{fig1}). This amount of points largest power of 2 below it is $2^{13}$.
+
+It is worth noting however that still our main analysis will concern the sea level data. The other data sets will merely be used at the end of the analysis to corroborate results from the sea level analysis.
+
+\section{FFT of the Sea level}
+
+We begin by noting down that the moon periodicity $T=27.3$ and hence we may convert this to frequency space via $T=1/f$ as done in the code below:
+
+\begin{lstlisting}
+  Moon_Period = 27.3
+  Moon_freq = 1/Moon_Period
+\end{lstlisting}
+
+We define the total number of points $N=2^{14}$ and proceed by loading in only the 2001-2002 data and then truncate this down to $2^{14}$ like so
+
+\begin{lstlisting}
+  N_tot = 2**14
+  data = np.array(raw_data\
+  [N_2000+1:len(raw_data)-1,:])
+  input_data = data[0:N_tot:step_size,0]                         
+\end{lstlisting}
+
+where we have indicated the zeroth column as this is the column that contains the sea level. We then calculate the FFT of the data by making use of inbuilt libraries and then proceed to calculate it's power spectra.
+
+\begin{lstlisting}
+  fft_input=np.fft.fft(input_data)
+  input_power=(np.square(\
+  np.absolute(fft_input)))
+\end{lstlisting}
+
+Before we can plot the data we need to construct a frequency axis. This can be done by calculating the sampling rate which represents the rate at which we sample the data. The data is sampled every hour so if we set the sampling rate $f_s=1$, then our scale would be in hours. To achieve a more nicely scaled axis we convert this into a daily sampling rate i.e. $f_s=24$.
+
+When then create a space of points from 0 to $N-1$ and scale it with the factor
+\begin{align*}
+  \frac{f_s}{N}
+\end{align*}
+
+This will create a properly calibrated frequency axis. In code this reads as
+
+\begin{lstlisting}
+  N = 2**14
+  fs = 24
+  f = (fs*np.linspace(0,N-1,N))/N
+\end{lstlisting}
+
+Lastly, before plotting there are three features we wish to overlay onto our plot to give us greater insight into our analysis. Firstly the Nyquist frequency which tells us that any data past the Nyquist frequency will be heavily aliased. This may be calculated simply via the formula $f_s/2$.
+
+Next is the minimum frequency which like the Nyquist frequency. Tells us that any data below the minimum frequency is heavily aliased. This may be calculated simply via the formula $f_s/N$ (Where again $N$ = total number of points).
+
+Thirdly we will overlay the moon frequency which we have already discussed how to calculate. Putting together our frequency axis with our power spectra and overlaying our three details can be done in code like so:
+
+\begin{lstlisting}
+  pypl.loglog(f,input_power,\
+  label=titles[0])
+  pypl.xlabel("frequency")
+  pypl.ylabel("Power Spectra")
+  pypl.grid()
+  pypl.axvline(x=fs/N,\
+  label="min freq",c='black')
+  pypl.axvline(x=Moon_freq,\
+  label="Moon Freq",c='black')
+  pypl.axvline(x=fs/2,\
+  label="Niquist Freq",c='black')
+  pypl.legend()
+  pypl.show()
+\end{lstlisting}
+
+where the variable ``titles'' simply contains a list of titles for the plots. This produces FIG \ref{fig2}:
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{fig2}
+    \caption{Sea Level Power Spectra}
+    \label{fig2}
+\end{figure}
+
+Here the black lines represent from left to right: The minimum frequency, the moon frequency and the Nyquist frequency. These lines will be consistent in every plot throughout the report.
+
+Looking at the straight FFT of the sea level data in FIG \ref{fig2}, we can see a small peak that does align with the moon frequency. However this peak is currently of small statistical significance as indicated in its height and in the fact that many similar peaks currently exist and with higher statistical significance.
+
+This can be seen more clearly in the zoomed in picture FIG \ref{fig3}. (Where we can ignore signals past the Nyquist frequency).
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{fig3}
+    \caption{Sea Level Power Spectra Zoomed}
+    \label{fig3}
+\end{figure}
+
+We now wish to clean up this signal and remove noise. This should leave us with only the statistically significant peaks. This can be done in a number of ways but we will focus on three averaging techniques.
+
+\section{Noise Reduction}
+
+Our first method is a sequential average of the data. Consider cutting the data into $N$ slices where the slices contain every $N$th point. For instance if we cut up the data into 4 slices, the first slice would contain the 1,5,9,.. etc points. The second slice would contain the 2,6,10,.. and so on.
+
+We consider each slice an independent data set and follow the same calculations as we did previously to calculate the FFT of each slice. Before we calculate the power spectra however we average over all the slices and then proceed as we did previously. In code this may be expressed as
+
+\begin{lstlisting}
+  for jj in range(0,N_avg):
+    input_data = data[jj:N_tot:N_avg,ii]
+    fft_input=fft_input+\
+    np.fft.fft(input_data)
+  fft_input = fft_input/N_avg
+  input_power=(np.square(\
+  np.absolute(fft_input)))    
+\end{lstlisting}
+
+where $N_{\text{avg}}$ represents the number of slices. Running the code and overlaying with our un-averaged data (which will have to be truncated down to $N/N_{\text{avg}}$ points for dimensionality) gives us FIG \ref{fig4}.
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{fig4}
+    \caption{Sequentially Averaged Sea Level Power Spectra}
+    \label{fig4}
+\end{figure}
+
+Here the orange curve represents the averaged data (this will be true for all the averaging methods). We can see here that the far right hand peaks greatly reduce in height whilst the peaks at and around the moon frequency retain their height and shape (This was conducted for $N_{\text{avg}}=36$). This gives us statistical confidence that at the very least the right hand peaks are primarily noise. As they have been greatly affected by this averaging technique which should reduce high frequency noise. We still have issues for the surrounding peaks near the moon frequency line and the low frequency peaks.
+
+For the low frequency peaks, consider the chunk averaging method. For this we simply break up our data set into $N$ chunks and consider them as independent data sets. We then simply follow the same methods as we did previously i.e. calculate the FFT of the individual chunks and then average the data together before calculating the power spectra. In code this reads as
+
+\begin{lstlisting}
+  for jj in range(0,N_avg):
+    input_data = data[jj*N:(jj+1)*N,ii]
+    fft_input=fft_input+\
+    np.fft.fft(input_data)
+  
+  fft_input = fft_input/N_avg        
+  input_power=(np.square(\
+  np.absolute(fft_input)))
+\end{lstlisting}
+
+where similarly $N_{\text{avg}}$ represents the number of chunks. Overlaying our original plot and running the code gives us FIG \ref{fig5}.
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{fig5}
+    \caption{Chunk Averaged Sea Level Power Spectra}
+    \label{fig5}
+\end{figure}
+
+We can see that while this method does flatten out some of the low frequency peaks it also affects the peak we wish to analyze which is less then desirable (This was done for $N_{\text{avg}}=4$). We can however claim that the peaks being generated near the minimum frequency are noise as that are clearly flattened in FIG \ref{fig5} (the flat line near the left edge of the graph).
+
+The last averaging method we can do is the moving average. This method is conducted after calculating the power spectra and hence may be done after either or none of the previous two methods are conducted. For the purposes of this section we will simply calculate the moving average after calculating the power spectra with no other averaging present.
+
+The purpose of the moving average is to remove rapid fluctuations and only keep statistically significant peaks. Consider taking an interval of length $L$ from the power spectra starting at the 1st point and ending at the $L$th. We calculate the average of these points and denote this as our first value. We then increment the interval one step (i.e. starting at the 2nd point and ending at the $(L+1)$th point) and calculate the average of these points and denote this our second data point.
+
+We continue this process until we average over the entire data set. This is what is called a moving average and results in a new power spectra of length $N-(L-1)$. We will actually employ what is called a weighted moving average but this will be further discussed in the windowing section. For now we consider a simple moving average which in code, may be calculated by
+
+\begin{lstlisting}
+  input_power=(np.square(\
+  np.absolute(fft_input)))
+  moving_avg = \
+  [0 for i in range(N-(width-1))]
+  for kk in range(0,len(moving_avg)-1):
+    moving_avg[kk] = np.sum(\
+    input_power[kk:kk+width])/width
+  pypl.loglog(f[0:len(moving_avg)]\
+  moving_avg,label=titles[0])
+\end{lstlisting}
+
+note that we had to pre-allocate memory for the variable ``moving average''. Here the variable ``width'' = $L$. Once again, running the code and overlaying our original plot gives us \ref{fig6}
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{fig6}
+    \caption{Moving Averaged Sea Level Power Spectra}
+    \label{fig6}
+\end{figure}
+
+where this was conducted for ``width=8''. As we can see, this gives us exactly the results we want. This method flattens out the low frequency peaks whilst keeping our statistically significant peak at the moon frequency. As an added bonus we can also see that the averaging reduces the heights of the peaks following the moon frequency. The result is that the most statistically significant peak (and widest) is the peak that occurs at the moon frequency.
+
+We will look at this peak in closer detail in the results section but for now we move onto some windowing methods for the data. This will include details on the weighted moving average as this in itself is a kind of windowing.
+
+\section{Windows}
+
+We will consider the following window on our data, namely the Hann window. This window function will reduce the values on the edge of the data set whilst keeping the values at the centre the same. This can be thought of as multiplying our data values with a bump function (bump function refers to a Gaussian bump function i.e. 0 at the edges and smoothly increasing to 1 at the centre).
+
+Mathematically the Hann window is described by the function
+
+\begin{align*}
+  H(n) = \frac{1}{2}\qty(1-\cos\qty(\frac{2\pi n}{N-1}))
+\end{align*}
+
+where $n$ is the current point and $N$ = total number of points. We construct this window function for $N=2^{14}$ points and then simply multiply it against our data before calculating the FFT and then the power spectra. In code this reads as
+
+\begin{lstlisting}
+  hann =  np.array([(1/2)*(1-cos(\
+  (2*m.pi*kk)/(N-1))) for kk in range(N)])
+  input_data = input_data*hann
+\end{lstlisting}
+
+and then following the previous code produces FIG \ref{fig7} (This is just a plot of the FFT data with no extra averaging done) where once again we have overlayed the original data for comparison.
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{fig7}
+    \caption{Hann Windowed Sea Level Power Spectra}
+    \label{fig7}
+\end{figure}
+
+Here the orange curve represents the windowed data. This sharpens the peak and does cause our desired peak to have the greatest height when compared to the other surrounding peaks but not by much. We will however later use this windowing in conjunction with our averaging techniques in order to extract out the statistically significant peaks in our data.
+
+Our weighted moving average is the logical extension of the above windowing and our previous moving average. We follow the same steps as we did previously with the added step that for our interval of length $L$, we multiply this by a Hann window of the same length. This will cause values closer to the centre to be weighted more greatly and the edges less so.
+
+In code we may accomplish this by
+
+\begin{lstlisting}
+  hann =  np.array([(1/2)*(1-cos(\
+  (2*m.pi*kk)/(N-1)))\
+  for kk in range(width)])
+  for kk in range(0,len(moving_avg)-1):
+    moving_avg[kk] = np.sum(hann\
+    *input_power[kk:kk+width])/width
+\end{lstlisting}
+
+where the variable ``width'' = the interval length for the moving average. Now with all our techniques discussed we may combine these methods together, picking and choosing the best ones in order to extract the dominant frequencies from our data which we expect to correlate with the lunar periodicity.
+
+\section{Results}
+
+Using the fact that our first two averaging methods told us that the higher and lower frequencies are noise. We wish to analyze the mid range frequencies more closely using our moving average method combined with our windowing to hopefully extract some statistically significant data.
+
+Just in case we were unsure of the validity of the low and high frequency peaks being mainly noise via our first two averaging techniques we may consider the following. Combining the moving average for ``width'' = 10 and the sequential average for $N=32$ slices produces FIG \ref{fig8}.
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{fig8}
+    \caption{Power Spectra with Moving and Sequential Average}
+    \label{fig8}
+\end{figure}
+
+This smooths out the noise whilst leaving the moon periodicity peak as the most statistically significant (just like what was previously calculated with our first two averaging techniques). This provides further evidence that the higher and lower frequency peaks are noise and the statistically significant peaks lie in the centre.
+
+Now applying our moving average again in conjunction with the sequential average again produces FIG \ref{fig9} (same values for width and $N$). Here we have zoomed in on the region of interest as we have discerned that everything outside this region is noise an uninteresting.
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{fig9}
+    \caption{Zoomed In Power Spectra for FIG. 8.}
+    \label{fig9}
+\end{figure}
+
+As can be seen in FIG \ref{fig9}, the tallest and widest peak in the data occurs at the moon periodicity. This would suggest that the dominant frequency (or most statistically significant frequency) being displayed in the sea level data is exactly the moon period frequency.
+
+This would hence suggest that their is a correlation between the period of the sea level heights and the lunar periodicity. However The other peaks in FIG \ref{fig9} might suggest that there are other dominant frequencies in the sea level height but just of slightly less statistical significance then the moon period.
+
+What we can do however is not just plot the moon frequency with a single black line but the next two harmonics ($2\cdot f_{\text{moon}}$ and $3\cdot f_{\text{moon}}$). When we overlay these peaks as well we get FIG \ref{fig10}
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{fig10}
+    \caption{Power Spectra with Moon Frequency Harmonics}
+    \label{fig10}
+\end{figure}
+
+This gives us strong evidence that the other peaks in the signal are being caused via the harmonics from the moon frequency. This is further evidence that the dominant frequency of the sea level height is correlated with the moon periodicity as one might expect.
+
+As a final test we may now overlay the plots for the previously mentioned four data sets whilst using the same averaging techniques used in FIG \ref{fig8}. This produces FIG \ref{fig11}.
+
+Zooming in on the plot for the wind speed and the other 3 quantities produces the 2 plots FIG \ref{fig12} and FIG \ref{fig13}.
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{fig11}
+    \caption{Power Spectra For Listed Data Sets}
+    \label{fig11}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{fig12}
+    \caption{Power Spectra Wind Speed Zoomed}
+    \label{fig12}
+  \end{figure}
+
+  \begin{figure}
+    \includegraphics[width=\columnwidth]{fig13}
+    \caption{Power Spectra For Listed Data Sets Zoomed}
+    \label{fig13}
+\end{figure}
+
+We again see that the most statistically significant peak is again at the moon period for all data sets.
+
+\section{Discussion}
+
+What we have discovered in this analysis is that the most statistically significant peak for the sea level power spectra after removing noise (Largest amplitude/height peak). Correlates exactly with the value for the Lunar frequency and by extension the Lunar periodicity ($f=1/T$) as seen in FIG \ref{fig10}.
+
+This strongly suggests that the sea level is operating on the same periodically cycle as the Moon and is further evidence for the fact that we know the Moon causes the tides/sea level heights.
+
+This is most easily seen by the moving average in tandem with the sequential average. The moving average is geared towards removing fast fluctuating noise which most greatly affected our data as seen in FIG \ref{fig2}.
+
+For an improved analysis, one might employ the discussed techniques but in greater detail on the other data sets or try more window functions. Trying more possible values for slices, widths, chunks and whether or not to turn on windowing is also possible. One possible extra technique that was not covered was an Ergodic temporal average.
+
+We have seen in our analysis that the peaks that cause the most interference with the claim that the moon frequency peak are the harmonic peaks or the peaks that follow shortly after the moon frequency peak. As the data is time varying, it may be possible to do a temporal Ergodic average to reduce the effects of these harmonics.
+
+\section{Conclusion}
+
+In conclusion we have found statistically significant evidence that the sea level data exhibits lunar periodicity. This was accomplished via Fourier analysis of the data combined with averaging and windowing techniques to reduce the noise of the data.
+
+
+
+% only one appendix.
+\appendix
+
+\section{Full Code}
+
+\begin{widetext}
+
+\lstinputlisting{exam_code_plot.py}
+
+
+
+\begin{thebibliography}{15}
+
+\bibitem{thesis}
+Karma Dajani and Sjoerd Dirksin 2008
+[\textit{A simple introduction to Ergodic Theory}]
+\\\texttt{http://www.staff.science.uu.nl/\~{}kraai101/lecturenotes2009.pdf}
+
+\bibitem{thing}
+Lucas Illing 2008
+[\textit{Fourier Analysis}]
+\\\texttt{http://www.reed.edu/physics/courses/Physics331.f08/pdf/Fourier.pdf}
+
+\bibitem{thesis}
+[\textit{Moving Average}]
+\\\texttt{https://en.wikipedia.org/wiki/Moving\_average}
+
+  
+\end{thebibliography}
+
+\end{widetext}
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

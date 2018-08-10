@@ -1,0 +1,194 @@
+% Created 2018-08-07 Tue 14:20
+% Intended LaTeX compiler: pdflatex
+\documentclass[13pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{mypackage}
+\pagenumbering{gobble}
+\author{Anthony Kalaitzis}
+\date{\today}
+\title{MPHIL Research Journal}
+\hypersetup{
+ pdfauthor={Anthony Kalaitzis},
+ pdftitle={MPHIL Research Journal},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.0.50 (Org mode 9.1.13)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+
+\section{2018}
+\label{sec:orgec92d11}
+\subsection{2018-07 July}
+\label{sec:orgd14834b}
+\subsubsection{2018-07-26 Thursday}
+\label{sec:org67019ae}
+\begin{enumerate}
+\item QMC starting point\hfill{}\textsc{Meeting}
+\label{sec:org1a0bca1}
+
+\uline{Notes}: Below we have the TOV equation which we will need to solve for the mass-radius relation for neutron stars 
+
+\begin{align*}
+  \frac{dP}{dr}=-\frac{Gm}{r^2}\rho\left(1+\frac{P}{\rho c^2}\right)\left(1+\frac{4\pi r^3P}{mc^2}\right)\left(1-\frac{2Gm}{rc^2}\right)^{-1}
+\end{align*}
+
+This will be done in the \(\beta\) equilibrium case where \(\mu_P=\mu_N+\mu_{e^-}\)
+
+\uline{Agenda}: Use these relationships to calculate the Moment of Inertia. Calculate the equation of state for the QMC model for neutron stars in \(\beta\) equilibrium. Solve the TOV equations for mass radius relationship for neutron stars.
+\end{enumerate}
+\subsection{2018-08 August}
+\label{sec:orgdbb953b}
+\subsubsection{2018-08-02 Thursday}
+\label{sec:orge8b1a98}
+\begin{enumerate}
+\item CCSP information session
+\label{sec:orgd974f1e}
+
+\uline{Notes}:  Allow \$1500 for travel expenses for conferences and hotels. Maybe mention the computers the university is supplying and your own personal computer. 
+
+\uline{Agenda}: Fix the budget section of the CCSP. Final check and spell check and then hand in
+
+\uline{Resources}: N/A
+
+\item Equation of State\hfill{}\textsc{Meeting:DM}
+\label{sec:org401ccff}
+
+\uline{Notes}: The equation of state represents \(P\) vs \(\epsilon\) i.e. pressure vs energy density. The recent Dark matter in a RMF theory setting paper \href{https://arxiv.org/abs/1807.10013v1}{Dark matter and neutron stars} only considered a small percentage of neutrons decaying into dark matter particles and was not considering their existence in neutron stars to explain for the dark matter problem of the universe. This likely occurred near the beginning of the universe (i.e. the creation of the dark matter).
+
+In order to solve the TOV equations we pick an initial density and find where the graph of Pressure vs radius intersects the \(x\) axis. This should be a simple DE to solve. Once you know this value you should be able to extract all needed physical quantities. This includes things like the mass as a function of radius and other various quantities in General Relativity (nuclear incomprehensibility.
+
+The constraints the GW170817 puts on the EoS are complicated and require a large amount of GR to explain. The bottom line is that is gives us a range of physically viable EoS to try as potential solutions. From this we can extract other useful quantities. An example of equations of state and mass radius relationships are given below:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.6\textwidth]{Images/MR_neutronstars.jpeg}
+\caption{Mass vs Radius for neutron stars}
+\end{figure}
+
+\uline{Agenda}: Acquire a range of values for the EoS with spacing of no bigger then \(0.1fm^{-3}\) for the case of \(p,n,\mu\) and \(e^{-}\) present in neutron stars. Have a read on the paper \href{https://arxiv.org/pdf/nucl-th/0611030.pdf}{Cold uniform matter and neutron stars in the QMC model}. Maybe explore some more background on the \(\beta\) equilibrium conditions of neutron stars and make sure to understand these conditions and where they come from.
+
+\uline{Resources}:  \href{https://arxiv.org/pdf/nucl-th/0611030.pdf}{Cold uniform matter and neutron stars in the QMC model}, \href{https://arxiv.org/abs/1807.10013v1}{Dark matter and neutron stars}, GW170817 is the code for the relevant gravitational wave experiment that will come up a lot.
+\end{enumerate}
+\subsubsection{2018-08-03 Friday}
+\label{sec:org3843f8c}
+\begin{enumerate}
+\item Countable and Uncountable infinities\hfill{}\textsc{RT}
+\label{sec:org3048147}
+
+\uline{Notes}: Below is a sketch of a proof of the natural numbers is an infinite set. Let \(f:\mathbb{N}\to \{1,...,n\}\). If we suppose that this mapping exists and is bijective, then if we take the final element \(n\) of the set. By the axiom of natural numbers, the element \(n+1\) must be in the set, hence not a bijection, contradiction.
+
+\uline{Resources}: \href{https://myuni.adelaide.edu.au/courses/25463}{Integration and Analysis Course Notes}, \href{https://en.wikipedia.org/wiki/G\%25C3\%25B6del\%2527s\_incompleteness\_theorems}{Godel's incompletness theorem}
+\end{enumerate}
+\subsubsection{2018-08-06 Monday}
+\label{sec:orgb905183}
+\begin{enumerate}
+\item QMC 2006 - Baryon Octet\hfill{}\textsc{2006}
+\label{sec:org36b97b5}
+
+\uline{Notes}: The observed maximum mass of cold neutron stars cannot be explained without considering the pressure, arising from the strong nuclear force, which opposes gravitational collapse. The theoretical framework for describing the properties of strongly interacting matter is the Equation of State (EoS), which relates the pressure and energy density of the system, calculated using a model for the baryon-baryon interaction between particles present in the matter.
+
+At sufficiently high density, nuclear matter will most likely be composed not just of nucleons and leptons but also strange baryons and boson condensates. It is also likely that the interaction between overlapping quark bags will result in partial or full deconfinement. We will consider the matter in \(\beta\) equilibrium and initially the \(p,n,e^{-}\) and \(\mu^{-}\) will be considered. Later we will fully incorporate the Hyperons and the scalar isovector. 
+
+The main feature of the QMC model is that the interactions are generated by the exchange of mesons coupled locally to the quarks. We will consider the \(\sigma,\omega\) and \(\rho\) mesons. Given the position and velocity of the bag, we obtain its energy by solving the field equations for the confined quarks.
+
+The \href{https://ac.els-cdn.com/0375947496000334/1-s2.0-0375947496000334-main.pdf?\_tid=17897949-d516-4ee8-a88c-221189b469fd\&acdnat=1533531811\_240b565d83935d63a742195c742ed692}{QMC 1996} paper mainly focused on nuclear matter and finite nuclei primarily composed of nucleons, it can however be generalized to Hyperons. The paper \href{https://ac.els-cdn.com/S037594740700574X/1-s2.0-S037594740700574X-main.pdf?\_tid=1435387d-6c93-4291-8638-8993350e4801\&acdnat=1533532016\_40e2a902600517075fec538e0670a79d}{QMC 2006} includes spin 1/2 SU(3) octet \((N,\Lambda,\Sigma,\Xi)\) where the baryons are specified by 
+
+\begin{align*}
+  \ket{f} = \ket{tms}
+\end{align*}
+
+Below is a table of the quantum numbers of the Baryon octet for future reference:
+
+\begin{center}
+\begin{tabular}{lllrrrrll}
+\hline
+ & p & n & \(\Lambda\) & \(\Sigma^{\text{-}}\) & \(\Sigma^{\text{0}}\) & \(\Sigma^{\text{+}}\) & \(\Xi^{\text{-}}\) & \(\Xi^{\text{0}}\)\\
+\hline
+t & 1/2 & 1/2 & 0 & 1 & 1 & 1 & 1/2 & 1/2\\
+m & 1/2 & -1/2 & 0 & -1 & 0 & 1 & -1/2 & 1/2\\
+s & 0 & 0 & -1 & -1 & -1 & -1 & -2 & -2\\
+\hline
+\end{tabular}
+\end{center}
+
+where \(t,m\) is the isospin and its projection respectively and \(s\) the strangeness. The working hypothesis is that the strange quark is not coupled to the meson fields, which can be seen as a consequence of the fact that the mesons represent correlated pion exchanges.
+
+\uline{Resources}: The main resource being referenced here is \href{https://ac.els-cdn.com/S037594740700574X/1-s2.0-S037594740700574X-main.pdf?\_tid=1435387d-6c93-4291-8638-8993350e4801\&acdnat=1533532016\_40e2a902600517075fec538e0670a79d}{Cold uniform matter and neutron stars} as well as \href{https://arxiv.org/pdf/nucl-th/0402064.pdf}{Quark structure and nuclear effective forces}, \href{https://ac.els-cdn.com/S0375947406001539/1-s2.0-S0375947406001539-main.pdf?\_tid=84dfeb2c-41fd-49f8-bfff-678d64150800\&acdnat=1533518634\_cccf7a73578a60dd2b5dfdd5639c1659}{Physical origin of density dependent forces of Skyrme type within the QMC model}
+\end{enumerate}
+\subsubsection{2018-08-07 Tuesday}
+\label{sec:org53f14ce}
+\begin{enumerate}
+\item QMC 2006 - Hamiltonian\hfill{}\textsc{2006}
+\label{sec:org614d626}
+
+\uline{Notes}: Set the \(u\) and \(d\) quark masses to zero and assume that their coupling to the meson fields respects isospin symmetry. The energy of a baryon of flavour \(f\) with position \(\vec{R}\) and momentum \(\vec{P}\) has the form
+
+\begin{align*}
+  E_f = \sqrt{P^2+M_f^2(\sigma)}+g_\omega^f \omega +g_\rho \vec{b}\cdot\vec{I}^t
+\end{align*}
+
+where M\(_{\text{f}}\)(\(\sigma\)) is the effective mass, that is the energy of the corresponding quark bag in its rest frame, in the \(\sigma\) field, and \(\vec{I}^t\) is the isospin operator for isospin \(t\), defined as
+
+\begin{align*}
+  \mel{tms}{\sum_q \frac{\vb{\tau}_q}{2}}{t'm's'} = \delta(tt')\delta(ss')\vb{I}_{mm'}^t
+\end{align*}
+
+\(\vec{\tau}_q\) the Pauli matrix acting on the \(u\) and \(d\) quarks. The flavour dependence of the \(\omega\) coupling is fixed by the number of non-strange quarks in the baryon, that is:
+
+\begin{align*}
+  g_\omega^f = \omega_f^\omega g_\omega = \qty(1+\frac{s}{3})g_\omega
+\end{align*}
+
+Generally we will use the following fit to the mass
+
+\begin{align*}
+  M_f(\sigma) = M_f - \omega_f^\sigma g_\sigma\sigma+\frac{d}{2}\tilde{\omega}_f^\sigma (g_\sigma\sigma)^2
+\end{align*}
+
+where \(d\) is the scalar polarisability, describing the response of the nucleon to the applied scalar field.
+
+The total energy of the nuclear system is the sum of the baryon energies \(E(i)\) and of the energy stored in the meson felds
+\begin{align*}
+  E_T &= \sum{i,A}E(i)+E_{\text{mesons}} \\
+  E_{\text{mesons}} &= \frac{1}{2}\int \dd^3\vb{r} \qty[ (\grad\sigma)^2+m_\sigma^2\sigma^2] - \frac{1}{2}\int \dd^3\vb{r}\qty[ (\grad\omega)^2+m_\omega^2\omega^2]\\
+  &\phantom{=} -\frac{1}{2}\int \dd^3\vb{r}\qty[ (\grad\cdot\vb{b})^2+m_\rho^2b^2]
+\end{align*}
+
+
+\uline{Resources}: See previous days references
+
+\item QMC 2006 - Unit Conversion\hfill{}\textsc{2006}
+\label{sec:org5e4336b}
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+Unit & Conversion Factor\\
+\hline
+fm & 197.33 MeV\(^{\text{-1}}\)\\
+1/fm\(^{\text{4}}\) & 2.6115\texttimes{} 10\(^{\text{$\backslash$ -4}}\)/km\(^{\text{2}}\)\\
+ & 197.33 MeV/fm\(^{\text{3}}\)\\
+ & 3.5178\texttimes{} 10\(^{\text{14}}\)g/cm\(^{\text{3}}\)\\
+ & 3.1616\texttimes{} 10\(^{\text{35}}\)dyne/cm\(^{\text{2}}\)\\
+MeV/fm\(^{\text{3}}\) & 1.7827\texttimes{} 10\(^{\text{12}}\)g/cm\(^{\text{3}}\)\\
+ & 1.3234\texttimes{} 10\(^{\text{-6}}\)/km\(^{\text{2}}\)\\
+M\(_{\odot}\) & 1.4766 km\\
+\hline
+\end{tabular}
+\end{center}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,186 @@
+module UsefulFunctions
+  use kinds
+  implicit none
+
+contains
+
+  SUBROUTINE rk4(y,dydx,x,h,yout,derivs)
+    USE kinds; USE nrutil, ONLY : assert_eq
+    IMPLICIT NONE
+    REAL(DP), DIMENSION(:), INTENT(IN) :: y,dydx
+    REAL(DP), INTENT(IN) :: x,h
+    REAL(DP), DIMENSION(:), INTENT(OUT) :: yout
+    INTERFACE
+       SUBROUTINE derivs(x,y,dydx)
+         USE kinds
+         IMPLICIT NONE
+         REAL(DP), INTENT(IN) :: x
+         REAL(DP), DIMENSION(:), INTENT(IN) :: y
+         REAL(DP), DIMENSION(:), INTENT(OUT) :: dydx
+       END SUBROUTINE derivs
+    END INTERFACE
+    INTEGER(I4B) :: ndum
+    REAL(DP) :: h6,hh,xh
+    REAL(DP), DIMENSION(size(y)) :: dym,dyt,yt
+    ndum=assert_eq(size(y),size(dydx),size(yout),'rk4')
+    hh=h*0.5_dp
+    h6=h/6.0_dp
+    xh=x+hh
+    yt=y+hh*dydx
+    call derivs(xh,yt,dyt)
+    yt=y+hh*dyt
+    call derivs(xh,yt,dym)
+    yt=y+h*dym
+    dym=dyt+dym
+    call derivs(x+h,yt,dyt)
+    yout=y+h6*(dydx+dyt+2.0_dp*dym)
+  END SUBROUTINE rk4
+
+  FUNCTION rtbis(func,x1,x2,xacc)
+    USE kinds; USE nrutil, ONLY : nrerror
+    IMPLICIT NONE
+    REAL(DP), INTENT(IN) :: x1,x2,xacc
+    REAL(DP) :: rtbis
+    INTERFACE
+       FUNCTION func(x)
+         USE kinds
+         IMPLICIT NONE
+         REAL(DP), INTENT(IN) :: x
+         REAL(DP) :: func
+       END FUNCTION func
+    END INTERFACE
+    INTEGER(I4B), PARAMETER :: MAXIT=40
+    INTEGER(I4B) :: j
+    REAL(DP) :: dx,f,fmid,xmid
+    fmid=func(x2)
+    f=func(x1)
+    if (f*fmid >= 0.0) call nrerror('rtbis: root must be bracketed')
+    if (f < 0.0) then
+       rtbis=x1
+       dx=x2-x1
+    else
+       rtbis=x2
+       dx=x1-x2
+    end if
+    do j=1,MAXIT
+       dx=dx*0.5_sp
+       xmid=rtbis+dx
+       fmid=func(xmid)
+       if (fmid <= 0.0) rtbis=xmid
+       if (abs(dx) < xacc .or. fmid == 0.0) RETURN
+    end do
+    call nrerror('rtbis: too many bisections')
+  END FUNCTION rtbis
+
+  FUNCTION rtnewt(funcd,x1,x2,xacc)
+    USE kinds; USE nrutil, ONLY : nrerror
+    IMPLICIT NONE
+    REAL(DP), INTENT(IN) :: x1,x2,xacc
+    REAL(DP) :: rtnewt
+    INTERFACE
+       SUBROUTINE funcd(x,fval,fderiv)
+         USE kinds
+         IMPLICIT NONE
+         REAL(DP), INTENT(IN) :: x
+         REAL(DP), INTENT(OUT) :: fval,fderiv
+       END SUBROUTINE funcd
+    END INTERFACE
+    INTEGER(I4B), PARAMETER :: MAXIT=20
+    INTEGER(I4B) :: j
+    REAL(DP) :: df,dx,f
+    rtnewt=0.5_dp*(x1+x2)
+    do j=1,MAXIT
+       call funcd(rtnewt,f,df)
+       dx=f/df
+       rtnewt=rtnewt-dx
+       if ((x1-rtnewt)*(rtnewt-x2) < 0.0)&
+            call nrerror('rtnewt: values jumped out of brackets')
+       if (abs(dx) < xacc) RETURN
+    end do
+    call nrerror('rtnewt exceeded maximum iterations')
+  END FUNCTION rtnewt
+
+  function linspace(start,finish,N)
+    integer                :: N
+    real(DP), intent(in)   :: start, finish
+    real(DP), dimension(N) :: linspace
+
+    real(DP)               :: int
+    integer                :: i
+
+    linspace(1) = real(start)
+    linspace(N) = real(finish)
+    int  = (real(finish)-start)/N
+
+    do i=2,N-1
+       linspace(i)=linspace(i-1)+int
+    end do
+
+  end function linspace
+
+  function GuessZero(fvals)
+    use Kinds
+    implicit none
+    real(DP),dimension(:),intent(in) :: fvals
+    integer                          :: GuessZero
+
+    integer                          :: jj
+
+    do jj=3,size(fvals)
+       if ( sign( fvals(jj-1)/abs(fvals(jj-1)) , fvals(jj)/abs(fvals(jj)) ) .ne. &
+            sign( fvals(jj-2)/abs(fvals(jj-2)) , fvals(jj-1)/abs(fvals(jj-1)) ) ) exit
+    end do
+
+    GuessZero = jj
+
+  end function GuessZero
+
+  function newton1D(fn, guess)
+    use Kinds
+    implicit none
+    real(DP) :: newton1D
+    interface
+       function fn(x)
+         use kinds
+         implicit none
+         real(DP)             :: fn
+         real(DP), intent(in) :: x
+       end function fn
+    end interface
+    real(DP) :: guess
+    ! Local Variables
+    real(DP) :: newt_tol = 1e-6
+    real(DP) :: h ! = 1e-6_DP
+    real(DP) :: fx, fxph, dfdx ! fxph = fn(x+h)
+    integer :: attempt
+    integer :: attempt_limit = 20
+    logical :: verbose = .false.
+
+    if (verbose) write(*,*) 'Newton-Raphson Method'
+    h = guess * 1.0e-6_DP
+    newton1D = guess
+    attempt = 1
+
+    do
+       fx = fn(newton1D)
+       if (abs(fx) <= newt_tol) then
+          if (verbose) then
+             write(*,'(a,i3,a)') 'Success after', attempt, ' attempts.'
+             write(*,*) 'Zero  = ', newton1D
+          end if
+          exit
+       else if (attempt >= attempt_limit) then
+          write(*,*) 'Failed, change initial guess or increase attempt limit.'
+          exit
+       end if
+
+       fxph = fn(newton1D + h)
+       dfdx = (fxph - fx) / h
+       newton1D = newton1D - fx / dfdx
+
+       attempt = attempt + 1
+    end do
+  end function newton1D
+
+
+end module UsefulFunctions

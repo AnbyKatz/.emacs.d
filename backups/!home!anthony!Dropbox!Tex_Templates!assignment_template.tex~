@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,left=1.5cm,right=1.5cm,top=10mm,bottom=20mm]{geometry}
+\usepackage{mypackage}
+
+\usepackage{amsmath,amssymb}
+\usepackage{physics}
+\usepackage{slashed}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{simplewick}
+\usepackage{listings}
+\usepackage{mwe}
+\usepackage{afterpage}
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+        \newpage}
+
+
+
+\begin{document}
+
+% ----------------------------------------------------------------
+
+\vspace*{-2cm}
+%\enlargethispage{2cm}
+
+\begin{center}
+\makeatletter
+% Upper part of the page
+%\vspace*{-1cm}
+\includegraphics[width=0.45\textwidth]{vertLogo.eps}\\[1.8cm]   
+\textsc{\LARGE Faculty of Sciences}\\[0.4cm]
+\textsc{\Large School of Physical Sciences}\\[0.7cm]
+% Title
+\HRule 
+\vspace{0.6cm}
+\huge{TITLE}
+\HRule 
+\vspace{1.4cm}
+\Large Anthony Kalaitzis \\[1.4cm]
+\Large
+\emph{Supervisors:} \\
+Prof.~Anthony \textsc{Thomas} \\
+Ass Prof.~Ross \textsc{Young}
+
+\vfill
+
+% Bottom of the page
+{\large Date}
+\end{center}
+
+% ------------------------------------------------------------------
+
+\newpage
+\tableofcontents
+\newpage
+
+
+
+
+
+
+
+
+
+
+\end{document}

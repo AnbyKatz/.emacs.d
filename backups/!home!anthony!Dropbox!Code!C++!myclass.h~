@@ -1,0 +1,14 @@
+// myclass.h
+
+class myclass
+{
+ public:
+  int age;
+  double height;
+
+  int get_age(void);
+
+  myclass();
+  ~myclass();
+
+};

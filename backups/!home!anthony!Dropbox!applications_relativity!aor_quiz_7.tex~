@@ -1,0 +1,196 @@
+\documentclass[13pt]{article}
+
+\usepackage[a4paper,left=1.5cm,right=1.5cm,top=10mm,bottom=20mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{physics}
+\usepackage{slashed}
+\usepackage{mypackage}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{mwe}
+\usepackage{numberedblock}
+\usepackage{afterpage}
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+        \newpage}
+      
+\title{Applications of Relativity Quiz 7}
+\author{Anthony Kalaitzis}
+\pagenumbering{gobble}
+
+\begin{document}
+\maketitle
+\section*{Question 1}
+
+$x=R\phi$ and $y=R\theta$
+\begin{align*}
+  J=\m{\pdv{x}{\phi}&\pdv{x}{\theta}\\
+  \pdv{y}{\phi}&\pdv{y}{\theta}} \qquad g=J^TJ
+\end{align*}
+Hence clearly we have
+\begin{align*}
+J=\m{R&0\\0&R}  
+\end{align*}
+and note that $g=J^TJ=J_{ij}^2$ for a diagonal matrix $J$ i.e. just the entries of the matrix squared
+\begin{align*}
+  g=\m{R&0\\0&R}^T\m{R&0\\0&R}=\m{R^2&0\\0&R^2}  
+\end{align*}
+
+\section*{Question 2}
+
+Here we have that
+\begin{align*}
+  \pdv{x}{\phi}=R\qquad\pdv{x}{\theta}=0
+\end{align*}
+and
+\begin{align*}
+  \pdv{y}{\phi}&=0\\
+  \pdv{y}{\theta}&=R\frac{\pdv{\theta}\tan(\theta/2+\pi/4)}{\tan(\theta/2+\pi/4)}
+\end{align*}
+let $x=\theta/2+\pi/4\implies \dd x= \dd\theta/2$ hence
+\begin{align*}
+\frac{1}{2}  \pdv{x}=\pdv{\theta}
+\end{align*}
+\begin{align*}
+  \pdv{\theta}\tan(\theta/2+\pi/4)=\frac{1}{2}\pdv{x}\tan x=\frac{1}{2\cos^2x}=\frac{1}{2\cos^2(\theta/2+\pi/4)}
+\end{align*}
+hence
+\begin{align*}
+  \pdv{y}{\theta}&=R\frac{\cos(\theta/2+\pi/4)}{\sin(\theta/2+\pi/4)}\frac{1}{2\cos^2(\theta/2+\pi/4)}\\
+                 &=\frac{R}{2}\frac{2}{\sin(\theta+\pi/2)+\sin(0)}\\
+  &=\frac{R}{\cos\theta}
+\end{align*}
+Where above we used that $2\sin A\cos B=\sin(A+B)+\sin(A-B)$ and that $\sin(\theta+\pi/2)=\cos\theta$. putting these together gives us that
+\begin{align*}
+  J=\m{R&0\\0&R/\cos\theta}
+\end{align*}
+and hence
+\begin{align*}
+  g=J^TJ=\m{R^2&0\\0&R^2/\cos^2\theta}
+\end{align*}
+
+\section*{Question 3}
+
+\begin{align*}
+  \pdv{x}{\phi}=\frac{R}{\sqrt{2}}\qquad \pdv{x}{\theta}=0\qquad \pdv{y}{\phi}=0\qquad \pdv{y}{\theta}=\sqrt{2}R\cos\theta
+\end{align*}
+\begin{align*}
+  \implies J=\m{R/\sqrt{2}&0\\0&\sqrt{2}R\cos\theta}
+\end{align*}
+and hence
+\begin{align*}
+  g=J^TJ=\m{R^2/2&0\\0&2R^2\cos^2\theta}
+\end{align*}
+
+\section*{Question 4}
+\subsection*{4.a}
+
+if $\mu\inR$ constant then we only have degrees of freedom $(\theta,\phi)$ hence we want to calculate the Jacobin $J$
+\begin{align*}
+  \pdv{x}{\theta}=-\sinh\mu\sin\theta\cos\phi\qquad\pdv{x}{\phi}=-\sinh\mu\cos\theta\sin\phi
+\end{align*}
+\begin{align*}
+  \pdv{y}{\theta}=-\sinh\mu\sin\theta\sin\phi\qquad\pdv{y}{\phi}=\sinh\mu\cos\theta\cos\phi
+\end{align*}
+\begin{align*}
+  \pdv{z}{\theta}=\cosh\mu\cos\theta \qquad \pdv{z}{\phi}=0
+\end{align*}
+clearly we have that
+\begin{align*} J=\m{-\sinh\mu\sin\theta\cos\phi&-\sinh\mu\sin\theta\cos\phi\\-\sinh\mu\sin\theta\sin\phi&\sinh\mu\cos\theta\cos\phi\\\cosh\mu\cos\theta&0}
+\end{align*}
+hence
+\begin{align*} g=J^TJ&=\m{-\sinh\mu\sin\theta\cos\phi&-\sinh\mu\sin\theta\sin\phi&\cosh\mu\cos\theta\\-\sinh\mu\sin\theta\cos\phi&\sinh\mu\cos\theta\cos\phi&0}\m{-\sinh\mu\sin\theta\cos\phi&-\sinh\mu\sin\theta\cos\phi\\-\sinh\mu\sin\theta\sin\phi&\sinh\mu\cos\theta\cos\phi\\\cosh\mu\cos\theta&0}\\              &=\m{\sin^2\theta\sin^2\phi\sinh^2\mu+\sin^2\theta\cos^2\phi\sinh^2\mu+\cos^2\theta\cosh^2\mu&0\\0&\sin^2\phi\cos^2\theta\sinh^2\mu+\cos^2\theta\cos^2\phi\sinh^2\mu}\\
+                     &=\m{\sin^2\theta\sinh^2\mu(\sin^2\phi+\cos^2\phi)+\cos^2\theta(1+\sinh^2\mu)&0\\0&\sinh^2\mu\cos^2\theta(\sin^2\phi+\cos^2\phi)}\\
+                     &=\m{(1-\cos^2\theta)\sinh^2\mu+\cos^2\theta(1+\sinh^2\mu)&0\\0&\cos^2\theta\sinh^2\mu}\\
+  &=\m{\cos^2\theta+\sinh^2\mu&0\\0&\cos^2\theta\sinh^2\mu}
+\end{align*}
+Where we used that $\cosh^2x-\sinh^2x=1$ and $\sin^2x+\cos^2x=1$
+\subsection*{4.b}
+\begin{align*}
+  \tan\alpha'&=\frac{\sqrt{g_{\phi\phi}}\dd\phi}{\sqrt{g_{\theta\theta}}\dd\theta}\\
+             &=\frac{\cos\theta\sinh\mu}{\sqrt{\cos^2\theta+\sinh^2\mu}}\frac{\tan\alpha}{\cos\theta}\\
+  &=\frac{\sinh\mu}{\sqrt{\cos^2\theta+\sinh^2\mu}}\tan\alpha
+\end{align*}
+Where we used that
+\begin{align*}
+  \frac{\dd\phi}{\dd \theta}=\frac{\tan\alpha}{\cos\theta}
+\end{align*}
+for this coordinate system, given in lectures.
+\section*{Question 5}
+\subsection*{5.a}
+
+We have the infinitesimal relationship that a distance on spherical surface, in this case the earth, can be written as.
+\begin{align*}
+  \dd s^2&= R^2\cos^2\theta\dd\phi^2+R^2\dd\theta^2\\
+         &=R^2\dd\theta^2\qty(1+\cos^2\theta\qty(\frac{\dd\phi}{\dd\theta})^2)\\
+         &=R^2\dd\theta^2\qty(1+\cos^2\theta\frac{\tan^2\alpha}{\cos^2\theta}) \\
+         &=R^2\dd\theta^2\qty(1+\tan^2\alpha)
+\end{align*}
+Where we used that $\tan\alpha/\cos\theta=\dd\phi/\dd\theta$ from the question. Taking the finite extension of this gives us that
+\begin{align*}
+  \Delta s^2&=R^2\Delta\theta^2(1+\tan^2\alpha)\\
+  s&=R(\theta_2-\theta_1)\sqrt{1+\tan^2\alpha}
+\end{align*}
+Where we pick $s_1=0$ i.e. the distance from the origin.
+\subsection*{5.b}
+In the Mercator projection we have
+\begin{align*}
+  x=R\phi \qquad y=R\log\qty(\tan\qty(\pi/4+\theta/2))
+\end{align*}
+Under this mapping we take the angle $\alpha$ down from the $z$ axis hence
+\begin{align*}
+  \tan\alpha&=\frac{\Delta x}{\Delta y}\\
+            &=\frac{R\Delta\phi}{R\Delta\big(\log(\tan(\pi/4+\theta/2))\big)}\\
+            &=\frac{\phi_2-\phi_1}{\log(\tan(\pi/4+\theta_2/2))-\log(\tan(\pi/4+\theta_1/2))}
+\end{align*}
+
+\section*{Question 6}
+Want to calculate the time difference the clocks read after one full year of orbit. We have the following 2 formulas
+\begin{align*}
+  m=\sqrt{\frac{c^2-3GM_E/r}{c^2+2\Phi_0}} \qquad m=\frac{\dd\tau'}{\dd\tau}
+\end{align*}
+where the (') frame refers to the satellites coordinate frame. hence we have that the time interval distortion is
+\begin{align*}
+  \frac{\dd\tau'}{\dd\tau}=\sqrt{\frac{c^2-3GM_E/r}{c^2+2\Phi_0}}
+\end{align*}
+where this formula will give us a second in the satellites frame as compared to a second in Earth's frame. Plugging in the numbers gives us that
+\begin{align*}
+  \frac{\dd\tau'}{\dd\tau}=\sqrt{\frac{3\cdot 10^{16}-3(6.674\cdot 10^{-11})(5.927\cdot 10^{24})/(36000\cdot 10^3)}{3\cdot 10^{16}+2(-6.2637\cdot 10^7)}}=1.000000000512831s
+\end{align*}
+Or in other words, for every second on earth, the satellite is
+\begin{align*}
+  1.000000000512831-1=5.128\cdot 10^{-10}s
+\end{align*}
+slower or if we convert this to how many seconds slower per day, we have that
+\begin{align*}
+(5.128\cdot 10^{-10})(60)(60)(24)=4.4308\cdot 10^{-5}s=44.308\mu s
+\end{align*}
+so each day is behind by $44.305\mu s$. hence after one year we have that
+\begin{align*}
+  (4.4308\cdot 10^{-6})(365)=0.01617s
+\end{align*}
+i.e. the satellite is behind by $0.01617s$. hence the time after one year will be registered as
+\begin{align*}
+  t&=t_{\text{earth day}}-t_{\text{time shift}}\\
+   &=\big((12)(60)(60)-0.01617\big)s
+\end{align*}
+and converting back to hours gives us
+\begin{align*}
+  t&=4.319998383\cdot 10^4/(60)(60)\\
+   &=11.999995501 h
+\end{align*}
+and converting this into clock format we just do the following on the minutes component of the above answer
+\begin{align*}
+  (60\cdot 0.999995507599470)=59.99973s
+\end{align*}
+so the time will be $11:59:99973$am. Where this is the format of (hours:minutes:lower-order-corrections).
+
+
+\end{document}

@@ -1,0 +1,76 @@
+
+
+
+#include <iostream>
+using namespace std;
+
+class meerkat //creating meerkat class
+{
+public: //letting code be accessed elsewhere
+ 
+  meerkat(); //constructor
+
+  void setName(string meerName); //behaviour
+  string getName();
+  void setAge(int meerAge);
+  int getAge();
+
+  int age; //state variables
+  string name;
+
+  ~meerkat(); //destructor
+
+};
+
+meerkat::meerkat() //initializing meerkat constructor
+{
+  name = "?"; //random values as they will be changed when functions are called
+  age = 0;
+}
+
+void meerkat::setName(string meerName) //sets meerkat name when function is called
+{
+  name = meerName;
+}
+
+string meerkat::getName() //returns set name
+{
+  return name;
+}
+
+void meerkat::setAge(int meerAge) //sets meerkat age when function is called
+{
+  age=meerAge;
+}
+
+int meerkat::getAge() //returns set age
+{
+  return age;
+}
+
+meerkat::~meerkat() //initalizing destructor
+{
+  cout<<"meerkat destroyed"<<endl;
+}
+
+#ifndef WEBSUBMIT
+int main() //main function
+{
+  string names[]={"Steve","Jill","Onyx","Stevie Wonder"}; //create an array of strings corresponding to names
+  int ages[]={5,2,10,4}; //create an array of ints corresponding to ages
+  meerkat *meerkats[4]; //creates an array of pointers to 4 meerkat objects
+
+  for(int i=0;i<4;i++) //for loop for all above array elements
+  {
+    meerkats[i]=new meerkat(); //creates new meerkat object
+    meerkats[i]-> setName(names[i]); //meerkat corresponding to ith position in string array and meerkat array has its name set
+    cout<<"name: "<<meerkats[i]->getName()<<endl; //prints ith meerkats name
+    meerkats[i]->setAge(ages[i]);//meerkat corresponding to ith position in int array and meerkat array has its age set
+    cout<<"age: "<<meerkats[i]->getAge()<<endl; //prints ith meerkats age
+  	cout<<endl;
+  }
+
+  for(int j=0;j<4;j++)
+    delete meerkats[j]; //destroys all created meerkat objects
+}
+#endif //WEBSUBMIT

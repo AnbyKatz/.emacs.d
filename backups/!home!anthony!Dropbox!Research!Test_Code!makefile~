@@ -1,0 +1,36 @@
+# Fortran base MakeFile
+# add links to libaries if needed
+
+F90C = ifort
+F90FLAGS = -O2
+
+%.o: %.f90
+	$(F90C) $(F90FLAGS) -c $<
+
+# Modules below
+OBJS = kinds.o\
+	UsefulFunctions.o\
+	nrutil.o\
+	nr.o\
+	pyplots.o\
+	myIntegrate.o\
+	quadpack.o
+
+all: test_code
+
+test_code: test_code.f90 $(OBJS)
+	$(F90C) $(F90FLAGS) -o $@ $< $(OBJS) 
+
+# list dependencies
+test_code.o: kinds.o quadpack.o nrutil.o nr.o pyplots.o UsefulFunctions.o myIntegrate.o
+
+UsefulFunctions.o : kinds.o nrutil.o nr.o
+nrutil.o: kinds.o
+nr.o: kinds.o
+pyplots.o: kinds.o
+quadpack.o: kinds.o
+myIntegrate.o: kinds.o quadpack.o
+
+clean:
+	rm *.o *.mod
+

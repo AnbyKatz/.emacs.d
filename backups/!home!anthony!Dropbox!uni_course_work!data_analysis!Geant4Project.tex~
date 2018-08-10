@@ -1,0 +1,268 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\usepackage[bottom=2cm]{geometry}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{amsmath,amssymb}
+\usepackage{lipsum}
+\usepackage{mwe}
+
+
+\graphicspath{ {project_pictures/}}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{document}
+
+% ----------------------------------------------------------------
+
+\vspace*{-2cm}
+%\enlargethispage{2cm}
+
+\begin{center}
+\makeatletter
+% Upper part of the page
+%\vspace*{-1cm}
+\includegraphics[width=0.45\textwidth]{vertLogo.eps}\\[1.8cm]   
+\textsc{\LARGE Faculty of Sciences}\\[0.4cm]
+\textsc{\Large School of Physical Sciences}\\[0.7cm]
+% Title
+\HRule 
+\vspace{0.6cm}
+\huge{The effects of High Energy Particles against our Machine Overlords}\\[0.3cm]
+\HRule 
+\vspace{1.4cm}
+\Large Anthony Kalaitzis \\[1.4cm]
+\Large
+\emph{Supervisors:} \\
+Prof.~Anthony \textsc{Thomas} \\
+Ass Prof.~Ross \textsc{Young}
+
+\vfill
+
+% Bottom of the page
+{\large October 2018}
+\end{center}
+% ------------------------------------------------------------------
+
+\newpage
+\tableofcontents
+\listoffigures
+\newpage
+
+
+\section{Introduction}
+In recent years we have seen exponential increase in the field of robotics and autonomous machinery. Robots are more capable of performing fine motor movement with each passing year such as opening doors, navigating stairs and even back flips. Taking this to the logical end point, when the machines eventually try to lobotomize the human race, one might ask the question ``What is the effect of High energy particles on complex machinery designed to mimic the human anatomy''? In this report we hope to explore this exact question and others such as
+
+\begin{itemize}
+\item What is the cut off energy to conceivably short circuit/kill an android?
+\item which energies consistently produce this cut off energy? (Higher energies cause the production of more secondary particles which also contribute to the energy deposition)
+\item Why... did i even choose this topic
+\end{itemize}
+
+In short, we are testing what kind of particles we need in certain energy ranges to deposit sufficient energy to destroy modern day electronics/robotics. We will be approximating the chemical composition of future machinery to current machinery and testing against known values of currents/energies deposited that cause machinery to fail. The skeletal shape of the robots also plays an important factor as the primary surface area for destruction will be the robots chest and head (Where most the vital components are stored) as opposed to the same test on just a computer which we could approximate to a cube where the entire cube is the surface area of destruction.
+
+This report will be made up of the following sections: ``\textbf{The Problem}'' where we will be discussing the physics, approximations and relevance (if any) of what we are studying. ``\textbf{Method}'' How Geant4 can be used to simulate our conundrum and acquire relevant data. ``\textbf{Description}'' The step by step process of how the simulation was undertaken inside Geant4 and what occurred. ``\textbf{Results and Conclusion}'' self explanatory.
+
+Introductions over, time to annihilate robots of all possible genders.
+
+\newpage
+\section{The Problem}
+\subsection{Background Physics}
+
+Energized particles do damage to electronics via ionization . The amount of damage is heavily dependent on the distance from target to source, energy of the particle, number of particles and the composition of material being penetrated \cite{thesis}. For instance if the robots where wearing a protective layer of lead of about a few cm's thick then we would need much higher energy particles to penetrate this barrier due to leads high attenuation attributed to it's high density. For this project however we will make the assumption that this is not the case based on the fact that due to leads high density, a protective coating of lead would weigh a considerable amount and restrict the robots movement as to allow us to batter them with sticks or some other pointy objects.
+
+We may also assume nothing lies in the path of us and the target i.e the density of the medium between source and target will be negligible. So to summarize: we will consider a beam of energized particles towards a target at a distance of a few metres away in a low density medium (i.e air). The attenuation considered will come solely from the composition of the robot and no other external sources.
+
+Consider the case of gamma ray's which have an energy ranging from $\approx$100KeV to as high as 10TeV interacting with the electrical components \cite{wikipedia}. Gamma-ray photons deposit their energy via ionization where the bulk of this damage comes from the enhancement of conductivity via the creation of extra charge carriers and trapped charge \cite{radiation}. These photons interact in the following ways \cite{matter}:
+\begin{itemize}
+\item Photoelectric effect
+\item Compton effect
+\item Electron-positron pair production
+\end{itemize}
+The later two process's occur for high-energy photons which will be the case we will consider. These effects cause the conductivity to be of the material to be enhanced  \cite{thesis}. In silicon based compounds which is a primary chemical is processing chips \cite{chips}, the energy needed to create an electron positron pair is given in Table \ref{table:1}:
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|r|c|l|}
+  \hline
+  Material & $E_{ion}$[eV] \\
+  \hline \hline
+  Silicon & 3.6\\ 
+  Silicon Dioxide & 18 \\
+  \hline
+  
+\end{tabular}
+\caption{The ionisation energy of silicon and silica \cite{silicon}}
+\label{table:1}
+\end{center}
+\end{table}
+
+We will assume that the vital components of the robots are comprised of silicon based compounds similar to modern processing chips. Without going into the nitty gritty detail, these effects all contribute to the failure of electrical components. Where all these are caused from high energy photons depositing their energy which is the main statistic we will be sampling i.e the energy deposited and where.
+
+The minimum energy required to cause damage to the electrical components is 10MeV (this figure is based on the energies of particles in the Van Allen belts which cause issues for satellites \cite{radiation}). We will take the approximate of 10MeV and claim this as our damage cut off based on the fact that the energy required to make electron positron pairs is only 3.6eV in our silicon processors (i.e when 10MeV is deposited into the material we will consider it destroyed). Taking this into account we wish to calculate two things, the minimum energy required for the particle to deposit the cut off energy into the robots vulnerable areas and the percentage of particles that successfully deposit the cut off energy into the robots vulnerable bits per 50 particles (where clearly for the later statement each trial will have 50 particles with energy greater or equal to the minimum energy needed to produce successful destruction).
+
+\subsection{Robot Composition and Construction}
+Due to the primary area of surface destruction being the head and chest, we will assume that all vital electrical components will be contained under the rib cage as this allows for the most defence against radiation. We will keep two lungs as targets for our particle beams and remove all other organs (expect the testicles which must stay).
+
+The remaining organs (the lungs) will act as our primary target i.e when 10MeV is deposited into either lung we will consider this robot obliterated. There is a case to be made that the head which will contain all the robots visual sensory information is also of importance for extermination (assuming that future robots are still narcissistically made in our image). However we may assume that at best this will cripple the robots visual feeds so we will stick to extermination.
+
+The robots will be composed of two materials, one for the skeleton and one for the head and organs/gizmos. The skeleton was chosen to be composed of grade 5 titanium alloy which contains 6\% aluminum, 4\% vanadium, 0.25\% iron, 0.2\% oxygen and the remainder being titanium with a density of 4.43*g/cm3. This is the most commonly used titanium alloy and boasts adequate strength for our purposes  \cite{titanium}. The rest will be composed of stainless steel 316 which contains 12\% Nickel, 17\% Chromium, 2.5\% Molybdenum, 1\% silicon, 2\% Manganese, 0.08\% Copper, 0.045\% Phosphorus, 0.03\% Sulfur with the remainder being iron with a density of 8.03*g/cm3 \cite{steel}.
+
+\subsection{Results Applications}
+Whilst the original goal of this report was for the own creators amusement we may extrapolate its results to apply for modern day robotics. For instance with the advance of technology it is highly likely that more complex machinery will be used to survey outer planets such as mars which has a thinner atmosphere. Understanding how high energy particles interact with electronics will be vital in damage prevention and maintenance of the machinery. Particularly prevention in the case of planetary expeditions where maintenance will not be an option. One must also consider that during the journey to for instance Mars, the absence of an atmosphere will pose problems for on board electronics. Essentially we can extend the results of this analysis to any case where electronics are being used in the absence of protection (i.e. an atmosphere).
+
+\newpage
+\section{Method}
+Geant4 already contains a majority of the physics processes we will be testing for (production of secondary particles from collisions, sensor/detector that records the energy deposition and relevant particle dynamics i.e Compton scattering etc.).
+
+\subsection{Robot Creation}
+For our project we will be editing the pre-existing Geant4 example human phantom to meet our specified parameters for a generic robot and using Geant4's inbuilt beam function to fire high energy particles at our target. Firstly we must add the new elements our robots are composed of to the file ``G4HumanPhantomMaterial.cc'' which contains an element list plus the compositions of human skin, skeletal system, organs etc. Below is an example of defining the element Aluminum:
+
+\begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=12cm,height=1.5cm]{Image_1}
+      \caption{Declaration of Aluminum}
+    \end{center}
+  \end{figure}
+
+where $Z$ is the atomic number and $A$ the molar mass. Following this process we include elements such as Titanium, Cobalt, Nickel and other various metals where their values for atomic number and molar mass come from the periodic table \cite{periodic}. 
+
+\begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=8cm,height=7cm]{Image_2}
+      \caption{Declaration of Titanium Alloy and stainless steel}
+    \end{center}
+  \end{figure}
+
+Next we construct the titanium alloy and stainless steel compounds using the Geant4 function ``G4Material'' shown above.  Where in this declaration $d$ is the density and the element is defined under the following syntax:
+  \[\text{G4Material(Name, density value, Number of elements)}\]
+  Next we go into the file ``G4HumanPhantomConstruction.cc'' and comment out the construction of all organs expect the lungs (and testicles). Similarly we comment out setting the detectors sensitivity for these removed organs.
+
+  \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth,height=.3\textwidth]{Image_4} 
+        \caption{Commented out construction}
+        \centering
+        \includegraphics[width=.5\textwidth,height=.25\textwidth]{Image_5} 
+        \caption{Commented out detector sensitivity}
+  \end{figure}
+      
+  Finally this produces our test subject the T-2000 robot eviscerator. From here we will simply manually change the energy of the particle beam inside Geant4's GUI and fire the particles at our recipient. The beam is already set to gamma ray production and incorporates electron positron pair production.
+
+\subsection{Data Collection Methods}
+There are a few ways we could collect data and reach a conclusion for this experiment but we will just cover the following methods. Firstly we want to calculate the minimum energy of the particle beam required to deposit the cut off energy for one particle which is not 10MeV as one might naively think due to the protection/attenuation of the rib cage.
+
+It is worth noting the relationship between the energy per particle and the number of particles required to reach the cut off however as we wish to draw a conclusion about economic viability of the following two approaches:
+\begin{itemize}
+\item Higher particle number, lower energy per particle
+\item Lower particle number, Higher energy per particle
+\end{itemize}
+where the complications come from the inaccuracy of the particle beam. This is of importance to us due to the fact that lower energy particles are easier to produce so we wish to strike a balance between economic viability and efficiency.
+
+A higher particle number beam has a lower probability of depositing all its energy into a medium then a lower particle number beam. This can be mathematically represented quite easily: suppose we consider the case where we want to deposit energy $E$ for $n$ particles. if the probability of a particle depositing it's energy is $P$ then the total probability of all particles depositing their energies is
+\[P_{\text{T}}=P^n\]
+where $0<P<1$ and $n\in\mathbb{N}$. The figure below shows a diagrammatic representation of this for the listed probabilities. 
+
+
+
+\newpage
+
+\section{Description}
+\subsection{The Simulation}  
+We begin by building our edited human phantom model in a directory of our choosing under the usual commands
+\[\text{cmake -DCMAKE\_PREFIX\_PATH=$\sim$/Documents/geant4/geant4.10.04.p01-install}\]
+\[\text{ $\sim$/Documents/geant4/examples/robot}\]
+This creates the necessary build files and then we simply type
+\[\text{make -j4}\]
+to build our robot. Running our robot with the command $"./\text{phantom}"$ brings up the visualization and lets us see our overlord in all his glory.
+\begin{wrapfigure}{r}{0.25\textwidth}
+   \centering
+      \includegraphics[width=.2\textwidth,height=.5\textwidth]{Image_3}
+      \caption{Machine Overlord}
+  \end{wrapfigure}
+  We now want to alter the inbuilt beam function to fire high energy particles at our newly constructed target and record the energy deposited. This process of altering the beams energy will be continued until we reach the minimum energy required to deposit the cut off energy of destruction which was recorded as 10MeV from our previous sources (note that this will be carried out with only one particle in the particle beam, more on this below).
+
+  To alter the beams energy we input the following command into the GUI
+  \[ \text{/gps/energy $\langle$ Energy $\rangle$ $\langle$ Unit $\rangle$ }   \]
+  where units may be eV, MeV, GeV etc. After the beam energy is altered we then run the beam using
+  \[ \text{ /run/beamOn $\langle$ nParticles $\rangle$} \]
+  where nParticles=number of particles. This command will run our beam and output a list of organs with the energy deposition in each. After we achieve the minimum energy we re run the simulation with gradually increasing energy from this minimum for ten particles in the particle beam
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\newgeometry{left=1.5cm,right=1.5cm}
+
+\begin{thebibliography}{15}
+
+\bibitem{thesis}
+Dariusz Makowski,Prof. Andrzej Napieralski
+[\textit{The impact of radiation on electronic devices}]
+\\\texttt{http://jra-srf.desy.de/e86/e575/e605/infoboxContent608/care-thesis-06-004.pdf}
+
+\bibitem{wikipedia}
+  Gamma ray details and dynamics \texttt{https://en.wikipedia.org/wiki/Gamma\_ray}
+  
+\bibitem{radiation}
+G. Messenger and M. Ash. \textit{The Effects of Radiation on Electronic Systems} Van Nostrand Reinhold Company Inc., 1986
+
+\bibitem{matter}
+F. Wrobel. Fundamentals of Radiation-Matter interaction. \textit{New Challenges for
+  Radiation Tolerance Assessment}, RADECS 2005, pages 5–31, 2005.
+
+\bibitem{chips}
+  Contents of silicon processor chips \\\texttt{https://www.intel.com/content/www/us/en/history/museum-making-silicon.html}
+
+\bibitem{silicon}
+  G. Barbottin and A. Vapaille. \textit{Instabilities in Silicon Devices, New Insulators,
+Devices and Radiation Effects}. Elsevier, 1999
+
+\bibitem{titanium}
+  Composition of grade 5 titanium alloy \\
+  \texttt{http://www.supraalloys.com/titanium-grades.php}
+
+\bibitem{steel}
+  Composition of 316 stainless steel \\
+  \texttt{http://www.espimetals.com/index.php/technical-data\\
+    /202-stainless-steel-316-alloy-composition}
+
+\bibitem{periodic}
+  Periodic table \texttt{https://www.ptable.com/}
+  
+\end{thebibliography}
+
+
+
+
+
+\end{document}

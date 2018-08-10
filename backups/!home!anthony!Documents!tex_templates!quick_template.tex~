@@ -1,0 +1,32 @@
+\documentclass[13pt]{article}
+
+\usepackage[a4paper,left=1.5cm,right=1.5cm,top=10mm,bottom=20mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{physics}
+\usepackage{\slashed}
+\usepackage{mypackage}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{mwe}
+\usepackage{numberedblock}
+\usepackage{afterpage}
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+        \newpage}
+      
+\title{}
+\author{Anthony Kalaitzis}
+\pagenumbering{gobble}
+
+\begin{document}
+\maketitle
+
+
+\end{document}

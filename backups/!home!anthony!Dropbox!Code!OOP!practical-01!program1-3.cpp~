@@ -1,0 +1,43 @@
+
+
+#include <iostream>
+using namespace std;
+
+int count(int array[],int n,int number)
+{
+
+    int y=0;
+    int total=0;
+
+    for(int i=0;i<n;i=i+1)
+    {
+        y=1;
+        if(array[i]==number)
+        {
+            total=total+1;
+        }
+    }
+    if(y>0)
+    {
+        return total;
+    }
+    else
+    {
+        return -1;
+    }
+
+}
+
+
+#ifndef WEBSUBMIT
+int main()
+{
+
+    int array[5]={1,2,2,2,5};
+    cout << count(array, 0, 2) << endl;
+
+}
+#endif //WEBSUBMIT
+
+
+

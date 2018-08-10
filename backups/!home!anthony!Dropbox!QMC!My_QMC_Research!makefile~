@@ -1,0 +1,37 @@
+# Fortran base MakeFile
+# add links to libaries if needed
+
+F90C		= ifort
+F90FLAGS	= -O2
+CFLAGS		= -O2 -mkl
+LIBS		= -lmkl_lapack95_lp64
+
+%.o: %.f90
+	$(F90C) $(CFLAGS) -c $<
+
+# Modules below
+OBJS = kinds.o\
+	UsefulFunctions.o\
+	pyplots.o\
+	quadpack.o\
+	lapack.o
+
+all: QMC_2018V1
+
+QMC_2018V1: QMC_2018V1.f90 $(OBJS)
+	$(F90C) $(CFLAGS) -o $@ $< $(OBJS) $(LIBS)
+
+
+# list dependencies
+QMC_2018V1.o: kinds.o\
+	quadpack.o\
+	pyplots.o\
+	UsefulFunctions.o\
+	lapack.o
+
+UsefulFunctions.o : kinds.o quadpack.o lapack.o
+pyplots.o: kinds.o
+quadpack.o: kinds.o
+
+clean:
+	rm *.o *.mod

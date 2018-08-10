@@ -1,0 +1,258 @@
+
+#include <iostream>
+using namespace std;
+
+class aircraft //creates aircraft class
+{
+	public: // public declared data
+		aircraft(); // constructor
+		
+		void setcallSign(string sign); //behaviours
+		string getcallSign();
+		void setheading(string direction);
+		string getheading();
+		void setflightlevel(int level);
+		int getflightlevel();
+		void setgroundspeed(int speed);
+		int getgroundspeed();
+		
+		string aircraft_type; //state variables
+		string callSign;
+		string heading;
+		int flightlevel;
+		int groundspeed;
+		
+		~aircraft(); //destructor		
+};
+
+aircraft::aircraft() //calling constructor
+{
+	callSign="?"; //variables to be changed later
+	heading="?";
+	flightlevel=0;
+	groundspeed=0;
+	aircraft_type="?";
+}
+
+void aircraft::setcallSign(string sign) //sets callsign
+{
+	callSign = sign;
+} 
+
+string aircraft::getcallSign() //returns callsign
+{
+	return callSign;
+} 
+
+void aircraft::setheading(string direction) //sets direction
+{
+	heading = direction;
+}
+
+string aircraft::getheading() //returns direction
+{
+	return heading;
+} 
+
+void aircraft::setflightlevel(int level) //sets flight level
+{
+	flightlevel = level;
+}
+
+int aircraft::getflightlevel() //returns flight level
+{
+	return flightlevel;
+} 
+
+
+void aircraft::setgroundspeed(int speed) //sets ground speed
+{
+	groundspeed = speed;
+}
+
+int aircraft::getgroundspeed() //returns groundspeed
+{
+	return groundspeed;
+} 
+
+aircraft::~aircraft() //initalizes destructor
+{
+	cout<<"aircraft destroyed"<<endl;
+}
+
+class fixedWing : public aircraft //creates subclass of aircraft called fixed wing
+{
+	public: //public data
+		fixedWing(); // constructor
+		
+		void putoncargo(int goods); //behaviour
+		void drive(int length);
+		
+		int cargo; //state variables
+		int runway;
+		
+		~fixedWing(); //destructor
+};
+
+fixedWing::fixedWing() //initalizing destrucot
+{
+	cargo = 0;
+	runway = 0;
+	aircraft_type="fixedWing"; 		//type of plane to be used later on, inherited from aircraft class
+}
+
+void fixedWing::putoncargo(int goods) 								//putting cargo on aircraft under fixedwing
+{
+	if(goods >= 130000) 											//if crago weighs equal to or more then 130000, cargo is not put on plane. otherwise it is
+	{
+		cout<<goods<<" amount of cargo is too heavy!!"<<endl;
+	}
+	else
+	{
+		cargo = goods;
+		cout<<cargo<<" kilograms of cargo added"<<endl; 			//letting programmer know, cargo is now on plane
+	}
+	
+}
+
+void fixedWing::drive(int length) 										//initalizing runway behaviour
+{
+	if(length < 5) 														//if runway length is less then 5km, plane cant take off, otherwise it takes off
+	{
+		cout<<length<<"km runway too small, min 5km"<<endl;
+	}
+	else
+	{
+		runway = length;
+		cout<<"took off with "<<runway<<" kilometres of runway"<<endl; //letting programmer know that plane took off with certain amount of runway
+	}
+}
+
+fixedWing::~fixedWing() //intializing destructor
+{
+	cout<<"fixed wing aircraft destroyed"<<endl;
+}
+
+class rotaryWing : public aircraft //creates subclass of aircraft called rotary wing
+{
+	public: //public declared data
+		rotaryWing(); //constructor
+		
+		void pad(int helipad_width); //behaviours
+		void ambulance(int people,string new_callSign);
+		void setHealth(int lvl);
+		
+		int helipad; //state variables
+		int health;
+		int patients;
+		
+		~rotaryWing(); //destructor
+		
+		
+};
+
+rotaryWing::rotaryWing() //initializing destructor
+{
+	helipad = 0;
+	health = 0;
+	aircraft_type="rotaryWing"; //type of plane to be used later on
+}
+
+void rotaryWing::setHealth(int lvl) //sets patients health
+{
+	health=lvl;
+}
+
+void rotaryWing::pad(int helipad_width)									 //initializes helicopter take off
+{
+	if(helipad_width < .5) 												//if helipad width is less then .5km, doesnt take off, otherwise it does
+	{
+		cout<<helipad_width<<"km helipad too small, min .5km"<<endl;
+	}
+	else
+	{
+		helipad = helipad_width;
+		cout<<"took off a "<<helipad<<" kilometre wide helipad"<<endl; //lets programmer know how much width helipad had
+	}
+}
+
+void rotaryWing::ambulance(int people, string new_callSign) //sets number of people on helipad and changes call sign if health is low
+{
+	patients=people;
+	cout<<people<<" people on the helicopter"<<endl; 		//lets programmer know how many people are on helicopter
+	cout<<"patients health: "<<health<<endl; 				//prints health rating. Good:10 down to Bad:0
+	if( health < 5) 										//if health is lower then 5, change call sign and specify that patients are un healthy
+	{
+		callSign = new_callSign;
+		cout<<"patients are un-healthy"<<endl;
+		cout<<"New callSign: "<<callSign<<endl;
+	}
+	else //otherwise patients are listed as healthy
+		cout<<"patients are healthy"<<endl;
+}
+
+#ifndef WEBSUBMIT
+int main() //main function
+{
+  int z=0; //counters to be used for different sized arrays
+  int x=0;
+  
+  string callSigns[4]={"A","B","C","D"};												 //general behaviour arrays that both air crafts share
+  string directions[4]={"North","South","East","West"}; 									//data will be accessed and used below
+  int flightlevels[4]={1,100000,300000,500000};
+  int speeds[4]={50000,20,500000,30000};
+  
+  int amount_cargo[2]={50000,300000}; 														//fixed wing aircraft specific data
+  int runway_lengths[2]={100000,-1};
+  
+  string changed_callsigns[1]={"SOS!!"};													 //rotary wing specific data
+  int healths[2]={10,1};
+  int people[2]={10,3};
+  int helipad_widths[2]={0,50000};
+  
+  aircraft *aircrafts[4]; 																//initializes array of 4 poninters to aircraft objects
+  int n_aircrafts=0; //counter
+  for(int i=0;i<2;i++) 																	// creates 4 aircraft objects rotating from fixed wing to rotary wing
+  {
+  	aircrafts[n_aircrafts++] = new fixedWing(); 										//new dynamically allocated object created, respective contructor called
+  	aircrafts[n_aircrafts++] = new rotaryWing();
+  	
+  }	
+  for(int i=0;i<n_aircrafts;i++) 														// initalizing behavouir for all 4 aircrafts
+  {
+  	aircrafts[i]->setcallSign(callSigns[i]);                              				 //below code relates to all aircrafts as they inhert the traits from aircraft class
+  	cout<<"callsign: "<<aircrafts[i]->getcallSign()<<endl;								 // set value above by referenceing array and then using pointer operation to print details specific to the ith aircraft
+  	aircrafts[i]->setflightlevel(flightlevels[i]);										 //continues for all other aircraft behaviours
+  	cout<<"flight level: "<<aircrafts[i]->getflightlevel()<<endl;
+  	aircrafts[i]->setheading(directions[i]);
+  	cout<<"direction: "<<aircrafts[i]->getheading()<<endl;
+  	aircrafts[i]->setgroundspeed(speeds[i]);
+  	cout<<"speed: "<<aircrafts[i]->getgroundspeed()<<endl;
+  	if(aircrafts[i]->aircraft_type=="fixedWing") 										//if the aircraft is a fixed wing
+  	{
+  		((fixedWing *)aircrafts[i])->putoncargo(amount_cargo[z]); 						//initialzes unique fixed wing operations, similar to above code
+  		((fixedWing *)aircrafts[i])->drive(runway_lengths[z]);							//fixed wing suffix used to specify fixed wing class
+		z++; //increments
+		cout<<"this is a fixed wing aircraft"<<endl; 									//specifies aircraft type
+	}
+	if(aircrafts[i]->aircraft_type=="rotaryWing") 										//if aircraft is a rotary wing
+	{
+		((rotaryWing *)aircrafts[i])->setHealth(healths[x]); 							//initializes unique rotary wing operations, simliar to code above
+		((rotaryWing *)aircrafts[i])->pad(helipad_widths[x]); 							//rotary wing suffic used to specify rotary wing class
+		((rotaryWing *)aircrafts[i])->ambulance(people[x],changed_callsigns[0]);
+		x++;//increments
+		cout<<"this is a rotary wing aircraft"<<endl;									//prints aircraft type
+	}	
+  	cout<<endl; //prints extra to make it more readible
+  }
+  
+  
+  
+  
+  for (int i=0;i<n_aircrafts;i++) //deletes all created aircrafts
+	{
+		delete aircrafts[i];	
+	}
+   
+}
+#endif //WEBSUBMIT

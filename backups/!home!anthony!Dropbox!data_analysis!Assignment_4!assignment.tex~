@@ -1,0 +1,235 @@
+% author lists, or if there are many overlapping affiliations.
+% For Phys. Rev. appearance, change preprint to twocolumn.
+% Choose pra, prb, prc, prd, pre, prl, prstab, prstper, or rmp for journal
+%  Add 'draft' option to mark overfull boxes with black boxes
+%  Add 'showpacs' option to make PACS codes appear
+%  Add 'showkeys' option to make keywords appear
+
+\documentclass[aps,prl,twocolumn]{revtex4-1}
+
+\usepackage{mypackage}
+
+\usepackage{amsmath,amssymb}
+\usepackage{physics}
+\usepackage{slashed}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{simplewick}
+\usepackage{listings}
+\usepackage{mwe}
+\usepackage{afterpage}
+
+\definecolor{mygreen}{RGB}{28,172,0} 
+\definecolor{mylilas}{RGB}{170,55,241}
+
+\begin{document}
+
+\lstset{language=Matlab,
+    %basicstyle=\color{red},
+    breaklines=true,
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},
+    showstringspaces=false,
+    %numbers=left,
+    %numberstyle={\tiny \color{black}},
+    %numbersep=9pt, 
+    emph=[1]{for,end,break},emphstyle=[1]\color{red},
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+
+% Use the \preprint command to place your local institutional report
+% number in the upper righthand corner of the title page in preprint mode.
+% Multiple \preprint commands are allowed.
+% Use the 'preprintnumbers' class option to override journal defaults
+% to display numbers if necessary
+% \preprint{}
+
+\title{Fourier Analysis Assignment 4}
+
+% repeat the \author .. \affiliation  etc. as needed
+% \email, \thanks, \homepage, \altaffiliation all apply to the current
+% author. Explanatory text should go in the []'s, actual e-mail
+% address or url should go in the {}'s for \email and \homepage.
+% Please use the appropriate macro foreach each type of information
+
+% \affiliation command applies to all authors since the last
+% \affiliation command. The \affiliation command should follow the
+% other information
+% \affiliation can be followed by \email, \homepage, \thanks as well.
+
+\author{Anthony Kalaitzis}
+
+%\email[]{Your e-mail address}
+%\homepage[]{Your web page}
+%\thanks{}
+%\altaffiliation{}
+\affiliation{}
+
+%Collaboration name if desired (requires use of superscriptaddress
+%option in \documentclass). \noaffiliation is required (may also be
+%used with the \author command).
+%\collaboration can be followed by \email, \homepage, \thanks as well.
+%\collaboration{}
+%\noaffiliation
+
+\date{\today}
+\maketitle
+
+\section{Introduction}
+In this report we hope to conduct a wavelet analysis on the bouncing ball data using the Morlet wavelet. This will help identify regions of interest on the Fourier transformed data.
+
+\section{Constructing the Morlet Wavelet}
+We begin by loading in our that we wish to perform some analysis on. It is important to note that we will not load in every data point as this will cause the periods to be too short and will hide graphic details that we wish to see.
+
+Instead we will take $2^{11}$ data points and decimate the rest. We chose this number based on the fact that Matlab's fast Fourier transform algorithms require us to have $2^N$ data points where $n\inN$.
+
+%insert code to load in data here
+
+Consider the Morlet wavelet which is mathematically expressed by the formula
+\begin{align*}
+  G(t)=\frac{1}{\pi^{1/4}}e^{i\omega_0t}e^{-t^2/2}
+\end{align*}
+where we choose $\omega_0=6$ to satisfy the admissibility condition. For the scaled version of the Morlet wavelet we make the transformation that $t\to t/s$ where $s$ is some scaling factor. We want to produce values of this function for a range of $t$ and $s$ values so next we construct these vectors.
+
+We take the initial time to be $t=0$ and the final time to be $N/f_s$ where $N$ is the total number of data points and $f_s$ is the sampling rate given by
+\begin{align*}
+  f_s=N\frac{f}{i}
+\end{align*}
+where $f$ is the frequency (our driving frequency data represents a 145Hz sine wave so we will use $f=145$) and $i$ is the value of the index at which the Fourier transformed power of the driver data obtains its maximum. These can be obtained like so in the following code:
+
+% insert code for sampling rate
+
+Putting together the knowledge of the sampling rate and the total number of points gives us our maximum time value $t_{\text{max}}=N/f_s$. Make a space with these boundary points and total number of points $N$ to produce our time axis.
+
+% insert code for frequency axis
+
+We can make the scaling factor vector any values we want so long as the values are small and the total number of points is low as too high will quickly exhaust our computation power. It was taken to be as follows
+
+% insert code for s axis
+
+With these axes we construct our Morlet wavelet in Matlab like so:
+
+% insert code for Morlet wavelet
+
+where $t$ is the input parameter. We want to evaluate this function for a given value of $s$ at a range of $t$'s. This will produce a matrix of values. To achieve this we make a grid of all the unique combinations of the vectors $s$ and $t$ and evaluate the Morlet wavelet on this grid for the parameter $t/s$ like so:
+
+% insert code for evaluating Morlet Wavelet
+
+This gives us all our values we need for the Morlet wavelet function that we will use to perform our wavelet transformation. As a sanity check we may plot the real and imaginary values of this function in a small range to see that the function has the desired form.
+
+% insert code for plotting wavelet
+
+We find that the wavelet when plotted produced FIG \ref{fig1} which is of the desired form.
+
+% insert plot for Morlet Wavelet picture
+
+\section{Cone of Influence}
+Before we continue any further it is important to calculate the cone of influence values so that we may overlay this on our plot to see the significant values for our data. This can be calculated by noting the following relationships between variables.
+\begin{align*}
+  \frac{1}{f}&=\frac{4\pi s}{\omega_0+\sqrt{2+\omega_0^2}}\\
+  \implies s&=\frac{\omega_0+\sqrt{2+\omega_0^2}}{4\pi f}
+\end{align*}
+where this is true for the Morlet wavelet (Note that this equation will be used later to create a proper frequency axis). The cone of influence's $t$ values is given by the simple formula that $t=\sqrt{2}s$. Plugging in our above formula for $s$ and re arranging for $f$ gives us the cone of influence's frequencies like so
+\begin{align*}
+  f=\frac{\sqrt{2}\qty(\omega_0+\sqrt{2+\omega_0^2})}{4\pi t}
+\end{align*}
+We then evaluate this formula at our $t$ vector to produce frequency values for our cone of influence. This however only gives one side of the cone, to get the other side we simply make the transformation that $t\to t_{\text{max}}-t$ which essentially mirrors the graph around a point. This is all achieved in code via:
+
+% insert code for calculating cones of influence
+
+We will later overlay this with our plots to illustrate the important data.
+
+\section{Wavelet Transformation}
+
+The wavelet transformation of the data is achieved by the formula that
+\begin{align*}
+  W_n(s)=\sum_{k=0}^{N-1}\hat{x}_k\hat{G}^*(s\omega_k)e^{i\omega_k n\delta t}
+\end{align*}
+where the $\hat{}$ represents Fourier transformed data, $x_k$ are the data points, $G$ is the Morlet wavelet and we are taking the inverse Fourier transform of the product of the two.
+
+Start off by calculating the Fourier transform of the Morlet wavelet (it is important to not that since this is a matrix of values, we have to explicitly tell Matlab to Fourier transform across the rows and not the columns).
+
+% insert code for Fourier transform of Morlet wavelet
+
+After this transformation we need to scale the resulting function in the following way
+\begin{align*}
+  \hat{G}(s\omega_k)=\qty(\frac{2\pi s}{\delta t})^{1/2}\hat{G}(s\omega_k)
+\end{align*}
+where $\delta t$ is a single time interval. In Matlab code this translates as
+
+% insert code for scaling wavelet function
+
+Now we can apply our formula to calculate the wavelet transformation and it's power spectra as we don't want to plot the transformation itself as it contains complex values.
+
+% Insert code for transformation calculation
+
+Finally we create a frequency axis using the formula from the cone of influence section and our already constructed vector $t$. We then make a unique grid of these time and frequency vectors and these will become the grid points for our heat map of the power spectra.
+
+% insert code for creating frequency and time meshgrid
+
+We can now use the following code to plot our power spectra of the wavelet transformation for the driver data, ball height data etc
+
+% insert code for plotting stuff
+
+\section{Noise Analysis}
+
+Before plotting, we want to create some noise which we may use to compare to our data and calculate a ratio which will tell us which data points are significant. Random noise may be produced in the following way where we shift and scale the values such that the RMS of the noise is equal to the RMS of the ball height data and the mean of the noise is 0.
+
+% Insert Matlab code for producing noise
+
+Now we can run the same code as in the previous section to plot the power spectra for the driver data, ball height, noise and we will also plot the ratio
+\begin{align*}
+  \frac{P_{\text{ball height}}}{P_{\text{noise}}}
+\end{align*}
+where this is the ratio of the power spectra of ball height over the noise. This will allow us to see if data points are significant  based on the magnitude of the hot spot. Running the code from the previous parts for the log plots produces
+
+% Insert all plots
+
+blah blah figure representing what and what
+
+\section{Discussion}
+talk about what we see in the figures, what this means, COI, important data points, relate between different data sets and so on.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% only one appendix.
+\appendix
+\section{Full Code}
+
+%\begin{acknowledgments}
+% put your acknowledgments here.
+%\end{acknowledgments}
+
+% Create the reference section using BibTeX:
+\bibliography{basename of .bib file}
+
+\end{document}
+
+% \bibliography{basename of .bib file}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

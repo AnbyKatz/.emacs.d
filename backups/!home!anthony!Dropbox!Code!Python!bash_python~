@@ -1,0 +1,5 @@
+#!/bin/bash
+
+chmod +x filename.py
+./python_filename.py
+

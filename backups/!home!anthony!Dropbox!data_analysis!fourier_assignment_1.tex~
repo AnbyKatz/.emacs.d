@@ -1,0 +1,138 @@
+\documentclass[13pt]{article}
+
+\usepackage[a4paper,left=1.5cm,right=1.5cm,top=10mm,bottom=20mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{physics}
+\usepackage{slashed}
+\usepackage{mypackage}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{mwe}
+\usepackage{numberedblock}
+\usepackage{afterpage}
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+
+\newcommand{\ft}{\mathcal{F}}
+\newcommand{\freqF}{\widetilde{F}(\nu)}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+        \newpage}
+      
+\title{Fourier Techniques Assignment 1}
+\author{Anthony Kalaitzis}
+\pagenumbering{gobble}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+\subsection*{1.a}
+Using the Fourier transformation formula we have
+\[\widetilde{F}(\nu)=\infint{t}f(t)e^{-2\pi i\nu t}  \]
+Using the linearity of the integral gives us that
+\[\therefore \ \widetilde{F}(\nu)=\int_{-1/2}^{1/2}2e^{-2\pi i\nu t}\dd t +\int_{1/2}^1 e^{-2\pi i\nu t}\dd t+\int_{-1}^{-1/2} e^{-2\pi i\nu t}\dd t+\int_{-\infty}^{-1}0\dd t+\int_{1}^\infty 0\dd t \]
+\[=-\frac{1}{2\pi i\nu}\Big(2e^{-2\pi i\nu t}\Big|_{-1/2}^{1/2}+e^{-2\pi i\nu t}\Big|_{1/2}^1+e^{-2\pi i\nu t}\Big|_{-1}^{-1/2}\Big)\]
+\[=-\frac{1}{2\pi i\nu}\Big(2(e^{-\pi i\nu}-e^{\pi i\nu})+e^{-2\pi i\nu}-e^{-\pi i\nu}+e^{\pi i\nu}-e^{2\pi i\nu}\Big)\]
+\[=\frac{1}{2\pi i\nu}\Big(e^{\pi\nu i}-e^{-\pi\nu i}+e^{2\pi\nu i}-e^{-2\pi\nu i}\Big)\]
+Using that
+\[\sin z=\frac{1}{2i}(e^{iz}-e^{-iz})\]
+hence
+\[\freqF=\frac{1}{2\pi\nu i}\Big(2i\sin(\pi\nu)+2i\sin(2\pi\nu)\Big)\]
+\[=\frac{1}{\pi\nu}\Big(\sin(\pi\nu)+\sin(2\pi\nu)\Big)\]
+\subsection*{1.b}
+\[ \widetilde{F}(\nu)=\int_{1/2}^1 e^{-2\pi i\nu t}\dd t+\int_{-1}^{-1/2} e^{-2\pi i\nu t}\dd t\]
+\[=-\frac{1}{2\pi\nu i}\Big(e^{\pi\nu i}-e^{-\pi\nu i}+e^{-2\pi\nu i}-e^{2\pi\nu i}\Big)\]
+\[=-\frac{1}{2\pi\nu i}\Big(2i\sin(\pi\nu)-2i\sin(2\pi\nu)\Big)\]
+\[=\frac{1}{\pi\nu}\Big(\sin(2\pi\nu)-\sin(\pi\nu)\Big)\]
+\section*{Question 2}
+\subsection*{2.a}
+suppose we have a function $f(t)$ with its Fourier transform
+\[f(t)=\infint{\nu}\widetilde{F}(\nu)e^{2\pi i\nu t}\]
+\[\dv{f(t)}{t}=\dv{t}\infint{\nu}\widetilde{F}(\nu)e^{2\pi i\nu t}  \]
+\[=\infint{\nu}\pdv{t} \freqF e^{2\pi i\nu t}\]
+Where we used Leibniz's rule. Let $\ft(f)$ denote the Fourier transformation of $f$ and $\ft^{-1}(f)$ the inverse Fourier transform.
+\[\ft^{-1}(f')=2\pi i\nu \infint{\nu}\freqF e^{2\pi i\nu t}\]
+\[f'(t)=2\pi i\nu \ft^{-1}(f)\]
+Hence the effect of taking the derivative is to multiply the Fourier transform by $2\pi i\nu$ as there is no physical distinction between the Fourier transform and the inverse Fourier transform. For example if
+
+
+\subsection*{2.b}
+\[ f(t)=\infint{\nu}\freqF e^{2\pi i\nu t}\]
+\[\int f\dd t=\infint{\nu} \freqF \int\dd t e^{2\pi i\nu t}\]
+Where we have used the exchange of ordered derivatives (That $\freqF\in L^1$) and the fact that $\freqF$ is independent of $t$ again, hence
+\[\int f dt =\frac{1}{2\pi i\nu}\infint{\nu}\freqF e^{2\pi i\nu t}\]
+\[ =\frac{1}{2\pi i\nu}\ft^{-1}(f)\]
+up to an overall constant. Hence the effect of integrating a function is to multiply the Fourier transform by $(2\pi i\nu)^{-1}$
+
+\section*{Question 3}
+\subsection*{3.a.i}
+Assuming that $\alpha,\nu\inR$ and that $\alpha>0$
+\[\freqF=\infint{t}f(t)e^{-2\pi i\nu t}\]
+hence using linearity of the integral gives us that
+\[\eqsplit{\freqF&=\int_0^\infty\dd t e^{-\alpha t}e^{-2\pi i\nu t}\\
+    &=\int_0^\infty\dd t e^{-(\alpha+2\pi i\nu)t}\\
+    &=-\frac{1}{\alpha+2\pi i\nu}e^{-(\alpha+2\pi i\nu)t}\Big|_0^\infty\\
+    &=-\frac{1}{\alpha+2\pi i\nu}(e^{-(\alpha+2\pi i\nu)\infty}-e^0) \\
+    &=\frac{1}{\alpha+2\pi i\nu}  }  \]
+\subsection*{3.a.ii}
+first lets write this in a more suggestive form
+\[z\equiv\frac{1}{\alpha+2\pi i\nu}\frac{\alpha-2\pi i\nu}{\alpha-2\pi i\nu}=\frac{\alpha-2\pi i\nu}{\alpha^2+4\pi^2\nu^2}=\frac{\alpha}{\alpha^2+4\pi^2\nu^2}-\frac{2\pi\nu}{\alpha^2+4\pi^2\nu^2}i\]
+\[\abs{z}=\frac{1}{\alpha^2+4\pi^2\nu^2}\sqrt{\alpha^2+4\pi^2\nu^2}\]
+\[=\sqrt{\frac{\alpha^2+4\pi^2\nu^2}{(\alpha^2+4\pi^2\nu^2)^2}}\]
+\[=\frac{1}{\sqrt{\alpha^2+4\pi^2\nu^2}}\]
+\[\phi=\arctan(-\frac{2\pi\nu}{\alpha})\]
+\subsection*{3.a.iii}
+\[\text{Re}(z)=\frac{\alpha}{\alpha^2+4\pi^2\nu^2} \qquad \text{Imag}(z)=-\frac{2\pi\nu}{\alpha^2+4\pi^2\nu^2}\]
+\subsection*{3.b}
+\[\lim_{\alpha\to 0^+}\ft(f(t))=\lim_{\alpha\to 0^+}\Big(\frac{\alpha}{\alpha^2+4\pi^2\nu^2}-\frac{2\pi\nu}{\alpha^2+4\pi^2\nu^2}i\Big)\]
+using that
+\[\pi\delta(x)=\lim_{a\to 0^+}\frac{a}{x^2+a^2}\]
+let $x^2=4\pi^2\nu^2$
+\[\lim_{\alpha\to 0^+}\ft(f(t))=\lim_{\alpha\to 0^+}\Big(\frac{\alpha}{\alpha^2+x^2}-\frac{2\pi\nu}{\alpha^2+4\pi^2\nu^2}i\Big)\]
+\[=\pi\delta(2\pi\nu)-\frac{1}{2\pi\nu}i\]
+and use that
+\[\delta(ax)=\frac{1}{\abs{a}}\delta(x)\]
+hence
+\[\lim_{\alpha\to 0^+}\ft(f(t))=\frac{1}{2}\delta(\nu)-\frac{1}{2\pi\nu}i\]
+\[\lim_{\alpha\to 0^+}\abs{z}=\frac{1}{\sqrt{4\pi^2\nu^2}}=\frac{1}{2\pi\nu}\]
+\[\lim_{\alpha\to0^+}\phi=\arctan(-\infty)=-\frac{\pi}{2}\]
+Where we have assumed that $\alpha>0$
+\section*{Question 4}
+By noticing that the function $\lim_{\alpha\to 0^+}\ft(f(t))=\theta(t)$ where $\theta$ is the Heaviside step function and $f(t)$ is the function in question 3. We immediately dget the answer
+\[\ft(\theta)=\lim_{\alpha\to 0^+}\ft(f(t))=\frac{1}{2}\Big(\delta(\nu)-\frac{i}{\pi\nu}\Big)\]
+Let us check that the inverse Fourier transform produces back the original function as we would hope.
+
+\begin{align*} \ft^{-1}\Big(\frac{1}{2}\big(\delta(\nu)-\frac{i}{\pi\nu}\big)\Big)
+  &=\frac{1}{2}\infint{\nu}\Big(\delta(\nu)-\frac{i}{\pi\nu}\Big)e^{2\pi i\nu t}\\
+  &=\frac{1}{2}e^0-\frac{i}{2\pi}\infint{\nu}\Big(\frac{\cos(2\pi\nu t)}{\nu}+\frac{i\sin(2\pi\nu t)}{\nu}\Big)\\
+\end{align*}
+We can see that the first term under the integral vanishes as it is an odd function i.
+\[\infint{\nu}\frac{\cos(2\pi i\nu t)}{\nu}=0\]
+Looking at a table of integrals we can find the answer for the second integral which is
+\begin{align*}
+  \infint{\nu}\frac{\sin(2\pi\nu t)}{\nu}
+  &=\pi\text{sign}(t)
+\end{align*}
+Hence
+\begin{align*}
+  \ft^{-1}(\ft(\theta))
+  &=\frac{1}{2}(1-\frac{i^2}{\pi}\pi\text{sign}(t))\\
+  &=1-\text{sign}(t)\\
+  &=\theta(t)
+\end{align*}
+where
+\begin{align*}
+  \text{sign}(t)=
+  \begin{cases}
+    +1 \qquad &t\geq 0 \\
+    -1 \qquad &t<0
+  \end{cases}
+\end{align*}
+Hence this Fourier transformation is consistent
+
+\end{document}

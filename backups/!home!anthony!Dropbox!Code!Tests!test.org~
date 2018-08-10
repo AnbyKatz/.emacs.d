@@ -1,0 +1,66 @@
+#+TITLE: LaTeX test
+#+AUTHOR: Anthony Kalaitzis
+#+OPTIONS: toc:nil
+#+LaTeX_CLASS_OPTIONS: [a4paper,12pt]
+
+* Relativistic Nuclear Field Theory
+
+** Test Chapter
+
+_underlined word_, *bold words*, =verbose=, /italic/.
+
+** Uncharged and Charged Scalar Fields
+
+#+BEGIN_EXPORT latex
+Consider the simplest example of a field ie the uncharged scalar field which we will denote $\sigma(x)$. This will have the corresponding KG Lagrangian density.
+\begin{align*}
+  \mathcal{L}_\sigma=\frac{1}{2}(\partial_\mu \sigma\partial^\mu \sigma - m_\sigma^2\sigma^2)
+\end{align*}
+where $m_\sigma$ denotes the meson mass. Clearly after applying the EL equations we get the corresponding KG equation for a free spin-zero meson ie
+\begin{align*}
+  \partial_\mu\bigg(\pdv{\mathcal{L}}{(\partial_\mu\sigma)}\bigg)-\pdv{\mathcal{L}}{\sigma}=0
+\end{align*}
+we get
+\begin{align*}
+  \pdv{\Lag}{(\partial_\mu\sigma)}&=\pdv{(\partial_\mu\sigma)}\frac{1}{2}(\partial_\mu\sigma g^{\mu\nu}\partial_\nu\sigma)\\
+                                  &=\frac{1}{2}\bigg(g^{\mu\nu}\partial_\nu\sigma+\partial_\mu\sigma g^{\mu\nu}\frac{\partial_\nu\sigma}{\partial_\mu\sigma}\bigg)\\
+                                  &=\frac{1}{2}\bigg(\partial^\mu\sigma+\partial_\nu\sigma g^{\mu\nu} \bigg)=\partial^\mu\sigma
+\end{align*}
+\begin{align*}
+  \implies \partial_\mu(\partial^\mu \sigma)+m_\sigma^2\sigma=0
+\end{align*}
+\begin{align*}
+  \therefore (\square+m_\sigma^2)\sigma(x)=0
+\end{align*}
+where $\square\equiv\partial_\mu\partial^\mu$. We make the standard substitutions  for energy and momentum operators
+\begin{align*}
+  E\to i\pdv{t} \qquad \mathbf{P}\to-i\grad
+\end{align*}
+Note the KG equation represents the operator equation below when acted on a state
+\begin{align*}
+  E^2=P^2+m_\sigma^2
+\end{align*}
+and we recognise that the above Lagrangian has the same space symmetries of any Lorentz scalar Lagrangian and hence its energy momentum tensor takes the usual form
+\begin{align*}
+  \mathcal{T}^{\mu\nu}\equiv\frac{\partial\mathcal{L}}{\partial{(\partial_\mu\phi)}}\partial^\nu\phi-\eta^{\mu\nu}\mathcal{L}
+\end{align*}
+A scalar Lagrangian that does have an internal symmetry is one representing two scalar mesons of the same mass,
+\begin{align*}
+  \mathcal{L}(\sigma_1,\sigma_2)=\frac{1}{2}(\partial_\mu \sigma_1\partial^\mu \sigma_1 - m_\sigma^2\sigma_1^2)+\frac{1}{2}(\partial_\mu \sigma_2\partial^\mu \sigma_2 - m_\sigma^2\sigma_2^2)
+\end{align*}
+This symmetry becomes more apparent if we define the complex field $\sigma=(\sigma_1+i\sigma_2)/\sqrt(2)$. Which then implies that we can write the lagrangian in the following way
+\begin{align*}
+  \mathcal{L}(\sigma_1,\sigma_2)=\partial_\mu\sigma^*\partial^\mu\sigma-m^2_\sigma\sigma^*\sigma
+\end{align*}
+which is clearly invariant under the transformation $\sigma(x)\to e^{iq\lambda}\sigma(x)$ and $\sigma^*(x)\to e^{-iq\lambda}\sigma^*(x)$ where $\lambda$ is a cts variable and we interpret $q$ as the charge of the field. If we now want to construct the conserved current we consider the variational derivative of this above transformation $\delta\sigma=iq\lambda\sigma$ or in terms of the original field $\sigma_1\to\sigma_1-q\lambda\sigma_2$ and $\sigma_2\to\sigma_2+a\lambda\sigma_1$. Hence our small deformations of the field are $-q\sigma_2$ and $q\sigma_1$ which leads to a conserved current which is just the sum of two terms
+\begin{align*}
+  J^\mu=q \bigg(\pdv{\mathcal{L}}{(\partial_\mu\sigma_1)}\sigma_2+\pdv{\mathcal{L}}{(\partial_\mu\sigma_2)}\sigma_1\bigg)=q(\sigma_1\partial^\mu\sigma_2+\sigma_2\partial^\mu\sigma_1)=q(\sigmav\cp\partial^\mu\sigmav)
+\end{align*}
+or in terms of the complex field we have 
+\begin{align*}
+  J^\mu=-iq(\sigma^*\partial^*\sigma-\sigma\partial_\mu\sigma^*)
+\end{align*}
+#+END_EXPORT
+
+\bibliography{ref}
+\bibliographystyle{plain}

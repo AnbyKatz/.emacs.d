@@ -1,0 +1,33 @@
+#!/home/anthony/anaconda3/bin/python3.6
+
+import matplotlib.pyplot as pypl
+import numpy as np
+import math as m
+from scipy.integrate import quad
+from matplotlib import rc
+from pylab import*
+from sympy import*
+
+data = np.loadtxt("BBChaos145Hz-1.txt")
+N=2**16
+
+driving_freq=data[0:N-1,0]
+ball_height=data[0:N-1,1]
+
+fourier_driver=np.fft.fft(driving_freq)
+fourier_height=np.fft.fft(ball_height)
+
+drive_power=(np.square(np.absolute(fourier_driver)))/N**2
+ball_power=(np.square(np.absolute(fourier_height)))
+
+i=np.argmax(drive_power)
+scale=145/i
+x=scale*linspace(-N/2,N/2-1,N-1)
+
+ball_power=np.fft.fftshift(ball_power)
+
+pypl.loglog(x,ball_power)
+pypl.xlabel("frequency")
+pypl.ylabel("Power Spectra")
+pypl.grid()
+pypl.show()

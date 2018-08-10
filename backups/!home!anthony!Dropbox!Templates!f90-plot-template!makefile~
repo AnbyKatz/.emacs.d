@@ -1,0 +1,27 @@
+# Fortran base MakeFile
+# add links to libaries if needed
+
+F90C = ifort
+F90FLAGS = -O2
+CFLAGS = -O2 -mkl
+LIBS = -lmkl_lapack95_lp64
+MYLIBS = -I/home/anthony/Dropbox/Code/Fortran/f90-toolbox/
+DIR = /home/anthony/Dropbox/Code/Fortran/f90-toolbox/
+
+%.o: %.f90
+	$(F90C) $(CFLAGS) -c $<
+
+# Modules below
+LIBOBJS = $(DIR)kinds.o\
+	$(DIR)pyplots.o\
+	$(DIR)lapack.o\
+	$(DIR)numFort.o\
+	$(DIR)quadpack.o
+
+all: test
+
+test: test.f90 
+	$(F90C) $(CFLAGS) -o $@ $< $(LIBOBJS) $(LIBS) $(MYLIBS)
+
+clean:
+	rm *.o *.mod

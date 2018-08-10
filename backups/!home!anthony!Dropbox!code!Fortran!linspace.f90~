@@ -1,0 +1,26 @@
+module linspace
+  use kinds
+  implicit none
+
+contains
+
+  function linspace(start,finish,N)
+    integer, intent(in)    :: start, finish, N
+
+    real(dp), dimension(L) :: x
+    real(dp)               :: int
+    integer                :: i
+    
+    x(1) = start
+    x(L) = finish
+    int  = finish/L 
+
+    do i=2,L-1
+       x(i)=x(i-1)+int
+    end do
+
+  end function linspace
+    
+
+
+end module linspace

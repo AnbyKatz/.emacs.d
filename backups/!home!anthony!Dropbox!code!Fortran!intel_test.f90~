@@ -1,0 +1,11 @@
+program intel_test
+  implicit none
+
+  real :: z
+
+  x=cmplx(1,1)
+
+  print *,z
+
+
+end program intel_test
