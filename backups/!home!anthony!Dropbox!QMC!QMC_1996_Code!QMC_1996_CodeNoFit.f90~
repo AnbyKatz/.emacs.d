@@ -77,7 +77,7 @@ contains
     use Kinds
     implicit none
 
-    N     = 1e4
+    N     = 1e3
     allocate(x_ax1(N),x_ax2(N),y_ax(N),&
          data1(N,6),data2(N,6),data3(N,6),&
          Meffvals(N),Cvals(N),d(N/2))
@@ -266,7 +266,6 @@ contains
        yvals(mm) =  (g_sigma/Msigma**2)*Cvals(mm)*(2/pi**2)*&
             integral(SMF_Integral,a,b,absErr,relErr)-sigma
     end do
-
 
     ! guess = GuessZero(yvals)
     ! yval = newton1D(SMF_newton,x_ax2(guess))

@@ -14,38 +14,17 @@ OBJS = kinds.o\
 	pyplots.o\
 	quadpack.o
 
-all: QMC_1996_CodeV1\
-	QMC_1996_CodeV2\
-	QMC_1996_CodeV3\
-	QMC_1996_CodeV4\
-	QMC_1996_CodeVFinal\
-	test
+all: QMC_1996_CodeFit\
+	QMC_1996_CodeNoFit
 
-QMC_1996_CodeV1: QMC_1996_CodeV1.f90 $(OBJS)
+QMC_1996_CodeFit: QMC_1996_CodeFit.f90 $(OBJS)
 	$(F90C) $(F90FLAGS) -o $@ $< $(OBJS)
-
-QMC_1996_CodeV2: QMC_1996_CodeV2.f90 $(OBJS)
-	$(F90C) $(F90FLAGS) -o $@ $< $(OBJS)
-
-QMC_1996_CodeV3: QMC_1996_CodeV3.f90 $(OBJS)
-	$(F90C) $(F90FLAGS) -o $@ $< $(OBJS)
-
-QMC_1996_CodeV4: QMC_1996_CodeV4.f90 $(OBJS)
-	$(F90C) $(F90FLAGS) -o $@ $< $(OBJS)
-
-QMC_1996_CodeVFinal: QMC_1996_CodeVFinal.f90 $(OBJS)
-	$(F90C) $(F90FLAGS) -o $@ $< $(OBJS)
-
-test: test.f90 $(OBJS)
+QMC_1996_CodeNoFit: QMC_1996_CodeNoFit.f90 $(OBJS)
 	$(F90C) $(F90FLAGS) -o $@ $< $(OBJS)
 
 # list dependencies
-QMC_1996_CodeV1.o: kinds.o quadpack.o nrutil.o pyplots.o UsefulFunctions.o
-QMC_1996_CodeV2.o: kinds.o quadpack.o nrutil.o pyplots.o UsefulFunctions.o
-QMC_1996_CodeV3.o: kinds.o quadpack.o nrutil.o pyplots.o UsefulFunctions.o
-QMC_1996_CodeV4.o: kinds.o quadpack.o nrutil.o pyplots.o UsefulFunctions.o
-QMC_1996_CodeVFinal.o: kinds.o quadpack.o nrutil.o pyplots.o UsefulFunctions.o
-test.o: kinds.o quadpack.o nrutil.o pyplots.o UsefulFunctions.o
+QMC_1996_CodeFit.o: kinds.o quadpack.o nrutil.o pyplots.o UsefulFunctions.o
+QMC_1996_CodeNoFit.o: kinds.o quadpack.o nrutil.o pyplots.o UsefulFunctions.o
 
 UsefulFunctions.o : kinds.o nrutil.o quadpack.o
 nrutil.o: kinds.o
