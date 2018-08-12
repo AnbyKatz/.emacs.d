@@ -1,20 +1,13 @@
 program test
-  use kinds
-  implicit none
+  use plplot
+  use numFort
+  implicit none 
 
+  integer,parameter::N=1000
+  real(DP),dimension(N)::x,y
 
-  real(DP) :: a,b,c
-
-
-  
-
-
-
-
-
-
-
-
-
+  x=linspace(-5.0,5.0,N)
+  y=sin(x)
+  call plot(x,y)
 
 end program test

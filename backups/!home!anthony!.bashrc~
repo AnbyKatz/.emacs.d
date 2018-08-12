@@ -147,11 +147,16 @@ alias clc="clear"
 # spelling corrections
 alias mkae="make"
 alias maek="make"
-
+# z - jump around
+source ~/bin/z-master/z.sh
+# Recognise compiler path
 source /opt/intel/bin/compilervars.sh intel64
+export FC=/opt/intel/bin/ifort
 export PATH=$PATH:/home/anthony/bin/
 export PATH=$PATH:/bin/bash
+export EDITOR=$EDITOR:emacsclient
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/anthony/bin/PLplot/install_dir/lib/pkgconfig
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2018.3.222/linux/mkl/lib/intel64_lin/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64_lin/
-export EDITOR=$EDITOR:emacsclient
-
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/anthony/bin/PLplot/install_dir/lib/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH/home/anthony/bin/PLplot/build_dir/bindings/fortran

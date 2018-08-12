@@ -1,27 +1,26 @@
 # Fortran base MakeFile
-# add links to libaries if needed
+# Directory to numFort
+DIR = /home/anthony/Dropbox/Code/Fortran/f90-toolbox/
 
-F90C		= ifort
-F90FLAGS	= -O2
-CFLAGS		= -O2 -mkl
-LIBS		= -lmkl_lapack95_lp64
-MYLIBS          = -I/home/anthony/Dropbox/Code/Fortran/f90-toolbox/
-PATH            = /home/anthony/Dropbox/Code/Fortran/f90-toolbox/
+F90C = ifort
+F90FLAGS = -O2
+CFLAGS = -O2 -xHost -mkl
 
-# %.o: %.f90
-# 	$(F90C) $(CFLAGS) -c $<
+PLPLOT = $$(pkg-config --cflags --libs plplot-fortran)
+LIBS = -lmkl_lapack95_lp64 -lplplotfortran -lplplot 
+MYLIBS = -I$(DIR)
+
+%.o: %.f90
+	$(F90C) $(CFLAGS) -c $<
 
 # Modules below
-LIBOBJS = kinds.o\
-	pyplots.o\
-	lapack.o\
-	numFort.o\
-	quadpack.o
+LIBOBJS = $(DIR)lapack.o\
+	$(DIR)numFort.o
 
 all: test
 
 test: test.f90 
-	$(F90C) $(CFLAGS) -o $@ $< $(LIBOBJS) $(LIBS) $(MYLIBS)
+	$(F90C) $(CFLAGS) -o $@ $< $(LIBOBJS) $(PLPLOT) $(LIBS) $(MYLIBS)
 
 clean:
 	rm *.o *.mod
