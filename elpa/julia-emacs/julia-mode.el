@@ -2,7 +2,6 @@
 
 ;; Copyright (C) 2009-2014 Julia contributors
 ;; URL: https://github.com/JuliaLang/julia
-;; Package-Version: 20171116.642
 ;; Version: 0.3
 ;; Keywords: languages
 
@@ -3215,6 +3214,28 @@ strings."
 (puthash "\\mtteight" "𝟾" julia-latexsubs)
 (puthash "\\mttnine" "𝟿" julia-latexsubs)
 
+;; Math insertion in julia. Use it with
+;; (add-hook 'julia-mode-hook 'julia-math-mode)
+;; (add-hook 'inferior-julia-mode-hook 'julia-math-mode)
+
+(when (require 'latex nil t)
+  (defun julia-math-insert (s)
+    "Inserts math symbol given by `s'"
+    (when s
+      (let ((sym (gethash (concat "\\" s) julia-latexsubs)))
+        (when sym
+          (insert sym)))))
+
+  (define-minor-mode julia-math-mode
+    "A minor mode with easy access to TeX math commands. The
+command is only entered if it is supported in Julia. The
+following commands are defined:
+
+\\{LaTeX-math-mode-map}"
+    nil nil (list (cons (LaTeX-math-abbrev-prefix) LaTeX-math-keymap))
+    (if julia-math-mode
+        (set (make-local-variable 'LaTeX-math-insert-function) 'julia-math-insert))))
+
 ;; Code for `inferior-julia-mode'
 (require 'comint)
 
@@ -3223,9 +3244,9 @@ strings."
   :type 'string
   :group 'julia)
 
-(defcustom julia-arguments '()
+(defcustom julia-arguments '("-i" "--color=yes")
   "Commandline arguments to pass to `julia-program'."
-  :type 'string
+  :type '(repeat (string :tag "argument"))
   :group 'julia)
 
 (defvar julia-prompt-regexp "^\\w*> "
@@ -3245,7 +3266,8 @@ strings."
     (let ((julia-program julia-program)
           (buffer (get-buffer-create "*Julia*")))
       (when (not (comint-check-proc "*Julia*"))
-            (apply #'make-comint-in-buffer "Julia" "*Julia*" julia-program julia-arguments))
+        (apply #'make-comint-in-buffer "Julia" "*Julia*"
+               julia-program nil julia-arguments))
       (pop-to-buffer-same-window "*Julia*")
       (inferior-julia-mode)))
 

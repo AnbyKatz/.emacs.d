@@ -1,5 +1,4 @@
 # -*- mode: org; -*-
-
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
 #+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -37,7 +36,12 @@ Add shell variables to emacs
 
 Enable quick changed between English and 日本語
 #+BEGIN_SRC emacs-lisp
-(set-language-environment "Japanese")
+  ;; (set-language-environment "Japanese")
+#+END_SRC
+
+Set encoding environment to UTF-8
+#+BEGIN_SRC emacs-lisp
+  (set-language-environment "UTF-8")
 #+END_SRC
 
 ** Extra
@@ -91,7 +95,6 @@ camelCase recognition
 Turn on rainbow deliminators 
 #+BEGIN_SRC emacs-lisp
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'foo-mode-hook #'rainbow-delimiters-mode)
 #+END_SRC
 
 ** Start up
@@ -169,7 +172,7 @@ File navigation for major files
 (global-set-key (kbd "H-r")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/Thesis/MPhil_Research.tex")))
 (global-set-key (kbd "H-j")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/journal.org")))
 (global-set-key (kbd "H-a")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/agenda.org")))
-(global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/My_QMC_Code/QMC_2018V1.f90")))
+(global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/myQMCcode/QMC_2018V1.f90")))
 (global-set-key (kbd "H-t")  (lambda () (interactive) (find-file  "~/texmf/tex/latex/package_repository/mypackage.sty")))
 #+END_SRC
 
@@ -324,18 +327,18 @@ Auto load in FORTRAN mode for f90 files
 
 Configurations for FORTRAN major mode
 #+BEGIN_SRC emacs-lisp
-(add-hook 'f90-mode-hook 'my-f90-mode-hook)
-(require 'fortran)
-(defun my-f90-mode-hook () 
-  (local-set-key (kbd "H-M-c") (lambda () (interactive) (shell-command "./bash_fortran")))
-  (local-set-key (kbd "H-t") 'my/f90-comment-header-block)
-  (setq f90-font-lock-keywords f90-font-lock-keywords-3)
-  '(f90-comment-region "!!!$")
-  '(f90-indented-comment-re "!")
-  (abbrev-mode 1)                     
-  (turn-on-font-lock)                 
-  (auto-fill-mode 0)                  
-)
+  (add-hook 'f90-mode-hook 'my-f90-mode-hook)
+  (require 'fortran)
+  (defun my-f90-mode-hook () 
+    (local-set-key (kbd "H-M-c") (lambda () (interactive) (shell-command "./bash_fortran")))
+    (local-set-key (kbd "H-t") 'my/f90-comment-header-block)
+    (setq f90-font-lock-keywords f90-font-lock-keywords-3)
+    '(f90-comment-region "!!!$")
+    '(f90-indented-comment-re "!")
+    ;; (abbrev-mode 1)                     
+    (turn-on-font-lock)                 
+    (auto-fill-mode 0)                  
+  )
 #+END_SRC
 
 Creates a heading in FORTRAN major mode
@@ -406,6 +409,7 @@ Some configurations Python major mode
     (setq python-shell-interpreter "ipython"
           python-shell-interpreter-args "--simple-prompt -i")
     (add-to-list 'load-path "/folder/containing/file")
+    (abbrev-mode 1)                     
     )
 #+END_SRC
 
@@ -437,51 +441,27 @@ Some configurations C++ major mode
 #+END_SRC
 
 ** Julia
-*** Environment Macros
-
-Some configurations Julia major mode
-#+BEGIN_SRC emacs-lisp
-(require 'julia-mode)
-(add-hook 'julia-mode-hook 'my-Julia-mode-hook)
-(defun my-Julia-mode-hook()
-  (local-set-key (kbd "C-c C-p") 'inferior-julia-shell)
-  (local-set-key (kbd "C-c C-r") 'julia-shell-run-region)
-  (local-set-key (kbd "H-M-p") 'my/julia-compile) 
-  )
-#+END_SRC
-
-Compile command for Julia
-#+BEGIN_SRC emacs-lisp
-(defun my/julia-compile()
-  (interactive)
-  (defvar thisfile buffer-file-name)
-  (shell-command (concat "julia " thisfile)))
-#+END_SRC
 
 *** Shell Configurations
 
 load in Julia compiler
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "~/.emacs.d/elpa/julia-mode-20171116.642")
+(add-to-list 'load-path "~/.emacs.d/elpa/julia-emacs")
 #+END_SRC
 
 Julia shell
 #+BEGIN_SRC emacs-lisp
-(setq  inferior-julia-program-name "~/bin/julia/bin/julia")
+(setq  inferior-julia-program-name "~/bin/julia/julia")
 #+END_SRC
 
-Julia repel stuff
+
+*** Environment Macros
+
+Some configurations Julia major mode
 #+BEGIN_SRC emacs-lisp
-(defun julia-repl ()
-  "Runs Julia in a screen session in a `term' buffer."
-  (interactive)
-  (require 'term)
-  (let ((termbuf (apply 'make-term "Julia REPL" "screen" nil (split-string-and-unquote "julia"))))
-    (set-buffer termbuf)
-    (term-mode)
-    (term-char-mode)
-    (switch-to-buffer termbuf)))
-(global-set-key (kbd "C-x j") 'julia-repl)
+  (require 'julia-mode)
+  (add-to-list 'load-path "~/.emacs.d/elpa/julia-shell-mode")
+  (require 'julia-shell)
 #+END_SRC
 
 * Org

@@ -13,7 +13,8 @@
 (when (memq window-system '(mac ns x))
 (exec-path-from-shell-initialize))
 
-(set-language-environment "Japanese")
+;; (set-language-environment "Japanese")
+(set-language-environment "UTF-8")
 
 (setq abbrev-file-name "~/.abbrev_defs")
 (if (file-exists-p abbrev-file-name)
@@ -42,7 +43,6 @@
 (global-subword-mode)
 
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'foo-mode-hook #'rainbow-delimiters-mode)
 
 (when (display-graphic-p)
   (add-to-list 'default-frame-alist '(fullscreen . maximized)))
@@ -80,7 +80,7 @@
 (global-set-key (kbd "H-r")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/Thesis/MPhil_Research.tex")))
 (global-set-key (kbd "H-j")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/journal.org")))
 (global-set-key (kbd "H-a")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/agenda.org")))
-(global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/My_QMC_Code/QMC_2018V1.f90")))
+(global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/myQMCcode/QMC_2018V1.f90")))
 (global-set-key (kbd "H-t")  (lambda () (interactive) (find-file  "~/texmf/tex/latex/package_repository/mypackage.sty")))
 
 (global-set-key (kbd "M-]") 'other-window)
@@ -174,7 +174,7 @@
   (setq f90-font-lock-keywords f90-font-lock-keywords-3)
   '(f90-comment-region "!!!$")
   '(f90-indented-comment-re "!")
-  (abbrev-mode 1)                     
+  ;; (abbrev-mode 1)                     
   (turn-on-font-lock)                 
   (auto-fill-mode 0)                  
 )
@@ -234,6 +234,7 @@
   (setq python-shell-interpreter "ipython"
         python-shell-interpreter-args "--simple-prompt -i")
   (add-to-list 'load-path "/folder/containing/file")
+  (abbrev-mode 1)                     
   )
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -252,33 +253,13 @@
   (local-set-key (kbd "H-M-p")(lambda () (interactive) (shell-command "./bash_c++")))
   )
 
+(add-to-list 'load-path "~/.emacs.d/elpa/julia-emacs")
+
+(setq  inferior-julia-program-name "~/bin/julia/julia")
+
 (require 'julia-mode)
-(add-hook 'julia-mode-hook 'my-Julia-mode-hook)
-(defun my-Julia-mode-hook()
-  (local-set-key (kbd "C-c C-p") 'inferior-julia-shell)
-  (local-set-key (kbd "C-c C-r") 'julia-shell-run-region)
-  (local-set-key (kbd "H-M-p") 'my/julia-compile) 
-  )
-
-(defun my/julia-compile()
-  (interactive)
-  (defvar thisfile buffer-file-name)
-  (shell-command (concat "julia " thisfile)))
-
-(add-to-list 'load-path "~/.emacs.d/elpa/julia-mode-20171116.642")
-
-(setq  inferior-julia-program-name "~/bin/julia/bin/julia")
-
-(defun julia-repl ()
-  "Runs Julia in a screen session in a `term' buffer."
-  (interactive)
-  (require 'term)
-  (let ((termbuf (apply 'make-term "Julia REPL" "screen" nil (split-string-and-unquote "julia"))))
-    (set-buffer termbuf)
-    (term-mode)
-    (term-char-mode)
-    (switch-to-buffer termbuf)))
-(global-set-key (kbd "C-x j") 'julia-repl)
+(add-to-list 'load-path "~/.emacs.d/elpa/julia-shell-mode")
+(require 'julia-shell)
 
 (defun my-org-mode-hook ()
   (setq org-log-done t)

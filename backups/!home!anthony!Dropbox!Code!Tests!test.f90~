@@ -1,13 +1,16 @@
 program test
-  use plplot
+  use kinds
   use numFort
   implicit none 
 
-  integer,parameter::N=1000
-  real(DP),dimension(N)::x,y
 
-  x=linspace(-5.0,5.0,N)
-  y=sin(x)
-  call plot(x,y)
+
+
+
+
+
+
+
+
 
 end program test
