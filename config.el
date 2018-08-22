@@ -14,6 +14,7 @@
 (exec-path-from-shell-initialize))
 
 ;; (set-language-environment "Japanese")
+
 (set-language-environment "UTF-8")
 
 (setq abbrev-file-name "~/.abbrev_defs")
