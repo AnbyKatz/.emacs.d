@@ -1,9 +1,7 @@
 program test
   use kinds
   use numFort
-  implicit none 
-
-
+  implicit none
 
 
 

@@ -1,6 +1,6 @@
 # Fortran base MakeFile
 # Directory to numFort
-DIR = ~/Dropbox/Code/Fortran/numFort/
+DIR = /home/anthony/Dropbox/Code/Fortran/numFort/
 
 F90C = ifort
 F90FLAGS = -O2
@@ -15,6 +15,7 @@ MYLIBS = -I$(DIR)
 
 # Library object files
 LIBOBJS = $(DIR)lapack.o\
+	$(DIR)kinds.o\
 	$(DIR)numFort.o
 
 # Own personal object files
