@@ -1,7 +1,14 @@
 program test
   use kinds
   use numFort
+  use PLplots
   implicit none
+
+
+
+
+
+
 
 
 

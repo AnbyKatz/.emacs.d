@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-08-06 Mon 14:14 -->
+<!-- 2018-08-29 Wed 13:09 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs Config file</title>
@@ -240,74 +240,69 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org3a480b8">1. Emacs Utility</a>
+<li><a href="#org24f363e">1. Emacs Utility</a>
 <ul>
-<li><a href="#org2536aed">1.1. Shell</a></li>
-<li><a href="#orgffe2ce6">1.2. Language</a></li>
-<li><a href="#org8c66791">1.3. Extra</a></li>
+<li><a href="#orge27a8fc">1.1. Shell</a></li>
+<li><a href="#org2dfb84a">1.2. Language</a></li>
+<li><a href="#org10f7ad2">1.3. Extra</a></li>
 </ul>
 </li>
-<li><a href="#orge51be0c">2. Quality of life changes</a>
+<li><a href="#org9a34556">2. Quality of life changes</a>
 <ul>
-<li><a href="#orgc3aa5bd">2.1. Accessibility</a></li>
-<li><a href="#org506215a">2.2. Start up</a></li>
-<li><a href="#orgd9eb280">2.3. Display and Utility</a></li>
+<li><a href="#org5215ca6">2.1. Accessibility</a></li>
+<li><a href="#orgb93c62c">2.2. Start up</a></li>
+<li><a href="#org17b050f">2.3. Display and Utility</a></li>
 </ul>
 </li>
-<li><a href="#org50d3b40">3. Key Re-bindings</a>
+<li><a href="#org1712e64">3. Key Re-bindings</a>
 <ul>
-<li><a href="#org1213dc6">3.1. File Navigation</a></li>
-<li><a href="#org0ca8c92">3.2. Movement Macros</a></li>
-<li><a href="#org8cd927b">3.3. Personal Macros</a></li>
-<li><a href="#org7df62cc">3.4. Global coding macros</a></li>
+<li><a href="#orgb5c59b1">3.1. File Navigation</a></li>
+<li><a href="#orgca30cc3">3.2. Movement Macros</a></li>
+<li><a href="#org5a4b369">3.3. Personal Macros</a></li>
+<li><a href="#org2455e7f">3.4. Global coding macros</a></li>
 </ul>
 </li>
-<li><a href="#orgce8b067">4. Helm</a></li>
-<li><a href="#orgc6816dd">5. Colour Theme</a></li>
-<li><a href="#orgf51857d">6. AucTex</a>
+<li><a href="#org2fb4711">4. Helm</a></li>
+<li><a href="#orgb31b1e3">5. Colour Theme</a></li>
+<li><a href="#orgd9638f5">6. AucTex</a>
 <ul>
-<li><a href="#orgfd437dd">6.1. FlySpell</a></li>
-<li><a href="#org868fd95">6.2. PDF Tools</a></li>
-<li><a href="#org04e2814">6.3. Utility</a></li>
-<li><a href="#org33727b6">6.4. LaTeX editing major mode</a></li>
+<li><a href="#org8dfadc9">6.1. FlySpell</a></li>
+<li><a href="#org8dd455f">6.2. PDF Tools</a></li>
+<li><a href="#org8ca7c4f">6.3. Utility</a></li>
+<li><a href="#org1dc28e3">6.4. LaTeX editing major mode</a></li>
 </ul>
 </li>
-<li><a href="#org20216c1">7. Coding</a>
+<li><a href="#orgdb26996">7. Coding</a>
 <ul>
-<li><a href="#orga58d3b2">7.1. FORTRAN</a></li>
-<li><a href="#orgbc61bae">7.2. Python</a></li>
-<li><a href="#orgf3a03fc">7.3. C++</a></li>
-<li><a href="#orgacaf4e8">7.4. Julia</a>
-<ul>
-<li><a href="#org8e4b799">7.4.1. Environment Macros</a></li>
-<li><a href="#org1f20df1">7.4.2. Shell Configurations</a></li>
+<li><a href="#org064bfe0">7.1. FORTRAN</a></li>
+<li><a href="#org5a22bf5">7.2. Python</a></li>
+<li><a href="#org331633a">7.3. C++</a></li>
+<li><a href="#org8200668">7.4. Julia</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#org094fffa">8. Org</a>
+<li><a href="#org357755d">8. Org</a>
 <ul>
-<li><a href="#org1ecd6d6">8.1. Editing Code</a></li>
-<li><a href="#org777e797">8.2. Capture Mode</a></li>
-<li><a href="#org11a47e1">8.3. Macros</a></li>
-<li><a href="#org80c7b0b">8.4. Utility</a></li>
-<li><a href="#org2fe7a6c">8.5. Visual Settings</a></li>
-<li><a href="#orge0c0ab5">8.6. Agenda alternations</a></li>
-<li><a href="#org2f1e7bc">8.7. Beamer</a></li>
-<li><a href="#org735aa9e">8.8. LaTeX</a></li>
+<li><a href="#orge97380c">8.1. Editing Code</a></li>
+<li><a href="#org9085e31">8.2. Capture Mode</a></li>
+<li><a href="#orgdb7c008">8.3. Macros</a></li>
+<li><a href="#org915a331">8.4. Utility</a></li>
+<li><a href="#org91f5ed9">8.5. Visual Settings</a></li>
+<li><a href="#orgfdc70bd">8.6. Agenda alternations</a></li>
+<li><a href="#orgd1e6fb8">8.7. Beamer</a></li>
+<li><a href="#orgfc0f832">8.8. LaTeX</a></li>
 </ul>
 </li>
-<li><a href="#org41e05c4">9. Wolfram Alpha</a></li>
+<li><a href="#org2c5b529">9. Wolfram Alpha</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org3a480b8" class="outline-2">
-<h2 id="org3a480b8"><span class="section-number-2">1</span> Emacs Utility</h2>
+<div id="outline-container-org24f363e" class="outline-2">
+<h2 id="org24f363e"><span class="section-number-2">1</span> Emacs Utility</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org2536aed" class="outline-3">
-<h3 id="org2536aed"><span class="section-number-3">1.1</span> Shell</h3>
+<div id="outline-container-orge27a8fc" class="outline-3">
+<h3 id="orge27a8fc"><span class="section-number-3">1.1</span> Shell</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Recognize exported paths in .bashrc
@@ -338,21 +333,29 @@ Add shell variables to emacs
 </div>
 </div>
 
-<div id="outline-container-orgffe2ce6" class="outline-3">
-<h3 id="orgffe2ce6"><span class="section-number-3">1.2</span> Language</h3>
+<div id="outline-container-org2dfb84a" class="outline-3">
+<h3 id="org2dfb84a"><span class="section-number-3">1.2</span> Language</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Enable quick changed between English and 日本語
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>set-language-environment <span style="color: #ff00ff;">"Japanese"</span><span style="color: #AE81FF;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #75715E;">;; </span><span style="color: #999999; font-style: italic;">(set-language-environment "Japanese")</span>
+</pre>
+</div>
+
+<p>
+Set encoding environment to UTF-8
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>set-language-environment <span style="color: #ff00ff;">"UTF-8"</span><span style="color: #AE81FF;">)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org8c66791" class="outline-3">
-<h3 id="org8c66791"><span class="section-number-3">1.3</span> Extra</h3>
+<div id="outline-container-org10f7ad2" class="outline-3">
+<h3 id="org10f7ad2"><span class="section-number-3">1.3</span> Extra</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Add custom abbrev definitions
@@ -399,16 +402,24 @@ Auto refresh buffers without asking
 <pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>global-auto-revert-mode t<span style="color: #AE81FF;">)</span>
 </pre>
 </div>
+
+<p>
+Display column number
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> column-number-mode t<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orge51be0c" class="outline-2">
-<h2 id="orge51be0c"><span class="section-number-2">2</span> Quality of life changes</h2>
+<div id="outline-container-org9a34556" class="outline-2">
+<h2 id="org9a34556"><span class="section-number-2">2</span> Quality of life changes</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgc3aa5bd" class="outline-3">
-<h3 id="orgc3aa5bd"><span class="section-number-3">2.1</span> Accessibility</h3>
+<div id="outline-container-org5215ca6" class="outline-3">
+<h3 id="org5215ca6"><span class="section-number-3">2.1</span> Accessibility</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Change text size in Emacs
@@ -431,14 +442,13 @@ Turn on rainbow deliminators
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-hook 'prog-mode-hook #'rainbow-delimiters-mode<span style="color: #AE81FF;">)</span>
-<span style="color: #AE81FF;">(</span>add-hook 'foo-mode-hook #'rainbow-delimiters-mode<span style="color: #AE81FF;">)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org506215a" class="outline-3">
-<h3 id="org506215a"><span class="section-number-3">2.2</span> Start up</h3>
+<div id="outline-container-orgb93c62c" class="outline-3">
+<h3 id="orgb93c62c"><span class="section-number-3">2.2</span> Start up</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Auto full screen Emacs GUI
@@ -498,8 +508,8 @@ Use better defaults for Emacs
 </div>
 </div>
 
-<div id="outline-container-orgd9eb280" class="outline-3">
-<h3 id="orgd9eb280"><span class="section-number-3">2.3</span> Display and Utility</h3>
+<div id="outline-container-org17b050f" class="outline-3">
+<h3 id="org17b050f"><span class="section-number-3">2.3</span> Display and Utility</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Display time in mode line
@@ -530,12 +540,12 @@ Display line numbers in programming modes
 </div>
 </div>
 
-<div id="outline-container-org50d3b40" class="outline-2">
-<h2 id="org50d3b40"><span class="section-number-2">3</span> Key Re-bindings</h2>
+<div id="outline-container-org1712e64" class="outline-2">
+<h2 id="org1712e64"><span class="section-number-2">3</span> Key Re-bindings</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org1213dc6" class="outline-3">
-<h3 id="org1213dc6"><span class="section-number-3">3.1</span> File Navigation</h3>
+<div id="outline-container-orgb5c59b1" class="outline-3">
+<h3 id="orgb5c59b1"><span class="section-number-3">3.1</span> File Navigation</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Enable quick access to config file
@@ -554,16 +564,15 @@ File navigation for major files
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-r"</span><span style="color: #66D9EF;">)</span>  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #A6E22E;">(</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span>find-file  <span style="color: #ff00ff;">"~/Dropbox/QMC/Thesis/MPhil_Research.tex"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
 <span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-j"</span><span style="color: #66D9EF;">)</span>  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #A6E22E;">(</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span>find-file  <span style="color: #ff00ff;">"~/Dropbox/Journal/journal.org"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
-<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-a"</span><span style="color: #66D9EF;">)</span>  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #A6E22E;">(</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span>find-file  <span style="color: #ff00ff;">"~/Dropbox/Journal/agenda.org"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
-<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-w"</span><span style="color: #66D9EF;">)</span>  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #A6E22E;">(</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span>find-file  <span style="color: #ff00ff;">"~/Dropbox/QMC/My_QMC_Research/QMC_2018.f90"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-w"</span><span style="color: #66D9EF;">)</span>  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #A6E22E;">(</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span>find-file  <span style="color: #ff00ff;">"~/Dropbox/QMC/myQMCcode/QMC_2018V1.f90"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
 <span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-t"</span><span style="color: #66D9EF;">)</span>  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #A6E22E;">(</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span>find-file  <span style="color: #ff00ff;">"~/texmf/tex/latex/package_repository/mypackage.sty"</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org0ca8c92" class="outline-3">
-<h3 id="org0ca8c92"><span class="section-number-3">3.2</span> Movement Macros</h3>
+<div id="outline-container-orgca30cc3" class="outline-3">
+<h3 id="orgca30cc3"><span class="section-number-3">3.2</span> Movement Macros</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Move between buffers in same frame
@@ -594,14 +603,15 @@ Move in paragraphs
 ace window movement key bindings
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-A"</span><span style="color: #66D9EF;">)</span> 'ace-window<span style="color: #AE81FF;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-]"</span><span style="color: #66D9EF;">)</span> 'ace-window<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> aw-keys '<span style="color: #66D9EF;">(</span>?q ?w ?e ?a ?s ?d ?z ?x ?c<span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org8cd927b" class="outline-3">
-<h3 id="org8cd927b"><span class="section-number-3">3.3</span> Personal Macros</h3>
+<div id="outline-container-org5a4b369" class="outline-3">
+<h3 id="org5a4b369"><span class="section-number-3">3.3</span> Personal Macros</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Binding for Helm Spotify inside Emacs
@@ -613,8 +623,8 @@ Binding for Helm Spotify inside Emacs
 </div>
 </div>
 
-<div id="outline-container-org7df62cc" class="outline-3">
-<h3 id="org7df62cc"><span class="section-number-3">3.4</span> Global coding macros</h3>
+<div id="outline-container-org2455e7f" class="outline-3">
+<h3 id="org2455e7f"><span class="section-number-3">3.4</span> Global coding macros</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Repeat previous shell command
@@ -651,8 +661,8 @@ Exchange below and above lines globally
 </div>
 </div>
 
-<div id="outline-container-orgce8b067" class="outline-2">
-<h2 id="orgce8b067"><span class="section-number-2">4</span> Helm</h2>
+<div id="outline-container-org2fb4711" class="outline-2">
+<h2 id="org2fb4711"><span class="section-number-2">4</span> Helm</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Major configurations for the Helm Plugin
@@ -677,8 +687,8 @@ Turn on Helm Spotify
 </div>
 </div>
 
-<div id="outline-container-orgc6816dd" class="outline-2">
-<h2 id="orgc6816dd"><span class="section-number-2">5</span> Colour Theme</h2>
+<div id="outline-container-orgb31b1e3" class="outline-2">
+<h2 id="orgb31b1e3"><span class="section-number-2">5</span> Colour Theme</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Load in custom colour theme
@@ -691,12 +701,12 @@ Load in custom colour theme
 </div>
 </div>
 
-<div id="outline-container-orgf51857d" class="outline-2">
-<h2 id="orgf51857d"><span class="section-number-2">6</span> AucTex</h2>
+<div id="outline-container-orgd9638f5" class="outline-2">
+<h2 id="orgd9638f5"><span class="section-number-2">6</span> AucTex</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgfd437dd" class="outline-3">
-<h3 id="orgfd437dd"><span class="section-number-3">6.1</span> FlySpell</h3>
+<div id="outline-container-org8dfadc9" class="outline-3">
+<h3 id="org8dfadc9"><span class="section-number-3">6.1</span> FlySpell</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Enable spell checking for LaTex
@@ -709,8 +719,8 @@ Enable spell checking for LaTex
 </div>
 </div>
 
-<div id="outline-container-org868fd95" class="outline-3">
-<h3 id="org868fd95"><span class="section-number-3">6.2</span> PDF Tools</h3>
+<div id="outline-container-org8dd455f" class="outline-3">
+<h3 id="org8dd455f"><span class="section-number-3">6.2</span> PDF Tools</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 Better PDF viewing inside AucTex
@@ -734,8 +744,8 @@ Better PDF viewing inside AucTex
 </div>
 </div>
 
-<div id="outline-container-org04e2814" class="outline-3">
-<h3 id="org04e2814"><span class="section-number-3">6.3</span> Utility</h3>
+<div id="outline-container-org8ca7c4f" class="outline-3">
+<h3 id="org8ca7c4f"><span class="section-number-3">6.3</span> Utility</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 Refresh the buffer after compilation
@@ -748,8 +758,8 @@ Refresh the buffer after compilation
 </div>
 </div>
 
-<div id="outline-container-org33727b6" class="outline-3">
-<h3 id="org33727b6"><span class="section-number-3">6.4</span> LaTeX editing major mode</h3>
+<div id="outline-container-org1dc28e3" class="outline-3">
+<h3 id="org1dc28e3"><span class="section-number-3">6.4</span> LaTeX editing major mode</h3>
 <div class="outline-text-3" id="text-6-4">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">tex</span><span style="color: #AE81FF;">)</span>
@@ -775,12 +785,12 @@ Refresh the buffer after compilation
 </div>
 </div>
 
-<div id="outline-container-org20216c1" class="outline-2">
-<h2 id="org20216c1"><span class="section-number-2">7</span> Coding</h2>
+<div id="outline-container-orgdb26996" class="outline-2">
+<h2 id="orgdb26996"><span class="section-number-2">7</span> Coding</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-orga58d3b2" class="outline-3">
-<h3 id="orga58d3b2"><span class="section-number-3">7.1</span> FORTRAN</h3>
+<div id="outline-container-org064bfe0" class="outline-3">
+<h3 id="org064bfe0"><span class="section-number-3">7.1</span> FORTRAN</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 Auto load in FORTRAN mode for f90 files
@@ -797,7 +807,7 @@ Configurations for FORTRAN major mode
 <pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-hook 'f90-mode-hook 'my-f90-mode-hook<span style="color: #AE81FF;">)</span>
 <span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">fortran</span><span style="color: #AE81FF;">)</span>
 <span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my-f90-mode-hook</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span> 
-  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"H-M-c"</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #E6DB74;">(</span><span style="color: #E6DB74;">)</span> <span style="color: #E6DB74;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #E6DB74;">)</span> <span style="color: #E6DB74;">(</span>shell-command <span style="color: #ff00ff;">"./bash_fortran"</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"H-M-c"</span><span style="color: #A6E22E;">)</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">lambda</span> <span style="color: #E6DB74;">(</span><span style="color: #E6DB74;">)</span> <span style="color: #E6DB74;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #E6DB74;">)</span> <span style="color: #E6DB74;">(</span>shell-command <span style="color: #ff00ff;">"./bashFortran.sh"</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span>
   <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"H-t"</span><span style="color: #A6E22E;">)</span> 'my/f90-comment-header-block<span style="color: #66D9EF;">)</span>
   <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> f90-font-lock-keywords f90-font-lock-keywords-3<span style="color: #66D9EF;">)</span>
   '<span style="color: #66D9EF;">(</span>f90-comment-region <span style="color: #ff00ff;">"!!!$"</span><span style="color: #66D9EF;">)</span>
@@ -847,21 +857,30 @@ Creates a heading in FORTRAN major mode
        <span style="color: #FD971F;">(</span>insert <span style="color: #ff00ff;">"!"</span><span style="color: #FD971F;">)</span>
        <span style="color: #FD971F;">(</span>newline<span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span>
   <span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
-<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"H-Z"</span><span style="color: #66D9EF;">)</span> 'my/f90-comment-header-block<span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Recompile FORTRAN numerical libraries 
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">numFort-recompile</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #E6DB74;">"Recompile personal FORTRAN numerical libraries"</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>shell-command <span style="color: #A6E22E;">(</span>concat <span style="color: #ff00ff;">"(cd /home/anthony/Dropbox/Code/Fortran/f90-toolbox/; ./recompile.sh"</span><span style="color: #A6E22E;">)</span> <span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgbc61bae" class="outline-3">
-<h3 id="orgbc61bae"><span class="section-number-3">7.2</span> Python</h3>
+<div id="outline-container-org5a22bf5" class="outline-3">
+<h3 id="org5a22bf5"><span class="section-number-3">7.2</span> Python</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 Insert a template for a python document
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-hook 'find-file-hooks 'my/template-insert-python<span style="color: #AE81FF;">)</span>
-<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my/template-insert-python</span><span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my/template-insert-python</span><span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
   <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
   <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">when</span> <span style="color: #A6E22E;">(</span><span style="color: #00ffff; font-weight: bold;">and</span>
   <span style="color: #E6DB74;">(</span>string-match <span style="color: #ff00ff;">"\\.py$"</span> <span style="color: #FD971F;">(</span>buffer-file-name<span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span>
@@ -876,18 +895,21 @@ Some configurations Python major mode
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">python</span><span style="color: #AE81FF;">)</span>
 <span style="color: #AE81FF;">(</span>add-hook 'python-mode-hook 'my-python-mode-hook<span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-hook 'find-file-hooks 'my/template-insert-python<span style="color: #AE81FF;">)</span>
 <span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my-python-mode-hook</span><span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>     
-  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> python-shell-interpreter <span style="color: #ff00ff;">"ipython"</span>
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"C-c C-r"</span><span style="color: #A6E22E;">)</span> 'ipython-shell-send-region<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> python-shell-interpreter <span style="color: #ff00ff;">"ipython3"</span>
         python-shell-interpreter-args <span style="color: #ff00ff;">"--simple-prompt -i"</span><span style="color: #66D9EF;">)</span>
   <span style="color: #66D9EF;">(</span>add-to-list 'load-path <span style="color: #ff00ff;">"/folder/containing/file"</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>abbrev-mode 1<span style="color: #66D9EF;">)</span>                     
   <span style="color: #AE81FF;">)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgf3a03fc" class="outline-3">
-<h3 id="orgf3a03fc"><span class="section-number-3">7.3</span> C++</h3>
+<div id="outline-container-org331633a" class="outline-3">
+<h3 id="org331633a"><span class="section-number-3">7.3</span> C++</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 Load in C++ major mode for .h files
@@ -925,86 +947,62 @@ Some configurations C++ major mode
 </div>
 </div>
 
-<div id="outline-container-orgacaf4e8" class="outline-3">
-<h3 id="orgacaf4e8"><span class="section-number-3">7.4</span> Julia</h3>
+<div id="outline-container-org8200668" class="outline-3">
+<h3 id="org8200668"><span class="section-number-3">7.4</span> Julia</h3>
 <div class="outline-text-3" id="text-7-4">
-</div>
-<div id="outline-container-org8e4b799" class="outline-4">
-<h4 id="org8e4b799"><span class="section-number-4">7.4.1</span> Environment Macros</h4>
-<div class="outline-text-4" id="text-7-4-1">
 <p>
-Some configurations Julia major mode
+Add paths to inferior julia shell and mode
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">julia-mode</span><span style="color: #AE81FF;">)</span>
-<span style="color: #AE81FF;">(</span>add-hook 'julia-mode-hook 'my-Julia-mode-hook<span style="color: #AE81FF;">)</span>
-<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my-Julia-mode-hook</span><span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
-  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"C-c C-p"</span><span style="color: #A6E22E;">)</span> 'inferior-julia-shell<span style="color: #66D9EF;">)</span>
-  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"C-c C-r"</span><span style="color: #A6E22E;">)</span> 'julia-shell-run-region<span style="color: #66D9EF;">)</span>
-  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"H-M-p"</span><span style="color: #A6E22E;">)</span> 'my/julia-compile<span style="color: #66D9EF;">)</span> 
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-to-list 'load-path <span style="color: #ff00ff;">"~/.emacs.d/elpa/julia-mode-20180816.2117/"</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-to-list 'load-path <span style="color: #ff00ff;">"~/.emacs.d/elpa/julia-shell-20161125.1910/"</span><span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">julia-mode</span><span style="color: #AE81FF;">)</span>
+</pre>
+</div>
+
+<p>
+Open up a Julia terminal below
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my/julia-set-up</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+<span style="color: #E6DB74;">"Runs inferior julia shell and an emulated julia terminal via term"</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">let</span> <span style="color: #A6E22E;">(</span><span style="color: #E6DB74;">(</span>w <span style="color: #FD971F;">(</span>split-window-right<span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span>    
+    <span style="color: #A6E22E;">(</span>select-window w<span style="color: #A6E22E;">)</span>
+    <span style="color: #A6E22E;">(</span>inferior-julia-shell<span style="color: #A6E22E;">)</span>
+    <span style="color: #A6E22E;">(</span>abbrev-mode 1<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">let</span> <span style="color: #A6E22E;">(</span><span style="color: #E6DB74;">(</span>w <span style="color: #FD971F;">(</span>split-window-below<span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span>    
+    <span style="color: #A6E22E;">(</span>select-window w<span style="color: #A6E22E;">)</span>
+    <span style="color: #A6E22E;">(</span>term <span style="color: #ff00ff;">"/home/anthony/bin/compilers/julia"</span><span style="color: #A6E22E;">)</span>
+    <span style="color: #A6E22E;">(</span>abbrev-mode 1<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span>
   <span style="color: #AE81FF;">)</span>
 </pre>
 </div>
 
 <p>
-Compile command for Julia
+My Julia mode hooks
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my/julia-compile</span><span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
-  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
-  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">defvar</span> <span style="color: #ffc125;">thisfile</span> buffer-file-name<span style="color: #66D9EF;">)</span>
-  <span style="color: #66D9EF;">(</span>shell-command <span style="color: #A6E22E;">(</span>concat <span style="color: #ff00ff;">"julia "</span> thisfile<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org1f20df1" class="outline-4">
-<h4 id="org1f20df1"><span class="section-number-4">7.4.2</span> Shell Configurations</h4>
-<div class="outline-text-4" id="text-7-4-2">
-<p>
-load in Julia compiler
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span>add-to-list 'load-path <span style="color: #ff00ff;">"~/.emacs.d/elpa/julia-mode-20171116.642"</span><span style="color: #AE81FF;">)</span>
-</pre>
-</div>
-
-<p>
-Julia shell
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span>  inferior-julia-program-name <span style="color: #ff00ff;">"~/bin/julia/bin/julia"</span><span style="color: #AE81FF;">)</span>
-</pre>
-</div>
-
-<p>
-Julia repel stuff
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">julia-repl</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
-  <span style="color: #E6DB74;">"Runs Julia in a screen session in a `</span><span style="color: #ee2c2c;">term</span><span style="color: #E6DB74;">' buffer."</span>
-  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">interactive</span><span style="color: #66D9EF;">)</span>
-  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">term</span><span style="color: #66D9EF;">)</span>
-  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">let</span> <span style="color: #A6E22E;">(</span><span style="color: #E6DB74;">(</span>termbuf <span style="color: #FD971F;">(</span>apply 'make-term <span style="color: #ff00ff;">"Julia REPL"</span> <span style="color: #ff00ff;">"screen"</span> nil <span style="color: #F92672;">(</span>split-string-and-unquote <span style="color: #ff00ff;">"julia"</span><span style="color: #F92672;">)</span><span style="color: #FD971F;">)</span><span style="color: #E6DB74;">)</span><span style="color: #A6E22E;">)</span>
-    <span style="color: #A6E22E;">(</span>set-buffer termbuf<span style="color: #A6E22E;">)</span>
-    <span style="color: #A6E22E;">(</span>term-mode<span style="color: #A6E22E;">)</span>
-    <span style="color: #A6E22E;">(</span>term-char-mode<span style="color: #A6E22E;">)</span>
-    <span style="color: #A6E22E;">(</span>switch-to-buffer termbuf<span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
-<span style="color: #AE81FF;">(</span>global-set-key <span style="color: #66D9EF;">(</span>kbd <span style="color: #ff00ff;">"C-x j"</span><span style="color: #66D9EF;">)</span> 'julia-repl<span style="color: #AE81FF;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">defun</span> <span style="color: #00ff7f;">my-julia-mode-hooks</span> <span style="color: #66D9EF;">(</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">require</span> '<span style="color: #ee2c2c;">julia-shell</span><span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>abbrev-mode 1<span style="color: #66D9EF;">)</span>                     
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"C-c C-c"</span><span style="color: #A6E22E;">)</span> 'julia-shell-run-region-or-line<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"C-c C-s"</span><span style="color: #A6E22E;">)</span> 'julia-shell-save-and-go<span style="color: #66D9EF;">)</span>
+  <span style="color: #66D9EF;">(</span>local-set-key <span style="color: #A6E22E;">(</span>kbd <span style="color: #ff00ff;">"C-c C-p"</span><span style="color: #A6E22E;">)</span> 'my/julia-set-up<span style="color: #66D9EF;">)</span>
+  <span style="color: #AE81FF;">)</span>
+<span style="color: #AE81FF;">(</span>add-hook 'julia-mode-hook 'my-julia-mode-hooks<span style="color: #AE81FF;">)</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-org094fffa" class="outline-2">
-<h2 id="org094fffa"><span class="section-number-2">8</span> Org</h2>
+<div id="outline-container-org357755d" class="outline-2">
+<h2 id="org357755d"><span class="section-number-2">8</span> Org</h2>
 <div class="outline-text-2" id="text-8">
 </div>
-<div id="outline-container-org1ecd6d6" class="outline-3">
-<h3 id="org1ecd6d6"><span class="section-number-3">8.1</span> Editing Code</h3>
+<div id="outline-container-orge97380c" class="outline-3">
+<h3 id="orge97380c"><span class="section-number-3">8.1</span> Editing Code</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 Some configurations Org major mode
@@ -1046,7 +1044,6 @@ load in certain languages coding modes
    <span style="color: #A6E22E;">(</span>fortran . t<span style="color: #A6E22E;">)</span>
    <span style="color: #A6E22E;">(</span>latex . t<span style="color: #A6E22E;">)</span>
    <span style="color: #A6E22E;">(</span>shell . t<span style="color: #A6E22E;">)</span>
-   <span style="color: #A6E22E;">(</span>julia . t<span style="color: #A6E22E;">)</span>
    <span style="color: #A6E22E;">(</span>emacs-lisp . t<span style="color: #A6E22E;">)</span>
    <span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
 </pre>
@@ -1054,8 +1051,8 @@ load in certain languages coding modes
 </div>
 </div>
 
-<div id="outline-container-org777e797" class="outline-3">
-<h3 id="org777e797"><span class="section-number-3">8.2</span> Capture Mode</h3>
+<div id="outline-container-org9085e31" class="outline-3">
+<h3 id="org9085e31"><span class="section-number-3">8.2</span> Capture Mode</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 add custom section titles templates
@@ -1063,11 +1060,11 @@ add custom section titles templates
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #AE81FF;">(</span><span style="color: #00ffff; font-weight: bold;">setq</span> org-capture-templates
       <span style="color: #66D9EF;">(</span><span style="color: #00ffff; font-weight: bold;">quote</span> <span style="color: #A6E22E;">(</span><span style="color: #E6DB74;">(</span><span style="color: #ff00ff;">"m"</span> <span style="color: #ff00ff;">"Meeting Notes"</span> entry <span style="color: #FD971F;">(</span>file+olp+datetree <span style="color: #ff00ff;">"~/Dropbox/Journal/journal.org"</span><span style="color: #FD971F;">)</span>
-               <span style="color: #ff00ff;">"* %? :Meeting: \n\n _Notes_:  \n \n _Agenda_: \n \n _Resources_: "</span><span style="color: #E6DB74;">)</span>
+               <span style="color: #ff00ff;">"* %? :Meeting: \n\n_Notes_:  \n \n_Agenda_: \n \n_Resources_: "</span><span style="color: #E6DB74;">)</span>
               <span style="color: #E6DB74;">(</span><span style="color: #ff00ff;">"j"</span> <span style="color: #ff00ff;">"Journal"</span> entry <span style="color: #FD971F;">(</span>file+olp+datetree <span style="color: #ff00ff;">"~/Dropbox/Journal/journal.org"</span><span style="color: #FD971F;">)</span>
-               <span style="color: #ff00ff;">"* %? \n\n _Notes_:  \n \n _Resources_:"</span><span style="color: #E6DB74;">)</span>
+               <span style="color: #ff00ff;">"* %? \n\n_Notes_:  \n \n_Resources_:"</span><span style="color: #E6DB74;">)</span>
               <span style="color: #E6DB74;">(</span><span style="color: #ff00ff;">"r"</span> <span style="color: #ff00ff;">"Research Talk"</span> entry <span style="color: #FD971F;">(</span>file+olp+datetree <span style="color: #ff00ff;">"~/Dropbox/Journal/journal.org"</span><span style="color: #FD971F;">)</span>
-               <span style="color: #ff00ff;">"* %? :RT: \n\n _Notes_:  \n \n _Resources_:"</span><span style="color: #E6DB74;">)</span>
+               <span style="color: #ff00ff;">"* %? :RT: \n\n_Notes_:  \n \n_Resources_:"</span><span style="color: #E6DB74;">)</span>
               <span style="color: #E6DB74;">(</span><span style="color: #ff00ff;">"Q"</span> <span style="color: #ff00ff;">"Meeting Question"</span> entry <span style="color: #FD971F;">(</span>file+olp+datetree <span style="color: #ff00ff;">"~/Dropbox/Journal/questions.org"</span><span style="color: #FD971F;">)</span>
                <span style="color: #ff00ff;">"* %?"</span><span style="color: #E6DB74;">)</span>
               <span style="color: #A6E22E;">)</span><span style="color: #66D9EF;">)</span><span style="color: #AE81FF;">)</span>
@@ -1085,8 +1082,8 @@ Tell org where the agenda files are
 </div>
 </div>
 
-<div id="outline-container-org11a47e1" class="outline-3">
-<h3 id="org11a47e1"><span class="section-number-3">8.3</span> Macros</h3>
+<div id="outline-container-orgdb7c008" class="outline-3">
+<h3 id="orgdb7c008"><span class="section-number-3">8.3</span> Macros</h3>
 <div class="outline-text-3" id="text-8-3">
 <p>
 Keyboard macros for org mode
@@ -1129,8 +1126,8 @@ Code block macros
 </div>
 </div>
 
-<div id="outline-container-org80c7b0b" class="outline-3">
-<h3 id="org80c7b0b"><span class="section-number-3">8.4</span> Utility</h3>
+<div id="outline-container-org915a331" class="outline-3">
+<h3 id="org915a331"><span class="section-number-3">8.4</span> Utility</h3>
 <div class="outline-text-3" id="text-8-4">
 <p>
 Translate regular ol&rsquo; straight quotes to typographically-correct curly quotes
@@ -1159,8 +1156,8 @@ For exporting to HTML
 </div>
 </div>
 
-<div id="outline-container-org2fe7a6c" class="outline-3">
-<h3 id="org2fe7a6c"><span class="section-number-3">8.5</span> Visual Settings</h3>
+<div id="outline-container-org91f5ed9" class="outline-3">
+<h3 id="org91f5ed9"><span class="section-number-3">8.5</span> Visual Settings</h3>
 <div class="outline-text-3" id="text-8-5">
 <p>
 Nice ellipsis:
@@ -1206,8 +1203,8 @@ Change Org bullets appearance
 </div>
 </div>
 
-<div id="outline-container-orge0c0ab5" class="outline-3">
-<h3 id="orge0c0ab5"><span class="section-number-3">8.6</span> Agenda alternations</h3>
+<div id="outline-container-orgfdc70bd" class="outline-3">
+<h3 id="orgfdc70bd"><span class="section-number-3">8.6</span> Agenda alternations</h3>
 <div class="outline-text-3" id="text-8-6">
 <p>
 Add states for to do lists
@@ -1222,8 +1219,8 @@ Add states for to do lists
 </div>
 </div>
 
-<div id="outline-container-org2f1e7bc" class="outline-3">
-<h3 id="org2f1e7bc"><span class="section-number-3">8.7</span> Beamer</h3>
+<div id="outline-container-orgd1e6fb8" class="outline-3">
+<h3 id="orgd1e6fb8"><span class="section-number-3">8.7</span> Beamer</h3>
 <div class="outline-text-3" id="text-8-7">
 <p>
 Some code to allow the use of Beamer in org mode
@@ -1296,8 +1293,8 @@ Beamer template
 </div>
 </div>
 
-<div id="outline-container-org735aa9e" class="outline-3">
-<h3 id="org735aa9e"><span class="section-number-3">8.8</span> LaTeX</h3>
+<div id="outline-container-orgfc0f832" class="outline-3">
+<h3 id="orgfc0f832"><span class="section-number-3">8.8</span> LaTeX</h3>
 <div class="outline-text-3" id="text-8-8">
 <p>
 Use <code>mypackage</code> package for all LaTeX exports.
@@ -1320,8 +1317,8 @@ Tell org where to find LaTeX
 </div>
 </div>
 
-<div id="outline-container-org41e05c4" class="outline-2">
-<h2 id="org41e05c4"><span class="section-number-2">9</span> Wolfram Alpha</h2>
+<div id="outline-container-org2c5b529" class="outline-2">
+<h2 id="org2c5b529"><span class="section-number-2">9</span> Wolfram Alpha</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 set wolfram alpha ID
@@ -1336,7 +1333,7 @@ set wolfram alpha ID
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Anthony Kalaitzis</p>
-<p class="date">Created: 2018-08-06 Mon 14:14</p>
+<p class="date">Created: 2018-08-29 Wed 13:09</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

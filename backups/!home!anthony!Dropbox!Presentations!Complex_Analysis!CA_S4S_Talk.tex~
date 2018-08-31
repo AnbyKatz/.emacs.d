@@ -1,4 +1,4 @@
-% Created 2018-08-07 Tue 13:59
+% Created 2018-08-29 Wed 14:10
 % Intended LaTeX compiler: pdflatex
 \documentclass[presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -39,15 +39,15 @@
 
 
 \section{Introduction}
-\label{sec:org9cd8aee}
+\label{sec:org8896890}
 
-\begin{frame}[label={sec:orgf814d87}]{Motivation}
+\begin{frame}[label={sec:orgb2da458}]{Motivation}
 \end{frame}
 
 \section{Complex Differentiation}
-\label{sec:org29aeef1}
+\label{sec:org87430e7}
 
-\begin{frame}[label={sec:orgedf2689}]{Balls}
+\begin{frame}[label={sec:org6e3b385}]{Balls}
 \begin{definition}
   If $a\inC$ and $R\inR$ then the Ball of radius $R$ is defined as the set
   \begin{align*}
@@ -58,7 +58,7 @@
 \end{definition}
 \end{frame}
 
-\begin{frame}[label={sec:org34037f0}]{The Derivative}
+\begin{frame}[label={sec:org775040e}]{The Derivative}
 \begin{definition}
   Take a complex valued function $f$ defined on a nhd of the point $z_0$ i.e. $B(z_0,R)$. The complex derivative defined as
   \begin{align*}
@@ -68,19 +68,19 @@
 \end{definition}
 \end{frame}
 
-\begin{frame}[label={sec:org69f93b1}]{Branch's}
+\begin{frame}[label={sec:orga2558cc}]{Branch's}
 \end{frame}
-\begin{frame}[label={sec:org1ffd950}]{Complex Logarithm}
+\begin{frame}[label={sec:org553264b}]{Complex Logarithm}
 \end{frame}
 
 \section{Complex Integration}
-\label{sec:orgbda5633}
+\label{sec:org97f8b2b}
 
-\begin{frame}[label={sec:org890e989}]{Orientation}
+\begin{frame}[label={sec:orgf681462}]{Orientation}
 \end{frame}
-\begin{frame}[label={sec:orga69c389}]{Parametrization}
+\begin{frame}[label={sec:orgd94eb55}]{Parametrization}
 \end{frame}
-\begin{frame}[label={sec:org41e9054}]{Cauchy's Integral Formula}
+\begin{frame}[label={sec:orgedcf1aa}]{Cauchy's Integral Formula}
 \begin{theorem}[Cauchy's Integral Formula]
   Suppose $f:U\subseteq \mathbb{C}\to\mathbb{C}$ is a holomorphic and $U$ an open subset. Then for the open ball $B(a,R)\subseteq U$ we have that
   \begin{align*}
@@ -89,11 +89,32 @@
 \end{theorem}
 \end{frame}
 
-\begin{frame}[label={sec:org97b10f4}]{Examples}
+\begin{frame}[label={sec:orgb1c9aba}]{Examples}
+Let $f(z) = z^2$ which is holomorphic on $B(3,R)$. Calculate
+\begin{align*}
+  \frac{1}{2\pi}\oint_{\pd B(3,R)}\frac{z^2}{z-3}\dd z
+\end{align*}
+Here $a = 3$ is our pole. Applying CIF gives us that
+\begin{align*}
+f(a) &= \frac{1}{2\pi}\oint_{\pd B(a,R)}\frac{f(z)}{z-a}\dd z=\frac{1}{2\pi}\oint_{\pd B(3,R)}\frac{z^2}{z-3}\dd z\\
+     &=  z^2\Big|_{z=3}\\
+     &= 9
+\end{align*}
 \end{frame}
-\begin{frame}[label={sec:org3c3748d}]{Laurent Series}
+\begin{frame}[label={sec:orgf356860}]{Examples}
+Let $f(z)=z\cos(z)$ which is holomorphic on $B(0,4)$. Calculate
+\begin{align*}
+  \frac{1}{2\pi}\oint_{\pd B(0,4)}\frac{z\cos(z)}{(z-i)(z-1)}\dd z
+\end{align*}
+Here's a clever trick
+\begin{align*}
+  \frac{1}{2\pi}\oint_{\pd B(0,4)}\frac{z\cos(z)}{(z-i)(z-1)}\dd z &= \frac{z\cos(z)}{z-i}\Big|_{z=1}+\frac{z\cos(z)}{z-1}\Big|_{z=i} \\
+                                                     &= \frac{cos(1)}{1-i}+\frac{i\cos(i)}{i-1}
+\end{align*}
 \end{frame}
-\begin{frame}[label={sec:org825fffb}]{Residue Theorem}
+\begin{frame}[label={sec:org9e7157c}]{Laurent Series}
+\end{frame}
+\begin{frame}[label={sec:org9c488cc}]{Residue Theorem}
 \begin{theorem}
   Suppose $f:U\subseteq \mathbb{C}\to \mathbb{C}$ is holomorphic on $U\setminus\{a_1,...,a_n\}$. $U$ an open set then we have that
   \begin{align*}
@@ -102,14 +123,14 @@
 \end{theorem}
 \end{frame}
 
-\begin{frame}[label={sec:org04a7398}]{Example}
+\begin{frame}[label={sec:orgf45e7c3}]{Example}
 \end{frame}
 
 \section{Cheat Sheet}
-\label{sec:orga345d22}
+\label{sec:org2904d72}
 
-\begin{frame}[label={sec:org7d73b47}]{Other Useful Theorems}
+\begin{frame}[label={sec:orgf2a6361}]{Other Useful Theorems}
 \end{frame}
-\begin{frame}[label={sec:orgba5c7ef}]{List of Complex Integrals}
+\begin{frame}[label={sec:org59cec04}]{List of Complex Integrals}
 \end{frame}
 \end{document}

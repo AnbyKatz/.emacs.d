@@ -2,6 +2,7 @@
 
 ;; Copyright (C) 2009-2014 Julia contributors
 ;; URL: https://github.com/JuliaLang/julia
+;; Package-Version: 20180816.2117
 ;; Version: 0.3
 ;; Keywords: languages
 
@@ -104,6 +105,7 @@ This function provides equivalent functionality, but makes no efforts to optimis
     (modify-syntax-entry ?'  "." table)
     (modify-syntax-entry ?\" "\"" table)
     (modify-syntax-entry ?` "\"" table)
+    (modify-syntax-entry ?\\ "\\" table)
 
     (modify-syntax-entry ?. "." table)
     (modify-syntax-entry ?? "." table)
@@ -116,7 +118,6 @@ This function provides equivalent functionality, but makes no efforts to optimis
     (modify-syntax-entry ?< "." table)
     (modify-syntax-entry ?> "." table)
     (modify-syntax-entry ?% "." table)
-    (modify-syntax-entry ?\\ "." table)
     table)
   "Syntax table for `julia-mode'.")
 

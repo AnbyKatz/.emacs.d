@@ -6,9 +6,8 @@
 \def\hi{All aboard the PC-Macro race}
 \let\myDate\date
 
-% Physics Macros
-% --------------
-% symbols
+% Packages
+%---------
 
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{physics}
@@ -27,14 +26,15 @@
 \usepackage{times}
 \usepackage{tikz}
 
+% Physics Macros
+% --------------
+
 \newcommand{\dalem}{-\frac{1}{c^2}\pdv[2]{t}+\laplacian}
-\newcommand{\ke}{\frac{1}{4\pi\epsilon_0}}
 \newcommand{\Lag}{\mathcal{L}}
 \newcommand{\Ham}{\mathcal{H}}
-\newcommand{\fsl}[1]{\slashed{#1}}
+\newcommand{\fs}[1]{\slashed{#1}}
 \newcommand{\psibar}{\overline{\psi}}
 \newcommand{\pd}{\partial}
-\newcommand{\gmunu}{g^{\mu\nu}}
 \newcommand{\einkx}{e^{-ik\cdot x}}
 \newcommand{\eikx}{e^{ik\cdot x}}
 \newcommand{\kv}{\boldsymbol{k}}
@@ -51,7 +51,7 @@
 \newcommand{\dg}{\dagger}
 \newcommand{\pii}{\pi i}
 \newcommand{\ft}{\mathcal{F}}
-\newcommand{\normord}[1]{:\mathrel{#1}:}
+
 % Tensor algebra
 \newcommand{\emftensordown}[2]{\pd_{#1}A_{#2}-\pd_{#2}A_{#1}}
 \newcommand{\emftensorup}[2]{\pd^{#1}A^{#2}-\pd^{#2}A^{#1}}
@@ -62,6 +62,7 @@
 % --------------
 \newcommand\m[1]{\begin{pmatrix}#1\end{pmatrix}}
 \newcommand{\unitv}[1]{\hat{\vb{#1}}}
+
 % Calculus
 % --------
 \newcommand{\triint}[1]{\int\text{d}^3\vb{#1}}
@@ -80,6 +81,24 @@
 % Environment Stuff
 % -----------------
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Beamer stuff
+\newcommand{\Berlincount}{\setbeamertemplate{footline}{%
+    \begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+      \leavevmode{\usebeamerfont{author in head/foot}\insertshortauthor}%
+      \hfill%
+      {\usebeamerfont{institute in head/foot}\usebeamercolor[fg]{institute in head/foot}\insertshortinstitute}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+      {\usebeamerfont{title in head/foot}\insertshorttitle\hfill\insertframenumber}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+    \end{beamercolorbox}
+    }}
 
 % old stuff
 \newcommand{\eqsplt}[1]{\begin{split}#1\end{split}}

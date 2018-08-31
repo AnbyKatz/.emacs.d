@@ -39,6 +39,26 @@
 
 (global-auto-revert-mode t)
 
+(setq column-number-mode t)
+
+(defun my/general-comment-header (title)
+  "Inserts a commented title"
+  (interactive "sEnter a title: ")
+  (defvar dash-len 1)
+  (setq dash-len (/ (- 68 (length title)) 2))
+  (insert comment-start)
+  (indent-for-tab-command)
+  (dotimes (ii dash-len)
+    (insert "-"))
+  (if (= (mod (length title) 2) 1)
+      (insert "-")
+    )
+  (insert title)
+  (dotimes (ii dash-len)
+    (insert "-"))
+  )
+(global-set-key (kbd "H-t") 'my/general-comment-header)
+
 (set-face-attribute 'default nil :height 150)
 
 (global-subword-mode)
@@ -80,9 +100,8 @@
 
 (global-set-key (kbd "H-r")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/Thesis/MPhil_Research.tex")))
 (global-set-key (kbd "H-j")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/journal.org")))
-(global-set-key (kbd "H-a")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/agenda.org")))
 (global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/myQMCcode/QMC_2018V1.f90")))
-(global-set-key (kbd "H-t")  (lambda () (interactive) (find-file  "~/texmf/tex/latex/package_repository/mypackage.sty")))
+(global-set-key (kbd "H-T")  (lambda () (interactive) (find-file  "~/texmf/tex/latex/package_repository/mypackage.sty")))
 
 (global-set-key (kbd "M-]") 'other-window)
 
@@ -91,7 +110,8 @@
 (global-set-key (kbd "M-n") 'forward-paragraph)
 (global-set-key (kbd "M-p") 'backward-paragraph)
 
-(global-set-key (kbd "H-A") 'ace-window)
+(global-set-key (kbd "H-]") 'ace-window)
+(setq aw-keys '(?q ?w ?e ?a ?s ?d ?z ?x ?c))
 
 (global-set-key (kbd "H-s") 'helm-spotify-plus)
 
@@ -170,12 +190,12 @@
 (add-hook 'f90-mode-hook 'my-f90-mode-hook)
 (require 'fortran)
 (defun my-f90-mode-hook () 
-  (local-set-key (kbd "H-M-c") (lambda () (interactive) (shell-command "./bash_fortran")))
+  (local-set-key (kbd "H-M-c") (lambda () (interactive) (shell-command "./bashFortran.sh")))
   (local-set-key (kbd "H-t") 'my/f90-comment-header-block)
   (setq f90-font-lock-keywords f90-font-lock-keywords-3)
   '(f90-comment-region "!!!$")
   '(f90-indented-comment-re "!")
-  ;; (abbrev-mode 1)                     
+  (abbrev-mode 1)                     
   (turn-on-font-lock)                 
   (auto-fill-mode 0)                  
 )
@@ -214,14 +234,12 @@
        (insert "!")
        (newline))
   )))
-(global-set-key (kbd "H-Z") 'my/f90-comment-header-block)
 
 (defun numFort-recompile ()
   "Recompile personal FORTRAN numerical libraries"
   (interactive)
   (shell-command (concat "(cd /home/anthony/Dropbox/Code/Fortran/f90-toolbox/; ./recompile.sh") ))
 
-(add-hook 'find-file-hooks 'my/template-insert-python)
 (defun my/template-insert-python()
   (interactive)
   (when (and
@@ -231,8 +249,10 @@
 
 (require 'python)
 (add-hook 'python-mode-hook 'my-python-mode-hook)
+(add-hook 'find-file-hooks 'my/template-insert-python)
 (defun my-python-mode-hook()     
-  (setq python-shell-interpreter "ipython"
+  (local-set-key (kbd "C-c C-r") 'ipython-shell-send-region)
+  (setq python-shell-interpreter "ipython3"
         python-shell-interpreter-args "--simple-prompt -i")
   (add-to-list 'load-path "/folder/containing/file")
   (abbrev-mode 1)                     
@@ -254,13 +274,31 @@
   (local-set-key (kbd "H-M-p")(lambda () (interactive) (shell-command "./bash_c++")))
   )
 
-(add-to-list 'load-path "~/.emacs.d/elpa/julia-emacs")
-
-(setq  inferior-julia-program-name "~/bin/julia/julia")
-
+(add-to-list 'load-path "~/.emacs.d/elpa/julia-mode-20180816.2117/")
+(add-to-list 'load-path "~/.emacs.d/elpa/julia-shell-20161125.1910/")
 (require 'julia-mode)
-(add-to-list 'load-path "~/.emacs.d/elpa/julia-shell-mode")
-(require 'julia-shell)
+
+(defun my/julia-set-up ()
+"Runs inferior julia shell and an emulated julia terminal via term"
+  (interactive)
+  (let ((w (split-window-right)))    
+    (select-window w)
+    (inferior-julia-shell)
+    (abbrev-mode 1))
+  (let ((w (split-window-below)))    
+    (select-window w)
+    (term "/home/anthony/bin/compilers/julia")
+    (abbrev-mode 1))
+  )
+
+(defun my-julia-mode-hooks ()
+  (require 'julia-shell)
+  (abbrev-mode 1)                     
+  (local-set-key (kbd "C-c C-c") 'julia-shell-run-region-or-line)
+  (local-set-key (kbd "C-c C-s") 'julia-shell-save-and-go)
+  (local-set-key (kbd "C-c C-p") 'my/julia-set-up)
+  )
+(add-hook 'julia-mode-hook 'my-julia-mode-hooks)
 
 (defun my-org-mode-hook ()
   (setq org-log-done t)
@@ -286,7 +324,6 @@
    (fortran . t)
    (latex . t)
    (shell . t)
-   (julia . t)
    (emacs-lisp . t)
    ))
 
