@@ -1,0 +1,13 @@
+# Example Julia file
+using Plots
+pyplot()
+
+x = -5:0.1:5
+y = sin.(x)
+
+counter = 0
+
+for i = 1:5
+    println(counter)
+    global counter = counter+1
+end

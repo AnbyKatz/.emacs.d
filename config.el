@@ -8,7 +8,7 @@
     (setq exec-path (split-string path-from-shell path-separator))))
 (when window-system (set-exec-path-from-shell-PATH))
 
-(global-set-key (kbd "H-S") 'window-split-toggle)
+(global-set-key (kbd "H-f") 'window-split-toggle)
 
 (when (memq window-system '(mac ns x))
 (exec-path-from-shell-initialize))
@@ -294,6 +294,7 @@
 (defun my-julia-mode-hooks ()
   (require 'julia-shell)
   (abbrev-mode 1)                     
+  (local-set-key (kbd "C-c C-r") 'julia-shell-run-region)
   (local-set-key (kbd "C-c C-c") 'julia-shell-run-region-or-line)
   (local-set-key (kbd "C-c C-s") 'julia-shell-save-and-go)
   (local-set-key (kbd "C-c C-p") 'my/julia-set-up)
