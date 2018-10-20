@@ -1,5 +1,0 @@
-#!/bin/bash
-
-make all
-./QMC_1996_CodeV3
-

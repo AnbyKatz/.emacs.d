@@ -1,6 +1,0 @@
-using SymPy
-
-x=Symbol('x')
-
-map(y->y^2+2*y,[1,2,3])
-

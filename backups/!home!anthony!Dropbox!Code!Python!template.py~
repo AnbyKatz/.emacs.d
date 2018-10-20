@@ -1,9 +1,0 @@
-#!/usr/bin/python3.5
-
-import matplotlib.pyplot as pypl
-import numpy as np
-import math as m
-from matplotlib import rc
-from pylab import*
-from sympy import*
-

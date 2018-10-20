@@ -115,6 +115,34 @@
 
 (global-set-key (kbd "H-s") 'helm-spotify-plus)
 
+(defun duplicate-current-line-or-region (arg)
+  "Duplicates the current line or region ARG times.
+If there's no region, the current line will be duplicated. However, if
+there's a region, all lines that region covers will be duplicated."
+  (interactive "p")
+  (let (beg end (origin (point)))
+    (if (and mark-active (> (point) (mark)))
+        (exchange-point-and-mark))
+    (setq beg (line-beginning-position))
+    (if mark-active
+        (exchange-point-and-mark))
+    (setq end (line-end-position))
+    (let ((region (buffer-substring-no-properties beg end)))
+      (dotimes (i arg)
+        (goto-char end)
+        (newline)
+        (insert region)
+        (setq end (point)))
+      (goto-char (+ origin (* (length region) arg) arg)))))
+(global-set-key (kbd "H-D") 'duplicate-current-line-or-region)
+
+(defun my/open-term-other-window ()
+  (interactive)
+  (let ((buf (term "/bin/bash")))
+    (switch-to-buffer (other-buffer buf))
+    (switch-to-buffer-other-window buf)))
+(global-set-key (kbd "C-x 4 t") 'my/open-term-other-window)
+
 (defun my/repeat-last-shell-command()
   "repeats last run shell command"
   (interactive)
@@ -167,8 +195,16 @@
 (add-hook 'TeX-after-compilation-finished-functions
 	  #'TeX-revert-document-buffer)
 
+(defun my/template-insert-LaTeX()
+  (interactive)
+  (when (and
+         (string-match "\\.tex$" (buffer-file-name))
+         (eq 1 (point-max)))
+    (insert-file "~/Dropbox/Templates/quickTeX.tex")))
+
 (require 'tex)
 (add-hook 'LaTeX-mode-hook 'my-LaTeX-mode-hook)
+(add-hook 'LaTeX-mode-hook 'my/template-insert-LaTeX)
 (defun my-LaTeX-mode-hook ()
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
@@ -245,7 +281,7 @@
   (when (and
   (string-match "\\.py$" (buffer-file-name))
   (eq 1 (point-max)))
-  (insert-file "~/Dropbox/Templates/python_template.py")))
+  (insert-file "~/Dropbox/Templates/PythonTemplate.py")))
 
 (require 'python)
 (add-hook 'python-mode-hook 'my-python-mode-hook)
