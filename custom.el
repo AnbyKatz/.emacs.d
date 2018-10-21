@@ -39,7 +39,7 @@
  '(main-line-separator-style 'chamfer)
  '(org-agenda-files '("~/Dropbox/Journal/agenda.org"))
  '(package-selected-packages
-   '(julia-mode julia-shell org-ac google-maps wolfram exec-path-from-shell org-bullets chess org charmap ace-window matlab-mode csharp-mode elpy rainbow-mode minimap helm-spotify helm-spotify-plus flycheck-julia julia-repl auctex auctex-latexmk auctex-lua))
+   '(use-package julia-mode julia-shell org-ac google-maps wolfram exec-path-from-shell org-bullets chess org charmap ace-window matlab-mode csharp-mode elpy rainbow-mode minimap helm-spotify helm-spotify-plus flycheck-julia julia-repl auctex auctex-latexmk auctex-lua))
  '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")
  '(powerline-color1 "#1E1E1E")
