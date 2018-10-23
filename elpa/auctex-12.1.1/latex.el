@@ -515,7 +515,7 @@ The behaviour of this hook is controlled by variable `LaTeX-section-label'."
   "Environments in AUCTeX."
   :group 'LaTeX-macro)
 
-(defcustom LaTeX-default-environment "align*"
+(defcustom LaTeX-default-environment "itemize"
   "*The default environment when creating new ones with `LaTeX-environment'.
 It is overridden by `LaTeX-default-document-environment' when it
 is non-nil and the current environment is \"document\"."
