@@ -1,3 +1,26 @@
+;; This is only needed once, near the top of the file
+(eval-when-compile
+  ;; Following line is not needed if use-package.el is in ~/.emacs.d
+  (add-to-list 'load-path "/home/anthony/.emacs.d/elpa/use-package-20180715.1801")
+  (require 'use-package))
+
+(use-package tex
+  :ensure auctex)
+(use-package org
+  :ensure t)
+(use-package auto-package-update
+  :ensure t)
+(use-package pdf-tools
+  :ensure t)
+(use-package ace-window
+  :ensure t)
+(use-package rainbow-delimiters
+  :ensure t)
+(use-package helm
+  :ensure t)
+(use-package flyspell
+  :ensure t)
+
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
                           "[ \t\n]*$"
