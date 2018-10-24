@@ -39,7 +39,7 @@
  '(main-line-separator-style 'chamfer)
  '(org-agenda-files '("~/Dropbox/Journal/agenda.org"))
  '(package-selected-packages
-   '(auto-package-update use-package julia-mode julia-shell org-ac google-maps wolfram exec-path-from-shell org-bullets chess matlab-mode rainbow-mode minimap helm-spotify helm-spotify-plus julia-repl auctex))
+   '(org-edit-latex auto-package-update use-package julia-mode julia-shell org-ac wolfram exec-path-from-shell org-bullets rainbow-mode helm-spotify helm-spotify-plus julia-repl auctex))
  '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")
  '(powerline-color1 "#1E1E1E")

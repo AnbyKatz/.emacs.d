@@ -4,21 +4,39 @@
   (add-to-list 'load-path "/home/anthony/.emacs.d/elpa/use-package-20180715.1801")
   (require 'use-package))
 
-(use-package tex
-  :ensure auctex)
-(use-package org
+(use-package ace-window
   :ensure t)
 (use-package auto-package-update
   :ensure t)
-(use-package pdf-tools
+(use-package tex
+  :ensure auctex)
+(use-package exec-path-from-shell
   :ensure t)
-(use-package ace-window
+(use-package julia-mode
+  :ensure t)
+(use-package julia-shell
+  :ensure t)
+(use-package org-ac
+  :ensure t)
+(use-package org-bullets
+  :ensure t)
+(use-package rainbow-mode
+  :ensure t)
+(use-package wolfram
+  :ensure t)
+(use-package better-defaults
+  :ensure t)
+(use-package org
+  :ensure t)
+(use-package pdf-tools
   :ensure t)
 (use-package rainbow-delimiters
   :ensure t)
 (use-package helm
   :ensure t)
 (use-package flyspell
+  :ensure t)
+(use-package htmlize
   :ensure t)
 
 (defun set-exec-path-from-shell-PATH ()
@@ -450,63 +468,6 @@ from matplotlib import rc
                           (sequence "⚑ WAITING(w)" "|")
                           (sequence "|" "💀 DEAD(d)")
                           ))
-
-; allow for export=>beamer by placing
-
-;; #+LaTeX_CLASS: beamer in org files
-(unless (boundp 'org-export-latex-classes)
-  (setq org-export-latex-classes nil))
-(add-to-list 'org-export-latex-classes
-  ;; beamer class, for presentations
-  '("beamer"
-     "\\documentclass[11pt]{beamer}\n
-      \\mode<{{{beamermode}}}>\n
-      \\usetheme{{{{beamertheme}}}}\n
-      \\usecolortheme{{{{beamercolortheme}}}}\n
-      \\beamertemplateballitem\n
-      \\setbeameroption{show notes}
-      \\usepackage[utf8]{inputenc}\n
-      \\usepackage[T1]{fontenc}\n
-      \\usepackage{hyperref}\n
-      \\usepackage{color}
-      \\usepackage{listings}
-      \\lstset{numbers=none,language=[ISO]C++,tabsize=4,
-  frame=single,
-  basicstyle=\\small,
-  showspaces=false,showstringspaces=false,
-  showtabs=false,
-  keywordstyle=\\color{blue}\\bfseries,
-  commentstyle=\\color{red},
-  }\n
-      \\usepackage{verbatim}\n
-      \\institute{{{{beamerinstitute}}}}\n          
-       \\subject{{{{beamersubject}}}}\n"
-
-     ("\\section{%s}" . "\\section*{%s}")
-     
-     ("\\begin{frame}[fragile]\\frametitle{%s}"
-       "\\end{frame}"
-       "\\begin{frame}[fragile]\\frametitle{%s}"
-       "\\end{frame}")))
-
-  ;; letter class, for formal letters
-
-  (add-to-list 'org-export-latex-classes
-
-  '("letter"
-     "\\documentclass[11pt]{letter}\n
-      \\usepackage[utf8]{inputenc}\n
-      \\usepackage[T1]{fontenc}\n
-      \\usepackage{color}"
-     
-     ("\\section{%s}" . "\\section*{%s}")
-     ("\\subsection{%s}" . "\\subsection*{%s}")
-     ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-     ("\\paragraph{%s}" . "\\paragraph*{%s}")
-     ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-(add-to-list 'org-structure-template-alist
-'("beamer" "#+TITLE: \n#+AUTHOR: Anthony Kalaitzis \n#+OPTIONS: H:2 toc:t num:t \n#+LATEX_CLASS: beamer \n#+LATEX_CLASS_OPTIONS: [presentation] \n#+LATEX_header: \n#+BEAMER_header: \\usetheme{Berlin} \n#+BEAMER_header: \\usecolortheme[named=purple]{structure} \n#+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col) %8BEAMER_OPT(Opt) \n?"))
 
 (setq org-latex-packages-alist '())
 (add-to-list 'org-latex-packages-alist '("" "mypackage" t))

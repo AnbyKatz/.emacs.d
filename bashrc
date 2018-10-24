@@ -139,11 +139,10 @@ fi
 alias install="sudo apt-get install"
 alias status="~/bin/dropbox.py status"
 alias cdhd="cd /media/anthony/Hard_Drive"
-# alias e="emacs-snapshot"
 alias emacs="emacs-snapshot"
 alias py="python3.7"
 alias jaxo="java -jar ~/bin/jaxodraw-2.1-0/jaxodraw-2.1-0.jar"
-
+alias cpmake="cp /home/anthony/Dropbox/Code/Fortran/numFort/{makefile,customPlot.py} ."
 # ls aliases
 alias ls="ls --color"
 alias lsa="ls --color -all"
@@ -173,9 +172,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2018.
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64_lin/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/anthony/bin/PLplot/install_dir/lib/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/anthony/bin/PLplot/build_dir/bindings/fortran/
-
-# create the numFort example makefile
-alias cpmake="cp /home/anthony/Dropbox/Code/Fortran/numFort/{makefile,pyplots.py,customPlot.py} ."
 
 function ef() {
     emacs-snapshot $1.f90 &
