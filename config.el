@@ -406,13 +406,11 @@ there's a region, all lines that region covers will be duplicated."
    ))
 
 (setq org-capture-templates
-      (quote (("m" "Meeting Notes" entry (file+olp+datetree "~/Dropbox/Journal/journal.org")
-               "* %? :Meeting: \n\n_Notes_:  \n \n_Agenda_: \n \n_Resources_: ")
-              ("j" "Journal" entry (file+olp+datetree "~/Dropbox/Journal/journal.org")
-               "* %? \n\n_Notes_:  \n \n_Resources_:")
-              ("r" "Research Talk" entry (file+olp+datetree "~/Dropbox/Journal/journal.org")
-               "* %? :RT: \n\n_Notes_:  \n \n_Resources_:")
-              ("Q" "Meeting Question" entry (file+olp+datetree "~/Dropbox/Journal/questions.org")
+      (quote (("m" "Meeting Notes" entry (file "~/Dropbox/QMC/Notes/MeetingNotes.org")
+               "* %? D/M/2018 :Meeting: \n\n_Notes_: \n \n_Resources_: ")
+              ("j" "Journal" entry (file "~/Dropbox/Journal/journal.org")
+               "* %? D/M/2018 :RT: \n\n_Notes_: \n \n_Resources_:")
+              ("Q" "Meeting Question" entry (file "~/Dropbox/QMC/Notes/Questions.org")
                "* %?")
               )))
 
@@ -470,7 +468,7 @@ from matplotlib import rc
                           ))
 
 (setq org-latex-packages-alist '())
-(add-to-list 'org-latex-packages-alist '("" "mypackage" t))
+  (add-to-list 'org-latex-packages-alist '("" "mypackage" t))
 
 (setq exec-path (append exec-path '("/usr/bin")))
 (load "auctex.el" nil t t)
