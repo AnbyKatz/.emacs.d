@@ -16,8 +16,6 @@
   :ensure t)
 (use-package julia-shell
   :ensure t)
-(use-package org-ac
-  :ensure t)
 (use-package org-bullets
   :ensure t)
 (use-package rainbow-mode
@@ -25,8 +23,6 @@
 (use-package wolfram
   :ensure t)
 (use-package better-defaults
-  :ensure t)
-(use-package org
   :ensure t)
 (use-package pdf-tools
   :ensure t)
