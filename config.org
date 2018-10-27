@@ -34,8 +34,6 @@ Ensure that main packages are loaded in
     :ensure t)
   (use-package julia-shell
     :ensure t)
-  (use-package org-ac
-    :ensure t)
   (use-package org-bullets
     :ensure t)
   (use-package rainbow-mode
@@ -43,8 +41,6 @@ Ensure that main packages are loaded in
   (use-package wolfram
     :ensure t)
   (use-package better-defaults
-    :ensure t)
-  (use-package org
     :ensure t)
   (use-package pdf-tools
     :ensure t)
