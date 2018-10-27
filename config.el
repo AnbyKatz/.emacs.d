@@ -39,21 +39,6 @@
 (use-package htmlize
   :ensure t)
 
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (replace-regexp-in-string
-                          "[ \t\n]*$"
-                          ""
-                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq eshell-path-env path-from-shell) ; for eshell users
-    (setq exec-path (split-string path-from-shell path-separator))))
-(when window-system (set-exec-path-from-shell-PATH))
-
-(global-set-key (kbd "H-f") 'window-split-toggle)
-
-(when (memq window-system '(mac ns x))
-(exec-path-from-shell-initialize))
-
 ;; (set-language-environment "Japanese")
 
 (set-language-environment "UTF-8")
@@ -99,6 +84,9 @@
     (insert "-"))
   )
 (global-set-key (kbd "H-t") 'my/general-comment-header)
+
+(require 'wolfram)
+(setq wolfram-alpha-app-id 'U2773W-V74GXV4HWX)
 
 (set-face-attribute 'default nil :height 150)
 
@@ -400,7 +388,7 @@ there's a region, all lines that region covers will be duplicated."
  '(
    (python . t)
    (fortran . t)
-   (latex . t)
+  (latex . t)
    (shell . t)
    (emacs-lisp . t)
    ))
@@ -472,6 +460,3 @@ from matplotlib import rc
 
 (setq exec-path (append exec-path '("/usr/bin")))
 (load "auctex.el" nil t t)
-
-(require 'wolfram)
-(setq wolfram-alpha-app-id 'U2773W-V74GXV4HWX)
