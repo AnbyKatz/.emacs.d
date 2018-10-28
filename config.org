@@ -323,6 +323,15 @@ Exchange below and above lines globally
 (global-set-key (kbd "M-<down>") 'move-line-down)
 #+END_SRC
 
+** God Mode
+
+Some God mode commands
+#+BEGIN_SRC emacs-lisp
+(require 'god-mode)
+(global-set-key (kbd "<f2>") 'god-mode)
+(define-key god-local-mode-map (kbd ".") 'repeat)
+#+END_SRC
+
 * Helm
 
 Major configurations for the Helm Plugin
@@ -344,7 +353,7 @@ Turn on Helm Spotify
 
 Load in custom colour theme
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'custom-theme-load-path "~/.emacs.d/anthony-swanking-theme")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/CustomTheme")
 (load-theme 'anthony-swanking t)
 #+END_SRC
 
@@ -384,14 +393,18 @@ Refresh the buffer after compilation
 	  #'TeX-revert-document-buffer)
 #+END_SRC
 
-Insert Latex template for .tex files
+Possible latex templates
 #+BEGIN_SRC emacs-lisp
-  (defun my/template-insert-LaTeX()
-    (interactive)
-    (when (and
-           (string-match "\\.tex$" (buffer-file-name))
-           (eq 1 (point-max)))
-      (insert-file "~/Dropbox/Templates/quickTeX.tex")))    
+(defun InsertTemplate-quickTeX()
+  "Insert quickTeX template"
+  (interactive)  
+  (insert-file "~/Dropbox/Templates/quickTeX.tex")
+)
+(defun InsertTemplate-reviewTeX()
+  "Insert reivewTeX template"
+  (interactive)  
+  (insert-file "~/Dropbox/Templates/reviewTeX.tex")
+)
 #+END_SRC
 
 ** LaTeX editing major mode
@@ -399,7 +412,6 @@ Insert Latex template for .tex files
 #+BEGIN_SRC emacs-lisp
 (require 'tex)
 (add-hook 'LaTeX-mode-hook 'my-LaTeX-mode-hook)
-(add-hook 'LaTeX-mode-hook 'my/template-insert-LaTeX)
 (defun my-LaTeX-mode-hook ()
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
@@ -425,9 +437,20 @@ Auto load in FORTRAN mode for f90 files
 (autoload 'f90-mode "f90" "Fortran 90 mode" t)
 #+END_SRC
 
+Insert FORTRAN template
+#+BEGIN_SRC emacs-lisp
+  (defun InsertTemplate-Fortran()
+  (interactive)
+  (when (and
+         (string-match "\\.f90$" (buffer-file-name))
+         (eq 1 (point-max)))
+    (insert-file "~/Dropbox/Templates/FortranTemplate.f90")))    
+#+END_SRC
+
 Configurations for FORTRAN major mode
 #+BEGIN_SRC emacs-lisp
   (add-hook 'f90-mode-hook 'my-f90-mode-hook)
+  (add-hook 'f90-mode-hook 'InsertTemplate-Fortran)
   (require 'fortran)
   (defun my-f90-mode-hook () 
     (local-set-key (kbd "H-M-c") (lambda () (interactive) (shell-command "./bashFortran.sh")))
@@ -491,7 +514,7 @@ Recompile FORTRAN numerical libraries
 
 Insert a template for a python document
 #+BEGIN_SRC emacs-lisp
-  (defun my/template-insert-python()
+  (defun InsertTemplate-Python()
     (interactive)
     (when (and
     (string-match "\\.py$" (buffer-file-name))
@@ -503,7 +526,7 @@ Some configurations Python major mode
 #+BEGIN_SRC emacs-lisp
   (require 'python)
   (add-hook 'python-mode-hook 'my-python-mode-hook)
-  (add-hook 'find-file-hooks 'my/template-insert-python)
+  (add-hook 'find-file-hooks 'InsertTemplate-Python)
   (defun my-python-mode-hook()     
     (local-set-key (kbd "C-c C-r") 'ipython-shell-send-region)
     (setq python-shell-interpreter "ipython3"
@@ -522,8 +545,8 @@ Load in C++ major mode for .h files
 
 Insert a template for a C++ document
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'find-file-hooks 'my/template-insert-C++)
-  (defun my/template-insert-C++()
+  (add-hook 'find-file-hooks 'InsertTemplate-C++)
+  (defun InsertTemplate-C++()
     (interactive)
     (when (and
     (string-match "\\.cpp$" (buffer-file-name))

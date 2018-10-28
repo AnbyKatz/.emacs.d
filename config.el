@@ -188,6 +188,10 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "M-<up>") 'move-line-up)
 (global-set-key (kbd "M-<down>") 'move-line-down)
 
+(require 'god-mode)
+(global-set-key (kbd "<f2>") 'god-mode)
+(define-key god-local-mode-map (kbd ".") 'repeat)
+
 (helm-mode 1)
 (require 'helm)
 (require 'helm-config)
@@ -197,7 +201,7 @@ there's a region, all lines that region covers will be duplicated."
 
 (require 'helm-spotify-plus)
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/anthony-swanking-theme")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/CustomTheme")
 (load-theme 'anthony-swanking t)
 
 (dolist (hook '(text-mode-hook))
@@ -220,16 +224,19 @@ there's a region, all lines that region covers will be duplicated."
 (add-hook 'TeX-after-compilation-finished-functions
 	  #'TeX-revert-document-buffer)
 
-(defun my/template-insert-LaTeX()
-  (interactive)
-  (when (and
-         (string-match "\\.tex$" (buffer-file-name))
-         (eq 1 (point-max)))
-    (insert-file "~/Dropbox/Templates/quickTeX.tex")))
+(defun InsertTemplate-quickTeX()
+  "Insert quickTeX template"
+  (interactive)  
+  (insert-file "~/Dropbox/Templates/quickTeX.tex")
+)
+(defun InsertTemplate-reviewTeX()
+  "Insert reivewTeX template"
+  (interactive)  
+  (insert-file "~/Dropbox/Templates/reviewTeX.tex")
+)
 
 (require 'tex)
 (add-hook 'LaTeX-mode-hook 'my-LaTeX-mode-hook)
-(add-hook 'LaTeX-mode-hook 'my/template-insert-LaTeX)
 (defun my-LaTeX-mode-hook ()
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
@@ -248,7 +255,15 @@ there's a region, all lines that region covers will be duplicated."
 
 (autoload 'f90-mode "f90" "Fortran 90 mode" t)
 
+(defun InsertTemplate-Fortran()
+(interactive)
+(when (and
+       (string-match "\\.f90$" (buffer-file-name))
+       (eq 1 (point-max)))
+  (insert-file "~/Dropbox/Templates/FortranTemplate.f90")))
+
 (add-hook 'f90-mode-hook 'my-f90-mode-hook)
+(add-hook 'f90-mode-hook 'InsertTemplate-Fortran)
 (require 'fortran)
 (defun my-f90-mode-hook () 
   (local-set-key (kbd "H-M-c") (lambda () (interactive) (shell-command "./bashFortran.sh")))
@@ -301,7 +316,7 @@ there's a region, all lines that region covers will be duplicated."
   (interactive)
   (shell-command (concat "(cd /home/anthony/Dropbox/Code/Fortran/f90-toolbox/; ./recompile.sh") ))
 
-(defun my/template-insert-python()
+(defun InsertTemplate-Python()
   (interactive)
   (when (and
   (string-match "\\.py$" (buffer-file-name))
@@ -310,7 +325,7 @@ there's a region, all lines that region covers will be duplicated."
 
 (require 'python)
 (add-hook 'python-mode-hook 'my-python-mode-hook)
-(add-hook 'find-file-hooks 'my/template-insert-python)
+(add-hook 'find-file-hooks 'InsertTemplate-Python)
 (defun my-python-mode-hook()     
   (local-set-key (kbd "C-c C-r") 'ipython-shell-send-region)
   (setq python-shell-interpreter "ipython3"
@@ -321,8 +336,8 @@ there's a region, all lines that region covers will be duplicated."
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-(add-hook 'find-file-hooks 'my/template-insert-C++)
-(defun my/template-insert-C++()
+(add-hook 'find-file-hooks 'InsertTemplate-C++)
+(defun InsertTemplate-C++()
   (interactive)
   (when (and
   (string-match "\\.cpp$" (buffer-file-name))
