@@ -118,6 +118,8 @@
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
+;; (sml/setup)
+
 (defun my/visit-emacs-config ()
   (interactive)
   (find-file "~/.emacs.d/config.org"))
@@ -189,7 +191,7 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "M-<down>") 'move-line-down)
 
 (require 'god-mode)
-(global-set-key (kbd "<f2>") 'god-mode)
+(global-set-key (kbd "H-;") 'god-mode)
 (define-key god-local-mode-map (kbd ".") 'repeat)
 
 (helm-mode 1)

@@ -135,7 +135,7 @@ set wolfram alpha ID
 (setq wolfram-alpha-app-id 'U2773W-V74GXV4HWX)
 #+END_SRC 
 
-* Quality of life changes
+* Beautification
 ** Accessibility
 Change text size in Emacs
 #+BEGIN_SRC emacs-lisp
@@ -211,6 +211,11 @@ Display line numbers in programming modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 #+END_SRC
 
+Smart mode line options
+#+BEGIN_SRC emacs-lisp
+  ;; (sml/setup)
+#+END_SRC
+ 
 * Key Re-bindings
 ** File Navigation
 
@@ -328,7 +333,7 @@ Exchange below and above lines globally
 Some God mode commands
 #+BEGIN_SRC emacs-lisp
 (require 'god-mode)
-(global-set-key (kbd "<f2>") 'god-mode)
+(global-set-key (kbd "H-;") 'god-mode)
 (define-key god-local-mode-map (kbd ".") 'repeat)
 #+END_SRC
 

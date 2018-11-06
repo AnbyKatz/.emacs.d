@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Emacs client
+export ALTERNATE_EDITOR=""
+export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
+export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
+
 # Custom Commands
 alias install="sudo apt-get install"
 alias status="~/bin/dropbox.py status"
@@ -47,3 +52,5 @@ function et() {
 function e() {
     emacs-snapshot $1 &
     }
+
+cd ~/Dropbox/QMC/
