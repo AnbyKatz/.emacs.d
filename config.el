@@ -418,6 +418,8 @@ there's a region, all lines that region covers will be duplicated."
 (setq org-agenda-files 
   (list "~/Dropbox/Journal/agenda.org" "~/Dropbox/Journal/journal.org"))
 
+(setq org-agenda-files '("~/Dropbox/QMC/Notes/"))
+
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)

@@ -667,6 +667,11 @@ Tell org where the agenda files are
   (list "~/Dropbox/Journal/agenda.org" "~/Dropbox/Journal/journal.org"))  
 #+END_SRC
 
+Set org agenda files maybe
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-files '("~/Dropbox/QMC/Notes/"))
+#+END_SRC
+
 ** Macros
 
 Keyboard macros for org mode
