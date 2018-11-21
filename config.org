@@ -536,9 +536,8 @@ Some configurations Python major mode
   (add-hook 'find-file-hooks 'InsertTemplate-Python)
   (defun my-python-mode-hook()     
     (local-set-key (kbd "C-c C-r") 'ipython-shell-send-region)
-    (setq python-shell-interpreter "ipython3"
+    (setq python-shell-interpreter "~/anaconda3/bin/ipython3"
           python-shell-interpreter-args "--simple-prompt -i")
-    (add-to-list 'load-path "/folder/containing/file")
     (abbrev-mode 1)                     
     )
 #+END_SRC
@@ -681,14 +680,6 @@ Code block macros
                '("el" "#+BEGIN_SRC emacs-lisp\n  ?\n#+END_SRC"))
   (add-to-list 'org-structure-template-alist
                '("c" "#+BEGIN_SRC C++\n  ?\n#+END_SRC"))
-  (add-to-list 'org-structure-template-alist
-               '("py" "#+BEGIN_SRC python
-  #!/usr/bin/python3.5
-  import matplotlib.pyplot as pypl
-  import numpy as np
-  import math as m
-  from matplotlib import rc
-  ?\n#+END_SRC"))
   (add-to-list 'org-structure-template-alist
                '("ipy" "#+BEGIN_SRC ipython :session :exports both :results raw drawer\n  ?\n#+END_SRC"))
   (add-to-list 'org-structure-template-alist

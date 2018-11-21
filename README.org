@@ -9,29 +9,56 @@
 #+AUTHOR: Anthony Kalaitzis
 #+TITLE: Emacs Config file
 
+* Use Package
+
+Load Use package in
+#+BEGIN_SRC emacs-lisp
+  ;; This is only needed once, near the top of the file
+  (eval-when-compile
+    ;; Following line is not needed if use-package.el is in ~/.emacs.d
+    (add-to-list 'load-path "/home/anthony/.emacs.d/elpa/use-package-20180715.1801")
+    (require 'use-package))
+#+END_SRC
+
+Ensure that main packages are loaded in
+#+BEGIN_SRC emacs-lisp
+  (use-package ace-window
+    :ensure t)
+  (use-package auto-package-update
+    :ensure t)
+  (use-package tex
+    :ensure auctex)
+  (use-package exec-path-from-shell
+    :ensure t)
+  (use-package julia-mode
+    :ensure t)
+  (use-package julia-shell
+    :ensure t)
+  (use-package org-bullets
+    :ensure t)
+  (use-package rainbow-mode
+    :ensure t)
+  (use-package wolfram
+    :ensure t)
+  (use-package better-defaults
+    :ensure t)
+  (use-package pdf-tools
+    :ensure t)
+  (use-package rainbow-delimiters
+    :ensure t)
+  (use-package helm
+    :ensure t)
+  (use-package flyspell
+    :ensure t)
+  (use-package htmlize
+    :ensure t)
+  (use-package org
+    :ensure t)
+  (use-package god-mode
+    :ensure t)
+#+END_SRC
+
 * Emacs Utility
-** Shell
-Recognize exported paths in .bashrc
-#+BEGIN_SRC emacs-lisp
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (replace-regexp-in-string
-                          "[ \t\n]*$"
-                          ""
-                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq eshell-path-env path-from-shell) ; for eshell users
-    (setq exec-path (split-string path-from-shell path-separator))))
-(when window-system (set-exec-path-from-shell-PATH))
-
-(global-set-key (kbd "H-f") 'window-split-toggle)
-#+END_SRC
-
-Add shell variables to emacs
-#+BEGIN_SRC emacs-lisp
-  (when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-#+END_SRC
-
 ** Language 
 
 Enable quick changed between English and 日本語
@@ -106,7 +133,13 @@ General comment header for any language
 (global-set-key (kbd "H-t") 'my/general-comment-header)
 #+END_SRC
 
-* Quality of life changes
+set wolfram alpha ID
+#+BEGIN_SRC emacs-lisp
+(require 'wolfram)
+(setq wolfram-alpha-app-id 'U2773W-V74GXV4HWX)
+#+END_SRC 
+
+* Beautification
 ** Accessibility
 Change text size in Emacs
 #+BEGIN_SRC emacs-lisp
@@ -182,6 +215,11 @@ Display line numbers in programming modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 #+END_SRC
 
+Smart mode line options
+#+BEGIN_SRC emacs-lisp
+  ;; (sml/setup)
+#+END_SRC
+ 
 * Key Re-bindings
 ** File Navigation
 
@@ -196,8 +234,6 @@ Enable quick access to config file
 File navigation for major files
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "H-r")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/Thesis/MPhil_Research.tex")))
-(global-set-key (kbd "H-j")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/journal.org")))
-(global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/myQMCcode/QMC_2018V1.f90")))
 (global-set-key (kbd "H-T")  (lambda () (interactive) (find-file  "~/texmf/tex/latex/package_repository/mypackage.sty")))
 #+END_SRC
 
@@ -232,6 +268,40 @@ Binding for Helm Spotify inside Emacs
 (global-set-key (kbd "H-s") 'helm-spotify-plus)
 #+END_SRC
 
+Duplicate line
+#+BEGIN_SRC emacs-lisp
+(defun duplicate-current-line-or-region (arg)
+  "Duplicates the current line or region ARG times.
+If there's no region, the current line will be duplicated. However, if
+there's a region, all lines that region covers will be duplicated."
+  (interactive "p")
+  (let (beg end (origin (point)))
+    (if (and mark-active (> (point) (mark)))
+        (exchange-point-and-mark))
+    (setq beg (line-beginning-position))
+    (if mark-active
+        (exchange-point-and-mark))
+    (setq end (line-end-position))
+    (let ((region (buffer-substring-no-properties beg end)))
+      (dotimes (i arg)
+        (goto-char end)
+        (newline)
+        (insert region)
+        (setq end (point)))
+      (goto-char (+ origin (* (length region) arg) arg)))))
+(global-set-key (kbd "H-D") 'duplicate-current-line-or-region)  
+#+END_SRC
+
+Open term in another window
+#+BEGIN_SRC emacs-lisp
+  (defun my/open-term-other-window ()
+  (interactive)
+  (let ((buf (term "/bin/bash")))
+    (switch-to-buffer (other-buffer buf))
+    (switch-to-buffer-other-window buf)))
+(global-set-key (kbd "C-x 4 t") 'my/open-term-other-window)
+#+END_SRC
+
 ** Global coding macros
 
 Repeat previous shell command
@@ -260,6 +330,15 @@ Exchange below and above lines globally
 (global-set-key (kbd "M-<down>") 'move-line-down)
 #+END_SRC
 
+** God Mode
+
+Some God mode commands
+#+BEGIN_SRC emacs-lisp
+(require 'god-mode)
+(global-set-key (kbd "H-;") 'god-mode)
+(define-key god-local-mode-map (kbd ".") 'repeat)
+#+END_SRC
+
 * Helm
 
 Major configurations for the Helm Plugin
@@ -281,7 +360,7 @@ Turn on Helm Spotify
 
 Load in custom colour theme
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'custom-theme-load-path "~/.emacs.d/anthony-swanking-theme")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/CustomTheme")
 (load-theme 'anthony-swanking t)
 #+END_SRC
 
@@ -321,6 +400,20 @@ Refresh the buffer after compilation
 	  #'TeX-revert-document-buffer)
 #+END_SRC
 
+Possible latex templates
+#+BEGIN_SRC emacs-lisp
+(defun InsertTemplate-quickTeX()
+  "Insert quickTeX template"
+  (interactive)  
+  (insert-file "~/Dropbox/Templates/quickTeX.tex")
+)
+(defun InsertTemplate-reviewTeX()
+  "Insert reivewTeX template"
+  (interactive)  
+  (insert-file "~/Dropbox/Templates/reviewTeX.tex")
+)
+#+END_SRC
+
 ** LaTeX editing major mode
 
 #+BEGIN_SRC emacs-lisp
@@ -351,9 +444,20 @@ Auto load in FORTRAN mode for f90 files
 (autoload 'f90-mode "f90" "Fortran 90 mode" t)
 #+END_SRC
 
+Insert FORTRAN template
+#+BEGIN_SRC emacs-lisp
+  (defun InsertTemplate-Fortran()
+  (interactive)
+  (when (and
+         (string-match "\\.f90$" (buffer-file-name))
+         (eq 1 (point-max)))
+    (insert-file "~/Dropbox/Templates/FortranTemplate.f90")))    
+#+END_SRC
+
 Configurations for FORTRAN major mode
 #+BEGIN_SRC emacs-lisp
   (add-hook 'f90-mode-hook 'my-f90-mode-hook)
+  (add-hook 'f90-mode-hook 'InsertTemplate-Fortran)
   (require 'fortran)
   (defun my-f90-mode-hook () 
     (local-set-key (kbd "H-M-c") (lambda () (interactive) (shell-command "./bashFortran.sh")))
@@ -417,24 +521,23 @@ Recompile FORTRAN numerical libraries
 
 Insert a template for a python document
 #+BEGIN_SRC emacs-lisp
-  (defun my/template-insert-python()
+  (defun InsertTemplate-Python()
     (interactive)
     (when (and
     (string-match "\\.py$" (buffer-file-name))
     (eq 1 (point-max)))
-    (insert-file "~/Dropbox/Templates/python_template.py")))    
+    (insert-file "~/Dropbox/Templates/PythonTemplate.py")))    
 #+END_SRC
 
 Some configurations Python major mode
 #+BEGIN_SRC emacs-lisp
   (require 'python)
   (add-hook 'python-mode-hook 'my-python-mode-hook)
-  (add-hook 'find-file-hooks 'my/template-insert-python)
+  (add-hook 'find-file-hooks 'InsertTemplate-Python)
   (defun my-python-mode-hook()     
     (local-set-key (kbd "C-c C-r") 'ipython-shell-send-region)
-    (setq python-shell-interpreter "ipython3"
+    (setq python-shell-interpreter "~/anaconda3/bin/ipython3"
           python-shell-interpreter-args "--simple-prompt -i")
-    (add-to-list 'load-path "/folder/containing/file")
     (abbrev-mode 1)                     
     )
 #+END_SRC
@@ -448,8 +551,8 @@ Load in C++ major mode for .h files
 
 Insert a template for a C++ document
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'find-file-hooks 'my/template-insert-C++)
-  (defun my/template-insert-C++()
+  (add-hook 'find-file-hooks 'InsertTemplate-C++)
+  (defun InsertTemplate-C++()
     (interactive)
     (when (and
     (string-match "\\.cpp$" (buffer-file-name))
@@ -506,7 +609,6 @@ My Julia mode hooks
 
 #+RESULTS:
 | my-julia-mode-hooks |
-
 * Org
 ** Editing Code
 
@@ -540,7 +642,7 @@ load in certain languages coding modes
    '(
      (python . t)
      (fortran . t)
-     (latex . t)
+    (latex . t)
      (shell . t)
      (emacs-lisp . t)
      ))
@@ -548,24 +650,19 @@ load in certain languages coding modes
 
 ** Capture Mode
 
-add custom section titles templates
+Add custom section titles templates
 #+BEGIN_SRC emacs-lisp
     (setq org-capture-templates
-          (quote (("m" "Meeting Notes" entry (file+olp+datetree "~/Dropbox/Journal/journal.org")
-                   "* %? :Meeting: \n\n_Notes_:  \n \n_Agenda_: \n \n_Resources_: ")
-                  ("j" "Journal" entry (file+olp+datetree "~/Dropbox/Journal/journal.org")
-                   "* %? \n\n_Notes_:  \n \n_Resources_:")
-                  ("r" "Research Talk" entry (file+olp+datetree "~/Dropbox/Journal/journal.org")
-                   "* %? :RT: \n\n_Notes_:  \n \n_Resources_:")
-                  ("Q" "Meeting Question" entry (file+olp+datetree "~/Dropbox/Journal/questions.org")
+          (quote (("n" "Notes" entry (file "~/Dropbox/QMC/Notes/Notes.org")
+                   "* %? D/11/2018 \n** Contents \n \n** Notes \n \n** Resources ")        
+                  ("Q" "Question" entry (file "~/Dropbox/QMC/Notes/Questions.org")
                    "* %?")
                   )))
 #+END_SRC
 
-Tell org where the agenda files are
+Set org agenda files maybe
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-files 
-  (list "~/Dropbox/Journal/agenda.org" "~/Dropbox/Journal/journal.org"))  
+  (setq org-agenda-files '("~/Dropbox/QMC/Notes/"))
 #+END_SRC
 
 ** Macros
@@ -583,14 +680,6 @@ Code block macros
                '("el" "#+BEGIN_SRC emacs-lisp\n  ?\n#+END_SRC"))
   (add-to-list 'org-structure-template-alist
                '("c" "#+BEGIN_SRC C++\n  ?\n#+END_SRC"))
-  (add-to-list 'org-structure-template-alist
-               '("py" "#+BEGIN_SRC python
-  #!/usr/bin/python3.5
-  import matplotlib.pyplot as pypl
-  import numpy as np
-  import math as m
-  from matplotlib import rc
-  ?\n#+END_SRC"))
   (add-to-list 'org-structure-template-alist
                '("ipy" "#+BEGIN_SRC ipython :session :exports both :results raw drawer\n  ?\n#+END_SRC"))
   (add-to-list 'org-structure-template-alist
@@ -618,7 +707,7 @@ Don't ask before evaluating code blocks.
 
 For exporting to HTML
 #+BEGIN_SRC emacs-lisp
-(require  'htmlize)
+   (require  'htmlize)
 #+END_SRC
 
 ** Visual Settings
@@ -660,77 +749,12 @@ Add states for to do lists
                             ))
 #+END_SRC
 
-** Beamer
-
-Some code to allow the use of Beamer in org mode
-#+BEGIN_SRC emacs-lisp
-; allow for export=>beamer by placing
-
-;; #+LaTeX_CLASS: beamer in org files
-(unless (boundp 'org-export-latex-classes)
-  (setq org-export-latex-classes nil))
-(add-to-list 'org-export-latex-classes
-  ;; beamer class, for presentations
-  '("beamer"
-     "\\documentclass[11pt]{beamer}\n
-      \\mode<{{{beamermode}}}>\n
-      \\usetheme{{{{beamertheme}}}}\n
-      \\usecolortheme{{{{beamercolortheme}}}}\n
-      \\beamertemplateballitem\n
-      \\setbeameroption{show notes}
-      \\usepackage[utf8]{inputenc}\n
-      \\usepackage[T1]{fontenc}\n
-      \\usepackage{hyperref}\n
-      \\usepackage{color}
-      \\usepackage{listings}
-      \\lstset{numbers=none,language=[ISO]C++,tabsize=4,
-  frame=single,
-  basicstyle=\\small,
-  showspaces=false,showstringspaces=false,
-  showtabs=false,
-  keywordstyle=\\color{blue}\\bfseries,
-  commentstyle=\\color{red},
-  }\n
-      \\usepackage{verbatim}\n
-      \\institute{{{{beamerinstitute}}}}\n          
-       \\subject{{{{beamersubject}}}}\n"
-
-     ("\\section{%s}" . "\\section*{%s}")
-     
-     ("\\begin{frame}[fragile]\\frametitle{%s}"
-       "\\end{frame}"
-       "\\begin{frame}[fragile]\\frametitle{%s}"
-       "\\end{frame}")))
-
-  ;; letter class, for formal letters
-
-  (add-to-list 'org-export-latex-classes
-
-  '("letter"
-     "\\documentclass[11pt]{letter}\n
-      \\usepackage[utf8]{inputenc}\n
-      \\usepackage[T1]{fontenc}\n
-      \\usepackage{color}"
-     
-     ("\\section{%s}" . "\\section*{%s}")
-     ("\\subsection{%s}" . "\\subsection*{%s}")
-     ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-     ("\\paragraph{%s}" . "\\paragraph*{%s}")
-     ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-#+END_SRC
-
-Beamer template 
-#+BEGIN_SRC emacs-lisp
-    (add-to-list 'org-structure-template-alist
-    '("beamer" "#+TITLE: \n#+AUTHOR: Anthony Kalaitzis \n#+OPTIONS: H:2 toc:t num:t \n#+LATEX_CLASS: beamer \n#+LATEX_CLASS_OPTIONS: [presentation] \n#+LATEX_header: \n#+BEAMER_header: \\usetheme{Berlin} \n#+BEAMER_header: \\usecolortheme[named=purple]{structure} \n#+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col) %8BEAMER_OPT(Opt) \n?"))
-#+END_SRC
-
 ** LaTeX
 
 Use =mypackage= package for all LaTeX exports.
 #+BEGIN_SRC emacs-lisp
 (setq org-latex-packages-alist '())
-(add-to-list 'org-latex-packages-alist '("" "mypackage" t))
+  (add-to-list 'org-latex-packages-alist '("" "mypackage" t))
 #+END_SRC
 
 Tell org where to find LaTeX
@@ -738,14 +762,6 @@ Tell org where to find LaTeX
   (setq exec-path (append exec-path '("/usr/bin")))
   (load "auctex.el" nil t t)
 #+END_SRC
-
-* Wolfram Alpha
-
-set wolfram alpha ID
-#+BEGIN_SRC emacs-lisp
-(require 'wolfram)
-(setq wolfram-alpha-app-id 'U2773W-V74GXV4HWX)
-#+END_SRC 
 
 
 
