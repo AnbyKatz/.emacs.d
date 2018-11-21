@@ -126,8 +126,6 @@
 (global-set-key (kbd "H-e") 'my/visit-emacs-config)
 
 (global-set-key (kbd "H-r")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/Thesis/MPhil_Research.tex")))
-(global-set-key (kbd "H-j")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/journal.org")))
-(global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/myQMCcode/QMC_2018V1.f90")))
 (global-set-key (kbd "H-T")  (lambda () (interactive) (find-file  "~/texmf/tex/latex/package_repository/mypackage.sty")))
 
 (global-set-key (kbd "M-]") 'other-window)
@@ -407,16 +405,11 @@ there's a region, all lines that region covers will be duplicated."
    ))
 
 (setq org-capture-templates
-      (quote (("m" "Meeting Notes" entry (file "~/Dropbox/QMC/Notes/MeetingNotes.org")
-               "* %? D/M/2018 :Meeting: \n\n_Notes_: \n \n_Resources_: ")
-              ("j" "Journal" entry (file "~/Dropbox/Journal/journal.org")
-               "* %? D/M/2018 :RT: \n\n_Notes_: \n \n_Resources_:")
-              ("Q" "Meeting Question" entry (file "~/Dropbox/QMC/Notes/Questions.org")
+      (quote (("n" "Notes" entry (file "~/Dropbox/QMC/Notes/Notes.org")
+               "* %? D/11/2018 \n** Contents \n \n** Notes \n \n** Resources ")        
+              ("Q" "Question" entry (file "~/Dropbox/QMC/Notes/Questions.org")
                "* %?")
               )))
-
-(setq org-agenda-files 
-  (list "~/Dropbox/Journal/agenda.org" "~/Dropbox/Journal/journal.org"))
 
 (setq org-agenda-files '("~/Dropbox/QMC/Notes/"))
 

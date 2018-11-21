@@ -1,5 +1,5 @@
 ;; (server-start) 
-
+(server-start)
 (let ((file-name-handler-alist nil)) 
   ;; Put custom settings in separate file.
   (setq custom-file "~/.emacs.d/custom.el")

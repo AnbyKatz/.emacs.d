@@ -230,8 +230,6 @@ Enable quick access to config file
 File navigation for major files
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "H-r")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/Thesis/MPhil_Research.tex")))
-(global-set-key (kbd "H-j")  (lambda () (interactive) (find-file  "~/Dropbox/Journal/journal.org")))
-(global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/myQMCcode/QMC_2018V1.f90")))
 (global-set-key (kbd "H-T")  (lambda () (interactive) (find-file  "~/texmf/tex/latex/package_repository/mypackage.sty")))
 #+END_SRC
 
@@ -652,19 +650,11 @@ load in certain languages coding modes
 Add custom section titles templates
 #+BEGIN_SRC emacs-lisp
     (setq org-capture-templates
-          (quote (("m" "Meeting Notes" entry (file "~/Dropbox/QMC/Notes/MeetingNotes.org")
-                   "* %? D/M/2018 :Meeting: \n\n_Notes_: \n \n_Resources_: ")
-                  ("j" "Journal" entry (file "~/Dropbox/Journal/journal.org")
-                   "* %? D/M/2018 :RT: \n\n_Notes_: \n \n_Resources_:")
-                  ("Q" "Meeting Question" entry (file "~/Dropbox/QMC/Notes/Questions.org")
+          (quote (("n" "Notes" entry (file "~/Dropbox/QMC/Notes/Notes.org")
+                   "* %? D/11/2018 \n** Contents \n \n** Notes \n \n** Resources ")        
+                  ("Q" "Question" entry (file "~/Dropbox/QMC/Notes/Questions.org")
                    "* %?")
                   )))
-#+END_SRC
-
-Tell org where the agenda files are
-#+BEGIN_SRC emacs-lisp
-(setq org-agenda-files 
-  (list "~/Dropbox/Journal/agenda.org" "~/Dropbox/Journal/journal.org"))  
 #+END_SRC
 
 Set org agenda files maybe
