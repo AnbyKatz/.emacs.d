@@ -1,5 +1,9 @@
-;; (server-start) 
 (server-start)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile
+  (require 'use-package))
 (let ((file-name-handler-alist nil)) 
   ;; Put custom settings in separate file.
   (setq custom-file "~/.emacs.d/custom.el")

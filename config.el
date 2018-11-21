@@ -34,6 +34,10 @@
   :ensure t)
 (use-package htmlize
   :ensure t)
+(use-package org
+  :ensure t)
+(use-package god-mode
+  :ensure t)
 
 ;; (set-language-environment "Japanese")
 
