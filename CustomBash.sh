@@ -45,12 +45,14 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2018.
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/anthony/bin/PLplot/install_dir/lib/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/anthony/bin/PLplot/build_dir/bindings/fortran/
 
+# Custom functions for running emacs
 function ef() {
-    emacs-snapshot $1.f90 &
+    emacs $1.f90 &
 }
 function et() {
-    emacs-snapshot $1tex &
+    emacs $1tex &
 }
 function e() {
-    emacs-snapshot $1 &
+    emacs $1 &
     }
+

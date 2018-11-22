@@ -38,6 +38,8 @@
   :ensure t)
 (use-package god-mode
   :ensure t)
+(use-package monokai-theme
+  :ensure t)
 
 ;; (set-language-environment "Japanese")
 

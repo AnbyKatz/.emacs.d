@@ -1,6 +1,31 @@
+;; ######################################################
+;; Running packages
+
 (setq package-archives
     '(("melpa" . "http://melpa.org/packages/")
       ("gnu" . "http://elpa.gnu.org/packages/")))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile
+  (require 'use-package))
+
+
+
+
+
+
+;; ######################################################
+;; ######################################################
+;; ######################################################
+;; ######################################################
+
+
+
+
+
+
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -39,7 +64,7 @@
  '(main-line-separator-style 'chamfer)
  '(org-agenda-files '("~/Dropbox/Journal/agenda.org"))
  '(package-selected-packages
-   '(smart-mode-line smart-mode-line-atom-one-dark-theme smart-mode-line-powerline-theme god-mode org-edit-latex auto-package-update use-package julia-mode julia-shell org-ac wolfram exec-path-from-shell org-bullets rainbow-mode helm-spotify helm-spotify-plus julia-repl auctex))
+   '(monokai-theme smart-mode-line smart-mode-line-atom-one-dark-theme smart-mode-line-powerline-theme god-mode org-edit-latex auto-package-update use-package julia-mode julia-shell org-ac wolfram exec-path-from-shell org-bullets rainbow-mode helm-spotify helm-spotify-plus julia-repl auctex))
  '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")
  '(powerline-color1 "#1E1E1E")

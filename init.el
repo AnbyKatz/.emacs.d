@@ -1,13 +1,5 @@
 ;; Init.el file, initializes emacs
-
-;; (server-start)
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(eval-when-compile
-  (require 'use-package))
+(server-start)
 
 (let ((file-name-handler-alist nil)) 
   ;; Load custom File
@@ -21,5 +13,5 @@
   (org-babel-load-file "~/.emacs.d/config.org")
 
   ;; EL file version
-  (load-file "~/.emacs.d/config.el")
+  ;; (load-file "~/.emacs.d/config.el")
 )
