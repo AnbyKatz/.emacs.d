@@ -124,7 +124,18 @@
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
-;; (sml/setup)
+(use-package spaceline
+  :ensure spaceline
+  :custom-face
+  (spaceline-highlight-face ((t (:background "SeaGreen4" :foreground "#3E3D31" :inherit (quote mode-line)))))
+  (spaceline-unmodified ((t (:background "SeaGreen4" :foreground "#3E3D31" :inherit (quote mode-line)))))
+  (spaceline-read-only ((t (:background "DarkOliveGreen" :foreground "#3E3D31" :inherit (quote mode-line)))))
+  :config
+  (spaceline-emacs-theme)
+  (setq spaceline-minor-modes-p nil)
+  (setq spaceline-buffer-size-p nil)
+  (setq spaceline-buffer-encoding-abbrev-p nil)
+(setq spaceline-highlight-face-func 'spaceline-highlight-face-modified))
 
 (defun my/visit-emacs-config ()
   (interactive)
@@ -258,6 +269,8 @@ there's a region, all lines that region covers will be duplicated."
   (local-set-key (kbd "C-c b") 'tex-latex-block)
   (local-set-key (kbd "<C-tab>") 'outline-toggle-children)
   )
+
+(require 'flycheck)
 
 (autoload 'f90-mode "f90" "Fortran 90 mode" t)
 

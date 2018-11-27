@@ -147,5 +147,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(font-lock-constant-face ((t (:foreground "firebrick2")))))
+ '(font-lock-constant-face ((t (:foreground "firebrick2"))))
+ '(spaceline-highlight-face ((t (:background "SeaGreen4" :foreground "#3E3D31" :inherit 'mode-line))))
+ '(spaceline-read-only ((t (:background "DarkOliveGreen" :foreground "#3E3D31" :inherit 'mode-line))))
+ '(spaceline-unmodified ((t (:background "SeaGreen4" :foreground "#3E3D31" :inherit 'mode-line)))))
 
