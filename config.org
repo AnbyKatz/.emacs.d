@@ -315,6 +315,11 @@ Open term in another window
 (global-set-key (kbd "C-x 4 t") 'my/open-term-other-window)
 #+END_SRC
 
+Switch frame
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "H-f") 'window-split-toggle)
+#+END_SRC
+
 ** Global coding macros
 
 Repeat previous shell command
@@ -683,6 +688,13 @@ Set org agenda files maybe
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-files '("~/Dropbox/QMC/Notes/"))
 #+END_SRC
+** Key Bindings
+
+Some key bindings for Org
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "H-/") 'org-tags-view)
+#+END_SRC
+
 
 ** Macros
 

@@ -185,6 +185,8 @@ there's a region, all lines that region covers will be duplicated."
     (switch-to-buffer-other-window buf)))
 (global-set-key (kbd "C-x 4 t") 'my/open-term-other-window)
 
+(global-set-key (kbd "H-f") 'window-split-toggle)
+
 (defun my/repeat-last-shell-command()
   "repeats last run shell command"
   (interactive)
@@ -430,6 +432,8 @@ there's a region, all lines that region covers will be duplicated."
               )))
 
 (setq org-agenda-files '("~/Dropbox/QMC/Notes/"))
+
+(global-set-key (kbd "H-/") 'org-tags-view)
 
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
