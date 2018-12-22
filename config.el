@@ -32,6 +32,8 @@
   :ensure t)
 (use-package flyspell
   :ensure t)
+(use-package flycheck
+  :ensure t)
 (use-package htmlize
   :ensure t)
 (use-package org
@@ -143,7 +145,7 @@
 (global-set-key (kbd "H-e") 'my/visit-emacs-config)
 
 (global-set-key (kbd "H-r")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/Thesis/MPhil_Research.tex")))
-(global-set-key (kbd "H-T")  (lambda () (interactive) (find-file  "~/texmf/tex/latex/package_repository/mypackage.sty")))
+(global-set-key (kbd "H-T")  (lambda () (interactive) (find-file  "~/Dropbox/.texmf/tex/latex/package_repository/mypackage.sty")))
 
 (global-set-key (kbd "M-]") 'other-window)
 
@@ -154,8 +156,6 @@
 
 (global-set-key (kbd "H-]") 'ace-window)
 (setq aw-keys '(?q ?w ?e ?a ?s ?d ?z ?x ?c))
-
-(global-set-key (kbd "H-s") 'helm-spotify-plus)
 
 (defun duplicate-current-line-or-region (arg)
   "Duplicates the current line or region ARG times.
@@ -217,8 +217,6 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-
-(require 'helm-spotify-plus)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/CustomTheme")
 (load-theme 'anthony-swanking t)

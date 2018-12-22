@@ -26,7 +26,7 @@ alias mkae="make"
 alias maek="make"
 
 # z - jump around
-source ~/bin/z-master/z.sh
+source ~/Dropbox/.z-master/z.sh
 
 # Recognise compiler path
 source /opt/intel/bin/compilervars.sh intel64
@@ -38,6 +38,7 @@ export PATH=$PATH:/bin/bash
 export PATH=$PATH:/home/anthony/bin/compilers
 export PATH=$PATH:/home/anthony/Dropbox/Code/Fortran/numFort
 export PATH=$PATH:/home/anthony/anaconda3/bin/
+export TEXMFHOME=~/Dropbox/.texmf
 export EDITOR=$EDITOR:emacsclient
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/anthony/bin/PLplot/install_dir/lib/pkgconfig/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2018.3.222/linux/mkl/lib/intel64_lin/

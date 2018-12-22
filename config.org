@@ -249,7 +249,7 @@ Enable quick access to config file
 File navigation for major files
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "H-r")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/Thesis/MPhil_Research.tex")))
-(global-set-key (kbd "H-T")  (lambda () (interactive) (find-file  "~/texmf/tex/latex/package_repository/mypackage.sty")))
+(global-set-key (kbd "H-T")  (lambda () (interactive) (find-file  "~/Dropbox/.texmf/tex/latex/package_repository/mypackage.sty")))
 #+END_SRC
 
 ** Movement Macros
