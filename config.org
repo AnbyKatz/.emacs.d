@@ -50,6 +50,8 @@ Ensure that main packages are loaded in
     :ensure t)
   (use-package flyspell
     :ensure t)
+  (use-package flycheck
+    :ensure t)
   (use-package htmlize
     :ensure t)
   (use-package org
@@ -276,11 +278,6 @@ ace window movement key bindings
 
 ** Personal Macros
 
-Binding for Helm Spotify inside Emacs
-#+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "H-s") 'helm-spotify-plus)
-#+END_SRC
-
 Duplicate line
 #+BEGIN_SRC emacs-lisp
 (defun duplicate-current-line-or-region (arg)
@@ -367,11 +364,6 @@ Major configurations for the Helm Plugin
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-#+END_SRC
-
-Turn on Helm Spotify
-#+BEGIN_SRC emacs-lisp
-(require 'helm-spotify-plus)
 #+END_SRC
 
 * Colour Theme
