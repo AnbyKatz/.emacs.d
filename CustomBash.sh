@@ -8,12 +8,7 @@ export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
 # Custom Commands
 alias install="sudo apt-get install"
 alias status="~/bin/dropbox.py status"
-alias cdhd="cd /media/anthony/Hard_Drive"
-alias emacs="emacs-snapshot"
 alias py="python3.7"
-alias jaxo="java -jar ~/bin/jaxodraw-2.1-0/jaxodraw-2.1-0.jar"
-alias cpmake="cp /home/anthony/Dropbox/Code/Fortran/numFort/{makefile,customPlot.py} ."
-alias Mathematica="wine /home/anthony/.wine/drive_c/Program\ Files/Wolfram\ Research/Mathematica/11.2/Mathematica.exe"
 
 # ls aliases
 alias ls="ls --color"

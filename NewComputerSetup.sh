@@ -21,3 +21,6 @@ cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 
 # -------------------------------Python-------------------------------
 # Install from anaconda, self explanatory
+
+# -------------------------------Fortran------------------------------
+# Install from parallel studio
