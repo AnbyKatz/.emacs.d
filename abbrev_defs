@@ -1,69 +1,79 @@
 ;;-*-coding: utf-8;-*-
+(define-abbrev-table 'Buffer-menu-mode-abbrev-table '())
+
 (define-abbrev-table 'Rd-mode-abbrev-table
   '(
-    ("`ag" "\\arguments" nil :count 0)
-    ("`al" "\\alias" nil :count 0)
-    ("`au" "\\author" nil :count 0)
-    ("`bf" "\\bold" nil :count 0)
-    ("`co" "\\code" nil :count 0)
-    ("`de" "\\describe" nil :count 0)
-    ("`dn" "\\description" nil :count 0)
-    ("`dt" "\\details" nil :count 0)
-    ("`em" "\\emph" nil :count 0)
-    ("`en" "\\enumerate" nil :count 0)
-    ("`ex" "\\examples" nil :count 0)
-    ("`fi" "\\file" nil :count 0)
-    ("`fo" "\\format" nil :count 0)
-    ("`it" "\\item" nil :count 0)
-    ("`iz" "\\itemize" nil :count 0)
-    ("`kw" "\\keyword" nil :count 0)
-    ("`li" "\\link" nil :count 0)
-    ("`me" "\\method" nil :count 0)
-    ("`na" "\\name" nil :count 0)
-    ("`no" "\\note" nil :count 0)
-    ("`re" "\\references" nil :count 0)
-    ("`sa" "\\seealso" nil :count 0)
-    ("`se" "\\section" nil :count 0)
-    ("`so" "\\source" nil :count 0)
-    ("`ss" "\\subsection" nil :count 0)
-    ("`sy" "\\synopsis" nil :count 0)
-    ("`ta" "\\tabular" nil :count 0)
-    ("`ti" "\\title" nil :count 0)
-    ("`us" "\\usage" nil :count 0)
-    ("`va" "\\value" nil :count 0)
+    ("`ag" "\\arguments" nil 0)
+    ("`al" "\\alias" nil 0)
+    ("`au" "\\author" nil 0)
+    ("`bf" "\\bold" nil 0)
+    ("`co" "\\code" nil 0)
+    ("`de" "\\describe" nil 0)
+    ("`dn" "\\description" nil 0)
+    ("`dt" "\\details" nil 0)
+    ("`em" "\\emph" nil 0)
+    ("`en" "\\enumerate" nil 0)
+    ("`ex" "\\examples" nil 0)
+    ("`fi" "\\file" nil 0)
+    ("`fo" "\\format" nil 0)
+    ("`it" "\\item" nil 0)
+    ("`iz" "\\itemize" nil 0)
+    ("`kw" "\\keyword" nil 0)
+    ("`li" "\\link" nil 0)
+    ("`me" "\\method" nil 0)
+    ("`na" "\\name" nil 0)
+    ("`no" "\\note" nil 0)
+    ("`re" "\\references" nil 0)
+    ("`sa" "\\seealso" nil 0)
+    ("`se" "\\section" nil 0)
+    ("`so" "\\source" nil 0)
+    ("`ss" "\\subsection" nil 0)
+    ("`sy" "\\synopsis" nil 0)
+    ("`ta" "\\tabular" nil 0)
+    ("`ti" "\\title" nil 0)
+    ("`us" "\\usage" nil 0)
+    ("`va" "\\value" nil 0)
    ))
 
-(global-abbrev-table)
+(define-abbrev-table 'completion-list-mode-abbrev-table '())
 
-"galpha"       0    "α"
-"gbeta"        0    "β"
-"gchi"         0    "χ"
-"gddelta"      0    "Δ"
-"gdelta"       0    "δ"
-"gepsilon"     0    "ε"
-"geta"         0    "η"
-"ggamma"       1    "γ"
-"gggamma"      0    "Γ"
-"gkappa"       0    "κ"
-"glambda"      0    "λ"
-"gllambda"     0    "Λ"
-"gmu"          0    "μ"
-"gnu"          0    "ν"
-"gomega"       0    "ω"
-"goomega"      0    "Ω"
-"gphi"         0    "φ"
-"gpi"          0    "π"
-"gpphi"        0    "Φ"
-"gppi"         0    "Π"
-"gppsi"        0    "Ψ"
-"gpsi"         0    "ψ"
-"grho"         0    "ρ"
-"gsigma"       0    "σ"
-"gssigma"      0    "Σ"
-"gtau"         0    "τ"
-"gtheta"       0    "θ"
-"gttheta"      0    "Θ"
-"gupsilon"     0    "υ"
-"gxi"          0    "ξ"
-"gxxi"         0    "Ξ"
-"gzeta"        0    "ζ"
+(define-abbrev-table 'diff-mode-abbrev-table '())
+
+(define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
+
+(define-abbrev-table 'elisp-byte-code-mode-abbrev-table '())
+
+(define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
+
+(define-abbrev-table 'fundamental-mode-abbrev-table '())
+
+(define-abbrev-table 'global-abbrev-table '())
+
+(define-abbrev-table 'help-mode-abbrev-table '())
+
+(define-abbrev-table 'lisp-mode-abbrev-table '())
+
+(define-abbrev-table 'messages-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'occur-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'occur-mode-abbrev-table '())
+
+(define-abbrev-table 'package-menu-mode-abbrev-table '())
+
+(define-abbrev-table 'process-menu-mode-abbrev-table '())
+
+(define-abbrev-table 'prog-mode-abbrev-table '())
+
+(define-abbrev-table 'special-mode-abbrev-table '())
+
+(define-abbrev-table 'tabulated-list-mode-abbrev-table '())
+
+(define-abbrev-table 'text-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-log-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-region-history-mode-abbrev-table '())
+

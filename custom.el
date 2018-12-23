@@ -1,6 +1,7 @@
 ;; ######################################################
 ;; Running packages
 
+(package initialize)
 (setq package-archives
     '(("melpa" . "http://melpa.org/packages/")
       ("gnu" . "http://elpa.gnu.org/packages/")))
