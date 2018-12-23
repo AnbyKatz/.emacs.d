@@ -1,5 +1,5 @@
 # ----------------------------Base packages---------------------------
-sudo apt-get install texlive texlive-latex-extra gfortran g++
+sudo apt-get install texlive texlive-latex-extra gfortran g++ gnome-tweaks
 
 # ---------------------------NVIDIA drivers---------------------------
 sudo add-apt-repository ppa:graphics-drivers/ppa
