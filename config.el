@@ -458,7 +458,7 @@ there's a region, all lines that region covers will be duplicated."
 
 (require  'htmlize)
 
-(setq org-ellipsis "⤵")
+(setq org-ellipsis "⬎")
 
 (setq org-src-fontify-natively t)
 

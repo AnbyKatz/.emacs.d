@@ -737,7 +737,7 @@ For exporting to HTML
 
 Nice ellipsis:
 #+BEGIN_SRC emacs-lisp
-   (setq org-ellipsis "⤵")
+   (setq org-ellipsis "⬎")
 #+END_SRC
 
 Use syntax highlighting in source blocks while editing (you may already have this).
