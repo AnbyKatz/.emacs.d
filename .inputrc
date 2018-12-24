@@ -1,0 +1,4 @@
+$include /etc/include
+
+set completion-ignore-case 1
+set enable-keypad 1

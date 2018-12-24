@@ -10,8 +10,8 @@
   :ensure t)
 (use-package tex
   :ensure auctex)
-(use-package exec-path-from-shell
-  :ensure t)
+;; (use-package exec-path-from-shell
+;;   :ensure t)
 (use-package julia-mode
   :ensure t)
 (use-package julia-shell

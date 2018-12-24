@@ -1,7 +1,11 @@
 *~
 backups/
+elpa/
+url/
+var/
 session*
 auto-save-list
 bookmarks
 kkcrc
-elpa/
+.last-package-update-day
+
