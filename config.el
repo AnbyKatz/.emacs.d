@@ -12,10 +12,6 @@
   :ensure auctex)
 ;; (use-package exec-path-from-shell
 ;;   :ensure t)
-(use-package julia-mode
-  :ensure t)
-(use-package julia-shell
-  :ensure t)
 (use-package org-bullets
   :ensure t)
 (use-package rainbow-mode
@@ -367,33 +363,6 @@ there's a region, all lines that region covers will be duplicated."
 (defun my-c++-mode-hook ()
   (local-set-key (kbd "H-M-p")(lambda () (interactive) (shell-command "./bash_c++")))
   )
-
-(add-to-list 'load-path "~/.emacs.d/elpa/julia-mode-20180816.2117/")
-(add-to-list 'load-path "~/.emacs.d/elpa/julia-shell-20161125.1910/")
-(require 'julia-mode)
-
-(defun my/julia-set-up ()
-"Runs inferior julia shell and an emulated julia terminal via term"
-  (interactive)
-  (let ((w (split-window-right)))    
-    (select-window w)
-    (inferior-julia-shell)
-    (abbrev-mode 1))
-  (let ((w (split-window-below)))    
-    (select-window w)
-    (term "/home/anthony/bin/compilers/julia")
-    (abbrev-mode 1))
-  )
-
-(defun my-julia-mode-hooks ()
-  (require 'julia-shell)
-  (abbrev-mode 1)                     
-  (local-set-key (kbd "C-c C-r") 'julia-shell-run-region)
-  (local-set-key (kbd "C-c C-c") 'julia-shell-run-region-or-line)
-  (local-set-key (kbd "C-c C-s") 'julia-shell-save-and-go)
-  (local-set-key (kbd "C-c C-p") 'my/julia-set-up)
-  )
-(add-hook 'julia-mode-hook 'my-julia-mode-hooks)
 
 (defun my-org-mode-hook ()
   (setq org-log-done t)
