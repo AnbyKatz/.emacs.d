@@ -1,0 +1,65 @@
+# -*- mode: org; -*-
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+
+#+AUTHOR: Anthony Kalaitzis
+#+TITLE: New Computer Setup file
+
+* Base packages
+
+#+BEGIN_SRC shell
+  sudo apt-get install texlive texlive-latex-extra gfortran g++
+#+END_SRC
+
+* Programming
+
+** Emacs Libraries
+
+#+BEGIN_SRC shell
+  sudo apt-get install build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev libncurses-dev libxpm-dev automake autoconf
+  apt-cache search 'libgnutls.*-dev'
+#+END_SRC
+
+Download source from
+[[https://www.gnu.org/software/emacs/][Emacs website]]
+
+** Python
+
+[[https://www.anaconda.com/download/#linux][Anaconda download page]]
+
+** Fortran
+
+Download from below, username: anthony42
+[[https://software.intel.com/en-us/qualify-for-free-software/student][ifort compiler]]
+
+** NVIDIA Drivers
+
+#+BEGIN_SRC shell
+  sudo add-apt-repository ppa:graphics-drivers/ppa
+  sudo apt-get update
+  # install the rest from package manager
+#+END_SRC
+
+** Dropbox
+
+#+BEGIN_SRC shell
+  cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+  ~/.dropbox-dist/dropboxd
+#+END_SRC
+
+* Personal
+
+** Spotify
+
+#+BEGIN_SRC shell
+  sudo apt-get install snap
+  snap install spotify
+#+END_SRC
+
+** Steam
+
+Download from package manager

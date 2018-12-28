@@ -28,8 +28,8 @@ Ensure that main packages are loaded in
     :ensure t)
   (use-package tex
     :ensure auctex)
-  ;; (use-package exec-path-from-shell
-  ;;   :ensure t)
+  (use-package exec-path-from-shell
+    :ensure t)
   (use-package org-bullets
     :ensure t)
   (use-package rainbow-mode
@@ -634,7 +634,7 @@ Add custom section titles templates
 
 Set org agenda files maybe
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-files '("~/Dropbox/QMC/Notes/"))
+  (setq org-agenda-files '("~/Dropbox/Notes/"))
 #+END_SRC
 ** Key Bindings
 

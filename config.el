@@ -10,8 +10,8 @@
   :ensure t)
 (use-package tex
   :ensure auctex)
-;; (use-package exec-path-from-shell
-;;   :ensure t)
+(use-package exec-path-from-shell
+  :ensure t)
 (use-package org-bullets
   :ensure t)
 (use-package rainbow-mode
@@ -398,7 +398,7 @@ there's a region, all lines that region covers will be duplicated."
                "* %?")
               )))
 
-(setq org-agenda-files '("~/Dropbox/QMC/Notes/"))
+(setq org-agenda-files '("~/Dropbox/Notes/"))
 
 (global-set-key (kbd "H-/") 'org-tags-view)
 
