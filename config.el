@@ -141,7 +141,8 @@
 (global-set-key (kbd "H-e") 'my/visit-emacs-config)
 
 (global-set-key (kbd "H-r")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/Thesis/MPhil_Research.tex")))
-(global-set-key (kbd "H-T")  (lambda () (interactive) (find-file  "~/Dropbox/.texmf/tex/latex/package_repository/mypackage.sty")))
+(global-set-key (kbd "H-T")  (lambda () (interactive) (find-file  "~/.emacs.d/.texmf/tex/latex/package_repository/mypackage.sty")))
+(global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Documents/QMC/")))
 
 (global-set-key (kbd "M-]") 'other-window)
 
