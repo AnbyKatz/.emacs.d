@@ -21,6 +21,9 @@ alias clc="clear"
 alias mkae="make"
 alias maek="make"
 
+# Update repositories
+alias update="bash ~/bin/update.sh"
+
 # z - jump around
 source ~/.emacs.d/.z-master/z.sh
 
