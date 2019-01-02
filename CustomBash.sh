@@ -9,7 +9,7 @@ export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
 alias install="sudo apt-get install"
 alias status="~/bin/dropbox.py status"
 alias py="python3.7"
-alias tor="./home/anthony/bin/tor-browser_en-US/Browser/firefox"
+alias tor="bash /home/anthony/bin/tor-browser_en-US/Browser/firefox"
 
 # ls aliases
 alias ls="ls --color"
