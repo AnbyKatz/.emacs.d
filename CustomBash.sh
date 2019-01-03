@@ -22,7 +22,7 @@ alias mkae="make"
 alias maek="make"
 
 # Update repositories
-alias update="bash ~/bin/update.sh"
+alias update="bash ~/.emacs.d/update.sh"
 
 # z - jump around
 source ~/.emacs.d/.z-master/z.sh
