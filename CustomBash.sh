@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Remap printscreen
+xmodmap -e "keycode 107 = Hyper_R"
+
 # Emacs client
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal

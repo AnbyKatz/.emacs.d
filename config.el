@@ -10,8 +10,6 @@
   :ensure t)
 (use-package tex
   :ensure auctex)
-(use-package exec-path-from-shell
-  :ensure t)
 (use-package org-bullets
   :ensure t)
 (use-package rainbow-mode
