@@ -633,7 +633,7 @@ Add custom section titles templates
 
 Set org agenda files maybe
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-files '("~/Dropbox/Notes/"))
+  (setq org-agenda-files '("~/Dropbox/OrgNotes/"))
 #+END_SRC
 ** Key Bindings
 

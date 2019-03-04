@@ -3,6 +3,9 @@
 # Remap printscreen
 xmodmap -e "keycode 107 = Hyper_R"
 
+# Work movement command
+alias cdw='cd ~/Dropbox/Papers/NSTidalCrust/'
+
 # Emacs client
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
@@ -26,6 +29,7 @@ alias maek="make"
 
 # Update repositories
 alias update="bash ~/.emacs.d/update.sh"
+alias refresh="bash ~/.emacs.d/refresh.sh"
 
 # z - jump around
 source ~/.emacs.d/.z-master/z.sh
