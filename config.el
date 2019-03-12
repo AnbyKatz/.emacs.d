@@ -182,6 +182,19 @@ there's a region, all lines that region covers will be duplicated."
 
 (global-set-key (kbd "H-f") 'window-split-toggle)
 
+(defun my/get-line-number()
+  "saves line number to a variable bbb"
+  (interactive)
+(end-of-buffer)
+(previous-line)
+(setq aaa (what-line))
+(setq bbb (substring aaa 5))
+)
+(defun my/print-line-number()
+  "prints line number"
+  (interactive)
+(insert bbb))
+
 (defun my/repeat-last-shell-command()
   "repeats last run shell command"
   (interactive)
@@ -201,6 +214,9 @@ there's a region, all lines that region covers will be duplicated."
 
 (global-set-key (kbd "M-<up>") 'move-line-up)
 (global-set-key (kbd "M-<down>") 'move-line-down)
+
+(global-set-key (kbd "C-=")  'text-scale-increase)
+(global-set-key (kbd "C--")  'text-scale-decrease)
 
 (require 'god-mode)
 (global-set-key (kbd "H-;") 'god-mode)
@@ -341,7 +357,7 @@ there's a region, all lines that region covers will be duplicated."
 (add-hook 'python-mode-hook 'my-python-mode-hook)
 (add-hook 'find-file-hooks 'InsertTemplate-Python)
 (defun my-python-mode-hook()     
-  (local-set-key (kbd "C-c C-r") 'ipython-shell-send-region)
+  (local-set-key (kbd "C-c C-r") 'python-shell-send-region)
   (setq python-shell-interpreter "/opt/anaconda3/bin/ipython3"
         python-shell-interpreter-args "--simple-prompt -i")
   (abbrev-mode 1)                     

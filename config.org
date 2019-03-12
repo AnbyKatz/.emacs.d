@@ -312,6 +312,22 @@ Switch frame
   (global-set-key (kbd "H-f") 'window-split-toggle)
 #+END_SRC
 
+Insert line number
+#+BEGIN_SRC emacs-lisp
+(defun my/get-line-number()
+  "saves line number to a variable bbb"
+  (interactive)
+(end-of-buffer)
+(previous-line)
+(setq aaa (what-line))
+(setq bbb (substring aaa 5))
+)
+(defun my/print-line-number()
+  "prints line number"
+  (interactive)
+(insert bbb))
+#+END_SRC
+
 ** Global coding macros
 
 Repeat previous shell command
@@ -338,6 +354,12 @@ Exchange below and above lines globally
 
 (global-set-key (kbd "M-<up>") 'move-line-up)
 (global-set-key (kbd "M-<down>") 'move-line-down)
+#+END_SRC
+
+increase and decrease text size
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-=")  'text-scale-increase)
+  (global-set-key (kbd "C--")  'text-scale-decrease)
 #+END_SRC
 
 ** God Mode
@@ -546,7 +568,7 @@ Some configurations Python major mode
   (add-hook 'python-mode-hook 'my-python-mode-hook)
   (add-hook 'find-file-hooks 'InsertTemplate-Python)
   (defun my-python-mode-hook()     
-    (local-set-key (kbd "C-c C-r") 'ipython-shell-send-region)
+    (local-set-key (kbd "C-c C-r") 'python-shell-send-region)
     (setq python-shell-interpreter "/opt/anaconda3/bin/ipython3"
           python-shell-interpreter-args "--simple-prompt -i")
     (abbrev-mode 1)                     
