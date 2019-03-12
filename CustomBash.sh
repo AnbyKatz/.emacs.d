@@ -27,7 +27,7 @@ alias clc="clear"
 alias mkae="make"
 alias maek="make"
 
-# Update repositories
+# git commands repositories
 alias update="bash ~/.emacs.d/update.sh"
 alias refresh="bash ~/.emacs.d/refresh.sh"
 
@@ -63,3 +63,7 @@ function e() {
     emacs $1 &
     }
 
+# Custom git command
+function gitt() {
+    git commit -a -m $1
+    }
