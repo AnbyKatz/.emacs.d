@@ -81,7 +81,7 @@
   (dotimes (ii dash-len)
     (insert "-"))
   )
-(global-set-key (kbd "H-t") 'my/general-comment-header)
+(global-set-key (kbd "H-h") 'my/general-comment-header)
 
 (require 'wolfram)
 (setq wolfram-alpha-app-id 'U2773W-V74GXV4HWX)
@@ -138,10 +138,6 @@
   (find-file "~/.emacs.d/config.org"))
 (global-set-key (kbd "H-e") 'my/visit-emacs-config)
 
-(global-set-key (kbd "H-r")  (lambda () (interactive) (find-file  "~/Dropbox/QMC/Thesis/MPhil_Research.tex")))
-(global-set-key (kbd "H-T")  (lambda () (interactive) (find-file  "~/.emacs.d/.texmf/tex/latex/package_repository/mypackage.sty")))
-(global-set-key (kbd "H-w")  (lambda () (interactive) (find-file  "~/Documents/QMC/")))
-
 (global-set-key (kbd "M-]") 'other-window)
 
 (global-set-key (kbd "M-[") 'other-frame)
@@ -174,11 +170,22 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "H-D") 'duplicate-current-line-or-region)
 
 (defun my/open-term-other-window ()
+    (interactive)
+    (split-window-below -12)
+    (other-window 1)
+    (term "/bin/bash")
+  )
+(defun my/open-term-close-window ()
   (interactive)
-  (let ((buf (term "/bin/bash")))
-    (switch-to-buffer (other-buffer buf))
-    (switch-to-buffer-other-window buf)))
-(global-set-key (kbd "C-x 4 t") 'my/open-term-other-window)
+  (switch-to-buffer-other-window "*terminal*")
+  (kill-buffer-and-window)
+)
+
+(add-hook 'term-exec-hook 
+      (lambda () (set-process-query-on-exit-flag (get-buffer-process (current-buffer)) nil)))
+
+(global-set-key (kbd "H-t") 'my/open-term-other-window)
+(global-set-key (kbd "H-M-t") 'my/open-term-close-window)
 
 (global-set-key (kbd "H-f") 'window-split-toggle)
 
@@ -296,8 +303,8 @@ there's a region, all lines that region covers will be duplicated."
 (add-hook 'f90-mode-hook 'InsertTemplate-Fortran)
 (require 'fortran)
 (defun my-f90-mode-hook () 
-  (local-set-key (kbd "H-M-c") (lambda () (interactive) (shell-command "./bashFortran.sh")))
-  (local-set-key (kbd "H-t") 'my/f90-comment-header-block)
+  (local-set-key (kbd "H-M-c") (lambda () (interactive) (shell-command "./BashFortran.sh")))
+  (local-set-key (kbd "H-M-h") 'my/f90-comment-header-block)
   (setq f90-font-lock-keywords f90-font-lock-keywords-3)
   '(f90-comment-region "!!!$")
   '(f90-indented-comment-re "!")
@@ -340,11 +347,6 @@ there's a region, all lines that region covers will be duplicated."
        (insert "!")
        (newline))
   )))
-
-(defun numFort-recompile ()
-  "Recompile personal FORTRAN numerical libraries"
-  (interactive)
-  (shell-command (concat "(cd /home/anthony/Dropbox/Code/Fortran/f90-toolbox/; ./recompile.sh") ))
 
 (defun InsertTemplate-Python()
   (interactive)
