@@ -31,6 +31,9 @@ alias maek="make"
 alias update="bash ~/.emacs.d/update.sh"
 alias refresh="bash ~/.emacs.d/refresh.sh"
 
+# Halley commands
+alias halleycmd="(cd /home/anthony/Documents/Games/halley-template/halley/bin/; ./halley-cmd)"
+
 # z - jump around
 source ~/.emacs.d/.z-master/z.sh
 
@@ -61,9 +64,4 @@ function et() {
 }
 function e() {
     emacs $1 &
-    }
-
-# Custom git command
-function gitt() {
-    git commit -a -m $1
     }
