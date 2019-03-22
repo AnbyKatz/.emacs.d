@@ -14,6 +14,3 @@ echo
 echo 'Thesis'
 git -C ~/Documents/Thesis status
 echo
-echo 'Papers'
-git -C ~/Documents/Papers status
-echo

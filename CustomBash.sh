@@ -54,6 +54,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2018.
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64_lin/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/anthony/bin/PLplot/install_dir/lib/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/anthony/bin/PLplot/build_dir/bindings/fortran/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/anthony/bin/boost_1_66_0/stage/lib
 
 # Custom functions for running emacs
 function ef() {
