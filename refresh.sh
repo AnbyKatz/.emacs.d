@@ -14,3 +14,9 @@ echo
 echo 'Thesis'
 git -C ~/Documents/Thesis status
 echo
+echo 'fe-hack'
+git -C ~/Documents/fe-fangame status
+echo
+echo 'halley'
+git -C ~/Documents/fe-fangame/halley status
+echo
