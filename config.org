@@ -54,6 +54,10 @@ Ensure that main packages are loaded in
     :ensure t)
   (use-package monokai-theme
     :ensure t)
+  (use-package f
+    :ensure t)
+  (use-package names
+    :ensure t)
 #+END_SRC
 
 * Emacs Utility
@@ -635,6 +639,12 @@ load in certain languages coding modes
      (shell . t)
      (emacs-lisp . t)
      ))
+#+END_SRC
+
+load special org tree thing
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "/home/anthony/.emacs.d/elpa/org-fs-tree/")
+  (require 'org-fs-tree)
 #+END_SRC
 
 ** Capture Mode

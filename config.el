@@ -36,6 +36,10 @@
   :ensure t)
 (use-package monokai-theme
   :ensure t)
+(use-package f
+  :ensure t)
+(use-package names
+  :ensure t)
 
 ;; (set-language-environment "Japanese")
 
@@ -407,6 +411,9 @@ there's a region, all lines that region covers will be duplicated."
    (shell . t)
    (emacs-lisp . t)
    ))
+
+(add-to-list 'load-path "/home/anthony/.emacs.d/elpa/org-fs-tree/")
+  (require 'org-fs-tree)
 
 (setq org-capture-templates
       (quote (("n" "Notes" entry (file "~/Dropbox/QMC/Notes/Notes.org")
