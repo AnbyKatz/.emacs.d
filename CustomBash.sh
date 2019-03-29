@@ -40,6 +40,9 @@ source ~/.emacs.d/.z-master/z.sh
 # Recognise compiler path
 source /opt/intel/bin/compilervars.sh intel64
 
+# Source git gear
+source ~/bin/git-gear-master/git-gear.sh
+
 # Exported Path variables
 export FC=/opt/intel/bin/ifort
 export PATH=$PATH:/home/anthony/bin/
