@@ -445,12 +445,12 @@ Possible latex templates
 (defun InsertTemplate-quickTeX()
   "Insert quickTeX template"
   (interactive)  
-  (insert-file "~/Dropbox/Templates/quickTeX.tex")
+  (insert-file "~/Dropbox/.templates/quickTeX.tex")
 )
 (defun InsertTemplate-reviewTeX()
   "Insert reivewTeX template"
   (interactive)  
-  (insert-file "~/Dropbox/Templates/reviewTeX.tex")
+  (insert-file "~/Dropbox/.templates/reviewTeX.tex")
 )
 #+END_SRC
 
@@ -497,7 +497,7 @@ Insert FORTRAN template
   (when (and
          (string-match "\\.f90$" (buffer-file-name))
          (eq 1 (point-max)))
-    (insert-file "~/Dropbox/Templates/FortranTemplate.f90")))    
+    (insert-file "~/Dropbox/.templates/FortranTemplate.f90")))    
 #+END_SRC
 
 Configurations for FORTRAN major mode
@@ -564,7 +564,7 @@ Insert a template for a python document
     (when (and
     (string-match "\\.py$" (buffer-file-name))
     (eq 1 (point-max)))
-    (insert-file "~/Dropbox/Templates/PythonTemplate.py")))    
+    (insert-file "~/Dropbox/.templates/PythonTemplate.py")))    
 #+END_SRC
 
 Some configurations Python major mode
@@ -595,7 +595,7 @@ Insert a template for a C++ document
     (when (and
     (string-match "\\.cpp$" (buffer-file-name))
     (eq 1 (point-max)))
-    (insert-file "~/Dropbox/Templates/c++template.cpp")))    
+    (insert-file "~/Dropbox/.templates/c++template.cpp")))    
 #+END_SRC
 
 Some configurations C++ major mode
