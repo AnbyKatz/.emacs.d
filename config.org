@@ -242,6 +242,11 @@ Enable quick access to config file
   (interactive)
   (find-file "~/.emacs.d/config.org"))
 (global-set-key (kbd "H-e") 'my/visit-emacs-config)
+
+(defun my/visit-bash-config ()
+  (interactive)
+  (find-file "~/.bashrc"))
+(global-set-key (kbd "H-M-e") 'my/visit-bash-config)
 #+END_SRC
 
 ** Movement Macros

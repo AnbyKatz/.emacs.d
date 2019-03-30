@@ -6,17 +6,17 @@ echo '.emacs.d'
 git -C ~/.emacs.d/ status
 echo
 echo 'QMC'
-git -C ~/Documents/QMC status
+git -C ~/Dropbox/QMC status
 echo
 echo 'NumFort'
-git -C ~/Documents/NumFort status
+git -C ~/Dropbox/NumFort status
 echo
 echo 'Thesis'
-git -C ~/Documents/Thesis status
+git -C ~/Dropbox/Thesis status
 echo
 echo 'fe-hack'
-git -C ~/Documents/fe-fangame status
+git -C ~/Dropbox/fe-fangame status
 echo
 echo 'halley'
-git -C ~/Documents/fe-fangame/halley status
+git -C ~/Dropbox/fe-fangame/halley status
 echo

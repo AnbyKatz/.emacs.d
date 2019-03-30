@@ -142,6 +142,11 @@
   (find-file "~/.emacs.d/config.org"))
 (global-set-key (kbd "H-e") 'my/visit-emacs-config)
 
+(defun my/visit-bash-config ()
+  (interactive)
+  (find-file "~/.bashrc"))
+(global-set-key (kbd "H-M-e") 'my/visit-bash-config)
+
 (global-set-key (kbd "M-]") 'other-window)
 
 (global-set-key (kbd "M-[") 'other-frame)
