@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Remap printscreen
-xmodmap -e "keycode 107 = Hyper_R"
+xmodmap -e "keycode 107 = Hyper_L"
 
 # Work movement command
 alias cdw='cd ~/Dropbox/Papers/NSTidalCrust/'

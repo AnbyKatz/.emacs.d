@@ -585,6 +585,8 @@ Some configurations Python major mode
 Load in C++ major mode for .h files
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.hh\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 #+END_SRC
 
 Insert a template for a C++ document

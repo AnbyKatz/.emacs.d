@@ -271,12 +271,12 @@ there's a region, all lines that region covers will be duplicated."
 (defun InsertTemplate-quickTeX()
   "Insert quickTeX template"
   (interactive)  
-  (insert-file "~/Dropbox/Templates/quickTeX.tex")
+  (insert-file "~/Dropbox/.templates/quickTeX.tex")
 )
 (defun InsertTemplate-reviewTeX()
   "Insert reivewTeX template"
   (interactive)  
-  (insert-file "~/Dropbox/Templates/reviewTeX.tex")
+  (insert-file "~/Dropbox/.templates/reviewTeX.tex")
 )
 
 (require 'tex)
@@ -306,7 +306,7 @@ there's a region, all lines that region covers will be duplicated."
 (when (and
        (string-match "\\.f90$" (buffer-file-name))
        (eq 1 (point-max)))
-  (insert-file "~/Dropbox/Templates/FortranTemplate.f90")))
+  (insert-file "~/Dropbox/.templates/FortranTemplate.f90")))
 
 (add-hook 'f90-mode-hook 'my-f90-mode-hook)
 (add-hook 'f90-mode-hook 'InsertTemplate-Fortran)
@@ -362,7 +362,7 @@ there's a region, all lines that region covers will be duplicated."
   (when (and
   (string-match "\\.py$" (buffer-file-name))
   (eq 1 (point-max)))
-  (insert-file "~/Dropbox/Templates/PythonTemplate.py")))
+  (insert-file "~/Dropbox/.templates/PythonTemplate.py")))
 
 (require 'python)
 (add-hook 'python-mode-hook 'my-python-mode-hook)
@@ -375,6 +375,8 @@ there's a region, all lines that region covers will be duplicated."
   )
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.hh\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 
 (add-hook 'find-file-hooks 'InsertTemplate-C++)
 (defun InsertTemplate-C++()
@@ -382,7 +384,7 @@ there's a region, all lines that region covers will be duplicated."
   (when (and
   (string-match "\\.cpp$" (buffer-file-name))
   (eq 1 (point-max)))
-  (insert-file "~/Dropbox/Templates/c++template.cpp")))
+  (insert-file "~/Dropbox/.templates/c++template.cpp")))
 
 (require 'cl)
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
