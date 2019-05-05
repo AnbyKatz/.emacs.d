@@ -419,9 +419,6 @@ there's a region, all lines that region covers will be duplicated."
    (emacs-lisp . t)
    ))
 
-(add-to-list 'load-path "/home/anthony/.emacs.d/elpa/org-fs-tree/")
-  (require 'org-fs-tree)
-
 (setq org-capture-templates
       (quote (("n" "Notes" entry (file "~/Dropbox/QMC/Notes/Notes.org")
                "* %? D/11/2018 \n** Contents \n \n** Notes \n \n** Resources ")        
