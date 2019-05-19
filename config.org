@@ -648,11 +648,11 @@ load in certain languages coding modes
      ))
 #+END_SRC
 
-load special org tree thing
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "/home/anthony/.emacs.d/elpa/org-fs-tree/")
-  (require 'org-fs-tree)
-#+END_SRC
+# load special org tree thing
+# #+BEGIN_SRC emacs-lisp
+# (add-to-list 'load-path "/home/anthony/.emacs.d/elpa/org-fs-tree/")
+#   (require 'org-fs-tree)
+# #+END_SRC
 
 ** Capture Mode
 
