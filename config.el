@@ -426,7 +426,7 @@ there's a region, all lines that region covers will be duplicated."
                "* %?")
               )))
 
-(setq org-agenda-files '("~/Dropbox/OrgNotes/"))
+(setq org-agenda-files '("~/Dropbox/Other/"))
 
 (global-set-key (kbd "H-/") 'org-tags-view)
 
