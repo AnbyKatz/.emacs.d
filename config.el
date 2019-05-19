@@ -369,7 +369,7 @@ there's a region, all lines that region covers will be duplicated."
 (add-hook 'find-file-hooks 'InsertTemplate-Python)
 (defun my-python-mode-hook()     
   (local-set-key (kbd "C-c C-r") 'python-shell-send-region)
-  (setq python-shell-interpreter "/opt/anaconda3/bin/ipython3"
+  (setq python-shell-interpreter "/home/anthony/anaconda3/bin/ipython3"
         python-shell-interpreter-args "--simple-prompt -i")
   (abbrev-mode 1)                     
   )
