@@ -1,7 +1,7 @@
 ;; This is only needed once, near the top of the file
 (eval-when-compile
   ;; Following line is not needed if use-package.el is in ~/.emacs.d
-  (add-to-list 'load-path "/home/anthony/.emacs.d/elpa/use-package-20180715.1801")
+  (add-to-list 'load-path "~/.emacs.d/elpa/use-package-20180715.1801")
   (require 'use-package))
 
 (use-package ace-window
@@ -39,6 +39,8 @@
 (use-package f
   :ensure t)
 (use-package names
+  :ensure t)
+(use-package gdscript-mode
   :ensure t)
 
 ;; (set-language-environment "Japanese")
