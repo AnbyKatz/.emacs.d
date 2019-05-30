@@ -159,6 +159,17 @@
 (global-set-key (kbd "H-]") 'ace-window)
 (setq aw-keys '(?q ?w ?e ?a ?s ?d ?z ?x ?c))
 
+(defun open-thesis-things ()
+"Opens all buffers necessary for thesis"
+(interactive)
+  (find-file "~/Dropbox/Other/Notes.org")
+  (find-file-other-frame "~/Dropbox/QMC/Thesis/Thesis.tex")
+  (split-window-right)
+  (other-window 1)
+  (find-file "~/Dropbox/QMC/Thesis/Thesis.pdf")  
+)
+(global-set-key (kbd "<H-return>") 'open-thesis-things)
+
 (defun duplicate-current-line-or-region (arg)
   "Duplicates the current line or region ARG times.
 If there's no region, the current line will be duplicated. However, if

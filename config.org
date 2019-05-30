@@ -277,6 +277,20 @@ ace window movement key bindings
 
 ** Personal Macros
 
+Open normal work thesis stuff
+#+BEGIN_SRC emacs-lisp
+(defun open-thesis-things ()
+"Opens all buffers necessary for thesis"
+(interactive)
+  (find-file "~/Dropbox/Other/Notes.org")
+  (find-file-other-frame "~/Dropbox/QMC/Thesis/Thesis.tex")
+  (split-window-right)
+  (other-window 1)
+  (find-file "~/Dropbox/QMC/Thesis/Thesis.pdf")  
+)
+(global-set-key (kbd "<H-return>") 'open-thesis-things)
+#+END_SRC
+
 Duplicate line
 #+BEGIN_SRC emacs-lisp
 (defun duplicate-current-line-or-region (arg)
