@@ -10,7 +10,7 @@ export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
 
 # Custom Commands
 alias install="sudo apt-get install"
-alias py="python3.7"
+alias python="python3.7"
 
 # ls aliases
 alias ls="ls --color"
@@ -28,14 +28,10 @@ source ~/.emacs.d/.z-master/z.sh
 # Recognise compiler path
 source /opt/intel/bin/compilervars.sh intel64
 
-# # Source git gear
-# source ~/bin/git-gear/git-gear.sh
-
 # Exported Path variables
-export PATH=$PATH:/home/anthony/bin/
 export PATH=$PATH:/bin/bash/
-export PATH=$PATH:/home/anthony/bin/compilers/
-export PATH=$PATH:/home/anthony/anaconda3/bin/
+export PATH=$PATH:~/bin/compilers/
+export PATH=$PATH:~/anaconda3/bin/
 export TEXMFHOME=~/Dropbox/.texmf
 export EDITOR=$EDITOR:emacsclient
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2018.3.222/linux/mkl/lib/intel64_lin/

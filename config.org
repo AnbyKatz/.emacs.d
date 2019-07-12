@@ -60,6 +60,8 @@ Ensure that main packages are loaded in
     :ensure t)
   (use-package gdscript-mode
     :ensure t)
+  ;; (use-package matlab-mode
+  ;;   :ensure t)
 #+END_SRC
 
 * Emacs Utility

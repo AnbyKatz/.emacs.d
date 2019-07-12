@@ -56,7 +56,7 @@
  '(org-agenda-files (quote ("~/Dropbox/Journal/agenda.org")))
  '(package-selected-packages
    (quote
-    (gdscript-mode names f monokai-theme smart-mode-line smart-mode-line-atom-one-dark-theme smart-mode-line-powerline-theme god-mode org-edit-latex auto-package-update use-package julia-mode julia-shell org-ac wolfram exec-path-from-shell org-bullets rainbow-mode helm-spotify helm-spotify-plus julia-repl auctex)))
+    (matlab-mode gdscript-mode names f monokai-theme smart-mode-line smart-mode-line-atom-one-dark-theme smart-mode-line-powerline-theme god-mode org-edit-latex auto-package-update use-package julia-mode julia-shell org-ac wolfram exec-path-from-shell org-bullets rainbow-mode helm-spotify helm-spotify-plus julia-repl auctex)))
  '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")
  '(powerline-color1 "#1E1E1E")

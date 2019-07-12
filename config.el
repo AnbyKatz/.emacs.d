@@ -42,6 +42,8 @@
   :ensure t)
 (use-package gdscript-mode
   :ensure t)
+;; (use-package matlab-mode
+;;   :ensure t)
 
 ;; (set-language-environment "Japanese")
 
