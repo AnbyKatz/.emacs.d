@@ -308,6 +308,7 @@ there's a region, all lines that region covers will be duplicated."
   (local-set-key (kbd "C-H-f") '(lambda () (interactive) (insert "frac{")))
   (local-set-key (kbd "C-c b") 'tex-latex-block)
   (local-set-key (kbd "<C-tab>") 'outline-toggle-children)
+  (local-set-key (kbd "H-1") 'Compile-Save-LaTeX)
   )
 
 (require 'flycheck)

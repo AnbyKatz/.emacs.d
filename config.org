@@ -489,6 +489,7 @@ Possible latex templates
   (local-set-key (kbd "C-H-f") '(lambda () (interactive) (insert "frac{")))
   (local-set-key (kbd "C-c b") 'tex-latex-block)
   (local-set-key (kbd "<C-tab>") 'outline-toggle-children)
+  (local-set-key (kbd "H-1") 'Compile-Save-LaTeX)
   )
 #+END_SRC
 
