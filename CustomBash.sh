@@ -25,6 +25,9 @@ alias clc="clear"
 alias mkae="make"
 alias maek="make"
 
+# Clean tex files command
+alias cleantex="rm -r auto *.aux *.bbl *.log *.blg *.synctex.gz"
+
 # z - jump around
 source ~/.emacs.d/.z-master/z.sh
 
@@ -49,4 +52,10 @@ function et() {
 }
 function e() {
     emacs $1 &
+}
+function matlab() {
+    CurrentDir=$(pwd)
+    cd ~/Matlab/R2019a/bin
+    ./matlab &
+    cd $CurrentDir
     }

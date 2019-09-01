@@ -38,6 +38,10 @@
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(frame-background-mode (quote dark))
  '(fringe-mode 4 nil (fringe))
+ '(helm-boring-file-regexp-list
+   (quote
+    ("\\.o$" "~$" "\\.bin$" "\\.lbin$" "\\.so$" "\\.a$" "\\.ln$" "\\.blg$" "\\.bbl$" "\\.elc$" "\\.lof$" "\\.glo$" "\\.idx$" "\\.lot$" "\\.svn\\(/\\|$\\)" "\\.hg\\(/\\|$\\)" "\\.git\\(/\\|$\\)" "\\.bzr\\(/\\|$\\)" "CVS\\(/\\|$\\)" "_darcs\\(/\\|$\\)" "_MTN\\(/\\|$\\)" "\\.fmt$" "\\.tfm$" "\\.class$" "\\.fas$" "\\.lib$" "\\.mem$" "\\.x86f$" "\\.sparcf$" "\\.dfsl$" "\\.pfsl$" "\\.d64fsl$" "\\.p64fsl$" "\\.lx64fsl$" "\\.lx32fsl$" "\\.dx64fsl$" "\\.dx32fsl$" "\\.fx64fsl$" "\\.fx32fsl$" "\\.sx64fsl$" "\\.sx32fsl$" "\\.wx64fsl$" "\\.wx32fsl$" "\\.fasl$" "\\.ufsl$" "\\.fsl$" "\\.dxl$" "\\.lo$" "\\.la$" "\\.gmo$" "\\.mo$" "\\.toc$" "\\.aux$" "\\.cp$" "\\.fn$" "\\.ky$" "\\.pg$" "\\.tp$" "\\.vr$" "\\.cps$" "\\.fns$" "\\.kys$" "\\.pgs$" "\\.tps$" "\\.vrs$" "\\.pyc$" "\\.pyo$" "\\.x$" "\\auto/?" "\\.mod$")))
+ '(helm-ff-skip-boring-files t)
  '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
  '(highlight-tail-colors
    (quote
@@ -56,7 +60,7 @@
  '(org-agenda-files (quote ("~/Dropbox/Journal/agenda.org")))
  '(package-selected-packages
    (quote
-    (matlab-mode gdscript-mode names f monokai-theme smart-mode-line smart-mode-line-atom-one-dark-theme smart-mode-line-powerline-theme god-mode org-edit-latex auto-package-update use-package julia-mode julia-shell org-ac wolfram exec-path-from-shell org-bullets rainbow-mode helm-spotify helm-spotify-plus julia-repl auctex)))
+    (helm-bibtex flycheck-julia matlab-mode gdscript-mode names f monokai-theme smart-mode-line smart-mode-line-atom-one-dark-theme smart-mode-line-powerline-theme god-mode org-edit-latex auto-package-update use-package org-ac wolfram exec-path-from-shell org-bullets rainbow-mode helm-spotify helm-spotify-plus julia-repl auctex)))
  '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")
  '(powerline-color1 "#1E1E1E")

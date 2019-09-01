@@ -24,6 +24,8 @@
   :ensure t)
 (use-package helm
   :ensure t)
+(use-package helm-bibtex
+  :ensure t)
 (use-package flyspell
   :ensure t)
 (use-package flycheck
@@ -48,6 +50,8 @@
 ;; (set-language-environment "Japanese")
 
 (set-language-environment "UTF-8")
+
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
 (setq abbrev-file-name "~/.abbrev_defs")
 (if (file-exists-p abbrev-file-name)
@@ -168,7 +172,7 @@
   (find-file-other-frame "~/Dropbox/QMC/Thesis/Thesis.tex")
   (split-window-right)
   (other-window 1)
-  (find-file "~/Dropbox/QMC/Thesis/Thesis.pdf")  
+  (find-file "~/Dropbox/Thesis/Thesis.pdf")  
 )
 (global-set-key (kbd "<H-return>") 'open-thesis-things)
 
@@ -385,7 +389,7 @@ there's a region, all lines that region covers will be duplicated."
 (add-hook 'find-file-hooks 'InsertTemplate-Python)
 (defun my-python-mode-hook()     
   (local-set-key (kbd "C-c C-r") 'python-shell-send-region)
-  (setq python-shell-interpreter "/home/anthony/anaconda3/bin/ipython3"
+  (setq python-shell-interpreter "/usr/bin/ipython3"
         python-shell-interpreter-args "--simple-prompt -i")
   (abbrev-mode 1)                     
   )
@@ -407,6 +411,11 @@ there's a region, all lines that region covers will be duplicated."
 (defun my-c++-mode-hook ()
   (local-set-key (kbd "H-M-p")(lambda () (interactive) (shell-command "./bash_c++")))
   )
+
+(add-to-list 'load-path "~/.emacs.d/elpa/julia-emacs/")
+(require 'julia-mode)
+(require 'julia-repl)
+(add-hook 'julia-mode-hook 'julia-repl-mode) ;; always use minor mode
 
 (defun my-org-mode-hook ()
   (setq org-log-done t)

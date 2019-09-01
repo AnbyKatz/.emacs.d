@@ -42,6 +42,8 @@ Ensure that main packages are loaded in
     :ensure t)
   (use-package helm
     :ensure t)
+  (use-package helm-bibtex
+    :ensure t)
   (use-package flyspell
     :ensure t)
   (use-package flycheck
@@ -78,6 +80,11 @@ Set encoding environment to UTF-8
 #+END_SRC
 
 ** Extra
+
+Make scripts executable after save from shebang line
+#+BEGIN_SRC emacs-lisp
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)  
+#+END_SRC
 
 Add custom abbrev definitions
 #+BEGIN_SRC emacs-lisp
@@ -288,7 +295,7 @@ Open normal work thesis stuff
   (find-file-other-frame "~/Dropbox/QMC/Thesis/Thesis.tex")
   (split-window-right)
   (other-window 1)
-  (find-file "~/Dropbox/QMC/Thesis/Thesis.pdf")  
+  (find-file "~/Dropbox/Thesis/Thesis.pdf")  
 )
 (global-set-key (kbd "<H-return>") 'open-thesis-things)
 #+END_SRC
@@ -626,6 +633,16 @@ Some configurations C++ major mode
 (defun my-c++-mode-hook ()
   (local-set-key (kbd "H-M-p")(lambda () (interactive) (shell-command "./bash_c++")))
   )
+#+END_SRC
+
+** Julia
+
+stuff for Julia
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/elpa/julia-emacs/")
+(require 'julia-mode)
+(require 'julia-repl)
+(add-hook 'julia-mode-hook 'julia-repl-mode) ;; always use minor mode
 #+END_SRC
 
 * Org
