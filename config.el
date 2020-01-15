@@ -155,6 +155,11 @@
   (find-file "~/.bashrc"))
 (global-set-key (kbd "H-M-e") 'my/visit-bash-config)
 
+(defun my/work-journal-bash-config ()
+  (interactive)
+  (find-file "~/Documents/Simbiant_Local/work_journal.org"))
+(global-set-key (kbd "H-w") 'my/work-journal-bash-config)
+
 (global-set-key (kbd "M-]") 'other-window)
 
 (global-set-key (kbd "M-[") 'other-frame)
@@ -398,14 +403,6 @@ there's a region, all lines that region covers will be duplicated."
 (add-to-list 'auto-mode-alist '("\\.hh\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 
-(add-hook 'find-file-hooks 'InsertTemplate-C++)
-(defun InsertTemplate-C++()
-  (interactive)
-  (when (and
-  (string-match "\\.cpp$" (buffer-file-name))
-  (eq 1 (point-max)))
-  (insert-file "~/Dropbox/.templates/c++template.cpp")))
-
 (require 'cl)
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 (defun my-c++-mode-hook ()
@@ -445,13 +442,13 @@ there's a region, all lines that region covers will be duplicated."
    ))
 
 (setq org-capture-templates
-      (quote (("n" "Notes" entry (file "~/Dropbox/QMC/Notes/Notes.org")
-               "* %? D/11/2018 \n** Contents \n \n** Notes \n \n** Resources ")        
-              ("Q" "Question" entry (file "~/Dropbox/QMC/Notes/Questions.org")
-               "* %?")
-              )))
+          (quote (("n" "Work notes" entry (file+datetree "~/Documents/Simbiant_Local/work_journal.org")
+                   "* *%?* \n* *Resources - Local & Online Links* \n* *Others* ") 
+("s" "Slack report" entry (file+datetree "~/Documents/Simbiant_Local/slack_reports.org")
+                   "* %? ")                          
+                  )))
 
-(setq org-agenda-files '("~/Dropbox/Other/"))
+(setq org-agenda-files '("~/Documents/Simbiant_Local/work_journal.org"))
 
 (global-set-key (kbd "H-/") 'org-tags-view)
 

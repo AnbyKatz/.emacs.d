@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Source Houdini
+# source /opt/hfs18.0.287/houdini_setup
+
 # Colour terminal
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
@@ -40,8 +43,8 @@ export PATH=$PATH:~/bin/compilers/
 export PATH=$PATH:~/anaconda3/bin/
 export TEXMFHOME=~/Dropbox/.texmf
 export EDITOR=$EDITOR:emacsclient
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2018.3.222/linux/mkl/lib/intel64_lin/
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64_lin/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2020.0.166/linux/mkl/lib/intel64_lin/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin/
 
 # Custom functions for running emacs
 function ef() {
@@ -53,6 +56,10 @@ function et() {
 function e() {
     emacs $1 &
 }
+function work_journal() {
+    emacs ~/Documents/Simbiant_Local/work_journal.org &
+}
+
 function matlab() {
     CurrentDir=$(pwd)
     cd ~/Matlab/R2019a/bin

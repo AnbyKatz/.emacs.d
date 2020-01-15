@@ -258,7 +258,15 @@ Enable quick access to config file
   (interactive)
   (find-file "~/.bashrc"))
 (global-set-key (kbd "H-M-e") 'my/visit-bash-config)
+
+(defun my/work-journal-bash-config ()
+  (interactive)
+  (find-file "~/Documents/Simbiant_Local/work_journal.org"))
+(global-set-key (kbd "H-w") 'my/work-journal-bash-config)
 #+END_SRC
+
+#+RESULTS:
+: my/work-journal-bash-config
 
 ** Movement Macros
 
@@ -615,16 +623,16 @@ Load in C++ major mode for .h files
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 #+END_SRC
 
-Insert a template for a C++ document
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'find-file-hooks 'InsertTemplate-C++)
-  (defun InsertTemplate-C++()
-    (interactive)
-    (when (and
-    (string-match "\\.cpp$" (buffer-file-name))
-    (eq 1 (point-max)))
-    (insert-file "~/Dropbox/.templates/c++template.cpp")))    
-#+END_SRC
+# Insert a template for a C++ document
+# #+BEGIN_SRC emacs-lisp
+#   (add-hook 'find-file-hooks 'InsertTemplate-C++)
+#   (defun InsertTemplate-C++()
+#     (interactive)
+#     (when (and
+#     (string-match "\\.cpp$" (buffer-file-name))
+#     (eq 1 (point-max)))
+#     (insert-file "~/Dropbox/.templates/c++template.cpp"))) ;
+# #+END_SRC
 
 Some configurations C++ major mode
 #+BEGIN_SRC emacs-lisp
@@ -689,16 +697,16 @@ load in certain languages coding modes
 Add custom section titles templates
 #+BEGIN_SRC emacs-lisp
     (setq org-capture-templates
-          (quote (("n" "Notes" entry (file "~/Dropbox/QMC/Notes/Notes.org")
-                   "* %? D/11/2018 \n** Contents \n \n** Notes \n \n** Resources ")        
-                  ("Q" "Question" entry (file "~/Dropbox/QMC/Notes/Questions.org")
-                   "* %?")
+          (quote (("n" "Work notes" entry (file+datetree "~/Documents/Simbiant_Local/work_journal.org")
+                   "* *%?* \n* *Resources - Local & Online Links* \n* *Others* ") 
+("s" "Slack report" entry (file+datetree "~/Documents/Simbiant_Local/slack_reports.org")
+                   "* %? ")                          
                   )))
 #+END_SRC
 
 Set org agenda files maybe
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-files '("~/Dropbox/Other/"))
+  (setq org-agenda-files '("~/Documents/Simbiant_Local/work_journal.org"))
 #+END_SRC
 ** Key Bindings
 
