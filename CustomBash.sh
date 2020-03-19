@@ -9,6 +9,13 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 # Remap printscreen
 xmodmap -e "keycode 107 = Hyper_L"
 
+# Feko license path
+# export ALTAIR_LICENSE_PATH=~/2019/altair/security/altair_lic.dat
+export ALTAIR_LICENSE_PATH=6200@DESKTOP-2M858P7
+
+# Mavlink path
+export PYTHONPATH=~/bin/mavlink/
+
 # Emacs client
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
@@ -30,6 +37,9 @@ alias maek="make"
 
 # Clean tex files command
 alias cleantex="rm -r auto *.aux *.bbl *.log *.blg *.synctex.gz"
+
+# raspberry pi command
+alias piconnect="ssh pi@192.168.0.58 -X"
 
 # z - jump around
 source ~/.emacs.d/.z-master/z.sh
@@ -59,10 +69,17 @@ function e() {
 function work_journal() {
     emacs ~/Documents/Simbiant_Local/work_journal.org &
 }
-
 function matlab() {
     CurrentDir=$(pwd)
-    cd ~/Matlab/R2019a/bin
+    cd ~/Matlab/R2019b/bin
     ./matlab &
     cd $CurrentDir
+    }
+function cvm(){
+    rm -rf build
+    mkdir build
+    cd build
+    cmake ..
+    make
+    cd ..
     }

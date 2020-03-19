@@ -42,10 +42,14 @@
   :ensure t)
 (use-package names
   :ensure t)
-(use-package gdscript-mode
-  :ensure t)
-;; (use-package matlab-mode
+;; (use-package csharpmode
 ;;   :ensure t)
+(use-package yaml-mode
+  :ensure t)
+(use-package flymake
+  :ensure t)
+(use-package flymake-cppcheck
+  :ensure t)
 
 ;; (set-language-environment "Japanese")
 
@@ -157,7 +161,7 @@
 
 (defun my/work-journal-bash-config ()
   (interactive)
-  (find-file "~/Documents/Simbiant_Local/work_journal.org"))
+  (find-file "~/Dropbox/Simbiant/engineeringLog.org"))
 (global-set-key (kbd "H-w") 'my/work-journal-bash-config)
 
 (global-set-key (kbd "M-]") 'other-window)
@@ -403,16 +407,19 @@ there's a region, all lines that region covers will be duplicated."
 (add-to-list 'auto-mode-alist '("\\.hh\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 
+(add-hook 'find-file-hooks 'InsertTemplate-C++)
+(defun InsertTemplate-C++()
+  (interactive)
+  (when (and
+  (string-match "\\.cpp$" (buffer-file-name))
+  (eq 1 (point-max)))
+  (insert-file "~/Dropbox/.templates/c++template.cpp"))) ;
+
 (require 'cl)
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 (defun my-c++-mode-hook ()
   (local-set-key (kbd "H-M-p")(lambda () (interactive) (shell-command "./bash_c++")))
   )
-
-(add-to-list 'load-path "~/.emacs.d/elpa/julia-emacs/")
-(require 'julia-mode)
-(require 'julia-repl)
-(add-hook 'julia-mode-hook 'julia-repl-mode) ;; always use minor mode
 
 (defun my-org-mode-hook ()
   (setq org-log-done t)
@@ -439,16 +446,17 @@ there's a region, all lines that region covers will be duplicated."
   (latex . t)
    (shell . t)
    (emacs-lisp . t)
+   (C . t)
    ))
 
 (setq org-capture-templates
-          (quote (("n" "Work notes" entry (file+datetree "~/Documents/Simbiant_Local/work_journal.org")
-                   "* *%?* \n* *Resources - Local & Online Links* \n* *Others* ") 
-("s" "Slack report" entry (file+datetree "~/Documents/Simbiant_Local/slack_reports.org")
+          (quote (("n" "Work notes" entry (file+datetree "~/Dropbox/Simbiant/engineeringLog.org")
+                   "* *%?* ") 
+("s" "Slack report" entry (file+datetree "~/Dropbox/Simbiant/slack_reports.org")
                    "* %? ")                          
                   )))
 
-(setq org-agenda-files '("~/Documents/Simbiant_Local/work_journal.org"))
+(setq org-agenda-files '("~/Dropbox/Simbiant/engineeringLog.org" "~/Dropbox/Simbiant/todo.org"))
 
 (global-set-key (kbd "H-/") 'org-tags-view)
 

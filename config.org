@@ -60,10 +60,14 @@ Ensure that main packages are loaded in
     :ensure t)
   (use-package names
     :ensure t)
-  (use-package gdscript-mode
-    :ensure t)
-  ;; (use-package matlab-mode
+  ;; (use-package csharpmode
   ;;   :ensure t)
+  (use-package yaml-mode
+    :ensure t)
+  (use-package flymake
+    :ensure t)
+  (use-package flymake-cppcheck
+    :ensure t)
 #+END_SRC
 
 * Emacs Utility
@@ -261,12 +265,9 @@ Enable quick access to config file
 
 (defun my/work-journal-bash-config ()
   (interactive)
-  (find-file "~/Documents/Simbiant_Local/work_journal.org"))
+  (find-file "~/Dropbox/Simbiant/engineeringLog.org"))
 (global-set-key (kbd "H-w") 'my/work-journal-bash-config)
 #+END_SRC
-
-#+RESULTS:
-: my/work-journal-bash-config
 
 ** Movement Macros
 
@@ -623,16 +624,16 @@ Load in C++ major mode for .h files
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 #+END_SRC
 
-# Insert a template for a C++ document
-# #+BEGIN_SRC emacs-lisp
-#   (add-hook 'find-file-hooks 'InsertTemplate-C++)
-#   (defun InsertTemplate-C++()
-#     (interactive)
-#     (when (and
-#     (string-match "\\.cpp$" (buffer-file-name))
-#     (eq 1 (point-max)))
-#     (insert-file "~/Dropbox/.templates/c++template.cpp"))) ;
-# #+END_SRC
+Insert a template for a C++ document
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'find-file-hooks 'InsertTemplate-C++)
+  (defun InsertTemplate-C++()
+    (interactive)
+    (when (and
+    (string-match "\\.cpp$" (buffer-file-name))
+    (eq 1 (point-max)))
+    (insert-file "~/Dropbox/.templates/c++template.cpp"))) ;
+#+END_SRC
 
 Some configurations C++ major mode
 #+BEGIN_SRC emacs-lisp
@@ -641,16 +642,6 @@ Some configurations C++ major mode
 (defun my-c++-mode-hook ()
   (local-set-key (kbd "H-M-p")(lambda () (interactive) (shell-command "./bash_c++")))
   )
-#+END_SRC
-
-** Julia
-
-stuff for Julia
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "~/.emacs.d/elpa/julia-emacs/")
-(require 'julia-mode)
-(require 'julia-repl)
-(add-hook 'julia-mode-hook 'julia-repl-mode) ;; always use minor mode
 #+END_SRC
 
 * Org
@@ -689,6 +680,7 @@ load in certain languages coding modes
     (latex . t)
      (shell . t)
      (emacs-lisp . t)
+     (C . t)
      ))
 #+END_SRC
 
@@ -697,16 +689,16 @@ load in certain languages coding modes
 Add custom section titles templates
 #+BEGIN_SRC emacs-lisp
     (setq org-capture-templates
-          (quote (("n" "Work notes" entry (file+datetree "~/Documents/Simbiant_Local/work_journal.org")
-                   "* *%?* \n* *Resources - Local & Online Links* \n* *Others* ") 
-("s" "Slack report" entry (file+datetree "~/Documents/Simbiant_Local/slack_reports.org")
+          (quote (("n" "Work notes" entry (file+datetree "~/Dropbox/Simbiant/engineeringLog.org")
+                   "* *%?* ") 
+("s" "Slack report" entry (file+datetree "~/Dropbox/Simbiant/slack_reports.org")
                    "* %? ")                          
                   )))
 #+END_SRC
 
 Set org agenda files maybe
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-files '("~/Documents/Simbiant_Local/work_journal.org"))
+  (setq org-agenda-files '("~/Dropbox/Simbiant/engineeringLog.org" "~/Dropbox/Simbiant/todo.org"))
 #+END_SRC
 ** Key Bindings
 
@@ -714,7 +706,6 @@ Some key bindings for Org
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "H-/") 'org-tags-view)
 #+END_SRC
-
 
 ** Macros
 
