@@ -38,8 +38,8 @@ Ensure that main packages are loaded in
     :ensure t)
   (use-package pdf-tools
     :ensure t)
-  (use-package rainbow-delimiters
-    :ensure t)
+  ;; (use-package rainbow-delimiters
+  ;;   :ensure t)
   (use-package helm
     :ensure t)
   (use-package helm-bibtex
@@ -414,7 +414,7 @@ increase and decrease text size
 Some God mode commands
 #+BEGIN_SRC emacs-lisp
 (require 'god-mode)
-(global-set-key (kbd "H-;") 'god-mode)
+(global-set-key (kbd "<insert>") 'god-mode)
 (define-key god-local-mode-map (kbd ".") 'repeat)
 #+END_SRC
 
@@ -681,6 +681,7 @@ load in certain languages coding modes
      (shell . t)
      (emacs-lisp . t)
      (C . t)
+     (matlab . t)
      ))
 #+END_SRC
 

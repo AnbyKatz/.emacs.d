@@ -44,17 +44,17 @@ alias piconnect="ssh pi@192.168.0.58 -X"
 # z - jump around
 source ~/.emacs.d/.z-master/z.sh
 
-# Recognise compiler path
-source /opt/intel/bin/compilervars.sh intel64
+# # Recognise compiler path
+# source /opt/intel/bin/compilervars.sh intel64
 
 # Exported Path variables
 export PATH=$PATH:/bin/bash/
-export PATH=$PATH:~/bin/compilers/
+export PATH=$PATH:~/bin/
 export PATH=$PATH:~/anaconda3/bin/
 export TEXMFHOME=~/Dropbox/.texmf
 export EDITOR=$EDITOR:emacsclient
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2020.0.166/linux/mkl/lib/intel64_lin/
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin/
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2020.0.166/linux/mkl/lib/intel64_lin/
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/compilers_and_libraries_2020.0.166/linux/compiler/lib/intel64_lin/
 
 # Custom functions for running emacs
 function ef() {
@@ -66,15 +66,7 @@ function et() {
 function e() {
     emacs $1 &
 }
-function work_journal() {
-    emacs ~/Documents/Simbiant_Local/work_journal.org &
-}
-function matlab() {
-    CurrentDir=$(pwd)
-    cd ~/Matlab/R2019b/bin
-    ./matlab &
-    cd $CurrentDir
-    }
+
 function cvm(){
     rm -rf build
     mkdir build

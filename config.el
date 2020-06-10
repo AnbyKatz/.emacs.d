@@ -20,8 +20,8 @@
   :ensure t)
 (use-package pdf-tools
   :ensure t)
-(use-package rainbow-delimiters
-  :ensure t)
+;; (use-package rainbow-delimiters
+;;   :ensure t)
 (use-package helm
   :ensure t)
 (use-package helm-bibtex
@@ -447,6 +447,7 @@ there's a region, all lines that region covers will be duplicated."
    (shell . t)
    (emacs-lisp . t)
    (C . t)
+   (matlab . t)
    ))
 
 (setq org-capture-templates
