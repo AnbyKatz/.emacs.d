@@ -12,23 +12,15 @@
   :ensure auctex)
 (use-package org-bullets
   :ensure t)
-(use-package rainbow-mode
-  :ensure t)
 (use-package wolfram
   :ensure t)
 (use-package better-defaults
   :ensure t)
 (use-package pdf-tools
   :ensure t)
-;; (use-package rainbow-delimiters
-;;   :ensure t)
 (use-package helm
   :ensure t)
 (use-package helm-bibtex
-  :ensure t)
-(use-package flyspell
-  :ensure t)
-(use-package flycheck
   :ensure t)
 (use-package htmlize
   :ensure t)
@@ -42,13 +34,7 @@
   :ensure t)
 (use-package names
   :ensure t)
-;; (use-package csharpmode
-;;   :ensure t)
 (use-package yaml-mode
-  :ensure t)
-(use-package flymake
-  :ensure t)
-(use-package flymake-cppcheck
   :ensure t)
 
 ;; (set-language-environment "Japanese")
@@ -105,8 +91,6 @@
 (set-face-attribute 'default nil :height 150)
 
 (global-subword-mode)
-
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 (when (display-graphic-p)
   (add-to-list 'default-frame-alist '(fullscreen . maximized)))
@@ -263,7 +247,7 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "C--")  'text-scale-decrease)
 
 (require 'god-mode)
-(global-set-key (kbd "H-;") 'god-mode)
+(global-set-key (kbd "<insert>") 'god-mode)
 (define-key god-local-mode-map (kbd ".") 'repeat)
 
 (helm-mode 1)
